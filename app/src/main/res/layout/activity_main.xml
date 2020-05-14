@@ -6,27 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Editado por David"
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:paddingTop="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.474"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/button"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="137dp"
-        tools:layout_editor_absoluteY="486dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="64dp"
+                android:contentDescription="@string/app_name"
+                app:srcCompat="@android:drawable/btn_star_big_on" />
+
+            <TextView
+                android:id="@+id/bienvenida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="60dp"
+                android:text="@string/bienvenida"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#90F662"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/label_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nombre" />
+
+            <EditText
+                android:id="@+id/text_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -39,6 +64,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.603" />
 
+            <TextView
+                android:id="@+id/label_contrasenia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/contrasenia" />
+
+            <EditText
+                android:id="@+id/text_contrasenia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="349dp"
+                android:layout_height="wrap_content"
+                android:bottomLeftRadius="200dp"
+                android:bottomRightRadius="200dp"
+                android:text="@string/iniciar_sesion"
+                android:topLeftRadius="00dp"
+                android:topRightRadius="00dp" />
+
+
+            <Button
+                android:id="@+id/btn_registro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Registro"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textColor="#80F1FF"
+                android:textSize="18sp" />
+                android:bottomRightRadius="2000dp"
+                android:bottomLeftRadius="2000dp"
+                android:topRightRadius="2000dp"
+                android:topLeftRadius="2000dp"
+
+        </LinearLayout>
+
+    </ScrollView>
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
