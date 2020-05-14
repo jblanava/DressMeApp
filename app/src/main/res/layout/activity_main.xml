@@ -31,12 +31,14 @@
                 app:srcCompat="@android:drawable/btn_star_big_on" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/bienvenida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="60dp"
                 android:text="@string/bienvenida"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#90F662"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/label_nombre"
@@ -69,6 +71,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/iniciar_sesion" />
+
+            <Button
+                android:id="@+id/btn_registro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Registro"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textColor="#80F1FF"
+                android:textSize="18sp" />
+                android:bottomRightRadius="2000dp"
+                android:bottomLeftRadius="2000dp"
+                android:topRightRadius="2000dp"
+                android:topLeftRadius="2000dp"
 
         </LinearLayout>
 
