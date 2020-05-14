@@ -31,7 +31,7 @@
                 app:srcCompat="@android:drawable/btn_star_big_on" />
 
             <TextView
-                android:id="@+id/bienvenida"
+                android:id="@+id/textBienvenida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="60dp"
@@ -41,13 +41,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/label_nombre"
+                android:id="@+id/labelNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/nombre" />
 
             <EditText
-                android:id="@+id/text_nombre"
+                android:id="@+id/textNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -65,31 +65,26 @@
         app:layout_constraintVertical_bias="0.603" />
 
             <TextView
-                android:id="@+id/label_contrasenia"
+                android:id="@+id/labelContrasenia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/contrasenia" />
 
             <EditText
-                android:id="@+id/text_contrasenia"
+                android:id="@+id/textContrasenia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword" />
 
             <Button
-                android:id="@+id/btn_login"
-                android:layout_width="349dp"
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:bottomLeftRadius="200dp"
-                android:bottomRightRadius="200dp"
-                android:text="@string/iniciar_sesion"
-                android:topLeftRadius="00dp"
-                android:topRightRadius="00dp" />
-
+                android:text="@string/iniciar_sesion" />
 
             <Button
-                android:id="@+id/btn_registro"
+                android:id="@+id/btnRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Registro"
