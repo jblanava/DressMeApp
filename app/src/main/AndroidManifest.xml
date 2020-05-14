@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Recomendador"></activity>
-        <activity android:name=".Configuracion"></activity>
-        <activity android:name=".Vestuario"></activity>
-        <activity android:name=".MenuPrincipal"></activity>
+        <activity android:name=".RecomendadorActivity" />
+        <activity android:name=".ConfiguracionActivity" />
+        <activity android:name=".VestuarioActivity" />
+        <activity android:name=".MenuPrincipalActivity" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
