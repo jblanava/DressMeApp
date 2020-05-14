@@ -3,4 +3,29 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="colorPiel">#ffe3ba</color>
+    <color name="colorNaranja">#ff9d00</color>
+    <color name="colorNaranjaClaro">#ffce96</color>
+    <color name="colorNaranja2">#ff831a</color>
+    <color name="colorNaranja3">#ff9338</color>
+    <color name="colorNaranja4">#ffad69</color>
+    <color name="colorNaranja5">#ffc594</color>
+    <color name="colorCoral">#ff631a</color>
+    <color name="colorCoral2">#ff7738</color>
+    <color name="colorCoralPastel">#ff9664</color>
+    <color name="colorCoralPastel2">#ffba99</color>
+    <color name="colorRojo">#fd4512</color>
+    <color name="colorAnaranjado">#ff6338</color>
+    <color name="colorAnaranjado2">#fc7956</color>
+    <color name="colorAnaranjadoPastel">#ffa187</color>
+    <color name="colorMarron">#d8400f</color>
+    <color name="colorMarron2">#fd3d00</color>
+    <color name="colorMarron3">#da6d4a</color>
+    <color name="colorMarron4">#d8866c</color>
+    <color name="colorMorado">#eac2ff</color>
+    <color name="colorMorado2">#dda3ff</color>
+    <color name="colorMorado3">#b36cd8</color>
+
+
+
 </resources>
