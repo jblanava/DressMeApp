@@ -29,7 +29,12 @@ public class MainActivity extends AppCompatActivity {
         textContrasenia = findViewById(R.id.textContrasenia);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegistro = findViewById(R.id.btnRegistro);
-
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Aqui pongo donde vaya el registro
+            }
+        });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 irAMenuPrincipal();
