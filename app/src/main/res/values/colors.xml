@@ -4,25 +4,28 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
-    //Estos van a ser los colores verdes
-    <color name="verdeClaro">#1affb5</color>
-    <color name="verdeClaro2">#4bffc5</color>
-    <color name="verdeClaro3">#6fffd1</color>
-    <color name="Pastel">#9fffe0</color>
-    //Estos van a ser los azules
-    <color name="azulClaro">#1adaff</color>
-    <color name="azulCLaro2">#48e1ff</color>
-    <color name="azulClaro3">#75e8ff</color>
-    <color name="Celeste">#a7f1ff</color>
+    <!-- Estos van a ser los colores verdes -->
 
-    <color name="azul">#1298fd</color>
-    <color name="azul2">#51b2fc</color>
-    <color name="azul3">#7ec7ff</color>
-    <color name="nube">#a7d9ff</color>
+    <color name="colorVerdeClaro">#1affb5</color>
+    <color name="colorVerdeClaro2">#4bffc5</color>
+    <color name="colorVerdeClaro3">#6fffd1</color>
+    <color name="colorPastel">#9fffe0</color>
 
-    <color name="azulMarino">#0f5cd8</color>
-    <color name="azulMarino2">#417ad5</color>
-    <color name="azulMarino3">#6b92cf</color>
-    <color name="azulGrisaceo">#92a7c9</color>
+    <!-- Estos van a ser los azules -->
+
+    <color name="colorAzulClaro">#1adaff</color>
+    <color name="colorAzulClaro2">#48e1ff</color>
+    <color name="colorAzulClaro3">#75e8ff</color>
+    <color name="colorCeleste">#a7f1ff</color>
+
+    <color name="colorAzul">#1298fd</color>
+    <color name="colorAzul2">#51b2fc</color>
+    <color name="colorAzul3">#7ec7ff</color>
+    <color name="colorNube">#a7d9ff</color>
+
+    <color name="colorAzulMarino">#0f5cd8</color>
+    <color name="colorAzulMarino2">#417ad5</color>
+    <color name="colorAzulMarino3">#6b92cf</color>
+    <color name="colorAzulGrisaceo">#92a7c9</color>
 
 </resources>
