@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MenuPrincipal extends AppCompatActivity {
+public class MenuPrincipalActivity extends AppCompatActivity {
 
     Button bVestuario, bRecomendador, bConfiguracion;
 

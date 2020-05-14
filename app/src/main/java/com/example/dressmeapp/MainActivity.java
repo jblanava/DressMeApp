@@ -10,23 +10,26 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText text_nombre;
-    private EditText text_contrasenia;
-    private Button btn_login;
+    private EditText textNombre;
+    private EditText textContrasenia;
+    private Button btnLogin;
+    private Button btnRegistro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        enlazarControles();
     }
 
     private void enlazarControles() {
 
-        text_nombre = findViewById(R.id.text_nombre);
-        text_contrasenia = findViewById(R.id.text_contrasenia);
-        btn_login = findViewById(R.id.btn_login);
+        textNombre = findViewById(R.id.textNombre);
+        textContrasenia = findViewById(R.id.textContrasenia);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnRegistro = findViewById(R.id.btnRegistro);
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 irAMenuPrincipal();
                 //quitarTeclado(v);
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void irAMenuPrincipal() {
-        Intent nuevaActividad = new Intent(this, MainActivity.class);
+        Intent nuevaActividad = new Intent(this, MenuPrincipalActivity.class);
         startActivity(nuevaActividad);
         finish();
     }
