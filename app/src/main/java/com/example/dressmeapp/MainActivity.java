@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText textContrasenia;
     private Button btnLogin;
     private Button btnRegistro;
+    private int prueba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void irAMenuPrincipal() {
+
         Intent nuevaActividad = new Intent(this, MenuPrincipalActivity.class);
         startActivity(nuevaActividad);
         finish();
