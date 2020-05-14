@@ -1,3 +1,12 @@
 <resources>
+
     <string name="app_name">DressMeApp</string>
+    <string name="nuevo_perfil">Nuevo perfil</string>
+
+    <string name="bienvenida">Bienvenido a DressMeApp</string>
+    <string name="nombre">Nombre</string>
+    <string name="contrasenia">Contraseña</string>
+    <string name="iniciar_sesion">Entrar</string>
+    <string name="crear_perfil">Crear perfil</string>
+
 </resources>
