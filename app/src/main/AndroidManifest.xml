@@ -11,6 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Configuracion"></activity>
         <activity android:name=".Vestuario"></activity>
+        <activity android:name=".MenuPrincipal"></activity>
+        <activity android:name=".Configuracion" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
