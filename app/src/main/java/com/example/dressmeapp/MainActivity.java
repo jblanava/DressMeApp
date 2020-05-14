@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void irAMenuPrincipal() {
-        Intent nuevaActividad = new Intent(this, MenuPrincipal.class);
+        Intent nuevaActividad = new Intent(this, MenuPrincipalActivity.class);
         startActivity(nuevaActividad);
         finish();
     }
