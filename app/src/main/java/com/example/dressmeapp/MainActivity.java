@@ -37,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_registro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Aquí pondré hacia donde va el botón registro
+            }
+        });
+
     }
 
     private void irAMenuPrincipal() {

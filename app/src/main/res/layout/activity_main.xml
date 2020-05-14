@@ -68,9 +68,14 @@
 
             <Button
                 android:id="@+id/btn_login"
-                android:layout_width="match_parent"
+                android:layout_width="349dp"
                 android:layout_height="wrap_content"
-                android:text="@string/iniciar_sesion" />
+                android:bottomLeftRadius="200dp"
+                android:bottomRightRadius="200dp"
+                android:text="@string/iniciar_sesion"
+                android:topLeftRadius="00dp"
+                android:topRightRadius="00dp" />
+
 
             <Button
                 android:id="@+id/btn_registro"
