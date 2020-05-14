@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText text_nombre;
     private EditText text_contrasenia;
     private Button btn_login;
-
+    private Button btn_registro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         text_nombre = findViewById(R.id.text_nombre);
         text_contrasenia = findViewById(R.id.text_contrasenia);
         btn_login = findViewById(R.id.btn_login);
+        btn_registro = findViewById(R.id.btn_registro);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
