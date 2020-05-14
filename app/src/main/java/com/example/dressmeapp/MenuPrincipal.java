@@ -46,15 +46,18 @@ public class MenuPrincipal extends AppCompatActivity {
     void ir_a_vestuario()
     {
         Intent vestuario = new Intent(this, Vestuario.class);
+        startActivity(vestuario);
     }
 
     void ir_a_recomendador()
     {
-        Intent vestuario = new Intent(this, Recomendador.class);
+        Intent recomendador = new Intent(this, Recomendador.class);
+        startActivity(recomendador);
     }
 
     void ir_a_configuracion()
     {
-        Intent vestuario = new Intent(this, Configuracion.class);
+        Intent configuracion = new Intent(this, Configuracion.class);
+        startActivity(configuracion);
     }
 }
