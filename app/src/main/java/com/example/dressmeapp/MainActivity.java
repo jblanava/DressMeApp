@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        enlazarControles();
     }
 
     private void enlazarControles() {
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void irAMenuPrincipal() {
-        Intent nuevaActividad = new Intent(this, MainActivity.class);
+        Intent nuevaActividad = new Intent(this, MenuPrincipal.class);
         startActivity(nuevaActividad);
         finish();
     }
