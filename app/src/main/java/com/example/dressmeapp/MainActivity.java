@@ -10,10 +10,11 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText text_nombre;
-    private EditText text_contrasenia;
-    private Button btn_login;
-    private Button btn_registro;
+    private EditText textNombre;
+    private EditText textContrasenia;
+    private Button btnLogin;
+    private Button btnRegistro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,24 +24,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void enlazarControles() {
 
-        text_nombre = findViewById(R.id.text_nombre);
-        text_contrasenia = findViewById(R.id.text_contrasenia);
-        btn_login = findViewById(R.id.btn_login);
-        btn_registro = findViewById(R.id.btn_registro);
+        textNombre = findViewById(R.id.textNombre);
+        textContrasenia = findViewById(R.id.textContrasenia);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnRegistro = findViewById(R.id.btnRegistro);
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 irAMenuPrincipal();
                 //quitarTeclado(v);
                 // aqui pongo lo que hace el boton
                 //login(e_usuario.getText().toString(), e_password.getText().toString());
-            }
-        });
-
-        btn_registro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Aquí pondré hacia donde va el botón registro
             }
         });
 
