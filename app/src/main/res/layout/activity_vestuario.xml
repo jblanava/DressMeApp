@@ -6,15 +6,86 @@
     android:layout_height="match_parent"
     tools:context=".VestuarioActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vestuario"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".5" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                tools:visibility="visible">
+
+                <EditText
+                    android:id="@+id/editText_busqueda"
+                    android:layout_width="0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Introducir busqueda" />
+
+                <Button
+                    android:id="@+id/boton_buscar"
+                    android:layout_width="0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Buscar" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/boton_añadir"
+                    android:layout_width="0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Añadir" />
+
+                <Button
+                    android:id="@+id/boton_agrupar"
+                    android:layout_width="0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Agrupar" />
+
+                <Button
+                    android:id="@+id/boton_ordenar"
+                    android:layout_width="0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Ordenar" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="0"
+            android:layout_weight="5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
