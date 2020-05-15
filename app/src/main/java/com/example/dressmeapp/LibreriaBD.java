@@ -1,4 +1,4 @@
-package com.example.armariovirtual;
+package com.example.dressmeapp;
 
 
         import java.sql.ResultSet;
@@ -9,7 +9,7 @@ package com.example.armariovirtual;
         import android.database.Cursor;
         import android.util.Log;
 
-public class lib {
+public class LibreriaBD {
 
     public static   String Rs_String (ResultSet rs , String pcampo)
     {
