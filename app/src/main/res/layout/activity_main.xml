@@ -32,12 +32,12 @@
 
             <TextView
                 android:id="@+id/textBienvenida"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="60dp"
                 android:text="@string/bienvenida"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#90F662"
+                android:textColor="#199415"
                 android:textStyle="bold" />
 
             <TextView
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:text="Registro"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="#80F1FF"
+                android:textColor="#ED0E0E"
                 android:textSize="18sp" />
                 android:bottomRightRadius="2000dp"
                 android:bottomLeftRadius="2000dp"

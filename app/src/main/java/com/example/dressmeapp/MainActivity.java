@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText textContrasenia;
     private Button btnLogin;
     private Button btnRegistro;
+    private int prueba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,13 @@ public class MainActivity extends AppCompatActivity {
         textContrasenia = findViewById(R.id.textContrasenia);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegistro = findViewById(R.id.btnRegistro);
-
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Aqui pongo donde vaya el registro
+                irARegistro();
+            }
+        });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 irAMenuPrincipal();
@@ -41,9 +48,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void irAMenuPrincipal() {
+
         Intent nuevaActividad = new Intent(this, MenuPrincipalActivity.class);
         startActivity(nuevaActividad);
-        finish();
-    }
 
+    }
+    private void irARegistro(){
+        Intent nuevaActividad = new Intent(this,RegistroActivity.class);
+        startActivity(nuevaActividad);
+    }
 }
