@@ -38,15 +38,15 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editText_busqueda"
                 android:layout_width="269dp"
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="Introducir busqueda" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/boton_buscar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Buscar" />
@@ -58,21 +58,21 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/boton_añadir"
                 android:layout_width="141dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Añadir" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/boton_agrupar"
                 android:layout_width="141dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Agrupar" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/boton_ordenar"
                 android:layout_width="141dp"
                 android:layout_height="match_parent"
                 android:text="Ordenar" />
