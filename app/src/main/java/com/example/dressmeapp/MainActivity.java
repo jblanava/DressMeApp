@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Aqui pongo donde vaya el registro
+                irARegistro();
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -52,5 +53,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(nuevaActividad);
         finish();
     }
-
+    private void irARegistro(){
+        Intent nuevaActividad = new Intent(this,RegistroActivity.class);
+        startActivity(nuevaActividad);
+    }
 }
