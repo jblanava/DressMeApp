@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,17 +16,21 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnRegistro;
     private int prueba;
+    private TextView TextoError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         enlazarControles();
+
     }
 
     private void enlazarControles() {
 
         textNombre = findViewById(R.id.textNombre);
+        TextoError = findViewById(R.id.TextoErrorView);
+        TextoError.setText("");
         textContrasenia = findViewById(R.id.textContrasenia);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegistro = findViewById(R.id.btnRegistro);
@@ -33,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Aqui pongo donde vaya el registro
-                irARegistro();
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -57,4 +61,18 @@ public class MainActivity extends AppCompatActivity {
         Intent nuevaActividad = new Intent(this,RegistroActivity.class);
         startActivity(nuevaActividad);
     }
+
+
+    protected void login(String usuario, String pass ){
+
+        if(EstaBD(usuario) && CompruebaContrasena(usuario,pass)){
+            irAMenuPrincipal();
+        }else{
+            TextoError.setText("Usuario o contrasena incorrectos");
+        }
+
+    }
+
+
+
 }
