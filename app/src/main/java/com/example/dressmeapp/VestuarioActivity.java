@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class VestuarioActivity extends AppCompatActivity {
 
-    Button bOrdenar,bAgrupar,bAnydir;
+    Button bOrdenar,bAgrupar,bAnydir, bBuscar;
+    LinearLayout listaPrendas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +22,9 @@ public class VestuarioActivity extends AppCompatActivity {
         bOrdenar = (Button) findViewById(R.id.boton_ordenar);
         bAgrupar = (Button) findViewById(R.id.boton_agrupar);
         bAnydir = (Button) findViewById(R.id.boton_añadir);
+        bBuscar = (Button) findViewById(R.id.boton_buscar);
+
+        listaPrendas = (LinearLayout) findViewById(R.id.lista_prendas);
 
         bAgrupar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +46,13 @@ public class VestuarioActivity extends AppCompatActivity {
                 ir_a_anydir();
             }
         });
+
+        bBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                añadir_elemento(); // SOLO PARA PROBAR
+            }
+        });
     }
 
     void ir_a_ordenar()
@@ -58,5 +71,11 @@ public class VestuarioActivity extends AppCompatActivity {
     {
         Intent anydir = new Intent(this, Anydir.class);
         startActivity(anydir);
+    }
+
+
+    void añadir_elemento()
+    {
+        listaPrendas.addView(getLayoutInflater().inflate(R.layout.activity_prenda_view, null));
     }
 }
