@@ -9,7 +9,7 @@ package com.example.dressmeapp;
         import android.database.Cursor;
         import android.util.Log;
 
-public class lib {
+public class LibreriaBD {
 
     public static   String Rs_String (ResultSet rs , String pcampo)
     {
