@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnRegistro;
     private int prueba;
-    private TextView TextoError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         textContrasenia = findViewById(R.id.textContrasenia);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegistro = findViewById(R.id.btnRegistro);
-
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 irAMenuPrincipal();
                 //quitarTeclado(v);
                 // aqui pongo lo que hace el boton
-                login(textNombre.getText().toString(), textContrasenia.getText().toString());
-
+                //login(e_usuario.getText().toString(), e_password.getText().toString());
             }
         });
 
@@ -55,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
         Intent nuevaActividad = new Intent(this, MenuPrincipalActivity.class);
         startActivity(nuevaActividad);
         finish();
+    }
+    private void irARegistro(){
+        Intent nuevaActividad = new Intent(this,RegistroActivity.class);
+        startActivity(nuevaActividad);
     }
 
     private void comprobarNombre(String n){
