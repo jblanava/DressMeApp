@@ -1,21 +1,18 @@
-package com.example.armariovirtual;
+package com.example.dressmeapp;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Calendar;
 
-        import java.sql.ResultSet;
-        import java.sql.SQLException;
-        import java.util.Calendar;
+import android.R.integer;
+import android.database.Cursor;
+import android.util.Log;
 
-        import android.R.integer;
-        import android.database.Cursor;
-        import android.util.Log;
+public class LibreriaBaseDatos {
 
-public class lib {
-
-    public static   String Rs_String (ResultSet rs , String pcampo)
-    {
+    public static String Rs_String (ResultSet rs, String pcampo) {
         try {
-
-            if (rs.getString(pcampo)!= null)
+            if (rs.getString(pcampo) != null)
                 return rs.getString(pcampo);
             else
                 return ""; // Por si es null
@@ -23,12 +20,11 @@ public class lib {
         } catch (SQLException e) {
 
             e.printStackTrace();
-            return "error en campo "+pcampo; //
+            return "error en campo " + pcampo; //
         }
     }
 
-    public static int Rs_int (ResultSet rs , String pcampo)
-    {
+    public static int Rs_int (ResultSet rs , String pcampo)  {
         try {
             return rs.getInt(pcampo);
 
@@ -39,8 +35,7 @@ public class lib {
         }
     }
 
-    public static boolean Rs_boolean (ResultSet rs , String pcampo)
-    {
+    public static boolean Rs_boolean (ResultSet rs , String pcampo) {
         try {
             return rs.getBoolean(pcampo);
 
@@ -51,8 +46,7 @@ public class lib {
         }
     }
 
-    public static double Rs_double (ResultSet rs , String pcampo)
-    {
+    public static double Rs_double (ResultSet rs , String pcampo) {
         try {
             return rs.getDouble(pcampo);
 
@@ -64,12 +58,11 @@ public class lib {
     }
 
 
-    public static   int CampoInt (Cursor pcursor , String pcampo)
-    {
+    public static int CampoInt (Cursor pcursor , String pcampo) {
         return ( pcursor.getInt(pcursor.getColumnIndex(pcampo)));
     }
 
-    public static   double  CampoDouble (Cursor pcursor , String pcampo)
+    public static double  CampoDouble (Cursor pcursor , String pcampo)
     {
         return ( pcursor.getDouble(pcursor.getColumnIndex(pcampo)));
     }
