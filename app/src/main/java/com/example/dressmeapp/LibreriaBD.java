@@ -1,13 +1,12 @@
 package com.example.dressmeapp;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Calendar;
 
-        import java.sql.ResultSet;
-        import java.sql.SQLException;
-        import java.util.Calendar;
-
-        import android.R.integer;
-        import android.database.Cursor;
-        import android.util.Log;
+import android.R.integer;
+import android.database.Cursor;
+import android.util.Log;
 
 public class LibreriaBD {
 
