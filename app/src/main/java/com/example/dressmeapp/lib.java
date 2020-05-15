@@ -1,4 +1,4 @@
-package com.example.armariovirtual;
+package com.example.dressmeapp;
 
 
         import java.sql.ResultSet;
