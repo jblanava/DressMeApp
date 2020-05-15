@@ -32,12 +32,12 @@
 
             <TextView
                 android:id="@+id/textBienvenida"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="60dp"
                 android:text="@string/bienvenida"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#90F662"
+                android:textColor="#199415"
                 android:textStyle="bold" />
 
             <TextView
@@ -52,17 +52,6 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName" />
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Editado por javi"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.603" />
 
             <TextView
                 android:id="@+id/labelContrasenia"
@@ -89,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:text="Registro"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="#80F1FF"
+                android:textColor="#ED0E0E"
                 android:textSize="18sp" />
                 android:bottomRightRadius="2000dp"
                 android:bottomLeftRadius="2000dp"
@@ -99,12 +88,5 @@
         </LinearLayout>
 
     </ScrollView>
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Editado por DanielSDVG"
-        tools:layout_editor_absoluteX="175dp"
-        tools:layout_editor_absoluteY="287dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
