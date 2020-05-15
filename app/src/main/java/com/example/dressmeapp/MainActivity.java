@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnRegistro;
     private int prueba;
+    private TextView TextoError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         textContrasenia = findViewById(R.id.textContrasenia);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegistro = findViewById(R.id.btnRegistro);
+
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 irAMenuPrincipal();
                 //quitarTeclado(v);
                 // aqui pongo lo que hace el boton
-                //login(e_usuario.getText().toString(), e_password.getText().toString());
+                login(textNombre.getText().toString(), textContrasenia.getText().toString());
+
             }
         });
 
@@ -52,5 +56,28 @@ public class MainActivity extends AppCompatActivity {
         startActivity(nuevaActividad);
         finish();
     }
+
+    private void comprobarNombre(String n){
+
+        //definir esta opearcion de bases de datos
+        if(EstaBD(n)){
+
+            TextoError.setText("Nombre de usuario ya existente");
+
+        }
+
+    }
+
+    protected void login(String usuario, String pass ){
+
+        if(usuario.equalsIgnoreCase("1") && pass.equalsIgnoreCase("2")){
+            irAMenuPrincipal();
+        }else{
+            TextoError.setText("Error en login");
+        }
+
+    }
+
+
 
 }
