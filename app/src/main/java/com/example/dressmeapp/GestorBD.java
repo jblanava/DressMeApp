@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class GestorBD {
 
-    private Context contexto;
+    private static Context contexto;
     private String LoginUsuario;
     private String LoginContrasena;
     private String RegistroUsuario;
@@ -24,12 +24,12 @@ public class GestorBD {
         // clase Registro
     }
 
-    protected int obtenIDMaximo(){
+    protected static int obtenIDMaximo(){
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
 
         Cursor cursor;
-        BaseDatos base = new BaseDatos(this.contexto);
+        BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -39,13 +39,35 @@ public class GestorBD {
         return resultado;
     }
     private static boolean UsuarioEstaEnBD(String nombre) {
-        // clase Registro
-        return false;
+
+        boolean encontrado = false;
+
+        String sentenciaSQL = "SELECT * FROM PERFIL WHERE USUARIO='" + nombre + "'";
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        encontrado = cursor.moveToFirst();
+        cursor.close();
+
+        return encontrado;
+
     }
 
-    private static boolean PassCorrecta(String usario, String password) {
-        // clase Entrar
-        return false;
+    private static boolean PassCorrecta(String usuario, String password) {
+
+        boolean encontrado = false;
+
+        String sentenciaSQL = "SELECT * FROM PERFIL WHERE USUARIO='"
+                + usuario + "' AND PASSWORD='" + password + "'";
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        encontrado = cursor.moveToFirst();
+        cursor.close();
+
+        return encontrado;
     }
 
     private static void CrearPerfil(int id, String usuario, String contrasenia){
