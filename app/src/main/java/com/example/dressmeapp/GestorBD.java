@@ -34,8 +34,14 @@ public class GestorBD {
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
         if(cursor.moveToFirst()){
-
+            do{
+                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
+            } while(cursor.moveToNext());
         }
+        resultado++;
+        baseDatos.close();
+        base.close();
+        cursor.close();
         return resultado;
     }
     private static boolean UsuarioEstaEnBD(String nombre) {
