@@ -40,7 +40,17 @@ public class GestorBD {
     }
 
     public static void RegistroPerfil(String u, String p) {
-        // clase Registro
+        int id = obtenIDMaximo();
+
+        String SentenciaSQL="INSERT INTO PERFIL(ID, USUARIO, PASSWORD) VALUES(";
+        SentenciaSQL += String.valueOf(id) + ",'" + u + "', '" + p + "')";
+
+        BaseDatos bdh = new BaseDatos(contexto);
+        SQLiteDatabase bd;
+        bd = bdh.getWritableDatabase();
+        bd.execSQL(SentenciaSQL);
+        bd.close();
+        bdh.close();
     }
 
     protected static int obtenIDMaximo(){
