@@ -115,6 +115,8 @@ public class GestorBD {
 
     private static void BorrarHistorial(int idPerfil){
 
+        // Definir cómo se hará una entrada en el historia (información de salida + prendas sugeridas)
+
     }
 
     private static void BorrarConjunto(int idPerfil){
@@ -122,6 +124,15 @@ public class GestorBD {
     }
 
     private static void ActualizarPerfil(int idPerfil, String usuario, String password){
+
+        String sentenciaSQL = "UPDATE PERFIL SET USUARIO='" + usuario + "', PASS='"
+                + password + "' WHERE idPerfil=" + idPerfil;
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
 
     }
 }
