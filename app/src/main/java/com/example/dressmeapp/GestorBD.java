@@ -139,12 +139,17 @@ public class GestorBD {
     }
 
     private static void BorrarPrenda(int idPrenda){
-        String sentenciaSQL;
-        sentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + String.valueOf(idPrenda);
+        //No se borra la prenda simplemente se actualiza el flag visible a 0
+
+        String SentenciaSQL;
+        SentenciaSQL = "UPDATE PRENDA SET ";
+        SentenciaSQL+= "VISIBLE = '0' ";
+        SentenciaSQL+= "WHERE ID = " + idPrenda;
+
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
-        baseDatos = base.getWritableDatabase();
-        baseDatos.execSQL(sentenciaSQL);
+        baseDatos=base.getWritableDatabase();
+        baseDatos.execSQL(SentenciaSQL);
         baseDatos.close();
         base.close();
     }
