@@ -30,7 +30,7 @@ public class GestorBD {
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
 
         Cursor cursor;
-        BaseDatos base = new BaseDatos(this.contexto);
+        BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
