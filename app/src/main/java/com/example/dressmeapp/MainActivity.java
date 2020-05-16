@@ -11,12 +11,11 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView textError;
     private EditText textNombre;
     private EditText textContrasenia;
     private Button btnLogin;
     private Button btnRegistro;
-    private int prueba;
-    private TextView TextoError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +27,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void enlazarControles() {
 
+        textError = findViewById(R.id.textError);
+        textError.setText("");
         textNombre = findViewById(R.id.textNombre);
-        TextoError = findViewById(R.id.TextoErrorView);
-        TextoError.setText("");
         textContrasenia = findViewById(R.id.textContrasenia);
+
         btnLogin = findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //irAMenuPrincipal();
+                //quitarTeclado(v);
+                // aqui pongo lo que hace el boton
+                login(textNombre.getText().toString(), textContrasenia.getText().toString());
+            }
+        });
+
         btnRegistro = findViewById(R.id.btnRegistro);
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,14 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 //Aqui pongo donde vaya el registro
             }
         });
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                irAMenuPrincipal();
-                //quitarTeclado(v);
-                // aqui pongo lo que hace el boton
-                //login(e_usuario.getText().toString(), e_password.getText().toString());
-            }
-        });
+
 
     }
 
@@ -63,13 +65,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    protected void login(String usuario, String pass ){
+    protected void login(String usuario, String pass) {
 
-        if(EstaBD(usuario) && CompruebaContrasena(usuario,pass)){
-            irAMenuPrincipal();
-        }else{
-            TextoError.setText("Usuario o contrasena incorrectos");
-        }
+        //if (GestorBD.UsuarioEstaEnBD(usuario) && GestorBD.CompruebaContrasena(usuario,pass)){
+            //irAMenuPrincipal();
+        //}else{
+        textError.setText(R.string.login_incorrecto);
+        //}
 
     }
 

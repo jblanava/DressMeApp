@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Ordenar"></activity>
+        <activity android:name=".PrendaView"></activity>
+        <activity android:name=".Ordenar" />
         <activity android:name=".Anydir" />
         <activity android:name=".RegistroActivity" />
         <activity android:name=".RecomendadorActivity" />
