@@ -31,16 +31,11 @@ public class RegistroActivity extends AppCompatActivity {
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(textContrasenia.toString().equals(textConfirmaContrasenia.toString())){
-                    crearPerfil();
-                }
+            if (textContrasenia.toString().equals(textConfirmaContrasenia.toString())){
+                //GestorBD.CrearPerfil();
+            }
                 }
         });
-
-    }
-
-        private void crearPerfil() {
 
     }
 
