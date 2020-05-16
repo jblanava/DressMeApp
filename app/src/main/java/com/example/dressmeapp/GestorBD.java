@@ -25,4 +25,31 @@ public class GestorBD {
         return false;
     }
 
+    private static void CrearPerfil(int id, String usuario, String contrasenia){
+
+    }
+
+    private static void CrearPerfil(String usuario, String contrasenia){
+
+    }
+
+    private static void BorrarPerfil(int id){
+
+    }
+
+    private static void BorrarPrenda(int idPrenda){
+
+    }
+
+    private static void BorrarHistorial(int idPerfil){
+
+    }
+
+    private static void BorrarConjunto(int idPerfil){
+
+    }
+
+    private static void ActualizarPerfil(int idPerfil, String usuario, String password){
+
+    }
 }
