@@ -25,19 +25,6 @@ public class GestorBD {
         }
     } */
 
-    public static void RegistroPerfil(String u, String p) {
-        int id = obtenIDMaximo();
-
-        String SentenciaSQL="INSERT INTO PERFIL(ID, USUARIO, PASSWORD) VALUES(";
-        SentenciaSQL += String.valueOf(id) + ",'" + u + "', '" + p + "')";
-
-        BaseDatos bdh = new BaseDatos(contexto);
-        SQLiteDatabase bd;
-        bd = bdh.getWritableDatabase();
-        bd.execSQL(SentenciaSQL);
-        bd.close();
-        bdh.close();
-    }
 
     protected static int obtenIDMaximo(){
         int resultado = 0;
@@ -92,11 +79,8 @@ public class GestorBD {
         return encontrado;
     }
 
-    private static void CrearPerfil(int id, String usuario, String contrasenia){
 
-    }
-
-    private static void CrearPerfil(String usuario, String contrasenia){
+    public static void CrearPerfil(String usuario, String contrasenia){
         int id = obtenIDMaximo();
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
@@ -124,7 +108,7 @@ public class GestorBD {
 
     }
 
-    private static void BorrarPrenda(int idPrenda){
+    private static void BorrarPrenda(int idPrenda){ // El borrar prenda realmente no es borrarla, es actualizar el flag
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + String.valueOf(idPrenda);
         BaseDatos base = new BaseDatos(contexto);
@@ -138,11 +122,28 @@ public class GestorBD {
     private static void BorrarHistorial(int idPerfil){
 
         // Definir cómo se hará una entrada en el historia (información de salida + prendas sugeridas)
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM ENTRADA_HISTORIAL WHERE ID = " + String.valueOf(idPerfil);
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
+
+
 
     }
 
-    private static void BorrarConjunto(int idPerfil){
-
+    private static void BorrarConjunto(int idConjunto){
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM CONJUNTO WHERE ID = " + String.valueOf(idConjunto);
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
     }
 
     private static void ActualizarPerfil(int idPerfil, String usuario, String password){
