@@ -17,27 +17,13 @@ public class GestorBD {
 
     }
     //PERFIL: int ID, String usuario, String password
-    public static void IngresoPerfil(String u, String p) {
+
+    /*public static void IngresoPerfil(String usuario, String pass) {
         // Clase Entrar
-        String sentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE USUARIO=";
-        sentenciaSQL+=u;
-        String contrasenia;
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
+        if(PassCorrecta(usuario, pass) && UsuarioEstaEnBD(usuario)){
 
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if(cursor.moveToFirst()){
-            do{
-                contrasenia = LibreriaBD.Campo(cursor, p);
-                //contrasenia = LibreriaBD.(cursor, "CONTRASENIA");
-            } while(cursor.moveToNext());
         }
-
-        baseDatos.close();
-        base.close();
-        cursor.close();
-    }
+    } */
 
     public static void RegistroPerfil(String u, String p) {
         int id = obtenIDMaximo();
@@ -106,11 +92,8 @@ public class GestorBD {
         return encontrado;
     }
 
-    private static void CrearPerfil(int id, String usuario, String contrasenia){
 
-    }
-
-    private static void CrearPerfil(String usuario, String contrasenia){
+    public static void CrearPerfil(String usuario, String contrasenia){
         int id = obtenIDMaximo();
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
@@ -148,7 +131,7 @@ public class GestorBD {
 
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
-        baseDatos=base.getWritableDatabase();
+        baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(SentenciaSQL);
         baseDatos.close();
         base.close();
@@ -157,11 +140,28 @@ public class GestorBD {
     private static void BorrarHistorial(int idPerfil){
 
         // Definir cómo se hará una entrada en el historia (información de salida + prendas sugeridas)
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM ENTRADA_HISTORIAL WHERE ID = " + String.valueOf(idPerfil);
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
+
+
 
     }
 
-    private static void BorrarConjunto(int idPerfil){
-
+    private static void BorrarConjunto(int idConjunto){
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM CONJUNTO WHERE ID = " + String.valueOf(idConjunto);
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
     }
 
     private static void ActualizarPerfil(int idPerfil, String usuario, String password){
