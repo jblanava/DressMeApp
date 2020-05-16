@@ -17,27 +17,13 @@ public class GestorBD {
 
     }
     //PERFIL: int ID, String usuario, String password
-    public static void IngresoPerfil(String u, String p) {
+    
+    /*public static void IngresoPerfil(String usuario, String pass) {
         // Clase Entrar
-        String sentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE USUARIO=";
-        sentenciaSQL+=u;
-        String contrasenia;
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
+        if(PassCorrecta(usuario, pass) && UsuarioEstaEnBD(usuario)){
 
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if(cursor.moveToFirst()){
-            do{
-                contrasenia = LibreriaBD.Campo(cursor, p);
-                //contrasenia = LibreriaBD.(cursor, "CONTRASENIA");
-            } while(cursor.moveToNext());
         }
-
-        baseDatos.close();
-        base.close();
-        cursor.close();
-    }
+    } */
 
     public static void RegistroPerfil(String u, String p) {
         // clase Registro
