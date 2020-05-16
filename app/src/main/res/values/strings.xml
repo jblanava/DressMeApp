@@ -8,5 +8,6 @@
     <string name="contrasenia">Contraseña</string>
     <string name="iniciar_sesion">Entrar</string>
     <string name="crear_perfil">Crear perfil</string>
+    <string name="login_incorrecto">Usuario o contraseña incorrectos</string>
 
 </resources>
