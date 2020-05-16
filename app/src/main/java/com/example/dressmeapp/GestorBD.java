@@ -99,7 +99,7 @@ public class GestorBD {
 
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
-        BaseDatos base = new BaseDatos(this.contexto);
+        BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
