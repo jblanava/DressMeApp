@@ -7,35 +7,22 @@ public class GestorBD {
     private String RegistroUsuario;
     private String RegistroContrasena;
 
-
-    public GestorBD(){
-
-
+    public static void IngresoPerfil(String u, String p) {
+        // Clase Entrar
     }
 
-    public void IngresoPerfil(String u, String p){
-         //Clase Entrar
-
-
+    public static void RegistroPerfil(String u, String p) {
+        // clase Registro
     }
 
-    public void RegistroPerfil(String u, String p){
-      //clase Registro
-
-
-    }
-
-     private boolean EstaBD(String usuario){
-        //clase Registro
-
+    private static boolean UsuarioEstaEnBD(String nombre) {
+        // clase Registro
         return false;
-     }
+    }
 
-     private boolean PassCorrecta(String usario, String password){
-        //clase Entrar
-
-
+    private static boolean PassCorrecta(String usario, String password) {
+        // clase Entrar
         return false;
-     }
+    }
 
 }
