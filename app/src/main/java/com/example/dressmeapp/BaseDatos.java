@@ -18,7 +18,20 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Crear todas las tablas...
+        String vsql;
+
+        // TABLA PRENDA
+        vsql = "CREATE TABLE \"PERFIL\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"CONTRASENIA\" VARCHAR(50) NOT NULL)";
+        db.execSQL(vsql);
+        vsql = "CREATE TABLE \"PRENDA\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"COLOR\" VARCHAR(50) NOT NULL" +
+                ", \"TIPO\" INTEGER NOT NULL, \"TALLA\" INTEGER NOT NULL,\"VISIBLE\" INTEGER NOT NULL, FOREIGN KEY (\"ID_PERFIL\") REFERENCES \"PERFIL\" (\"ID\") )";
+
+        db.execSQL(vsql);
+
+
+
+        db.execSQL( "INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ") ;
+        db.execSQL( "INSERT INTO PRENDA VALUES (1  ,'CAMISETA_REXULONA','AZUL',1,1,1,1) ") ;
     }
 
     @Override
