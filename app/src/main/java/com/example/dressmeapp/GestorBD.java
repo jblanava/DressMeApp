@@ -6,7 +6,7 @@ public class GestorBD {
     private String LoginContrasena;
     private String RegistroUsuario;
     private String RegistroContrasena;
-
+    //PERFIL: int ID, String usuario, String password
     public static void IngresoPerfil(String u, String p) {
         // Clase Entrar
     }
