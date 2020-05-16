@@ -17,16 +17,43 @@ public class GestorBD {
 
     }
     //PERFIL: int ID, String usuario, String password
-    
+
     /*public static void IngresoPerfil(String usuario, String pass) {
         // Clase Entrar
-        if(PassCorrecta(usuario, pass) && UsuarioEstaEnBD(usuario)){
+        String sentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE USUARIO=";
+        sentenciaSQL+=u;
+        String contrasenia;
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
 
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        if(cursor.moveToFirst()){
+            do{
+                contrasenia = LibreriaBD.Campo(cursor, "CONTRASENIA");
+            } while(cursor.moveToNext());
         }
+
+        baseDatos.close();
+        base.close();
+        cursor.close();
     } */
 
+    public static void RegistroPerfil(String u, String p) {
+        int id = obtenIDMaximoPerfil();
 
-    protected static int obtenIDMaximo(){
+        String SentenciaSQL="INSERT INTO PERFIL(ID, USUARIO, PASSWORD) VALUES(";
+        SentenciaSQL += String.valueOf(id) + ",'" + u + "', '" + p + "')";
+
+        BaseDatos bdh = new BaseDatos(contexto);
+        SQLiteDatabase bd;
+        bd = bdh.getWritableDatabase();
+        bd.execSQL(SentenciaSQL);
+        bd.close();
+        bdh.close();
+    }
+
+    protected static int obtenIDMaximoPerfil(){
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
 
@@ -46,6 +73,27 @@ public class GestorBD {
         cursor.close();
         return resultado;
     }
+    protected static int obtenIDMaximoPrenda(){
+        int resultado = 0;
+        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PRENDA";
+
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        if(cursor.moveToFirst()){
+            do{
+                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
+            } while(cursor.moveToNext());
+        }
+        resultado++;
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return resultado;
+    }
+
     private static boolean UsuarioEstaEnBD(String nombre) {
         // clase Registro
        String sentenciaSQL;
@@ -80,11 +128,11 @@ public class GestorBD {
     }
 
 
-    public static void CrearPerfil(String usuario, String contrasenia){
-        int id = obtenIDMaximo();
+    protected static void CrearPerfil(String usuario, String contrasenia){
+        int id = obtenIDMaximoPerfil();
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
-        sentenciaSQL += String.valueOf(id) + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "'";
+        sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "'";
 
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
@@ -93,7 +141,20 @@ public class GestorBD {
         baseDatos.close();
         base.close();
     }
+    protected static void crearPrenda(String nombre, String color, String tipo , String talla, int visible,int id_perfil){
+    int id= obtenIDMaximoPrenda();
+    String sentenciaSQL;
+    sentenciaSQL = "INSERT INTO PRENDA (ID, NOMBRE, COLOR, TIPO, TALLA, VISIBLE, ID_PERFIL) VALUES (";
+    sentenciaSQL += id +",'" + nombre.trim()+ "', '" + color.trim() + "', '" + tipo.trim() +
+            "', '"+talla.trim()+"', '"+visible+"', '"+id_perfil +"'";
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos=base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
 
+    }
     private static void BorrarPerfil(int id){
 
         String sentenciaSQL;
@@ -108,13 +169,18 @@ public class GestorBD {
 
     }
 
-    private static void BorrarPrenda(int idPrenda){ // El borrar prenda realmente no es borrarla, es actualizar el flag
-        String sentenciaSQL;
-        sentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + String.valueOf(idPrenda);
+    private static void BorrarPrenda(int idPrenda){
+        //No se borra la prenda simplemente se actualiza el flag visible a 0
+
+        String SentenciaSQL;
+        SentenciaSQL = "UPDATE PRENDA SET ";
+        SentenciaSQL+= "VISIBLE = '0' ";
+        SentenciaSQL+= "WHERE ID = " + idPrenda;
+
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
-        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.execSQL(SentenciaSQL);
         baseDatos.close();
         base.close();
     }
