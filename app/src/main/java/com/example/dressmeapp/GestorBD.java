@@ -138,7 +138,7 @@ public class GestorBD {
 
     }
 
-    private static void BorrarPrenda(int idPrenda){
+    private static void BorrarPrenda(int idPrenda){ // El borrar prenda realmente no es borrarla, es actualizar el flag
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + String.valueOf(idPrenda);
         BaseDatos base = new BaseDatos(contexto);
@@ -152,11 +152,28 @@ public class GestorBD {
     private static void BorrarHistorial(int idPerfil){
 
         // Definir cómo se hará una entrada en el historia (información de salida + prendas sugeridas)
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM ENTRADA_HISTORIAL WHERE ID = " + String.valueOf(idPerfil);
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
+
+
 
     }
 
-    private static void BorrarConjunto(int idPerfil){
-
+    private static void BorrarConjunto(int idConjunto){
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM CONJUNTO WHERE ID = " + String.valueOf(idConjunto);
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
     }
 
     private static void ActualizarPerfil(int idPerfil, String usuario, String password){
