@@ -48,30 +48,22 @@
                 android:textColor="#ED0E0E"
                 tools:visibility="visible" />
 
-            <TextView
-                android:id="@+id/labelNombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nombre" />
-
             <EditText
                 android:id="@+id/textNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:ems="10"
+                android:hint="@string/nombre"
                 android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/labelContrasenia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/contrasenia" />
 
             <EditText
                 android:id="@+id/textContrasenia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:ems="10"
+                android:hint="@string/contrasenia"
                 android:inputType="textPassword" />
 
             <Button

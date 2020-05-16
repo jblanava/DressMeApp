@@ -1,14 +1,22 @@
 <resources>
 
     <string name="app_name">DressMeApp</string>
-    <string name="nuevo_perfil">Nuevo perfil</string>
 
+
+    <!-- strings usados en MainActivity -->
     <string name="bienvenida">Bienvenido a DressMeApp</string>
-    <string name="bienvenida_registro">Cree su propio Armario Virtual</string>
     <string name="nombre">Nombre</string>
     <string name="contrasenia">Contraseña</string>
     <string name="iniciar_sesion">Entrar</string>
-    <string name="crear_perfil">Crear perfil</string>
+    <string name="nuevo_perfil">Nuevo perfil</string>
     <string name="login_incorrecto">Usuario o contraseña incorrectos</string>
+
+    <!-- strings usados en RegistroActivity -->
+    <string name="bienvenida_registro">Cree su propio Armario Virtual</string>
+    <string name="registro_nombre">Introduzca un nombre</string>
+    <string name="registro_contrasenia">Introduzca una contraseña</string>
+    <string name="registro_contrasenia_confirma">Confirme la contraseña</string>
+    <string name="crear_perfil">Crear perfil</string>
+
 
 </resources>

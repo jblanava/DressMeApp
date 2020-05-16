@@ -9,7 +9,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="64dp">
+        android:paddingTop="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,43 +31,30 @@
                 android:textColor="#199415"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/showUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Usuario" />
-
             <EditText
                 android:id="@+id/textNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:ems="10"
+                android:hint="@string/registro_nombre"
                 android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/contraseña"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Introduzca contraseña" />
 
             <EditText
                 android:id="@+id/textContrasenia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:ems="10"
+                android:hint="@string/registro_contrasenia"
                 android:inputType="textPassword" />
-
-            <TextView
-                android:id="@+id/contraseñaRepetida"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Repita contraseña" />
 
             <EditText
                 android:id="@+id/textConfirmaContrasenia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="@string/registro_contrasenia_confirma"
                 android:inputType="textPassword" />
 
             <Button
@@ -71,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="¡Registrame!" />
+                android:text="@string/crear_perfil" />
         </LinearLayout>
     </ScrollView>
 
