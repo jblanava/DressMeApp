@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class GestorBD {
 
-    private Context contexto;
+    private static Context contexto;
     private String LoginUsuario;
     private String LoginContrasena;
     private String RegistroUsuario;
