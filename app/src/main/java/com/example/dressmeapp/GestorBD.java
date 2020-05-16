@@ -46,20 +46,21 @@ public class GestorBD {
         return resultado;
     }
     private static boolean UsuarioEstaEnBD(String nombre) {
+        // clase Registro
+       String sentenciaSQL;
+       sentenciaSQL= "SELECT ID FROM PERFIL WHERE USUARIO=";
+       sentenciaSQL+= nombre;
+       BaseDatos base = new BaseDatos(contexto);
+       SQLiteDatabase baseDatos = base.getReadableDatabase();
 
-        boolean encontrado = false;
+       Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
+       if(cursor == null && cursor.getCount() == 0){ //Aquí comrpuebo si el cursor está vacío, en otro casa habrá traído algo de la BD
+              return false;
 
-        String sentenciaSQL = "SELECT * FROM PERFIL WHERE USUARIO='" + nombre + "'";
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        encontrado = cursor.moveToFirst();
-        cursor.close();
-
-        return encontrado;
-
-    }
+       }else{
+           return true;
+       }
+        }
 
     private static boolean PassCorrecta(String usuario, String password) {
 
@@ -98,7 +99,7 @@ public class GestorBD {
     private static void BorrarPerfil(int id){
 
         String sentenciaSQL;
-        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
+        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + String.valueOf(id);
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
@@ -110,7 +111,14 @@ public class GestorBD {
     }
 
     private static void BorrarPrenda(int idPrenda){
-
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + String.valueOf(idPrenda);
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
     }
 
     private static void BorrarHistorial(int idPerfil){
