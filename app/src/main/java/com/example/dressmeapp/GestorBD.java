@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+
 public class GestorBD {
 
     private Context contexto;
@@ -57,6 +58,16 @@ public class GestorBD {
     }
 
     private static void BorrarPerfil(int id){
+
+        String vsql;
+        vsql = "DELETE FROM PERFIL WHERE ID = " + id;
+        BaseDatos bdh = new BaseDatos(this.contexto);
+        SQLiteDatabase bd;
+        bd = bdh.getWritableDatabase();
+        bd.execSQL(vsql);
+        bd.close();
+        bdh.close();
+
 
     }
 
