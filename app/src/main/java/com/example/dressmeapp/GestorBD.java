@@ -60,7 +60,17 @@ public class GestorBD {
     }
 
     private static void CrearPerfil(String usuario, String contrasenia){
+    int id = obtenIDMaximo();
+    String vsql;
+    vsql = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
+    vsql += String.valueOf(id) + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "'";
 
+    BaseDatos bdh = new BaseDatos(contexto);
+    SQLiteDatabase bd;
+    bd=bdh.getWritableDatabase();
+    bd.execSQL(vsql);
+    bd.close();
+    bdh.close();
     }
 
     private static void BorrarPerfil(int id){
