@@ -25,19 +25,6 @@ public class GestorBD {
         }
     } */
 
-    public static void RegistroPerfil(String u, String p) {
-        int id = obtenIDMaximo();
-
-        String SentenciaSQL="INSERT INTO PERFIL(ID, USUARIO, PASSWORD) VALUES(";
-        SentenciaSQL += String.valueOf(id) + ",'" + u + "', '" + p + "')";
-
-        BaseDatos bdh = new BaseDatos(contexto);
-        SQLiteDatabase bd;
-        bd = bdh.getWritableDatabase();
-        bd.execSQL(SentenciaSQL);
-        bd.close();
-        bdh.close();
-    }
 
     protected static int obtenIDMaximo(){
         int resultado = 0;
@@ -92,11 +79,8 @@ public class GestorBD {
         return encontrado;
     }
 
-    private static void CrearPerfil(int id, String usuario, String contrasenia){
 
-    }
-
-    private static void CrearPerfil(String usuario, String contrasenia){
+    public static void CrearPerfil(String usuario, String contrasenia){
         int id = obtenIDMaximo();
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
