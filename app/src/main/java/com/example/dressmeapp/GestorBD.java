@@ -25,7 +25,7 @@ public class GestorBD {
         // clase Registro
     }
 
-    protected int obtenIDMaximo(){
+    protected static int obtenIDMaximo(){
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
 
@@ -65,14 +65,14 @@ public class GestorBD {
 
     private static void BorrarPerfil(int id){
 
-        String vsql;
-        vsql = "DELETE FROM PERFIL WHERE ID = " + id;
-        BaseDatos bdh = new BaseDatos(this.contexto);
-        SQLiteDatabase bd;
-        bd = bdh.getWritableDatabase();
-        bd.execSQL(vsql);
-        bd.close();
-        bdh.close();
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
+        BaseDatos base = new BaseDatos(this.contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
 
 
     }
