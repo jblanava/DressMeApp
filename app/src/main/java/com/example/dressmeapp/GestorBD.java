@@ -19,6 +19,24 @@ public class GestorBD {
     //PERFIL: int ID, String usuario, String password
     public static void IngresoPerfil(String u, String p) {
         // Clase Entrar
+        String sentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE USUARIO=";
+        sentenciaSQL+=u;
+        String contrasenia;
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        if(cursor.moveToFirst()){
+            do{
+                contrasenia = LibreriaBD.Campo(cursor, p);
+                //contrasenia = LibreriaBD.(cursor, "CONTRASENIA");
+            } while(cursor.moveToNext());
+        }
+
+        baseDatos.close();
+        base.close();
+        cursor.close();
     }
 
     public static void RegistroPerfil(String u, String p) {
@@ -60,24 +78,24 @@ public class GestorBD {
     }
 
     private static void CrearPerfil(String usuario, String contrasenia){
-    int id = obtenIDMaximo();
-    String vsql;
-    vsql = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
-    vsql += String.valueOf(id) + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "'";
+        int id = obtenIDMaximo();
+        String sentenciaSQL;
+        sentenciaSQL = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
+        sentenciaSQL += String.valueOf(id) + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "'";
 
-    BaseDatos bdh = new BaseDatos(contexto);
-    SQLiteDatabase bd;
-    bd=bdh.getWritableDatabase();
-    bd.execSQL(vsql);
-    bd.close();
-    bdh.close();
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos=base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
     }
 
     private static void BorrarPerfil(int id){
 
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
-        BaseDatos base = new BaseDatos(this.contexto);
+        BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
