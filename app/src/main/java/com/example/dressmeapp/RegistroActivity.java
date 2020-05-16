@@ -40,7 +40,7 @@ public class RegistroActivity extends AppCompatActivity {
 
     }
 
-    private void crearPerfil() {
+        private void crearPerfil() {
 
     }
 
