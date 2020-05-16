@@ -64,13 +64,35 @@ public class GestorBD {
         return resultado;
     }
     private static boolean UsuarioEstaEnBD(String nombre) {
-        // clase Registro
-        return false;
+
+        boolean encontrado = false;
+
+        String sentenciaSQL = "SELECT * FROM PERFIL WHERE USUARIO='" + nombre + "'";
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        encontrado = cursor.moveToFirst();
+        cursor.close();
+
+        return encontrado;
+
     }
 
-    private static boolean PassCorrecta(String usario, String password) {
-        // clase Entrar
-        return false;
+    private static boolean PassCorrecta(String usuario, String password) {
+
+        boolean encontrado = false;
+
+        String sentenciaSQL = "SELECT * FROM PERFIL WHERE USUARIO='"
+                + usuario + "' AND PASSWORD='" + password + "'";
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        encontrado = cursor.moveToFirst();
+        cursor.close();
+
+        return encontrado;
     }
 
     private static void CrearPerfil(int id, String usuario, String contrasenia){
