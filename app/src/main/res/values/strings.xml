@@ -4,6 +4,7 @@
     <string name="nuevo_perfil">Nuevo perfil</string>
 
     <string name="bienvenida">Bienvenido a DressMeApp</string>
+    <string name="bienvenida_registro">Cree su propio Armario Virtual</string>
     <string name="nombre">Nombre</string>
     <string name="contrasenia">Contraseña</string>
     <string name="iniciar_sesion">Entrar</string>

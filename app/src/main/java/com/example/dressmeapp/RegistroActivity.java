@@ -23,9 +23,9 @@ public class RegistroActivity extends AppCompatActivity {
 
     private void enlazarControles() {
 
-        textNombre = findViewById(R.id.usuarioCaja);
-        textContrasenia = findViewById(R.id.password);
-        textConfirmaContrasenia = findViewById(R.id.password2vez);
+        textNombre = findViewById(R.id.textNombre);
+        textContrasenia = findViewById(R.id.textContrasenia);
+        textConfirmaContrasenia = findViewById(R.id.textConfirmaContrasenia);
         btnConfirmar = findViewById(R.id.buttonRegistro);
 
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
