@@ -1,11 +1,20 @@
 package com.example.dressmeapp;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 public class GestorBD {
 
+    private Context contexto;
     private String LoginUsuario;
     private String LoginContrasena;
     private String RegistroUsuario;
     private String RegistroContrasena;
+    public GestorBD(Context context){
+        contexto = context;
+
+    }
     //PERFIL: int ID, String usuario, String password
     public static void IngresoPerfil(String u, String p) {
         // Clase Entrar
@@ -15,6 +24,20 @@ public class GestorBD {
         // clase Registro
     }
 
+    protected int obtenIDMaximo(){
+        int resultado = 0;
+        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
+
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(this.contexto);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        if(cursor.moveToFirst()){
+
+        }
+        return resultado;
+    }
     private static boolean UsuarioEstaEnBD(String nombre) {
         // clase Registro
         return false;
