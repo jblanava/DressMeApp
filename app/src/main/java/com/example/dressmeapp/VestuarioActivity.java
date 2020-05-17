@@ -78,7 +78,7 @@ public class VestuarioActivity extends AppCompatActivity {
 
     void ir_a_agrupar()
     {
-        Intent agrupar = new Intent(this, RecomendadorActivity.class); //CAMBIAR A AGRUPAR
+        Intent agrupar = new Intent(this, Agrupar.class); //CAMBIAR A AGRUPAR
         startActivity(agrupar);
     }
 
