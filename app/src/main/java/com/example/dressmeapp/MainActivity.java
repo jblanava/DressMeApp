@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         enlazarControles();
+
     }
 
     private void enlazarControles() {
@@ -35,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                validarLogin(textNombre.getText().toString(),
-                        textContrasenia.getText().toString());
+                //irAMenuPrincipal();
+                //quitarTeclado(v);
+                // aqui pongo lo que hace el boton
+                login(textNombre.getText().toString(), textContrasenia.getText().toString());
             }
         });
 
@@ -48,15 +51,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void irAMenuPrincipal() {
+
         Intent nuevaActividad = new Intent(this, MenuPrincipalActivity.class);
         startActivity(nuevaActividad);
+        finish();
     }
     private void irARegistro(){
         Intent nuevaActividad = new Intent(this,RegistroActivity.class);
         startActivity(nuevaActividad);
+        finish();
     }
 
     private void validarLogin(String usuario, String pass) {

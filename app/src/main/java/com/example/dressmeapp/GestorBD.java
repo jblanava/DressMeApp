@@ -276,18 +276,18 @@ public class GestorBD {
         base.close();
     }
 
-    protected static void ActualizarPerfil(int idPerfil, String usuario, String password){
+    protected static void ActualizarPerfil(int idPerfil, String password){
 
-        if (!UsuarioEstaEnBD(usuario)) {
-            String sentenciaSQL = "UPDATE PERFIL SET USUARIO='" + usuario + "', PASS='"
-                    + password + "' WHERE idPerfil=" + idPerfil;
+
+            String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
+                    + password + "' WHERE ID=" + idPerfil;
             BaseDatos base = new BaseDatos(contexto);
             SQLiteDatabase baseDatos;
             baseDatos = base.getWritableDatabase();
             baseDatos.execSQL(sentenciaSQL);
             baseDatos.close();
             base.close();
-        }
+
 
 
     }
