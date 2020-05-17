@@ -8,6 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.Inflater;
 
 public class VestuarioActivity extends AppCompatActivity {
 
@@ -20,13 +25,31 @@ public class VestuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vestuario);
 
         enlazar_controles();
-/*
-        Prenda[] prendas = GestorBD.getPrendas();
 
+        List<Prenda> prendas = GestorBD.Dar_Prendas();
+/*
+        List<Prenda> prendas = new ArrayList<>();
+
+        prendas.add(new Prenda("Nombre", "Color", "Tipo", "Talla"));
+        prendas.add(new Prenda("Nombre2", "Color2", "Tipo2", "Talla2"));
+        prendas.add(new Prenda("Nombre3", "Color3", "Tipo3", "Talla3"));
+        prendas.add(new Prenda("Nombre", "Color", "Tipo", "Talla"));
+        prendas.add(new Prenda("Nombre2", "Color2", "Tipo2", "Talla2"));
+        prendas.add(new Prenda("Nombre3", "Color3", "Tipo3", "Talla3"));
+        prendas.add(new Prenda("Nombre", "Color", "Tipo", "Talla"));
+        prendas.add(new Prenda("Nombre2", "Color2", "Tipo2", "Talla2"));
+        prendas.add(new Prenda("Nombre3", "Color3", "Tipo3", "Talla3"));
+        prendas.add(new Prenda("Nombre", "Color", "Tipo", "Talla"));
+        prendas.add(new Prenda("Nombre2", "Color2", "Tipo2", "Talla2"));
+        prendas.add(new Prenda("Nombre3", "Color3", "Tipo3", "Talla3"));
+        prendas.add(new Prenda("Nombre", "Color", "Tipo", "Talla"));
+        prendas.add(new Prenda("Nombre2", "Color2", "Tipo2", "Talla2"));
+        prendas.add(new Prenda("Nombre3", "Color3", "Tipo3", "Talla3"));
+*/
         for(Prenda p : prendas)
         {
             añadir_elemento(p);
-        }*/
+        }
     }
 
     void enlazar_controles()
@@ -62,7 +85,7 @@ public class VestuarioActivity extends AppCompatActivity {
         bBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                añadir_elemento(); // SOLO PARA PROBAR
+                buscar();
             }
         });
     }
@@ -75,7 +98,7 @@ public class VestuarioActivity extends AppCompatActivity {
 
     void ir_a_agrupar()
     {
-        Intent agrupar = new Intent(this, RecomendadorActivity.class); //CAMBIAR A AGRUPAR
+        Intent agrupar = new Intent(this, Agrupar.class); //CAMBIAR A AGRUPAR
         startActivity(agrupar);
     }
 
@@ -85,9 +108,26 @@ public class VestuarioActivity extends AppCompatActivity {
         startActivity(anydir);
     }
 
-
-    void añadir_elemento()
+    void buscar()
     {
-        listaPrendas.addView(getLayoutInflater().inflate(R.layout.activity_prenda_view, null));
+        // No se que hay que poner aqui aun
+    }
+
+
+    void añadir_elemento(Prenda prenda)
+    {
+        View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
+
+        TextView nombre = (TextView) v.findViewById(R.id.prenda_nombre);
+        TextView tipo = (TextView) v.findViewById(R.id.prenda_tipo);
+        TextView color = (TextView) v.findViewById(R.id.prenda_color);
+        TextView talla = (TextView) v.findViewById(R.id.prenda_talla);
+
+        nombre.setText(prenda.nombre);
+        tipo.setText(prenda.tipo);
+        color.setText(prenda.color);
+        talla.setText(prenda.talla);
+
+        listaPrendas.addView(v);
     }
 }
