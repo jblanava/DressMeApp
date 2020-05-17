@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class GestorBD {
 
-    private static int idPerfil;
+    public static int idPerfil;
     private static Context contexto;
     private String LoginUsuario;
     private String LoginContrasena;
@@ -115,6 +115,27 @@ public class GestorBD {
            return true;
        }
         }
+
+    protected static int GetIdPerfil(String usuario, String password) {
+
+        int resultado = 0;
+        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE USUARIO = " + usuario + " AND CONTRASENIA = "+ password;
+
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        resultado = LibreriaBD.CampoInt(cursor, "ID");
+
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return resultado;
+
+
+    }
 
     protected static boolean PassCorrecta(String usuario, String password) {
 
