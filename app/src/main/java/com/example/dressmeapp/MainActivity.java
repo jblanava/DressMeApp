@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void login(String usuario, String pass) {
-            irAMenuPrincipal();
-/*
+
+
         String error = "";
         boolean ok = true;
 
@@ -82,12 +82,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (ok) {
             // GestorBD.idPerfil = GestorBD.getIdPerfil();
+            GestorBD.idPerfil = GestorBD.IdPerfilAsociado(usuario,pass);
+            irAMenuPrincipal();
         } else {
             textError.setText(error);
         }
 
-*/
+
     }
+
 
 
 }
