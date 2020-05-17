@@ -58,11 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
         Intent nuevaActividad = new Intent(this, MenuPrincipalActivity.class);
         startActivity(nuevaActividad);
-
+        finish();
     }
     private void irARegistro(){
         Intent nuevaActividad = new Intent(this,RegistroActivity.class);
         startActivity(nuevaActividad);
+        finish();
     }
 
 
