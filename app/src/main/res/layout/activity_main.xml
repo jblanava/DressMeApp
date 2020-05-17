@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:textColor="#ED0E0E"
+                android:textColor="@color/colorError"
                 tools:visibility="visible" />
 
             <EditText

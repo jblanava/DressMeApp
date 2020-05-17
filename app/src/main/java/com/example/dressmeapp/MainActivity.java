@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         String UsuarioError = "Usuario no encontrado en la base de datos";
         String PassError = "Contraseña incorrecta para el usuario introducido";
 
-        if (gestor.UsuarioEstaEnBD(usuario) && gestor.PassCorrecta(usuario,pass)){
+        if (gestor.PassCorrecta(usuario,pass)){
             irAMenuPrincipal();
         }else{
             if(gestor.UsuarioEstaEnBD(usuario)){ // Errores diferentes si el usuario esta o no en la base de datos
