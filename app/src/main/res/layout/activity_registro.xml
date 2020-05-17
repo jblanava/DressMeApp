@@ -62,7 +62,7 @@
             <TextView
                 android:id="@+id/textError"
                 android:layout_width="match_parent"
-                android:layout_height="16dp"
+                android:layout_height="64dp"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/colorError" />
 

@@ -66,22 +66,24 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    private void validarLogin(String usuario, String pass) {
 
-    protected void login(String usuario, String pass) {
+        String error = "";
+        boolean ok = true;
 
-        String UsuarioError = "Usuario no encontrado en la base de datos";
-        String PassError = "Contraseña incorrecta para el usuario introducido";
+        if (!GestorBD.UsuarioEstaEnBD(usuario)) {
+            ok = false;
+            error = getString(R.string.login_incorrecto_usuario);
+        } else if (!GestorBD.PassCorrecta(usuario, pass)) {
+            ok = false;
+            error = getString(R.string.login_incorrecto_pass);
+        }
 
-        if (gestor.UsuarioEstaEnBD(usuario) && gestor.PassCorrecta(usuario,pass)){
-            GestorBD.idPerfil = gestor.GetIdPerfil(usuario,pass);
+        if (ok) {
+            // GestorBD.idPerfil = GestorBD.getIdPerfil();
             irAMenuPrincipal();
-        }else{
-            if(gestor.UsuarioEstaEnBD(usuario)){ // Errores diferentes si el usuario esta o no en la base de datos
-                textError.setText(PassError);
-            }else{
-                textError.setText(UsuarioError);
-            }
-
+        } else {
+            textError.setText(error);
         }
 
     }
