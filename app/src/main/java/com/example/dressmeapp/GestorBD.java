@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class GestorBD {
 
+    private static int idPerfil;
     private static Context contexto;
     private String LoginUsuario;
     private String LoginContrasena;
@@ -15,6 +16,10 @@ public class GestorBD {
     public GestorBD(Context context){
         contexto = context;
 
+    }
+
+    public static int getIdPerfil(){
+        return idPerfil;
     }
     //PERFIL: int ID, String usuario, String password
 

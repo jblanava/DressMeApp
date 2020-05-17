@@ -19,6 +19,18 @@ public class VestuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vestuario);
 
+        enlazar_controles();
+/*
+        Prenda[] prendas = GestorBD.getPrendas();
+
+        for(Prenda p : prendas)
+        {
+            añadir_elemento(p);
+        }*/
+    }
+
+    void enlazar_controles()
+    {
         bOrdenar = (Button) findViewById(R.id.boton_ordenar);
         bAgrupar = (Button) findViewById(R.id.boton_agrupar);
         bAnydir = (Button) findViewById(R.id.boton_añadir);
