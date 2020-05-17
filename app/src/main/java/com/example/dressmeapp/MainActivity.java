@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         String PassError = "Contraseña incorrecta para el usuario introducido";
 
         if (gestor.UsuarioEstaEnBD(usuario) && gestor.PassCorrecta(usuario,pass)){
+            GestorBD.idPerfil = gestor.GetIdPerfil(usuario,pass);
             irAMenuPrincipal();
         }else{
             if(gestor.UsuarioEstaEnBD(usuario)){ // Errores diferentes si el usuario esta o no en la base de datos
