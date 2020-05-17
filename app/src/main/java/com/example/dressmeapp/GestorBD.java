@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class GestorBD {
 
@@ -13,12 +16,13 @@ public class GestorBD {
     private String LoginContrasena;
     private String RegistroUsuario;
     private String RegistroContrasena;
-    public GestorBD(Context context){
+
+    public GestorBD(Context context) {
         contexto = context;
 
     }
 
-    public static int getIdPerfil(){
+    public static int getIdPerfil() {
         return idPerfil;
     }
     //PERFIL: int ID, String usuario, String password
@@ -47,7 +51,7 @@ public class GestorBD {
     public static void RegistroPerfil(String u, String p) {
         int id = obtenIDMaximoPerfil();
 
-        String SentenciaSQL="INSERT INTO PERFIL(ID, USUARIO, PASSWORD) VALUES(";
+        String SentenciaSQL = "INSERT INTO PERFIL(ID, USUARIO, PASSWORD) VALUES(";
         SentenciaSQL += String.valueOf(id) + ",'" + u + "', '" + p + "')";
 
         BaseDatos bdh = new BaseDatos(contexto);
@@ -58,7 +62,7 @@ public class GestorBD {
         bdh.close();
     }
 
-    protected static int obtenIDMaximoPerfil(){
+    protected static int obtenIDMaximoPerfil() {
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
 
@@ -67,10 +71,10 @@ public class GestorBD {
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if(cursor.moveToFirst()){
-            do{
+        if (cursor.moveToFirst()) {
+            do {
                 resultado = LibreriaBD.CampoInt(cursor, "MAXID");
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         resultado++;
         baseDatos.close();
@@ -78,6 +82,37 @@ public class GestorBD {
         cursor.close();
         return resultado;
     }
+
+     public static List<Prenda> Dar_Prendas() {
+
+         String sentenciaSQL = "SELECT * FROM PRENDA WHERE VISIBLE = 1";
+         Cursor cursor;
+         List<Prenda> res = new ArrayList<>();
+
+         BaseDatos base = new BaseDatos(contexto);
+         SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+         cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+         if (cursor.moveToFirst()) {
+             do {
+
+                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+                String color = LibreriaBD.Campo(cursor, "COLOR");
+                int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
+                int talla = LibreriaBD.CampoInt(cursor, "TALLA");
+
+
+
+                Prenda p = new Prenda(nombre,color,"CAMISA","talla");
+                res.add(p);
+
+             } while (cursor.moveToNext());
+
+         }
+         return res;
+     }
+
     protected static int obtenIDMaximoPrenda(){
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PRENDA";
