@@ -151,10 +151,10 @@ public class GestorBD {
        }
         }
 
-    protected static int GetIdPerfil(String usuario, String password) {
+    protected static int IdPerfilAsociado(String usuario, String password) {
 
-        int resultado = 0;
-        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE USUARIO = " + usuario + " AND CONTRASENIA = "+ password;
+        int id = 0;
+        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE USUARIO = '" + usuario + "' AND CONTRASENIA = '"+ password+ "'";
 
         Cursor cursor;
         BaseDatos base = new BaseDatos(contexto);
@@ -162,12 +162,12 @@ public class GestorBD {
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
-        resultado = LibreriaBD.CampoInt(cursor, "ID");
+        id = LibreriaBD.CampoInt(cursor, "ID");
 
         baseDatos.close();
         base.close();
         cursor.close();
-        return resultado;
+        return id;
 
 
     }
