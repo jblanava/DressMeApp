@@ -18,30 +18,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String vsql;
+
 
         // TABLA PRENDA
-        vsql = "CREATE TABLE \"PERFIL\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"CONTRASENIA\" VARCHAR(50) NOT NULL)";
-        db.execSQL(vsql);
-        vsql = "CREATE TABLE \"PRENDA\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"COLOR\" VARCHAR(50) NOT NULL" +
-                ", \"TIPO\" INTEGER NOT NULL, \"TALLA\" INTEGER NOT NULL,\"VISIBLE\" INTEGER NOT NULL, FOREIGN KEY (\"ID_PERFIL\") REFERENCES \"PERFIL\" (\"ID\") )";
 
-        db.execSQL(vsql);
-
-        vsql = "CREATE TABLE \"ENTRADA_HISTORIAL\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"FORMALIDAD\" INTEGER NOT NULL" +
-                ", \"TIEMPO\" INTEGER NOT NULL, \"TEMPERATURA\" INTEGER NOT NULL,\"FECHA\" INTEGER NOT NULL, FOREIGN KEY (\"ID_PRENDA\") REFERENCES \"PRENDA\" (\"ID\") )";
-
-        db.execSQL(vsql);
-
-               vsql = "CREATE TABLE \"CONJUNTO\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"ABRIGO\" INTEGER ,\"SUDADERA\" INTEGER , \"CAMISETA\" INTEGER NOT NULL, " +
-                "\"PANTALON\" INTEGER NOT NULL, \"ZAPATO\" INTEGER NOT NULL, \"COMPLEMENTO\" INTEGER )";
-
-        db.execSQL(vsql);
-
-        db.execSQL("CREATE TABLE \"COLOR\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
-        db.execSQL("CREATE TABLE \"TIPO\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
-        db.execSQL("CREATE TABLE \"TALLA\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
-
+        crearTablas(db);
         crearColor(db);
         crearTalla(db);
         crearTipos(db);
@@ -57,26 +38,50 @@ import android.database.sqlite.SQLiteOpenHelper;
         if (oldVersion != newVersion) { }
     }
 
+    private void crearTablas(SQLiteDatabase db){
+        String vsql;
+        vsql = "CREATE TABLE \"PERFIL\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"CONTRASENIA\" VARCHAR(50) NOT NULL)";
+        db.execSQL(vsql);
+        vsql = "CREATE TABLE \"PRENDA\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"COLOR\" VARCHAR(50) NOT NULL" +
+                ", \"TIPO\" INTEGER NOT NULL, \"TALLA\" INTEGER NOT NULL,\"VISIBLE\" INTEGER NOT NULL, FOREIGN KEY (\"ID_PERFIL\") REFERENCES \"PERFIL\" (\"ID\") )";
+
+        db.execSQL(vsql);
+
+        vsql = "CREATE TABLE \"ENTRADA_HISTORIAL\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"FORMALIDAD\" INTEGER NOT NULL" +
+                ", \"TIEMPO\" INTEGER NOT NULL, \"TEMPERATURA\" INTEGER NOT NULL,\"FECHA\" INTEGER NOT NULL, FOREIGN KEY (\"ID_PRENDA\") REFERENCES \"PRENDA\" (\"ID\") )";
+
+        db.execSQL(vsql);
+
+        vsql = "CREATE TABLE \"CONJUNTO\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"ABRIGO\" INTEGER ,\"SUDADERA\" INTEGER , \"CAMISETA\" INTEGER NOT NULL, " +
+                "\"PANTALON\" INTEGER NOT NULL, \"ZAPATO\" INTEGER NOT NULL, \"COMPLEMENTO\" INTEGER )";
+
+        db.execSQL(vsql);
+
+        db.execSQL("CREATE TABLE \"COLOR\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
+        db.execSQL("CREATE TABLE \"TIPO\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
+        db.execSQL("CREATE TABLE \"TALLA\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
+    }
+
     private void crearTipos(SQLiteDatabase db){
         // ACTUALIZAR LOS VALORES
 
-                                                                //   MF F  C  D  P  MF F  N  C  MC //  Parte_Corporal
-        db.execSQL( "INSERT INTO TIPO VALUES (1  , 'ABRIGO',         1, 1, 0, 0, 0, 1, 0, 0, 0, 0,           0) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (2  , 'BLUSA',          1, 1, 0, 0, 0, 1, 1, 1, 1, 1,           2) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (3 , 'BAÑADOR/BIKINI',  0, 0, 0, 0, 1, 0, 0, 0, 1, 1,           3) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (4  , 'CHAQUETA',       1, 1, 1, 1, 1, 1, 1, 0, 0, 0,           0) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (5  , 'CAMISA' ,        1, 1, 0, 0, 0, 1, 1, 1, 1, 1,           2) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (6  , 'CAMISETA' ,      0, 1, 1, 1, 1, 1, 1, 1, 1, 1,           2) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (7 , 'CHANCLAS',        0, 1, 0, 0, 1, 0, 0, 0, 1, 1,           4) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (8  , 'FALDA',          1, 1, 1, 0, 0, 1, 1, 1, 1, 1,           3) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (9  , 'PANTALON',       1, 1, 1, 1, 0, 1, 1, 1, 1, 1,           3) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (10  , 'POLO',          1, 1, 1, 0, 0, 1, 1, 1, 1, 1,           2) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (11  , 'SUDADERA',      0, 1, 1, 0, 1, 1, 1, 1, 1, 0,           1) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (12 , 'TRAJE',          1, 1, 0, 0, 0, 1, 1, 1, 1, 1,           2) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (13 , 'TENNIS',         0, 1, 1, 1, 1, 1, 1, 1, 1, 1,           3) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (14  , 'JERSEY',        1, 1, 0, 0, 0, 1, 1, 1, 1, 0,           1) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (15  , 'ZAPATOS',       1, 1, 1, 0, 0, 1, 1, 1, 1, 1,           4) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (16  , 'COMPLEMENTO',   1, 1, 1, 1, 1, 1, 1, 1, 1, 1,           5) ") ;
+
+        db.execSQL( "INSERT INTO TIPO VALUES (1  , 'ABRIGO') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (2  , 'BLUSA') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (3 , 'BAÑADOR/BIKINI') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (4  , 'CHAQUETA') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (5  , 'CAMISA'  ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (6  , 'CAMISETA' ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (7 , 'CHANCLAS') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (8  , 'FALDA' ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (9  , 'PANTALON') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (10  , 'POLO') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (11  , 'SUDADERA') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (12 , 'TRAJE') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (13 , 'TENNIS') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (14  , 'JERSEY') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (15  , 'ZAPATOS' ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (16  , 'COMPLEMENTO') ") ;
 
     }
 

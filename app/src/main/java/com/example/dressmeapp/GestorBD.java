@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class GestorBD {
 
+    private static int idPerfil;
     private static Context contexto;
     private String LoginUsuario;
     private String LoginContrasena;
@@ -16,8 +17,13 @@ public class GestorBD {
         contexto = context;
 
     }
+
+    public static int getIdPerfil(){
+        return idPerfil;
+    }
     //PERFIL: int ID, String usuario, String password
-    public static void IngresoPerfil(String u, String p) {
+
+    /*public static void IngresoPerfil(String usuario, String pass) {
         // Clase Entrar
         String sentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE USUARIO=";
         sentenciaSQL+=u;
@@ -29,18 +35,17 @@ public class GestorBD {
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
         if(cursor.moveToFirst()){
             do{
-                contrasenia = LibreriaBD.Campo(cursor, p);
-                //contrasenia = LibreriaBD.(cursor, "CONTRASENIA");
+                contrasenia = LibreriaBD.Campo(cursor, "CONTRASENIA");
             } while(cursor.moveToNext());
         }
 
         baseDatos.close();
         base.close();
         cursor.close();
-    }
+    } */
 
     public static void RegistroPerfil(String u, String p) {
-        int id = obtenIDMaximo();
+        int id = obtenIDMaximoPerfil();
 
         String SentenciaSQL="INSERT INTO PERFIL(ID, USUARIO, PASSWORD) VALUES(";
         SentenciaSQL += String.valueOf(id) + ",'" + u + "', '" + p + "')";
@@ -53,7 +58,7 @@ public class GestorBD {
         bdh.close();
     }
 
-    protected static int obtenIDMaximo(){
+    protected static int obtenIDMaximoPerfil(){
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
 
@@ -73,6 +78,27 @@ public class GestorBD {
         cursor.close();
         return resultado;
     }
+    protected static int obtenIDMaximoPrenda(){
+        int resultado = 0;
+        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PRENDA";
+
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        if(cursor.moveToFirst()){
+            do{
+                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
+            } while(cursor.moveToNext());
+        }
+        resultado++;
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return resultado;
+    }
+
     private static boolean UsuarioEstaEnBD(String nombre) {
         // clase Registro
        String sentenciaSQL;
@@ -106,15 +132,12 @@ public class GestorBD {
         return encontrado;
     }
 
-    private static void CrearPerfil(int id, String usuario, String contrasenia){
 
-    }
-
-    private static void CrearPerfil(String usuario, String contrasenia){
-        int id = obtenIDMaximo();
+    protected static void CrearPerfil(String usuario, String contrasenia){
+        int id = obtenIDMaximoPerfil();
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
-        sentenciaSQL += String.valueOf(id) + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "'";
+        sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "'";
 
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
@@ -123,7 +146,20 @@ public class GestorBD {
         baseDatos.close();
         base.close();
     }
+    protected static void crearPrenda(String nombre, String color, String tipo , String talla, int visible,int id_perfil){
+    int id= obtenIDMaximoPrenda();
+    String sentenciaSQL;
+    sentenciaSQL = "INSERT INTO PRENDA (ID, NOMBRE, COLOR, TIPO, TALLA, VISIBLE, ID_PERFIL) VALUES (";
+    sentenciaSQL += id +",'" + nombre.trim()+ "', '" + color.trim() + "', '" + tipo.trim() +
+            "', '"+talla.trim()+"', '"+visible+"', '"+id_perfil +"'";
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos=base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
 
+    }
     private static void BorrarPerfil(int id){
 
         String sentenciaSQL;
@@ -139,12 +175,17 @@ public class GestorBD {
     }
 
     private static void BorrarPrenda(int idPrenda){
-        String sentenciaSQL;
-        sentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + String.valueOf(idPrenda);
+        //No se borra la prenda simplemente se actualiza el flag visible a 0
+
+        String SentenciaSQL;
+        SentenciaSQL = "UPDATE PRENDA SET ";
+        SentenciaSQL+= "VISIBLE = '0' ";
+        SentenciaSQL+= "WHERE ID = " + idPrenda;
+
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
-        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.execSQL(SentenciaSQL);
         baseDatos.close();
         base.close();
     }
@@ -152,11 +193,28 @@ public class GestorBD {
     private static void BorrarHistorial(int idPerfil){
 
         // Definir cómo se hará una entrada en el historia (información de salida + prendas sugeridas)
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM ENTRADA_HISTORIAL WHERE ID = " + String.valueOf(idPerfil);
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
+
+
 
     }
 
-    private static void BorrarConjunto(int idPerfil){
-
+    private static void BorrarConjunto(int idConjunto){
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM CONJUNTO WHERE ID = " + String.valueOf(idConjunto);
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
     }
 
     private static void ActualizarPerfil(int idPerfil, String usuario, String password){
