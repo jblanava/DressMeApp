@@ -9,7 +9,9 @@
     <string name="contrasenia">Contraseña</string>
     <string name="iniciar_sesion">Entrar</string>
     <string name="nuevo_perfil">Nuevo perfil</string>
-    <string name="login_incorrecto">Usuario o contraseña incorrectos</string>
+
+    <string name="login_incorrecto_usuario">Usuario no encontrado</string>
+    <string name="login_incorrecto_pass">Contraseña incorrecta</string>
 
     <!-- strings usados en RegistroActivity -->
     <string name="bienvenida_registro">Cree su propio Armario Virtual</string>
@@ -17,6 +19,11 @@
     <string name="registro_contrasenia">Introduzca una contraseña</string>
     <string name="registro_contrasenia_confirma">Confirme la contraseña</string>
     <string name="crear_perfil">Crear perfil</string>
+
+    <string name="registro_error_sinnombre">Escriba un nombre para su perfil</string>
+    <string name="registro_error_nombreusado">El nombre ya está en uso</string>
+    <string name="registro_error_passnocoincide">La contraseña no coincide</string>
+    <string name="registro_error_sinpass">Introduzca una contraseña</string>
 
 
 </resources>

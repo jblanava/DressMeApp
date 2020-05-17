@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.StringJoiner;
+
 public class RegistroActivity extends AppCompatActivity {
 
     private EditText textNombre;
@@ -44,11 +46,32 @@ public class RegistroActivity extends AppCompatActivity {
 
     private void validarCrearCuenta(String nombre, String contrasenia, String contraseniaConfirmada) {
 
-        // Comprobar nombre. Condiciones:
-        // 1. Al menos un carácter (no vacío)
+        String errores = "";
+        boolean ok = true;
 
+        // Validar nombre
         if (nombre.isEmpty()) {
-            //textError.setText();
+            ok = false;
+            errores += getString(R.string.registro_error_sinnombre) + "\n";
+        } else if (GestorBD.UsuarioEstaEnBD(nombre)) {
+            ok = false;
+            errores += getString(R.string.registro_error_nombreusado) + "\n";
+        }
+
+        // Validar contraseña
+        if (!contrasenia.equals(contraseniaConfirmada)) {
+            ok = false;
+            errores += getString(R.string.registro_error_passnocoincide) + "\n";
+        } else if (contrasenia.isEmpty()) {
+            ok = false;
+            errores += getString(R.string.registro_error_sinpass) + "\n";
+        }
+
+        // Mostrar errores o crear cuenta
+        if (ok) {
+            GestorBD.CrearPerfil(nombre, contrasenia);
+        } else {
+            textError.setText(errores);
         }
 
     }
