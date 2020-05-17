@@ -26,6 +26,16 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
                 irCambiarContrasenia();
             }
         });
+
+        cambioDatos.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                irCambiarDatos();
+            }
+        });
+    }
+
+    protected void irCambiarDatos() {
+
     }
 
     protected void irCambiarContrasenia() {
