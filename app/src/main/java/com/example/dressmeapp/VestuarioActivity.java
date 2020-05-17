@@ -26,7 +26,9 @@ public class VestuarioActivity extends AppCompatActivity {
 
         enlazar_controles();
 
-        List<Prenda> prendas = GestorBD.Dar_Prendas();
+
+
+        List<Prenda> prendas = GestorBD.Dar_Prendas(this);
 /*
         List<Prenda> prendas = new ArrayList<>();
 
