@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void login(String usuario, String pass) {
-            irAMenuPrincipal();
+
 
         String error = "";
         boolean ok = true;
