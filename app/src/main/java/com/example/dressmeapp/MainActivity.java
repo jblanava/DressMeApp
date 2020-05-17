@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText textContrasenia;
     private Button btnLogin;
     private Button btnRegistro;
+    private GestorBD gestor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
     protected void login(String usuario, String pass) {
 
-        //if (GestorBD.UsuarioEstaEnBD(usuario) && GestorBD.CompruebaContrasena(usuario,pass)){
-            //irAMenuPrincipal();
-        //}else{
+        if (gestor.UsuarioEstaEnBD(usuario) && GestorBD.CompruebaContrasena(usuario,pass)){
+            irAMenuPrincipal();
+        }else{
         textError.setText(R.string.login_incorrecto);
-        //}
+        }
 
     }
 

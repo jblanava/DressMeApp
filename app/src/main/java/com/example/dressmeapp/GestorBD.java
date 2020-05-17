@@ -94,7 +94,7 @@ public class GestorBD {
         return resultado;
     }
 
-    private static boolean UsuarioEstaEnBD(String nombre) {
+    protected static boolean UsuarioEstaEnBD(String nombre) {
         // clase Registro
        String sentenciaSQL;
        sentenciaSQL= "SELECT ID FROM PERFIL WHERE USUARIO=";
@@ -111,7 +111,7 @@ public class GestorBD {
        }
         }
 
-    private static boolean PassCorrecta(String usuario, String password) {
+    protected static boolean PassCorrecta(String usuario, String password) {
 
         boolean encontrado = false;
 
@@ -155,7 +155,7 @@ public class GestorBD {
         base.close();
 
     }
-    private static void BorrarPerfil(int id){
+    protected static void BorrarPerfil(int id){
 
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + String.valueOf(id);
@@ -169,7 +169,7 @@ public class GestorBD {
 
     }
 
-    private static void BorrarPrenda(int idPrenda){
+    protected static void BorrarPrenda(int idPrenda){
         //No se borra la prenda simplemente se actualiza el flag visible a 0
 
         String SentenciaSQL;
@@ -185,7 +185,7 @@ public class GestorBD {
         base.close();
     }
 
-    private static void BorrarHistorial(int idPerfil){
+    protected static void BorrarHistorial(int idPerfil){
 
         // Definir cómo se hará una entrada en el historia (información de salida + prendas sugeridas)
         String sentenciaSQL;
@@ -201,7 +201,7 @@ public class GestorBD {
 
     }
 
-    private static void BorrarConjunto(int idConjunto){
+    protected static void BorrarConjunto(int idConjunto){
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM CONJUNTO WHERE ID = " + String.valueOf(idConjunto);
         BaseDatos base = new BaseDatos(contexto);
@@ -212,7 +212,7 @@ public class GestorBD {
         base.close();
     }
 
-    private static void ActualizarPerfil(int idPerfil, String usuario, String password){
+    protected static void ActualizarPerfil(int idPerfil, String usuario, String password){
 
         if (!UsuarioEstaEnBD(usuario)) {
             String sentenciaSQL = "UPDATE PERFIL SET USUARIO='" + usuario + "', PASS='"
