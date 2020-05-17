@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PrendaView"></activity>
+        <activity android:name=".ConfiguracionContraseniaActivity"></activity>
+        <activity android:name=".PerfilConfiguracionActivity" />
+        <activity android:name=".PrendaView" />
         <activity android:name=".Ordenar" />
         <activity android:name=".Anydir" />
         <activity android:name=".RegistroActivity" />
