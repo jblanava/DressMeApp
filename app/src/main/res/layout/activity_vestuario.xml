@@ -6,87 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".VestuarioActivity">
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+            <EditText
+                android:id="@+id/editText_busqueda"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Introducir busqueda" />
+
+            <Button
+                android:id="@+id/boton_buscar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:visibility="visible"
-                tools:visibility="visible">
+                android:text="Buscar" />
+        </TableRow>
 
-                <EditText
-                    android:id="@+id/editText_busqueda"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Introducir busqueda" />
-
-                <Button
-                    android:id="@+id/boton_buscar"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Buscar" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/boton_añadir"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Añadir" />
-
-                <Button
-                    android:id="@+id/boton_agrupar"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Agrupar" />
-
-                <Button
-                    android:id="@+id/boton_ordenar"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Ordenar" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <ScrollView
-            android:id="@+id/scrollView2"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-            <LinearLayout
-                android:id="@+id/lista_prendas"
+            <Button
+                android:id="@+id/boton_agrupar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Agrupar" />
+
+            <Button
+                android:id="@+id/boton_añadir"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Añadir" />
+
+            <Button
+                android:id="@+id/boton_ordenar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Ordenar" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="18">
+
+            <ScrollView
+                android:id="@+id/scrollView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+                android:layout_height="match_parent"
+                android:layout_weight="5">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lista_prendas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+            </ScrollView>
+        </TableRow>
+
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

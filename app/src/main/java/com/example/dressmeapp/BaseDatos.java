@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
     public class BaseDatos extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
-    private static final String NOMBRE_BASE_DATOS = "dressmeapp1.db";
+    private static final String NOMBRE_BASE_DATOS = "dressmeapp2.db";
 
 
     public BaseDatos (Context contexto) {
@@ -27,6 +27,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
         db.execSQL( "INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ") ;
         db.execSQL( "INSERT INTO PRENDA VALUES (6  ,'CAMISETA_REXULONA','AZUL',1,1,1,1) ") ;
+        db.execSQL( "INSERT INTO PRENDA VALUES (3  ,'patalon','w3eZUL',1,1,1,1) ") ;
         db.execSQL( "INSERT INTO PRENDA VALUES (1  ,'PRIMERA',1,1,1,1,1) ") ;
 
     }

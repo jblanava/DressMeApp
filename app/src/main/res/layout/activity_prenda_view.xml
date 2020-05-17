@@ -24,6 +24,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="TextView"
+                app:autoSizeMaxTextSize="30dp"
+                app:autoSizeMinTextSize="14dp"
                 app:autoSizeTextType="uniform" />
 
             <TextView
@@ -32,6 +34,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="TextView"
+                app:autoSizeMaxTextSize="30dp"
+                app:autoSizeMinTextSize="14dp"
                 app:autoSizeTextType="uniform" />
         </TableRow>
 
@@ -46,6 +50,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="TextView"
+                app:autoSizeMaxTextSize="30dp"
+                app:autoSizeMinTextSize="14dp"
                 app:autoSizeTextType="uniform" />
 
             <TextView
@@ -54,6 +60,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="TextView"
+                app:autoSizeMaxTextSize="30dp"
+                app:autoSizeMinTextSize="14dp"
                 app:autoSizeTextType="uniform" />
         </TableRow>
 

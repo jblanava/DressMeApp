@@ -26,28 +26,8 @@ public class VestuarioActivity extends AppCompatActivity {
 
         enlazar_controles();
 
-
-
         List<Prenda> prendas = GestorBD.Dar_Prendas(this);
-/*
-        List<Prenda> prendas = new ArrayList<>();
 
-        prendas.add(new Prenda("Nombre", "Color", "Tipo", "Talla"));
-        prendas.add(new Prenda("Nombre2", "Color2", "Tipo2", "Talla2"));
-        prendas.add(new Prenda("Nombre3", "Color3", "Tipo3", "Talla3"));
-        prendas.add(new Prenda("Nombre", "Color", "Tipo", "Talla"));
-        prendas.add(new Prenda("Nombre2", "Color2", "Tipo2", "Talla2"));
-        prendas.add(new Prenda("Nombre3", "Color3", "Tipo3", "Talla3"));
-        prendas.add(new Prenda("Nombre", "Color", "Tipo", "Talla"));
-        prendas.add(new Prenda("Nombre2", "Color2", "Tipo2", "Talla2"));
-        prendas.add(new Prenda("Nombre3", "Color3", "Tipo3", "Talla3"));
-        prendas.add(new Prenda("Nombre", "Color", "Tipo", "Talla"));
-        prendas.add(new Prenda("Nombre2", "Color2", "Tipo2", "Talla2"));
-        prendas.add(new Prenda("Nombre3", "Color3", "Tipo3", "Talla3"));
-        prendas.add(new Prenda("Nombre", "Color", "Tipo", "Talla"));
-        prendas.add(new Prenda("Nombre2", "Color2", "Tipo2", "Talla2"));
-        prendas.add(new Prenda("Nombre3", "Color3", "Tipo3", "Talla3"));
-*/
         for(Prenda p : prendas)
         {
             añadir_elemento(p);
