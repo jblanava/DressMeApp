@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void login(String usuario, String pass) {
 
-        if (gestor.UsuarioEstaEnBD(usuario) && GestorBD.CompruebaContrasena(usuario,pass)){
+        if (gestor.UsuarioEstaEnBD(usuario) && gestor.PassCorrecta(usuario,pass)){
             irAMenuPrincipal();
         }else{
         textError.setText(R.string.login_incorrecto);
