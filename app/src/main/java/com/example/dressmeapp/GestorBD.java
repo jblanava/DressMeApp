@@ -110,6 +110,9 @@ public class GestorBD {
              } while (cursor.moveToNext());
 
          }
+         baseDatos.close();
+         base.close();
+         cursor.close();
          return res;
      }
 
