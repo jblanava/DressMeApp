@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 //irAMenuPrincipal();
                 //quitarTeclado(v);
                 // aqui pongo lo que hace el boton
-                login(textNombre.getText().toString(), textContrasenia.getText().toString());
+                Validarlogin(textNombre.getText().toString(), textContrasenia.getText().toString());
             }
         });
 
@@ -66,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void validarLogin(String usuario, String pass) {
+
+
+    private void Validarlogin(String usuario, String pass){
 
         String error = "";
         boolean ok = true;
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (ok) {
-            // GestorBD.idPerfil = GestorBD.getIdPerfil();
+            GestorBD.idPerfil = GestorBD.IdPerfilAsociado(usuario,pass);
             irAMenuPrincipal();
         } else {
             textError.setText(error);
