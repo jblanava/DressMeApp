@@ -55,7 +55,7 @@ public class RegistroActivity extends AppCompatActivity {
             errores += getString(R.string.registro_error_sinnombre) + "\n";
         } else if (GestorBD.UsuarioEstaEnBD(nombre)) {
             ok = false;
-            errores += getString(R.string.registro_error_sinnombre) + "\n";
+            errores += getString(R.string.registro_error_nombreusado) + "\n";
         }
 
         // Validar contraseña
