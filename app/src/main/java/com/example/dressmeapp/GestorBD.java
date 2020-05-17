@@ -119,7 +119,7 @@ public class GestorBD {
     protected static int IdPerfilAsociado(String usuario, String password) {
 
         int id = 0;
-        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE USUARIO = '" + usuario + "' AND CONTRASENIA = '"+ password+ "'";
+        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE USUARIO ='" + usuario + "' AND CONTRASENIA ='"+ password+ "'";
 
         Cursor cursor;
         BaseDatos base = new BaseDatos(contexto);
