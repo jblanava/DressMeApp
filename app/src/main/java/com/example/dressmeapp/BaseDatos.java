@@ -10,8 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
     private static final String NOMBRE_BASE_DATOS = "dressmeapp1.db";
 
 
-    private Context contexto;
-
     public BaseDatos (Context contexto) {
         super(contexto, NOMBRE_BASE_DATOS, null, VERSION);
     }
@@ -43,12 +41,12 @@ import android.database.sqlite.SQLiteOpenHelper;
         vsql = "CREATE TABLE \"PERFIL\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"CONTRASENIA\" VARCHAR(50) NOT NULL)";
         db.execSQL(vsql);
         vsql = "CREATE TABLE \"PRENDA\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"COLOR\" VARCHAR(50) NOT NULL" +
-                ", \"TIPO\" INTEGER NOT NULL, \"TALLA\" INTEGER NOT NULL,\"VISIBLE\" INTEGER NOT NULL, FOREIGN KEY (\"ID_PERFIL\") REFERENCES \"PERFIL\" (\"ID\") )";
+                ", \"TIPO\" INTEGER NOT NULL, \"TALLA\" INTEGER NOT NULL,\"VISIBLE\" INTEGER NOT NULL, \"ID_PERFIL\" INTEGER NOT NULL )";
 
         db.execSQL(vsql);
 
         vsql = "CREATE TABLE \"ENTRADA_HISTORIAL\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"FORMALIDAD\" INTEGER NOT NULL" +
-                ", \"TIEMPO\" INTEGER NOT NULL, \"TEMPERATURA\" INTEGER NOT NULL,\"FECHA\" INTEGER NOT NULL, FOREIGN KEY (\"ID_PRENDA\") REFERENCES \"PRENDA\" (\"ID\") )";
+                ", \"TIEMPO\" INTEGER NOT NULL, \"TEMPERATURA\" INTEGER NOT NULL,\"FECHA\" INTEGER NOT NULL, \"ID_PRENDA\" INTEGER NOT NULL  )";
 
         db.execSQL(vsql);
 

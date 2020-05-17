@@ -19,7 +19,6 @@ public class GestorBD {
 
     public GestorBD(Context context) {
         contexto = context;
-
     }
 
     public static int getIdPerfil() {
@@ -83,13 +82,13 @@ public class GestorBD {
         return resultado;
     }
 
-     public static List<Prenda> Dar_Prendas() {
+     public static List<Prenda> Dar_Prendas(Context context) {
 
-         String sentenciaSQL = "SELECT * FROM PRENDA WHERE VISIBLE = 1";
+         String sentenciaSQL = "SELECT NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
          Cursor cursor;
          List<Prenda> res = new ArrayList<>();
 
-         BaseDatos base = new BaseDatos(contexto);
+         BaseDatos base = new BaseDatos(context);
          SQLiteDatabase baseDatos = base.getReadableDatabase();
 
          cursor = baseDatos.rawQuery(sentenciaSQL, null);
