@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.dressmeapp.Activities.MenuPrincipalActivity;
+import com.example.dressmeapp.Activities.RegistroActivity;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
 
