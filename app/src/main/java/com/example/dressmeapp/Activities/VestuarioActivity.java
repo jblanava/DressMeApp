@@ -2,6 +2,7 @@ package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
@@ -31,7 +32,7 @@ public class VestuarioActivity extends AppCompatActivity {
 
         List<Prenda> prendas = GestorBD.Dar_Prendas(this);
 
-        prendas.add(new Prenda("hola", "galleta", "BAÑADOR/BIKINI", "tutifruti"));
+        prendas.add(new Prenda(0, "hola", "galleta", "BAÑADOR/BIKINI", "tutifruti"));
 
         for(Prenda p : prendas)
         {
@@ -117,10 +118,16 @@ public class VestuarioActivity extends AppCompatActivity {
 
         TableLayout t = (TableLayout) v.findViewById(R.id.boton_prenda);
 
+        final Context a = this;
+
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("Debug", "Boton pulsado, prenda con nombre: " + prenda.nombre);
+
+                View view = getLayoutInflater().inflate(R.layout.activity_prenda_view, null); // TODO: seleccionar la activity adecuada
+                Intent modificar = new Intent(a, VestuarioActivity.class);
+                startActivity(modificar);
             }
         });
 

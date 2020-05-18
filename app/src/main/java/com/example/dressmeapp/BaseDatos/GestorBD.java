@@ -95,7 +95,7 @@ public class GestorBD {
 
     public static List<Prenda> Dar_Prendas(Context context) {
 
-        String sentenciaSQL = "SELECT NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
+        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
 
@@ -106,7 +106,7 @@ public class GestorBD {
 
         if (cursor.moveToFirst()) {
             do {
-
+                int id = LibreriaBD.CampoInt(cursor,"ID");
                 String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
                 String color = LibreriaBD.Campo(cursor, "COLOR");
                 int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
@@ -114,7 +114,7 @@ public class GestorBD {
 
 
 
-                Prenda p = new Prenda(nombre,color,"CAMISA","talla");
+                Prenda p = new Prenda(id, nombre,color,"CAMISA","talla");
                 res.add(p);
 
             } while (cursor.moveToNext());
