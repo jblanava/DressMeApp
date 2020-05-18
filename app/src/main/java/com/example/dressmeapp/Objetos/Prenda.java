@@ -2,8 +2,9 @@ package com.example.dressmeapp.Objetos;
 
 public class Prenda
 {
-    public Prenda(String n, String c, String ti, String ta)
+    public Prenda(int i, String n, String c, String ti, String ta)
     {
+        this.id = id;
         this.nombre = n;
         this.color = c;
         this.tipo = ti;
@@ -14,4 +15,6 @@ public class Prenda
     public String color;
     public String tipo;
     public String talla;
+
+    public int id;
 }
