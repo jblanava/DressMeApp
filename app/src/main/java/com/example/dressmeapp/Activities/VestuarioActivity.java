@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
@@ -28,6 +30,8 @@ public class VestuarioActivity extends AppCompatActivity {
         enlazar_controles();
 
         List<Prenda> prendas = GestorBD.Dar_Prendas(this);
+
+        prendas.add(new Prenda("hola", "galleta", "BAÑADOR/BIKINI", "tutifruti"));
 
         for(Prenda p : prendas)
         {
@@ -97,7 +101,7 @@ public class VestuarioActivity extends AppCompatActivity {
     }
 
 
-    void añadir_elemento(Prenda prenda)
+    void añadir_elemento(final Prenda prenda)
     {
         View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
 
@@ -110,6 +114,15 @@ public class VestuarioActivity extends AppCompatActivity {
         tipo.setText(prenda.tipo);
         color.setText(prenda.color);
         talla.setText(prenda.talla);
+
+        TableLayout t = (TableLayout) v.findViewById(R.id.boton_prenda);
+
+        t.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Debug", "Boton pulsado, prenda con nombre: " + prenda.nombre);
+            }
+        });
 
         listaPrendas.addView(v);
     }
