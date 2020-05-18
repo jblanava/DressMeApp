@@ -1,4 +1,4 @@
-package com.example.dressmeapp;
+package com.example.dressmeapp.BaseDatos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

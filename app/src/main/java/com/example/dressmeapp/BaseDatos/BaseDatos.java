@@ -1,4 +1,4 @@
-package com.example.dressmeapp;
+package com.example.dressmeapp.BaseDatos;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

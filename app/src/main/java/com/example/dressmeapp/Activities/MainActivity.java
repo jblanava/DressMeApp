@@ -1,4 +1,4 @@
-package com.example.dressmeapp;
+package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
     private void irARegistro(){
-        Intent nuevaActividad = new Intent(this,RegistroActivity.class);
+        Intent nuevaActividad = new Intent(this, RegistroActivity.class);
         startActivity(nuevaActividad);
         finish();
     }

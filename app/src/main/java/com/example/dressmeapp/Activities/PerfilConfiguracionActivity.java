@@ -1,4 +1,4 @@
-package com.example.dressmeapp;
+package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.dressmeapp.Activities.ConfiguracionContraseniaActivity;
+import com.example.dressmeapp.Activities.MainActivity;
+import com.example.dressmeapp.R;
 
 public class PerfilConfiguracionActivity extends AppCompatActivity {
     private Button cambioDatos;

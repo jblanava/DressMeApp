@@ -1,14 +1,16 @@
-package com.example.dressmeapp;
+package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class PrendaView extends AppCompatActivity {
+import com.example.dressmeapp.R;
+
+public class AgruparPrendasActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prenda_view);
+        setContentView(R.layout.activity_agrupar);
     }
 }

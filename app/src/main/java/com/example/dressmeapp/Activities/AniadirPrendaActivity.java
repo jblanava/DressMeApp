@@ -1,10 +1,12 @@
-package com.example.dressmeapp;
+package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Anydir extends AppCompatActivity {
+import com.example.dressmeapp.R;
+
+public class AniadirPrendaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
