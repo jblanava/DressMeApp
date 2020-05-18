@@ -1,4 +1,4 @@
-package com.example.dressmeapp;
+package com.example.dressmeapp.Objetos;
 
 public class Prenda
 {

@@ -1,8 +1,10 @@
-package com.example.dressmeapp;
+package com.example.dressmeapp.BaseDatos;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.dressmeapp.Objetos.Prenda;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +63,7 @@ public class GestorBD {
         bdh.close();
     }
 
-    protected static int obtenIDMaximoPerfil() {
+    public static int obtenIDMaximoPerfil() {
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
 
@@ -115,7 +117,7 @@ public class GestorBD {
          return res;
      }
 
-    protected static int obtenIDMaximoPrenda(){
+    public static int obtenIDMaximoPrenda(){
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PRENDA";
 
@@ -136,7 +138,7 @@ public class GestorBD {
         return resultado;
     }
 
-    protected static boolean UsuarioEstaEnBD(String nombre) {
+    public static boolean UsuarioEstaEnBD(String nombre) {
         // clase Registro
        String sentenciaSQL;
        sentenciaSQL= "SELECT ID FROM PERFIL WHERE USUARIO=";
@@ -153,7 +155,7 @@ public class GestorBD {
        }
         }
 
-    protected static int IdPerfilAsociado(String usuario, String password) {
+    public static int IdPerfilAsociado(String usuario, String password) {
 
         int id = 0;
         String sentenciaSQL = "SELECT ID FROM PERFIL WHERE USUARIO ='" + usuario + "' AND CONTRASENIA ='"+ password+ "'";
@@ -174,7 +176,7 @@ public class GestorBD {
 
     }
 
-    protected static boolean PassCorrecta(String usuario, String password) {
+    public static boolean PassCorrecta(String usuario, String password) {
 
         boolean encontrado = false;
 
@@ -191,7 +193,7 @@ public class GestorBD {
     }
 
 
-    protected static void CrearPerfil(String usuario, String contrasenia){
+    public static void CrearPerfil(String usuario, String contrasenia){
         int id = obtenIDMaximoPerfil();
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
@@ -204,7 +206,7 @@ public class GestorBD {
         baseDatos.close();
         base.close();
     }
-    protected static void crearPrenda(String nombre, String color, String tipo , String talla, int visible,int id_perfil){
+    public static void crearPrenda(String nombre, String color, String tipo , String talla, int visible,int id_perfil){
     int id= obtenIDMaximoPrenda();
     String sentenciaSQL;
     sentenciaSQL = "INSERT INTO PRENDA (ID, NOMBRE, COLOR, TIPO, TALLA, VISIBLE, ID_PERFIL) VALUES (";
@@ -218,7 +220,7 @@ public class GestorBD {
         base.close();
 
     }
-    protected static void BorrarPerfil(int id){
+    public static void BorrarPerfil(int id){
 
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + String.valueOf(id);
@@ -232,7 +234,7 @@ public class GestorBD {
 
     }
 
-    protected static void BorrarPrenda(int idPrenda){
+    public static void BorrarPrenda(int idPrenda){
         //No se borra la prenda simplemente se actualiza el flag visible a 0
 
         String SentenciaSQL;
@@ -248,7 +250,7 @@ public class GestorBD {
         base.close();
     }
 
-    protected static void BorrarHistorial(int idPerfil){
+    public static void BorrarHistorial(int idPerfil){
 
         // Definir cómo se hará una entrada en el historia (información de salida + prendas sugeridas)
         String sentenciaSQL;
@@ -264,7 +266,7 @@ public class GestorBD {
 
     }
 
-    protected static void BorrarConjunto(int idConjunto){
+    public static void BorrarConjunto(int idConjunto){
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM CONJUNTO WHERE ID = " + String.valueOf(idConjunto);
         BaseDatos base = new BaseDatos(contexto);
@@ -275,7 +277,7 @@ public class GestorBD {
         base.close();
     }
 
-    protected static void ActualizarPerfil(int idPerfil, String password){
+    public static void ActualizarPerfil(int idPerfil, String password){
 
 
             String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"

@@ -1,18 +1,19 @@
-package com.example.dressmeapp;
+package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.Objetos.Prenda;
+import com.example.dressmeapp.R;
+
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class VestuarioActivity extends AppCompatActivity {
 
@@ -74,19 +75,19 @@ public class VestuarioActivity extends AppCompatActivity {
 
     void ir_a_ordenar()
     {
-        Intent ordenar = new Intent(this, Ordenar.class);
+        Intent ordenar = new Intent(this, OrdenarPrendasActivity.class);
         startActivity(ordenar);
     }
 
     void ir_a_agrupar()
     {
-        Intent agrupar = new Intent(this, Agrupar.class); //CAMBIAR A AGRUPAR
+        Intent agrupar = new Intent(this, AgruparPrendasActivity.class); //CAMBIAR A AGRUPAR
         startActivity(agrupar);
     }
 
     void ir_a_anydir()
     {
-        Intent anydir = new Intent(this, Anydir.class);
+        Intent anydir = new Intent(this, AniadirPrendaActivity.class);
         startActivity(anydir);
     }
 

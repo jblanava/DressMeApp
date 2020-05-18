@@ -9,15 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Agrupar"></activity>
-        <activity android:name=".Ordenar" />
-        <activity android:name=".Anydir" />
-        <activity android:name=".RegistroActivity" />
-        <activity android:name=".RecomendadorActivity" />
-        <activity android:name=".ConfiguracionActivity" />
-        <activity android:name=".VestuarioActivity" />
-        <activity android:name=".MenuPrincipalActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.AgruparPrendasActivity"></activity>
+        <activity android:name=".Activities.OrdenarPrendasActivity" />
+        <activity android:name=".Activities.AniadirPrendaActivity" />
+        <activity android:name=".Activities.RegistroActivity" />
+        <activity android:name=".Activities.RecomendadorActivity" />
+        <activity android:name=".Activities.VestuarioActivity" />
+        <activity android:name=".Activities.MenuPrincipalActivity" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
