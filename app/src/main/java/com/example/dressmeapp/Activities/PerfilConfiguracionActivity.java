@@ -66,7 +66,7 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
             {
 
                 int id= gestor.getIdPerfil();
-                gestor.BorrarPerfil(id);
+                gestor.BorrarPerfil(getApplicationContext(),id);
                 startActivity(borrado);
                 //código Java si se ha pulsado sí
             }

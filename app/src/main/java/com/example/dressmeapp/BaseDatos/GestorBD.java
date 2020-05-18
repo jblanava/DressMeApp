@@ -163,7 +163,7 @@ public class GestorBD {
     public static boolean UsuarioEstaEnBD(Context contexto, String nombre) {
         // clase Registro
         String sentenciaSQL;
-        sentenciaSQL= "SELECT ID FROM PERFIL WHERE USUARIO='" + nombre + "'";
+        sentenciaSQL= "SELECT ID FROM PERFIL WHERE NOMBRE = '" + nombre + "'";
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
@@ -192,7 +192,7 @@ public class GestorBD {
     public static int IdPerfilAsociado(Context contexto, String usuario, String password) {
 
         int id = 0;
-        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE USUARIO ='" + usuario + "' AND CONTRASENIA ='"+ password+ "'";
+        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE ='" + usuario + "' AND CONTRASENIA ='"+ password+ "'";
 
         Cursor cursor;
         BaseDatos base = new BaseDatos(contexto);
@@ -200,7 +200,14 @@ public class GestorBD {
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
-        id = LibreriaBD.CampoInt(cursor, "ID");
+
+        if (cursor.moveToFirst())
+            do {
+
+                id = LibreriaBD.CampoInt(cursor, "ID");
+
+            } while ( cursor.moveToNext());
+
 
         baseDatos.close();
         base.close();
@@ -221,8 +228,8 @@ public class GestorBD {
 
         boolean encontrado = false;
 
-        String sentenciaSQL = "SELECT * FROM PERFIL WHERE USUARIO='"
-                + usuario + "' AND PASSWORD='" + password + "'";
+        String sentenciaSQL = "SELECT * FROM PERFIL WHERE NOMBRE='"
+                + usuario + "' AND CONTRASENIA='" + password + "'";
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
@@ -242,8 +249,8 @@ public class GestorBD {
     public static void CrearPerfil(Context contexto, String usuario, String contrasenia){
         int id = obtenIDMaximoPerfil(contexto);
         String sentenciaSQL;
-        sentenciaSQL = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
-        sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "'";
+        sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE,  CONTRASENIA) VALUES (";
+        sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "')";
 
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
