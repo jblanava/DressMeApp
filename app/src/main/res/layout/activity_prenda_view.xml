@@ -7,8 +7,11 @@
     tools:context=".Activities.PrendaActivity">
 
     <TableLayout
+        android:id="@+id/boton_prenda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#2196F3"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

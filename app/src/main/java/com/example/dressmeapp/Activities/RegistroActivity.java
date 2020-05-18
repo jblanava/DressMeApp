@@ -54,7 +54,7 @@ public class RegistroActivity extends AppCompatActivity {
         if (nombre.isEmpty()) {
             ok = false;
             errores += getString(R.string.registro_error_sinnombre) + "\n";
-        } else if (GestorBD.UsuarioEstaEnBD(nombre)) {
+        } else if (GestorBD.UsuarioEstaEnBD(getApplicationContext(), nombre)) {
             ok = false;
             errores += getString(R.string.registro_error_nombreusado) + "\n";
         }
@@ -70,7 +70,7 @@ public class RegistroActivity extends AppCompatActivity {
 
         // Mostrar errores o crear cuenta
         if (ok) {
-            GestorBD.CrearPerfil(nombre, contrasenia);
+            GestorBD.CrearPerfil(getApplicationContext(), nombre, contrasenia);
         } else {
             textError.setText(errores);
         }
