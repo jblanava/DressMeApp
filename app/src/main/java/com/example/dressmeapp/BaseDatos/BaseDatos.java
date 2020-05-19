@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
     public class BaseDatos extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
-    private static final String NOMBRE_BASE_DATOS = "dressmeapp4.db";
+    private static final String NOMBRE_BASE_DATOS = "dressmeapp3.db";
 
 
     public BaseDatos (Context contexto) {

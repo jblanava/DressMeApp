@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.dressmeapp.Activities.ConfiguracionContraseniaActivity;
+import com.example.dressmeapp.Activities.MainActivity;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
 
@@ -64,7 +66,7 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
             {
 
                 int id= gestor.getIdPerfil();
-                //gestor.BorrarPerfil(id);
+                gestor.BorrarPerfil(getApplicationContext(),id);
                 startActivity(borrado);
                 //código Java si se ha pulsado sí
             }

@@ -95,7 +95,7 @@ public class GestorBD {
 
     public static List<Prenda> Dar_Prendas(Context context) {
 
-        String sentenciaSQL = "SELECT NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
+        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
 
@@ -106,7 +106,7 @@ public class GestorBD {
 
         if (cursor.moveToFirst()) {
             do {
-
+                int id = LibreriaBD.CampoInt(cursor,"ID");
                 String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
                 String color = LibreriaBD.Campo(cursor, "COLOR");
                 int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
@@ -114,7 +114,7 @@ public class GestorBD {
 
 
 
-                Prenda p = new Prenda(nombre,color,"CAMISA","talla");
+                Prenda p = new Prenda(id, nombre,color,"CAMISA","talla");
                 res.add(p);
 
             } while (cursor.moveToNext());
@@ -163,7 +163,7 @@ public class GestorBD {
     public static boolean UsuarioEstaEnBD(Context contexto, String nombre) {
         // clase Registro
         String sentenciaSQL;
-        sentenciaSQL= "SELECT ID FROM PERFIL WHERE NOMBRE='" + nombre + "'";
+        sentenciaSQL= "SELECT ID FROM PERFIL WHERE USUARIO='" + nombre + "'";
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
@@ -192,21 +192,21 @@ public class GestorBD {
     public static int IdPerfilAsociado(Context contexto, String usuario, String password) {
 
         int id = 0;
-        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE ='" + usuario + "' AND CONTRASENIA ='"+ password+ "'";
+        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE USUARIO ='" + usuario + "' AND CONTRASENIA ='"+ password+ "'";
 
         Cursor cursor;
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if (cursor.moveToFirst()) {
-            id = LibreriaBD.CampoInt(cursor, "ID");
-        }
+
+        id = LibreriaBD.CampoInt(cursor, "ID");
 
         baseDatos.close();
         base.close();
         cursor.close();
         return id;
+
 
     }
 
@@ -221,8 +221,8 @@ public class GestorBD {
 
         boolean encontrado = false;
 
-        String sentenciaSQL = "SELECT * FROM PERFIL WHERE NOMBRE='"
-                + usuario + "' AND CONTRASENIA='" + password + "'";
+        String sentenciaSQL = "SELECT * FROM PERFIL WHERE USUARIO='"
+                + usuario + "' AND PASSWORD='" + password + "'";
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
@@ -242,8 +242,8 @@ public class GestorBD {
     public static void CrearPerfil(Context contexto, String usuario, String contrasenia){
         int id = obtenIDMaximoPerfil(contexto);
         String sentenciaSQL;
-        sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE, CONTRASENIA) VALUES (";
-        sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "')";
+        sentenciaSQL = "INSERT INTO PERFIL (ID, USUARIO,  CONTRASENIA) VALUES (";
+        sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "'";
 
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
