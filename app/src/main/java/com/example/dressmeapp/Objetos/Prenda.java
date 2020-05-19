@@ -4,7 +4,7 @@ public class Prenda
 {
     public Prenda(int i, String n, String c, int ti, int ta)
     {
-        this.id = id;
+        this.id = i;
         this.nombre = n;
         this.color = c;
         this.tipo = ti;

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
     public class BaseDatos extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
-    private static final String NOMBRE_BASE_DATOS = "dressmeapp3.db";
+    private static final String NOMBRE_BASE_DATOS = "dressmeapp5.db";
 
 
     public BaseDatos (Context contexto) {
@@ -26,9 +26,9 @@ import android.database.sqlite.SQLiteOpenHelper;
         crearTipos(db);
 
         db.execSQL( "INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ") ;
-        db.execSQL( "INSERT INTO PRENDA VALUES (6  ,'CAMISETA_REXULONA','AZUL',1,1,1,1) ") ;
-        db.execSQL( "INSERT INTO PRENDA VALUES (3  ,'patalon','w3eZUL',1,1,1,1) ") ;
-        db.execSQL( "INSERT INTO PRENDA VALUES (1  ,'PRIMERA',1,1,1,1,1) ") ;
+        db.execSQL( "INSERT INTO PRENDA VALUES (1  , 'Prueba1', 'azul',1,3, 1, 1) ") ;
+        db.execSQL( "INSERT INTO PRENDA VALUES (2  , 'Prueba21', 'verda', 4, 2, 1, 1) ") ;
+        db.execSQL( "INSERT INTO PRENDA VALUES (3  , 'Prueba14', 'amarillo', 7,1, 1, 1) ") ;
 
     }
 
