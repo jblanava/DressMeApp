@@ -114,7 +114,7 @@ public class GestorBD {
 
 
 
-                Prenda p = new Prenda(nombre,color,"CAMISA","talla");
+                Prenda p = new Prenda(id, nombre,color,"CAMISA","talla");
                 res.add(p);
 
             } while (cursor.moveToNext());
