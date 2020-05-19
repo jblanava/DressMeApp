@@ -45,16 +45,35 @@ public class ConfiguracionContraseniaActivity extends AppCompatActivity {
     }
     private void UpdatePass(){
 
-        if(nuevaContrasenia.getText().toString().equals(nuevaContrasenia2.getText().toString())) {
-            int idPerfil = gestor.getIdPerfil();
-            gestor.ActualizarPerfil(idPerfil, nuevaContrasenia.getText().toString());
+        String antiguaPass = contraseniaAntigua.getText().toString();
+        String nuevaPass = nuevaContrasenia.getText().toString();
+        String nuevaPassConfirmada = nuevaContrasenia2.getText().toString();
 
-             Intent salto = new Intent(this, MenuPrincipalActivity.class);
-             startActivity(salto);
-             this.finish();
+        String errores = "";
+        boolean ok = true;
 
-        }else{
-            textError.setText("ERROR, LAS CONTRASEÑAS NO COINCIDEN");
+        if (!nuevaPass.equals(nuevaPassConfirmada)) {
+            // Las contraseñas nuevas deben coincidir
+            ok = false;
+            errores += "Las contraseñas nuevas no coinciden";
+        } else if (nuevaPass.isEmpty()) {
+            // La nueva contraseña no debe ser vacía
+            ok = false;
+            errores += "Introduzca una nueva contraseña";
+        }/* else if (GestorBD.PassCorrecta(getApplicationContext(), , antiguaPass)) {
+            // Hay que introducir la contraseña antigua para cambiarla
+            ok = false;
+            errores += "Introduzca una nueva contraseña";
+        }*/
+
+        if (ok) {
+            GestorBD.ActualizarPerfil(getApplicationContext(), GestorBD.idPerfil, nuevaContrasenia.getText().toString());
+
+            Intent salto = new Intent(this, MenuPrincipalActivity.class);
+            startActivity(salto);
+            this.finish();
+        } else {
+            textError.setText(errores);
         }
 
     }

@@ -37,7 +37,7 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
 
         cambioDatos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                irCambiarDatos();
+                MostrarDatos();
             }
         });
 
@@ -68,7 +68,7 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
         {
             public void onClick(DialogInterface dialog, int which)
             {
-                //No hace nada, se queda en la imsma Activity
+                //No hace nada, se queda en la misma Activity
                 //código java si se ha pulsado no
             }
         });
@@ -91,8 +91,12 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
 
     }
 
-    protected void irCambiarDatos() {
+    protected void MostrarDatos() {
         //No sabemos que hase, preguntar a María :D
+    Intent salto = new Intent(this,MostrarDatosActivity.class);
+    startActivity(salto);
+
+
     }
 
     protected void irCambiarContrasenia() {

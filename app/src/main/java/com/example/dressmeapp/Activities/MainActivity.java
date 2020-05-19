@@ -86,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (ok) {
-            // GestorBD.idPerfil = GestorBD.getIdPerfil();
-            GestorBD.idPerfil = GestorBD.IdPerfilAsociado(getApplicationContext(), usuario,pass);
+            GestorBD.idPerfil = GestorBD.IdPerfilAsociado(getApplicationContext(), usuario, pass);
             irAMenuPrincipal();
         } else {
             textError.setText(error);

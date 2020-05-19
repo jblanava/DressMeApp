@@ -12,7 +12,11 @@ import java.util.List;
 
 public class GestorBD {
 
+    /**
+     * El ID del perfil que tiene la sesión abierta actualmente.
+     */
     public static int idPerfil;
+
     private static Context contexto;
     private String LoginUsuario;
     private String LoginContrasena;
@@ -92,9 +96,9 @@ public class GestorBD {
         return resultado;
     }
 
-
+/*
     public static List<Prenda> Dar_Prendas(Context context) {
-
+/*
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
@@ -123,8 +127,11 @@ public class GestorBD {
         base.close();
         cursor.close();
         return res;
+        }
+ */
 
-    }
+
+
 
     /**
      * Devuelve el ID correspondiente a la siguiente prenda que se cree.
@@ -283,10 +290,10 @@ public class GestorBD {
 
     }
 
-    public void BorrarPerfil(Context context, int id){
+    public static void BorrarPerfil(Context contexto, int id){
 
         String sentenciaSQL;
-        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + String.valueOf(id);
+        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
@@ -294,6 +301,7 @@ public class GestorBD {
         baseDatos.close();
         base.close();
 
+        //  Hace falta ademas borrar las prendas, conjuntos e historial
 
     }
 
@@ -303,12 +311,30 @@ public class GestorBD {
      * @param contexto El contexto a usar.
      * @param idPrenda El ID de la prenda a borrar.
      */
-    public static void BorrarPrenda(Context contexto, int idPrenda){
+    public static void CambiarVisibilidadPrenda(Context contexto, int idPrenda){ // este metodo es para cambiar la visibilidad, pero la prenda se mantiene en la base de datos
 
         String SentenciaSQL;
         SentenciaSQL = "UPDATE PRENDA SET ";
         SentenciaSQL+= "VISIBLE = '0' ";
         SentenciaSQL+= "WHERE ID = " + idPrenda;
+
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(SentenciaSQL);
+        baseDatos.close();
+        base.close();
+    }
+
+    /**
+     * Borra definitivamente las prendas de un perfil (no las hace invisibles)
+     * @param contexto El contexto a usar.
+     * @param idPerfil El ID del perfil cuyas prendas borrar
+     */
+    public static void borrarPrenda(Context contexto, int idPerfil) {
+
+        String SentenciaSQL;
+        SentenciaSQL = "DELETE * FROM PRENDA WHERE ID_PERFIL =" + idPerfil;
 
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
@@ -345,22 +371,43 @@ public class GestorBD {
         base.close();
     }
 
-    public static void ActualizarPerfil(int idPerfil, String password){
+    public static void ActualizarPerfil(Context contexto, int idPerfil, String password){
 
-
-            String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
-                    + password + "' WHERE ID=" + idPerfil;
-            BaseDatos base = new BaseDatos(contexto);
-            SQLiteDatabase baseDatos;
-            baseDatos = base.getWritableDatabase();
-            baseDatos.execSQL(sentenciaSQL);
-            baseDatos.close();
-            base.close();
-
-
+        String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
+                + password + "' WHERE ID=" + idPerfil;
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
 
     }
+    public static String getUser(int idPerfil){
+        String SentenciaSQL = "SELECT NOMBRE FROM PERFIL WHERE ID=" + idPerfil;
+        String res="";
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos=base.getWritableDatabase();
+        Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
+        if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"NOMBRE");
+        base.close();
+        baseDatos.close();
+        cursor.close();
+        return res;
+    }
+    public static  String getPass(int idPerfil){
+        String SentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE ID=" + idPerfil;
+        String res="";
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos=base.getWritableDatabase();
+        Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
+        if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"CONTRASENIA");
+        base.close();
+        baseDatos.close();
+        cursor.close();
+        return res;
 
+    }
     public static Prenda Obtener_Prenda(Context context,int id){
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 AND ID = " + id;
         Cursor cursor;
