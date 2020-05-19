@@ -19,7 +19,9 @@
         <activity android:name=".Activities.RecomendadorActivity" />
         <activity android:name=".Activities.VestuarioActivity" />
         <activity android:name=".Activities.MenuPrincipalActivity" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".Activities.PerfilConfiguracionActivity" />
+        <activity android:name=".Activities.MainActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

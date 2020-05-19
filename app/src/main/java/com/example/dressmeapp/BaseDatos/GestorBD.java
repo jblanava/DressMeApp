@@ -243,7 +243,7 @@ public class GestorBD {
     public static void CrearPerfil(Context contexto, String usuario, String contrasenia){
         int id = obtenIDMaximoPerfil(contexto);
         String sentenciaSQL;
-        sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE, CONTRASENIA) VALUES (";
+        sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE,  CONTRASENIA) VALUES (";
         sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "')";
 
         BaseDatos base = new BaseDatos(contexto);
