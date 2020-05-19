@@ -86,4 +86,17 @@ public class ExampleInstrumentedTest {
 
     }
 
+    @Test
+    public void actualizarPerfil() {
+
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        GestorBD.CrearPerfil(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
+        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
+
+        GestorBD.ActualizarPerfil(appContext, maxNuevoPerfil, "NuevaContraseña");
+
+        assertTrue(GestorBD.PassCorrecta(appContext, "UsuarioPrueba4", "NuevaContraseña"));
+
+    }
+
 }

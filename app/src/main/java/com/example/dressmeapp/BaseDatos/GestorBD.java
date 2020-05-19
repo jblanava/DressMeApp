@@ -12,7 +12,11 @@ import java.util.List;
 
 public class GestorBD {
 
+    /**
+     * El ID del perfil que tiene la sesión abierta actualmente.
+     */
     public static int idPerfil;
+
     private static Context contexto;
     private String LoginUsuario;
     private String LoginContrasena;
@@ -344,19 +348,16 @@ public class GestorBD {
         base.close();
     }
 
-    public static void ActualizarPerfil(int idPerfil, String password){
+    public static void ActualizarPerfil(Context contexto, int idPerfil, String password){
 
-
-            String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
-                    + password + "' WHERE ID=" + idPerfil;
-            BaseDatos base = new BaseDatos(contexto);
-            SQLiteDatabase baseDatos;
-            baseDatos = base.getWritableDatabase();
-            baseDatos.execSQL(sentenciaSQL);
-            baseDatos.close();
-            base.close();
-
-
+        String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
+                + password + "' WHERE ID=" + idPerfil;
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
 
     }
 
