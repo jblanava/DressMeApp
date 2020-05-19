@@ -92,7 +92,7 @@ public class GestorBD {
         return resultado;
     }
 
-
+/*
     public static List<Prenda> Dar_Prendas(Context context) {
 /*
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
@@ -126,6 +126,8 @@ public class GestorBD {
 */
         return null;
     }
+
+ */
 
     /**
      * Devuelve el ID correspondiente a la siguiente prenda que se cree.
