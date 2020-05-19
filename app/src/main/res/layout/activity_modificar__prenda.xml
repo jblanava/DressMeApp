@@ -21,8 +21,9 @@
                 android:id="@+id/texto_tipo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Tipo"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
         </TableRow>
 
         <TableRow
@@ -30,13 +31,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1" >
 
-            <EditText
-                android:id="@+id/rellena_tipo"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:layout_marginLeft="10dp" />
         </TableRow>
 
         <TableRow
@@ -48,8 +47,9 @@
                 android:id="@+id/texto_nombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Nombre"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
         </TableRow>
 
         <TableRow
@@ -61,6 +61,7 @@
                 android:id="@+id/rellena_nombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Name" />
@@ -75,8 +76,9 @@
                 android:id="@+id/texto_talla"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Talla"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
         </TableRow>
 
         <TableRow
@@ -84,13 +86,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <EditText
-                android:id="@+id/rellena_talla"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:layout_marginLeft="10dp" />
         </TableRow>
 
         <TableRow
@@ -102,8 +102,9 @@
                 android:id="@+id/texto_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Color"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
         </TableRow>
 
         <TableRow
@@ -115,6 +116,7 @@
                 android:id="@+id/rellena_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Name" />
@@ -123,24 +125,22 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1" >
 
             <Button
                 android:id="@+id/boton_eliminar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="ELIMINAR" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
 
             <Button
                 android:id="@+id/boton_intercambiar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:text="INTERCAMBIAR" />
         </TableRow>
     </TableLayout>
