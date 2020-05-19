@@ -199,8 +199,9 @@ public class GestorBD {
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
-
-        id = LibreriaBD.CampoInt(cursor, "ID");
+        if (cursor.moveToFirst()) {
+            id = LibreriaBD.CampoInt(cursor, "ID");
+        }
 
         baseDatos.close();
         base.close();
