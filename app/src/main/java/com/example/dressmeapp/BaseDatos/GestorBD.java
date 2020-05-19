@@ -94,7 +94,7 @@ public class GestorBD {
 
 
     public static List<Prenda> Dar_Prendas(Context context) {
-
+/*
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
@@ -123,7 +123,8 @@ public class GestorBD {
         base.close();
         cursor.close();
         return res;
-
+*/
+        return null;
     }
 
     /**
@@ -294,6 +295,8 @@ public class GestorBD {
         baseDatos.close();
         base.close();
 
+        //  Hace falta ademas borrar las prendas, conjuntos e historial
+
 
     }
 
@@ -303,12 +306,25 @@ public class GestorBD {
      * @param contexto El contexto a usar.
      * @param idPrenda El ID de la prenda a borrar.
      */
-    public static void BorrarPrenda(Context contexto, int idPrenda){
+    public static void CambiarVisibilidadPrenda(Context contexto, int idPrenda){ // este metodo es para cambiar la visibilidad, pero la prenda se mantiene en la base de datos
 
         String SentenciaSQL;
         SentenciaSQL = "UPDATE PRENDA SET ";
         SentenciaSQL+= "VISIBLE = '0' ";
         SentenciaSQL+= "WHERE ID = " + idPrenda;
+
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(SentenciaSQL);
+        baseDatos.close();
+        base.close();
+    }
+
+    public static void borrarPrenda(Context contexto, int idPrenda){  // esta borra de forma definitiva la prenda
+
+        String SentenciaSQL;
+        SentenciaSQL = "DELETE * FROM PRENDA WHERE ID =" + idPrenda;
 
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
