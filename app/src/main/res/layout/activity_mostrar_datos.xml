@@ -4,53 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.PerfilConfiguracionActivity">
+    tools:context=".Activities.MostrarDatosActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/PASSWORD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cambie su configuración del perfil aquí"
+        android:text="seMuestraPass"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.568" />
 
-    <Button
-        android:id="@+id/botonCambiaDatos"
+    <TextView
+        android:id="@+id/userPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MOSTRAR MIS DATOS"
+        android:text="USUARIO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.311" />
+        app:layout_constraintVertical_bias="0.199" />
 
-    <Button
-        android:id="@+id/botonCambiaContrasenia"
+    <TextView
+        android:id="@+id/MuestraUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cambiar mi contraseña"
+        android:text="seMuestraUser"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.3" />
 
-    <Button
-        android:id="@+id/botonBorrarPerfil"
+    <TextView
+        android:id="@+id/Contrasenia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Borrar perfil"
+        android:text="@string/contrasenia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.452" />
 </androidx.constraintlayout.widget.ConstraintLayout>
