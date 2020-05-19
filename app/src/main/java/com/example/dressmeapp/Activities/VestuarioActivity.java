@@ -32,7 +32,7 @@ public class VestuarioActivity extends AppCompatActivity {
 
         List<Prenda> prendas = GestorBD.Dar_Prendas(this);
 
-        prendas.add(new Prenda(0, "hola", "galleta", "BAÑADOR/BIKINI", "tutifruti"));
+        prendas.add(new Prenda(0, "hola", "galleta", 5, 2));
 
         for(Prenda p : prendas)
         {
@@ -125,8 +125,8 @@ public class VestuarioActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("Debug", "Boton pulsado, prenda con nombre: " + prenda.nombre);
 
-                View view = getLayoutInflater().inflate(R.layout.activity_prenda_view, null); // TODO: seleccionar la activity adecuada
-                Intent modificar = new Intent(a, VestuarioActivity.class);
+                Intent modificar = new Intent(a, Modificar_Prenda.class);
+                modificar.putExtra("ID_Prenda", prenda.id);
                 startActivity(modificar);
             }
         });
