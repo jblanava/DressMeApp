@@ -2,6 +2,7 @@ package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +48,11 @@ public class ConfiguracionContraseniaActivity extends AppCompatActivity {
         if(nuevaContrasenia.getText().toString().equals(nuevaContrasenia2.getText().toString())) {
             int idPerfil = gestor.getIdPerfil();
             gestor.ActualizarPerfil(idPerfil, nuevaContrasenia.getText().toString());
+
+             Intent salto = new Intent(this, MenuPrincipalActivity.class);
+             startActivity(salto);
+             this.finish();
+
         }else{
             textError.setText("ERROR, LAS CONTRASEÑAS NO COINCIDEN");
         }
