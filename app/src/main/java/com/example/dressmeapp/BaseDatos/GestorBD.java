@@ -283,17 +283,16 @@ public class GestorBD {
 
     }
 
-    public void BorrarPerfil(Context context, int id){
+    public static void BorrarPerfil(Context contexto, int id){
 
         String sentenciaSQL;
-        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + String.valueOf(id);
+        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
         baseDatos.close();
         base.close();
-
 
     }
 
