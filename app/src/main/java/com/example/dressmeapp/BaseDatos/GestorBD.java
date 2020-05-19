@@ -114,7 +114,7 @@ public class GestorBD {
 
 
 
-               Prenda p = new Prenda(id, nombre,color,"CAMISA","talla");
+                Prenda p = new Prenda(id, nombre,color,tipo,talla);
                 res.add(p);
 
             } while (cursor.moveToNext());
@@ -423,5 +423,55 @@ public class GestorBD {
         base.close();
         cursor.close();
         return nombre;
+    }
+
+    public static List<String> getTipos (Context context){
+        String sentenciaSQL = "SELECT NOMBRE FROM TIPO ";
+        Cursor cursor;
+        List<String> res = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+
+                res.add(nombre);
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return res;
+    }
+
+    public static List<String> getTallas (Context context){
+        String sentenciaSQL = "SELECT NOMBRE FROM TALLA ";
+        Cursor cursor;
+        List<String> res = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+
+                res.add(nombre);
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return res;
     }
 }
