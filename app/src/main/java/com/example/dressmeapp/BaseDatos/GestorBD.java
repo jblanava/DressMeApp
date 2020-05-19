@@ -375,10 +375,10 @@ public class GestorBD {
                 String color = LibreriaBD.Campo(cursor, "COLOR");
                 int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
                 int talla = LibreriaBD.CampoInt(cursor, "TALLA");
-                
 
 
-                Prenda p = new Prenda(id, nombre,color,tipo,talla);
+
+               p = new Prenda(id, nombre,color,tipo,talla);
 
         }
         baseDatos.close();
