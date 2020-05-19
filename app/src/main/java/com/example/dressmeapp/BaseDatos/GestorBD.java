@@ -123,11 +123,11 @@ public class GestorBD {
         base.close();
         cursor.close();
         return res;
-*/
-        return null;
-    }
-
+        }
  */
+
+
+
 
     /**
      * Devuelve el ID correspondiente a la siguiente prenda que se cree.
@@ -323,10 +323,10 @@ public class GestorBD {
         base.close();
     }
 
-    public static void borrarPrenda(Context contexto, int idPrenda){  // esta borra de forma definitiva la prenda
+    public static void borrarPrenda(Context contexto, int idPerfil){  // esta borra de forma definitiva la prenda, hay que pasar el ID del perfil asociado
 
         String SentenciaSQL;
-        SentenciaSQL = "DELETE * FROM PRENDA WHERE ID =" + idPrenda;
+        SentenciaSQL = "DELETE * FROM PRENDA WHERE ID_PERFIL =" + idPerfil;
 
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
