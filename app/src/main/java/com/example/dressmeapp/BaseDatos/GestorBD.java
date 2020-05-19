@@ -357,4 +357,68 @@ public class GestorBD {
 
 
     }
+
+    public static Prenda Obtener_Prenda(Context context,int id){
+        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 AND ID = " + id;
+        Cursor cursor;
+
+
+        BaseDatos base = new BaseDatos(context);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        Prenda p=null;
+        if (cursor.moveToFirst()) {
+
+
+                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+                String color = LibreriaBD.Campo(cursor, "COLOR");
+                int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
+                int talla = LibreriaBD.CampoInt(cursor, "TALLA");
+                
+
+
+                Prenda p = new Prenda(id, nombre,color,tipo,talla);
+
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return p;
+    }
+
+    public static String Dar_Tipo (Context context,int tipo){
+        String sentenciaSQL = "SELECT NOMBRE FROM TIPO WHERE ID = " + tipo;
+        Cursor cursor;
+
+        BaseDatos base = new BaseDatos(context);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        cursor.moveToFirst() ;
+
+        String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return nombre;
+    }
+
+    public static String Dar_Talla (Context context,int talla){
+        String sentenciaSQL = "SELECT NOMBRE FROM TALLA WHERE ID = " + talla;
+        Cursor cursor;
+
+        BaseDatos base = new BaseDatos(context);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        cursor.moveToFirst() ;
+
+        String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return nombre;
+    }
 }
