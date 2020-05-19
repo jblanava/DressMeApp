@@ -93,7 +93,8 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
 
     protected void MostrarDatos() {
         //No sabemos que hase, preguntar a María :D
-
+    Intent salto = new Intent(this,MostrarDatosActivity.class);
+    startActivity(salto);
 
 
     }

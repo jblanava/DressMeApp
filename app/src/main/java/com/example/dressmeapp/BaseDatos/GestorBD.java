@@ -362,7 +362,31 @@ public class GestorBD {
 
 
     }
+    public static String getUser(int idPerfil){
+        String SentenciaSQL = "SELECT NOMBRE FROM PERFIL WHERE ID=" + idPerfil;
+        String res="";
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos=base.getWritableDatabase();
+        Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
+        if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"NOMBRE");
+        base.close();
+        baseDatos.close();
+        cursor.close();
+        return res;
+    }
+    public static  String getPass(int idPerfil){
+        String SentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE ID=" + idPerfil;
+        String res="";
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos=base.getWritableDatabase();
+        Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
+        if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"CONTRASENIA");
+        base.close();
+        baseDatos.close();
+        cursor.close();
+        return res;
 
+    }
     public static Prenda Obtener_Prenda(Context context,int id){
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 AND ID = " + id;
         Cursor cursor;
