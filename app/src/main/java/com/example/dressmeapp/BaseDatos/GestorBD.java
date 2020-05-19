@@ -200,7 +200,10 @@ public class GestorBD {
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
-        id = LibreriaBD.CampoInt(cursor, "ID");
+        if(cursor.moveToFirst()){
+            id = LibreriaBD.CampoInt(cursor, "ID");
+        }
+
 
         baseDatos.close();
         base.close();
