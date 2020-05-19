@@ -12,6 +12,8 @@
         <activity android:name=".Activities.AgruparPrendasActivity"></activity>
         <activity android:name=".Activities.OrdenarPrendasActivity" />
         <activity android:name=".Activities.AniadirPrendaActivity" />
+        <activity android:name=".Activities.ConfiguracionActivity" />
+        <activity android:name=".Activities.ConfiguracionContraseniaActivity" />
         <activity android:name=".Activities.RegistroActivity" />
         <activity android:name=".Activities.RecomendadorActivity" />
         <activity android:name=".Activities.VestuarioActivity" />
