@@ -6,14 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".Activities.RecomendadorActivity">
 
-    <TextView
-        android:id="@+id/textView2"
+    <Button
+        android:id="@+id/bRecomendador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RECOMENDADOR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Recomiéndame"
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="247dp" />
+
+    <Button
+        android:id="@+id/bHistorial"
+        android:layout_width="129dp"
+        android:layout_height="55dp"
+        android:text="Historial"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="407dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
