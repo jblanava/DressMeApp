@@ -11,10 +11,9 @@ public class Prenda
         this.talla = ta;
     }
 
+    public int id;
     public String nombre;
     public String color;
     public int tipo;
     public int talla;
-
-    public int id;
 }

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
 
 public class MostrarDatosActivity extends AppCompatActivity {

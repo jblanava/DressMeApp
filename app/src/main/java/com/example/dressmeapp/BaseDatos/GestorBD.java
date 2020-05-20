@@ -96,9 +96,9 @@ public class GestorBD {
         return resultado;
     }
 
-/*
+
     public static List<Prenda> Dar_Prendas(Context context) {
-/*
+
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
@@ -128,7 +128,7 @@ public class GestorBD {
         cursor.close();
         return res;
         }
- */
+
 
 
 
