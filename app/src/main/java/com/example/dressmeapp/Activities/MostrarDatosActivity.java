@@ -2,6 +2,7 @@ package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import android.widget.Button;
@@ -16,7 +17,7 @@ public class MostrarDatosActivity extends AppCompatActivity {
     private TextView muestraUser;
     private TextView pass;
     private TextView muestraPassword;
-    private GestorBD gestor;
+    private Context contexto;
     private Button BotonPass;
 
     @Override
@@ -27,21 +28,25 @@ public class MostrarDatosActivity extends AppCompatActivity {
     }
 
     private void enlazarControles(){
-       gestor= new GestorBD(this);
-       user= findViewById(R.id.userPerfil);
-       muestraUser=findViewById(R.id.MuestraUser);
-       pass= findViewById(R.id.Contrasenia);
-       muestraPassword=findViewById(R.id.PASSWORD);
-       muestraDatos();
+
+        contexto = getApplicationContext();
+
+        user = findViewById(R.id.userPerfil);
+        muestraUser = findViewById(R.id.MuestraUser);
+        pass = findViewById(R.id.Contrasenia);
+        muestraPassword = findViewById(R.id.PASSWORD);
+        muestraDatos();
 
     }
 
     private void muestraDatos() {
-    int id= gestor.getIdPerfil();
-    String user= gestor.getUser(id);
-    String pass= gestor.getPass(id);
-    muestraUser.setText(user);
-    muestraPassword.setText(pass);
+
+        int id= GestorBD.getIdPerfil();
+        String user = GestorBD.getUser(contexto, id);
+        String pass = GestorBD.getPass(contexto, id);
+        muestraUser.setText(user);
+        muestraPassword.setText(pass);
+
     }
 
 /*

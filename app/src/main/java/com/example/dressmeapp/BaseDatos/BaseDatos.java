@@ -11,8 +11,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
     public BaseDatos (Context contexto) {
-        super(contexto, NOMBRE_BASE_DATOS, null, VERSION);
+        this(contexto, NOMBRE_BASE_DATOS);
     }
+    public BaseDatos (Context contexto, String nombrebd) {
+        super(contexto, nombrebd, null, VERSION);
+    }
+
+    public static String getNombreBaseDatos() { return NOMBRE_BASE_DATOS; }
 
     @Override
     public void onCreate(SQLiteDatabase db) {

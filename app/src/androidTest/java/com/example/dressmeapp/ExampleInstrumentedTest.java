@@ -3,14 +3,15 @@ package com.example.dressmeapp;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.Debug.Debug;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,32 +25,32 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
-    @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+    private static Context appContext;
+    private static String nombreBaseDatos;
+    private static int contador = 0;
 
-        assertEquals("com.example.dressmeapp", appContext.getPackageName());
+    @Before
+    public void prepararTest() {
+        appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        nombreBaseDatos = "test" + contador + ".db";
+        contador++;
+        Debug.borrarTodosLosPerfiles(appContext, nombreBaseDatos);
     }
 
     @Test
     public void insertarPerfilFuncionaBien() {
 
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-
-        GestorBD.CrearPerfil(appContext, "UsuarioPrueba", "ContraseñaPrueba");
-        assertTrue(GestorBD.PassCorrecta(appContext, "UsuarioPrueba", "ContraseñaPrueba"));
+        GestorBD.CrearPerfil(appContext, nombreBaseDatos, "UsuarioPrueba", "ContraseñaPrueba");
+        assertTrue(GestorBD.PassCorrecta(appContext, nombreBaseDatos, "UsuarioPrueba", "ContraseñaPrueba"));
 
     }
 
     @Test
     public void obtenerIDMaximoFuncionaBien() {
 
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-
-        int maxCalculado = GestorBD.obtenIDMaximoPerfil(appContext);
-        GestorBD.CrearPerfil(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
-        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
+        int maxCalculado = GestorBD.obtenIDMaximoPerfil(appContext, nombreBaseDatos);
+        GestorBD.CrearPerfil(appContext, nombreBaseDatos, "UsuarioPrueba2", "ContraseñaPrueba2");
+        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, nombreBaseDatos, "UsuarioPrueba2", "ContraseñaPrueba2");
 
         assertEquals(maxCalculado, maxNuevoPerfil);
 
@@ -58,24 +59,22 @@ public class ExampleInstrumentedTest {
     @Test
     public void borrarPerfilFuncionaBien() {
 
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-
         int perfilesAntes = 0;
         int perfilesDespues = 0;
 
         String sentencia = "SELECT COUNT(*) FROM PERFIL";
-        BaseDatos bd = new BaseDatos(appContext);
+        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
         SQLiteDatabase sqLiteDatabase = bd.getReadableDatabase();
 
-        GestorBD.CrearPerfil(appContext, "UsuarioPrueba3", "ContraseñaPrueba3");
-        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba3", "ContraseñaPrueba3");
+        GestorBD.CrearPerfil(appContext, nombreBaseDatos, "UsuarioPrueba3", "ContraseñaPrueba3");
+        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, nombreBaseDatos, "UsuarioPrueba3", "ContraseñaPrueba3");
 
         Cursor cur = sqLiteDatabase.rawQuery(sentencia, null);
         if (cur.moveToFirst()) {
             perfilesAntes = cur.getInt(0);
         }
 
-        GestorBD.BorrarPerfil(appContext, maxNuevoPerfil);
+        GestorBD.BorrarPerfil(appContext, nombreBaseDatos, maxNuevoPerfil);
 
         cur = sqLiteDatabase.rawQuery(sentencia, null);
         if (cur.moveToFirst()) {
@@ -89,13 +88,12 @@ public class ExampleInstrumentedTest {
     @Test
     public void actualizarPerfil() {
 
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        GestorBD.CrearPerfil(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
-        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
+        GestorBD.CrearPerfil(appContext, nombreBaseDatos, "UsuarioPrueba4", "ContraseñaPrueba4");
+        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, nombreBaseDatos, "UsuarioPrueba4", "ContraseñaPrueba4");
 
-        GestorBD.ActualizarPerfil(appContext, maxNuevoPerfil, "NuevaContraseña");
+        GestorBD.ActualizarPerfil(appContext, nombreBaseDatos, maxNuevoPerfil, "NuevaContraseña");
 
-        assertTrue(GestorBD.PassCorrecta(appContext, "UsuarioPrueba4", "NuevaContraseña"));
+        assertTrue(GestorBD.PassCorrecta(appContext, nombreBaseDatos, "UsuarioPrueba4", "NuevaContraseña"));
 
     }
 
