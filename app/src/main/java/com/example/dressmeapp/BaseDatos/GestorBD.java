@@ -98,7 +98,7 @@ public class GestorBD {
     }
 
 
-    public static List<Prenda> Dar_Prendas(Context context) {
+    public static List<Prenda> PrendasVisibles(Context context) {
 
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
         Cursor cursor;
@@ -128,7 +128,7 @@ public class GestorBD {
         base.close();
         cursor.close();
         return res;
-        }
+    }
 
 
 
@@ -279,15 +279,14 @@ public class GestorBD {
 
         int id= obtenIDMaximoPrenda(contexto);
         String sentenciaSQL;
-        sentenciaSQL = "INSERT INTO PRENDA (ID, NOMBRE, COLOR, TIPO, TALLA, VISIBLE, ID_PERFIL) VALUES (";
-        sentenciaSQL += id +",'" + nombre.trim()+ "', '" + color.trim() + "', '" + tipo +
-                "', '"+ talla +"', '"+visible+"', '"+id_perfil +"'";
-            BaseDatos base = new BaseDatos(contexto);
-            SQLiteDatabase baseDatos;
-            baseDatos=base.getWritableDatabase();
-            baseDatos.execSQL(sentenciaSQL);
-            baseDatos.close();
-            base.close();
+        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%s', %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil);
+
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos=base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
 
     }
 
@@ -328,14 +327,14 @@ public class GestorBD {
     }
 
     /**
-     * Borra definitivamente las prendas de un perfil (no las hace invisibles)
+     * Borra definitivamente la prenda indicada
      * @param contexto El contexto a usar.
-     * @param idPerfil El ID del perfil cuyas prendas borrar
+     * @param id El ID de la prenda que quieres borrar
      */
-    public static void borrarPrenda(Context contexto, int idPerfil) {
-
+    public static void borrarPrenda(Context contexto, int id)
+    {
         String SentenciaSQL;
-        SentenciaSQL = "DELETE * FROM PRENDA WHERE ID_PERFIL =" + idPerfil;
+        SentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + id;
 
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
@@ -410,7 +409,7 @@ public class GestorBD {
 
     }
     public static Prenda Obtener_Prenda(Context context,int id){
-        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 AND ID = " + id;
+        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE ID = " + id + " AND VISIBLE = 1";
         Cursor cursor;
 
 
@@ -444,9 +443,13 @@ public class GestorBD {
         SQLiteDatabase baseDatos = base.getReadableDatabase();
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
-        cursor.moveToFirst() ;
+        String nombre = "Error";
 
-        String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+        if(cursor.moveToFirst())
+        {
+             nombre = LibreriaBD.Campo(cursor, "NOMBRE");
+        }
+
 
         baseDatos.close();
         base.close();
@@ -462,9 +465,13 @@ public class GestorBD {
         SQLiteDatabase baseDatos = base.getReadableDatabase();
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
-        cursor.moveToFirst() ;
+        String nombre = "Error";
 
-        String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+        if(cursor.moveToFirst())
+        {
+            nombre = LibreriaBD.Campo(cursor, "NOMBRE");
+        }
+
         baseDatos.close();
         base.close();
         cursor.close();

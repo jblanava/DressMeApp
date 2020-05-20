@@ -31,12 +31,17 @@ public class VestuarioActivity extends AppCompatActivity {
 
         enlazar_controles();
 
-        List<Prenda> prendas = GestorBD.Dar_Prendas(this);
+        mostrar_prendas();
+    }
 
-        for(Prenda p : prendas)
-        {
-            añadir_elemento(p);
-        }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        listaPrendas.removeAllViews();
+
+        mostrar_prendas();
     }
 
     void enlazar_controles()
@@ -100,6 +105,16 @@ public class VestuarioActivity extends AppCompatActivity {
         // No se que hay que poner aqui aun
     }
 
+
+    void mostrar_prendas()
+    {
+        List<Prenda> prendas = GestorBD.PrendasVisibles(this);
+
+        for(Prenda p : prendas)
+        {
+            añadir_elemento(p);
+        }
+    }
 
     void añadir_elemento(final Prenda prenda)
     {

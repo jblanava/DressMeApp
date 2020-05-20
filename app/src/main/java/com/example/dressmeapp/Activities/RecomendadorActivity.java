@@ -21,7 +21,7 @@ public class RecomendadorActivity extends AppCompatActivity {
     private void enlazaControles(){
         bRecomendador= findViewById(R.id.bRecomendador);
         bHistorial = findViewById(R.id.bHistorial);
-
+/*
         bRecomendador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,6 +35,6 @@ public class RecomendadorActivity extends AppCompatActivity {
                 Intent salto = new Intent(this,claseQueSalto.class);
                 startActivity(salto);
             }
-        });
+        });*/
     }
 }
