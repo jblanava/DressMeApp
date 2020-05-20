@@ -15,6 +15,8 @@ import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.*;
 import com.example.dressmeapp.R;
 
+import java.util.Random;
+
 public class AlgoritmoRecomendador extends AppCompatActivity {
     private LinearLayout listaPrendas;
     private Conjunto conjunto;
@@ -24,6 +26,7 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algoritmo_recomendador);
         gestor= new GestorBD(this);
+        rellenaConjunto();
         muestraConjuntos();
     }
 
@@ -34,9 +37,22 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
             metodoChavales(prenda);
         }//PROBABLEMENTE EL FOR NO CIERRE AQUÍ :D
     }
-
-
     }
+
+    private void rellenaConjunto(){
+        //Esto es provisional porque no se me ocurre nada mejor de momento para rellenar conjuntos:D
+        int limite= gestor.obtenIDMaximoPrenda(this);
+        Random rnd = new Random();
+        int id;
+        for(int i=0;i<6;i++){
+        id=rnd.nextInt(limite);
+        conjunto.add(id);
+        }
+    }
+
+
+
+
     private void metodoChavales(final Prenda prenda){
         View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
 
