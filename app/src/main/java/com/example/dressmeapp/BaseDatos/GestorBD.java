@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.dressmeapp.Activities.AniadirPrendaActivity;
 import com.example.dressmeapp.Objetos.Prenda;
 
 import java.util.ArrayList;
@@ -12,7 +13,11 @@ import java.util.List;
 
 public class GestorBD {
 
+    /**
+     * El ID del perfil que tiene la sesión abierta actualmente.
+     */
     public static int idPerfil;
+
     private static Context contexto;
     private String LoginUsuario;
     private String LoginContrasena;
@@ -92,9 +97,9 @@ public class GestorBD {
         return resultado;
     }
 
-/*
+
     public static List<Prenda> Dar_Prendas(Context context) {
-/*
+
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
@@ -124,7 +129,7 @@ public class GestorBD {
         cursor.close();
         return res;
         }
- */
+
 
 
 
@@ -270,13 +275,13 @@ public class GestorBD {
      *                (siempre lo será en el historial)
      * @param id_perfil El ID del perfil que tendrá la prenda.
      */
-    public static void crearPrenda(Context contexto, String nombre, String color, String tipo , String talla, int visible,int id_perfil){
+    public static void crearPrenda(Context contexto, String nombre, String color, int tipo , int talla, int visible,int id_perfil){
 
         int id= obtenIDMaximoPrenda(contexto);
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PRENDA (ID, NOMBRE, COLOR, TIPO, TALLA, VISIBLE, ID_PERFIL) VALUES (";
-        sentenciaSQL += id +",'" + nombre.trim()+ "', '" + color.trim() + "', '" + tipo.trim() +
-                "', '"+talla.trim()+"', '"+visible+"', '"+id_perfil +"'";
+        sentenciaSQL += id +",'" + nombre.trim()+ "', '" + color.trim() + "', '" + tipo +
+                "', '"+ talla +"', '"+visible+"', '"+id_perfil +"'";
             BaseDatos base = new BaseDatos(contexto);
             SQLiteDatabase baseDatos;
             baseDatos=base.getWritableDatabase();
@@ -286,10 +291,10 @@ public class GestorBD {
 
     }
 
-    public void BorrarPerfil(Context context, int id){
+    public static void BorrarPerfil(Context contexto, int id){
 
         String sentenciaSQL;
-        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + String.valueOf(id);
+        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
         BaseDatos base = new BaseDatos(contexto);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
@@ -298,7 +303,6 @@ public class GestorBD {
         base.close();
 
         //  Hace falta ademas borrar las prendas, conjuntos e historial
-
 
     }
 
@@ -323,7 +327,12 @@ public class GestorBD {
         base.close();
     }
 
-    public static void borrarPrenda(Context contexto, int idPerfil){  // esta borra de forma definitiva la prenda, hay que pasar el ID del perfil asociado
+    /**
+     * Borra definitivamente las prendas de un perfil (no las hace invisibles)
+     * @param contexto El contexto a usar.
+     * @param idPerfil El ID del perfil cuyas prendas borrar
+     */
+    public static void borrarPrenda(Context contexto, int idPerfil) {
 
         String SentenciaSQL;
         SentenciaSQL = "DELETE * FROM PRENDA WHERE ID_PERFIL =" + idPerfil;
@@ -363,19 +372,16 @@ public class GestorBD {
         base.close();
     }
 
-    public static void ActualizarPerfil(int idPerfil, String password){
+    public static void ActualizarPerfil(Context contexto, int idPerfil, String password){
 
-
-            String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
-                    + password + "' WHERE ID=" + idPerfil;
-            BaseDatos base = new BaseDatos(contexto);
-            SQLiteDatabase baseDatos;
-            baseDatos = base.getWritableDatabase();
-            baseDatos.execSQL(sentenciaSQL);
-            baseDatos.close();
-            base.close();
-
-
+        String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
+                + password + "' WHERE ID=" + idPerfil;
+        BaseDatos base = new BaseDatos(contexto);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
 
     }
     public static String getUser(int idPerfil){
@@ -413,17 +419,15 @@ public class GestorBD {
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
         Prenda p=null;
-        if (cursor.moveToFirst()) {
 
+        if (cursor.moveToFirst())
+        {
+            String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+            String color = LibreriaBD.Campo(cursor, "COLOR");
+            int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
+            int talla = LibreriaBD.CampoInt(cursor, "TALLA");
 
-                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
-                String color = LibreriaBD.Campo(cursor, "COLOR");
-                int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
-                int talla = LibreriaBD.CampoInt(cursor, "TALLA");
-
-
-
-               p = new Prenda(id, nombre,color,tipo,talla);
+            p = new Prenda(id, nombre,color,tipo,talla);
 
         }
         baseDatos.close();
@@ -515,5 +519,10 @@ public class GestorBD {
         base.close();
         cursor.close();
         return res;
+    }
+
+    public void Modificar_Prenda (Context context, Prenda p){
+        CambiarVisibilidadPrenda(context, p.id );
+        crearPrenda(context,p.nombre,p.color,p.tipo,p.talla,1,getIdPerfil());
     }
 }

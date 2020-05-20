@@ -72,6 +72,7 @@ public class RegistroActivity extends AppCompatActivity {
         // Mostrar errores o crear cuenta
         if (ok) {
             GestorBD.CrearPerfil(getApplicationContext(), nombre, contrasenia);
+            GestorBD.idPerfil = GestorBD.IdPerfilAsociado(getApplicationContext(), nombre, contrasenia);
             irAMenuPrincipal();
         } else {
             textError.setText(errores);

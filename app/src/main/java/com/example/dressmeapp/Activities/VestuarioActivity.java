@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
@@ -31,8 +32,6 @@ public class VestuarioActivity extends AppCompatActivity {
         enlazar_controles();
 
         List<Prenda> prendas = GestorBD.Dar_Prendas(this);
-
-        prendas.add(new Prenda(0, "hola", "galleta", 5, 2));
 
         for(Prenda p : prendas)
         {
@@ -111,10 +110,13 @@ public class VestuarioActivity extends AppCompatActivity {
         TextView color = (TextView) v.findViewById(R.id.prenda_color);
         TextView talla = (TextView) v.findViewById(R.id.prenda_talla);
 
+        String tipoText = GestorBD.Dar_Tipo(this, prenda.tipo);
+        String tallaText = GestorBD.Dar_Talla(this, prenda.talla);
+
         nombre.setText(prenda.nombre);
-        tipo.setText(prenda.tipo);
+        tipo.setText(tipoText);
         color.setText(prenda.color);
-        talla.setText(prenda.talla);
+        talla.setText(tallaText);
 
         TableLayout t = (TableLayout) v.findViewById(R.id.boton_prenda);
 
@@ -126,7 +128,7 @@ public class VestuarioActivity extends AppCompatActivity {
                 Log.d("Debug", "Boton pulsado, prenda con nombre: " + prenda.nombre);
 
                 Intent modificar = new Intent(a, Modificar_Prenda.class);
-                modificar.putExtra("ID_Prenda", prenda.id);
+                modificar.putExtra("intVariableName", prenda.id);
                 startActivity(modificar);
             }
         });
