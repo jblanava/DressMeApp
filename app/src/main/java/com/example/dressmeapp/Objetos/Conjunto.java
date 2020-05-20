@@ -23,6 +23,12 @@ public class Conjunto {
             return false;
         }
     }
+    public int getSize(){
+        return idPrendas.size();
+    }
+    public int obtenId(int pos){
+        return this.idPrendas.get(pos);
+    }
     public void remove(int idPrenda){
         idPrendas.remove(idPrenda);
     }

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.AlgoritmoRecomendador">
+    tools:context=".Activities.HistorialActivity">
 
     <TextView
-        android:id="@+id/textViewAlgoritmo"
+        android:id="@+id/textViewHistorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Algoritmo"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="304dp" />
+        android:text="Historial"
+        tools:layout_editor_absoluteX="169dp"
+        tools:layout_editor_absoluteY="243dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
