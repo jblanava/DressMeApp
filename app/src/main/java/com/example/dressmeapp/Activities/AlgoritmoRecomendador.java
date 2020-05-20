@@ -28,12 +28,12 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
     }
 
     private void muestraConjuntos(){
-
-        for(int i=0;i<conjunto.getSize();i++) {
+    if(conjunto != null) {
+        for (int i = 0; i < conjunto.getSize(); i++) {
             Prenda prenda = gestor.Obtener_Prenda(this, conjunto.obtenId(i));
             metodoChavales(prenda);
-                    }//PROBABLEMENTE EL FOR NO CIERRE AQUÍ :D
-
+        }//PROBABLEMENTE EL FOR NO CIERRE AQUÍ :D
+    }
 
 
     }
