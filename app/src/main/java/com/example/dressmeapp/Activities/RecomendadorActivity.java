@@ -25,16 +25,21 @@ public class RecomendadorActivity extends AppCompatActivity {
         bRecomendador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent salto = new Intent(getApplicationContext(), AlgoritmoRecomendador.class);
-                startActivity(salto);
+                saltoAlgoritmo();
             }
         });
-        bRecomendador.setOnClickListener(new View.OnClickListener() {
+        bHistorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent salto2 = new Intent(getApplicationContext(),HistorialActivity.class);
-                startActivity(salto2);
+                saltoHistorial();
             }
         });
+    }
+    private void saltoAlgoritmo(){
+        Intent salto = new Intent(this,AlgoritmoRecomendador.class);
+        startActivity(salto);
+    }
+    private  void saltoHistorial(){
+        Intent salto = new Intent(this,HistorialActivity.class);
     }
 }
