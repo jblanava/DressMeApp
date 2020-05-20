@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.dressmeapp.Activities.AniadirPrendaActivity;
 import com.example.dressmeapp.Objetos.Prenda;
 
 import java.util.ArrayList;
@@ -274,13 +275,13 @@ public class GestorBD {
      *                (siempre lo será en el historial)
      * @param id_perfil El ID del perfil que tendrá la prenda.
      */
-    public static void crearPrenda(Context contexto, String nombre, String color, String tipo , String talla, int visible,int id_perfil){
+    public static void crearPrenda(Context contexto, String nombre, String color, int tipo , int talla, int visible,int id_perfil){
 
         int id= obtenIDMaximoPrenda(contexto);
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PRENDA (ID, NOMBRE, COLOR, TIPO, TALLA, VISIBLE, ID_PERFIL) VALUES (";
-        sentenciaSQL += id +",'" + nombre.trim()+ "', '" + color.trim() + "', '" + tipo.trim() +
-                "', '"+talla.trim()+"', '"+visible+"', '"+id_perfil +"'";
+        sentenciaSQL += id +",'" + nombre.trim()+ "', '" + color.trim() + "', '" + tipo +
+                "', '"+ talla +"', '"+visible+"', '"+id_perfil +"'";
             BaseDatos base = new BaseDatos(contexto);
             SQLiteDatabase baseDatos;
             baseDatos=base.getWritableDatabase();
@@ -518,5 +519,10 @@ public class GestorBD {
         base.close();
         cursor.close();
         return res;
+    }
+
+    public void Modificar_Prenda (Context context, Prenda p){
+        CambiarVisibilidadPrenda(context, p.id );
+        crearPrenda(context,p.nombre,p.color,p.tipo,p.talla,1,getIdPerfil());
     }
 }
