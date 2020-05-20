@@ -521,7 +521,7 @@ public class GestorBD {
         return res;
     }
 
-    public void Modificar_Prenda (Context context, Prenda p){
+    public static void  Modificar_Prenda (Context context, Prenda p){
         CambiarVisibilidadPrenda(context, p.id );
         crearPrenda(context,p.nombre,p.color,p.tipo,p.talla,1,getIdPerfil());
     }
