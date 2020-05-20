@@ -2,7 +2,7 @@ package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.content.*;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,16 +25,21 @@ public class RecomendadorActivity extends AppCompatActivity {
         bRecomendador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent salto = new Intent(this,claseQueSalto.class);
-                startActivity(salto);
+                saltoAlgoritmo();
             }
         });
-        bRecomendador.setOnClickListener(new View.OnClickListener() {
+        bHistorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent salto = new Intent(this,claseQueSalto.class);
-                startActivity(salto);
+                saltoHistorial();
             }
         });*/
+    }
+    private void saltoAlgoritmo(){
+        Intent salto = new Intent(this,AlgoritmoRecomendador.class);
+        startActivity(salto);
+    }
+    private  void saltoHistorial(){
+        Intent salto = new Intent(this,HistorialActivity.class);
     }
 }
