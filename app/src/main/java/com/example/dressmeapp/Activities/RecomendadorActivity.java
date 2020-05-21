@@ -25,7 +25,7 @@ public class RecomendadorActivity extends AppCompatActivity {
         bRecomendador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saltoAlgoritmo();
+                //saltoAlgoritmo();
             }
         });
         bHistorial.setOnClickListener(new View.OnClickListener() {
