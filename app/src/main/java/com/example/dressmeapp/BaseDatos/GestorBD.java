@@ -31,6 +31,7 @@ public class GestorBD {
     public static int getIdPerfil() {
         return idPerfil;
     }
+    public static void setIdPerfil(int nuevoId) {         idPerfil = nuevoId;     }
     //PERFIL: int ID, String usuario, String password
 
     /*public static void IngresoPerfil(String usuario, String pass) {
@@ -385,10 +386,10 @@ public class GestorBD {
 
     }
 
-    public static String getUser(int idPerfil){
+    public static String getUser(Context c, int idPerfil){
         String SentenciaSQL = "SELECT NOMBRE FROM PERFIL WHERE ID=" + idPerfil;
         String res="";
-        BaseDatos base = new BaseDatos(contexto);
+        BaseDatos base = new BaseDatos(c);
         SQLiteDatabase baseDatos=base.getWritableDatabase();
         Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
         if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"NOMBRE");
@@ -398,10 +399,10 @@ public class GestorBD {
         return res;
     }
 
-    public static  String getPass(int idPerfil){
+    public static  String getPass(Context c, int idPerfil){
         String SentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE ID=" + idPerfil;
         String res="";
-        BaseDatos base = new BaseDatos(contexto);
+        BaseDatos base = new BaseDatos(c);
         SQLiteDatabase baseDatos=base.getWritableDatabase();
         Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
         if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"CONTRASENIA");
