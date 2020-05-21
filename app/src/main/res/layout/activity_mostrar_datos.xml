@@ -58,14 +58,14 @@
 
     <Button
         android:id="@+id/BotonPass"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="49dp"
         android:layout_height="46dp"
         android:background="@android:drawable/ic_menu_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintHorizontal_bias="0.897"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572"
-        style="?android:attr/borderlessButtonStyle"/>
+        app:layout_constraintVertical_bias="0.572" />
 </androidx.constraintlayout.widget.ConstraintLayout>
