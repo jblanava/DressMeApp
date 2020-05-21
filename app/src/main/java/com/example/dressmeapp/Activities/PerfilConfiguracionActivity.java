@@ -2,6 +2,8 @@ package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +17,7 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     private Button cambioDatos;
     private Button cambioContrasenia;
     private Button borrarPerfil;
-    private GestorBD gestor;
+    private Context contexto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +26,8 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     }
 
     private void enlazarControles() {
-        //Aquí le paso el contexto al gestorBD
-        gestor= new GestorBD(this);
+
+        contexto = getApplicationContext();
         cambioDatos = findViewById(R.id.botonCambiaDatos);
         cambioContrasenia = findViewById(R.id.botonCambiaContrasenia);
         borrarPerfil = findViewById(R.id.botonBorrarPerfil);
@@ -79,8 +81,8 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
 
     private void borrado_de_perfil() {
 
-        int id= gestor.getIdPerfil();
-        gestor.BorrarPerfil(getApplicationContext(),id);
+        int id= GestorBD.getIdPerfil();
+        GestorBD.BorrarPerfil(contexto, id);
 
         this.finish();
 

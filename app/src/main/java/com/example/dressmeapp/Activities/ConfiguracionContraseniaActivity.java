@@ -67,7 +67,7 @@ public class ConfiguracionContraseniaActivity extends AppCompatActivity {
         }*/
 
         if (ok) {
-            GestorBD.ActualizarPerfil(getApplicationContext(), GestorBD.idPerfil, nuevaContrasenia.getText().toString());
+            GestorBD.ActualizarPerfil(getApplicationContext(), GestorBD.getIdPerfil(), nuevaContrasenia.getText().toString());
 
             Intent salto = new Intent(this, MenuPrincipalActivity.class);
             startActivity(salto);

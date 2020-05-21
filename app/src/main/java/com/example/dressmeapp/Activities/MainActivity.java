@@ -2,8 +2,10 @@ package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.example.dressmeapp.Activities.MenuPrincipalActivity;
 import com.example.dressmeapp.Activities.RegistroActivity;
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.Debug.Debug;
 import com.example.dressmeapp.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,14 +24,14 @@ public class MainActivity extends AppCompatActivity {
     private EditText textContrasenia;
     private Button btnLogin;
     private Button btnRegistro;
-    private GestorBD gestor;
+
+    private Context contexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         enlazarControles();
-
     }
 
     private void enlazarControles() {
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        gestor = new GestorBD(getApplicationContext());
+        contexto = getApplicationContext();
 
     }
 
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (ok) {
-            GestorBD.idPerfil = GestorBD.IdPerfilAsociado(getApplicationContext(), usuario, pass);
+            GestorBD.setIdPerfil(GestorBD.IdPerfilAsociado(getApplicationContext(), usuario, pass));
             irAMenuPrincipal();
         } else {
             textError.setText(error);

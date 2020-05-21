@@ -20,12 +20,12 @@ import java.util.Random;
 public class AlgoritmoRecomendador extends AppCompatActivity {
     private LinearLayout listaPrendas;
     private Conjunto conjunto;
-    private GestorBD gestor;
+    private Context contexto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algoritmo_recomendador);
-        gestor= new GestorBD(this);
+        contexto = getApplicationContext();
         rellenaConjunto();
         muestraConjuntos();
     }
@@ -33,7 +33,7 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
     private void muestraConjuntos(){
     if(conjunto != null) {
         for (int i = 0; i < conjunto.getSize(); i++) {
-            Prenda prenda = gestor.Obtener_Prenda(this, conjunto.obtenId(i));
+            Prenda prenda = GestorBD.Obtener_Prenda(contexto, conjunto.obtenId(i));
             metodoChavales(prenda);
         }//PROBABLEMENTE EL FOR NO CIERRE AQUÍ :D
     }
@@ -41,7 +41,7 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
 
     private void rellenaConjunto(){
         //Esto es provisional porque no se me ocurre nada mejor de momento para rellenar conjuntos:D
-        int limite= gestor.obtenIDMaximoPrenda(this);
+        int limite= GestorBD.obtenIDMaximoPrenda(contexto);
         Random rnd = new Random();
         int id;
         for(int i=0;i<6;i++){

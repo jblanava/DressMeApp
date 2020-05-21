@@ -31,6 +31,7 @@ public class GestorBD {
     public static int getIdPerfil() {
         return idPerfil;
     }
+    public static void setIdPerfil(int nuevoId) {         idPerfil = nuevoId;     }
     //PERFIL: int ID, String usuario, String password
 
     /*public static void IngresoPerfil(String usuario, String pass) {
@@ -532,6 +533,4 @@ public class GestorBD {
         CambiarVisibilidadPrenda(context, p.id );
         crearPrenda(context,p.nombre,p.color,p.tipo,p.talla,1,getIdPerfil());
     }
-
-
 }
