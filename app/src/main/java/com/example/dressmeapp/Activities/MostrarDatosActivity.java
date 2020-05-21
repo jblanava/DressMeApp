@@ -54,20 +54,20 @@ public class MostrarDatosActivity extends AppCompatActivity {
     private void muestraDatos() {
 
         int id= GestorBD.getIdPerfil();
-        String user = GestorBD.getUser(contexto, id);
+      //  String user = GestorBD.getUser(contexto, id);
         String pass = "********";
-        muestraUser.setText(user);
+       // muestraUser.setText(user);
         muestraPassword.setText(pass);
 
     }
     private void mostrarDatos_mas_pass() {
 
         int id= GestorBD.getIdPerfil();
-        String user = GestorBD.getUser(contexto, id);
-        String pass_mostrada = GestorBD.getPass(this, id);
+       // String user = GestorBD.getUser(contexto, id);
+       // String pass_mostrada = GestorBD.getPass(this, id);
 
-        muestraUser.setText(user);
-        muestraPassword.setText(pass_mostrada);
+       // muestraUser.setText(user);
+       // muestraPassword.setText(pass_mostrada);
     }
 /*
     public void ocultarContrasenia{

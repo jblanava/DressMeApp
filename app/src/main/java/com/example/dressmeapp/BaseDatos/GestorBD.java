@@ -101,7 +101,7 @@ public class GestorBD {
 
     public static List<Prenda> PrendasVisibles(Context context, String texto) {
 
-        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 AND UPPER(NOMBRE) LIKE '%UPPER(" + texto + ")%'";
+        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 AND UPPER(NOMBRE) LIKE '%" + texto.toUpperCase() + "%'";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
 
@@ -146,7 +146,7 @@ public class GestorBD {
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PRENDA";
 
         Cursor cursor;
-        BaseDatos base = new BaseDatos(contexto);
+        BaseDatos base = new BaseDatos(context);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);

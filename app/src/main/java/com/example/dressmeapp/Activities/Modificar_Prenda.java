@@ -39,12 +39,12 @@ public class Modificar_Prenda extends AppCompatActivity {
 
         enlazar_controles();
 
-     //   enlazar_prenda();
+        enlazar_prenda();
     }
 
     void enlazar_controles() {// Enlaza los controles y rellena los Spinner con la lista de opciones
 
-        /*
+
         Stipo = (Spinner) findViewById(R.id.rellena_tipo);
         Stalla = (Spinner) findViewById(R.id.rellena_talla);
         Enombre = (EditText) findViewById(R.id.rellena_nombre);
@@ -123,7 +123,6 @@ public class Modificar_Prenda extends AppCompatActivity {
         Stalla.setSelection(prenda.talla - 1);
         Enombre.setText(prenda.nombre);
         Ecolor.setText(prenda.color);
-        */
 
     }
 }
