@@ -7,17 +7,15 @@ import android.database.sqlite.SQLiteOpenHelper;
     public class BaseDatos extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
-    private static final String NOMBRE_BASE_DATOS = "dressmeapp9.db";
 
-
+/* TODO: Eliminar, es innecesario
     public BaseDatos (Context contexto) {
         this(contexto, NOMBRE_BASE_DATOS);
-    }
-    public BaseDatos (Context contexto, String nombrebd) {
+    }*/
+    public BaseDatos (Context contexto, String nombrebd)
+    {
         super(contexto, nombrebd, null, VERSION);
     }
-
-    public static String getNombreBaseDatos() { return NOMBRE_BASE_DATOS; }
 
     @Override
     public void onCreate(SQLiteDatabase db) {

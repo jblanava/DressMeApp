@@ -26,31 +26,35 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
 
     private static Context appContext;
-    private static String nombreBaseDatos;
-    private static int contador = 0;
+    private static String nombreBaseDatos = "BaseDeDatosPruebas.db";
 
     @Before
     public void prepararTest() {
         appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        nombreBaseDatos = "test" + contador + ".db";
-        contador++;
-        Debug.borrarTodosLosPerfiles(appContext, nombreBaseDatos);
+        appContext.deleteDatabase(nombreBaseDatos);
+
+        GestorBD.seleccionarBD(nombreBaseDatos);
     }
+
+    /********************************************************************************
+     PERFILES
+     ********************************************************************************/
 
     @Test
     public void insertarPerfilFuncionaBien() {
 
-        GestorBD.CrearPerfil(appContext, nombreBaseDatos, "UsuarioPrueba", "ContraseñaPrueba");
-        assertTrue(GestorBD.PassCorrecta(appContext, nombreBaseDatos, "UsuarioPrueba", "ContraseñaPrueba"));
+        GestorBD.CrearPerfil(appContext, "UsuarioPrueba", "ContraseñaPrueba");
+        assertTrue(GestorBD.UsuarioEstaEnBD(appContext, "UsuarioPrueba"));
+        assertTrue(GestorBD.PassCorrecta(appContext, "UsuarioPrueba", "ContraseñaPrueba"));
 
     }
 
     @Test
-    public void obtenerIDMaximoFuncionaBien() {
+    public void obtenerIDMaximoPerfilFuncionaBien() {
 
-        int maxCalculado = GestorBD.obtenIDMaximoPerfil(appContext, nombreBaseDatos);
-        GestorBD.CrearPerfil(appContext, nombreBaseDatos, "UsuarioPrueba2", "ContraseñaPrueba2");
-        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, nombreBaseDatos, "UsuarioPrueba2", "ContraseñaPrueba2");
+        int maxCalculado = GestorBD.obtenIDMaximoPerfil(appContext);
+        GestorBD.CrearPerfil(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
+        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
 
         assertEquals(maxCalculado, maxNuevoPerfil);
 
@@ -66,15 +70,15 @@ public class ExampleInstrumentedTest {
         BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
         SQLiteDatabase sqLiteDatabase = bd.getReadableDatabase();
 
-        GestorBD.CrearPerfil(appContext, nombreBaseDatos, "UsuarioPrueba3", "ContraseñaPrueba3");
-        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, nombreBaseDatos, "UsuarioPrueba3", "ContraseñaPrueba3");
+        GestorBD.CrearPerfil(appContext, "UsuarioPrueba3", "ContraseñaPrueba3");
+        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba3", "ContraseñaPrueba3");
 
         Cursor cur = sqLiteDatabase.rawQuery(sentencia, null);
         if (cur.moveToFirst()) {
             perfilesAntes = cur.getInt(0);
         }
 
-        GestorBD.BorrarPerfil(appContext, nombreBaseDatos, maxNuevoPerfil);
+        GestorBD.BorrarPerfil(appContext, maxNuevoPerfil);
 
         cur = sqLiteDatabase.rawQuery(sentencia, null);
         if (cur.moveToFirst()) {
@@ -86,15 +90,136 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void actualizarPerfil() {
+    public void actualizarPerfilFuncionaBien() {
 
-        GestorBD.CrearPerfil(appContext, nombreBaseDatos, "UsuarioPrueba4", "ContraseñaPrueba4");
-        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, nombreBaseDatos, "UsuarioPrueba4", "ContraseñaPrueba4");
+        GestorBD.CrearPerfil(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
+        int id = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
 
-        GestorBD.ActualizarPerfil(appContext, nombreBaseDatos, maxNuevoPerfil, "NuevaContraseña");
+        GestorBD.ActualizarPerfil(appContext, id, "NuevaContraseña");
 
-        assertTrue(GestorBD.PassCorrecta(appContext, nombreBaseDatos, "UsuarioPrueba4", "NuevaContraseña"));
+        assertTrue(GestorBD.PassCorrecta(appContext, "UsuarioPrueba4", "NuevaContraseña"));
 
     }
+
+    @Test
+    public void getUserFuncionaBien() {
+
+        GestorBD.CrearPerfil(appContext, "UsuarioPrueba5", "ContraseñaPrueba5");
+        int id = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba5", "ContraseñaPrueba5");
+
+        assertEquals("UsuarioPrueba5", GestorBD.getUser(appContext, id));
+
+    }
+
+    @Test
+    public void getPassFuncionaBien() {
+
+        GestorBD.CrearPerfil(appContext, "UsuarioPrueba6", "ContraseñaPrueba6");
+        int id = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba6", "ContraseñaPrueba6");
+
+        assertEquals("ContraseñaPrueba6", GestorBD.getPass(appContext, id));
+
+    }
+
+    /********************************************************************************
+     PRENDAS Y CONJUNTOS
+     ********************************************************************************/
+
+    @Test
+    public void insertarPrendaFuncionaBien() {
+
+        String sentencia = "SELECT COUNT(*) FROM PRENDA";
+        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        SQLiteDatabase sqldb = bd.getReadableDatabase();
+
+        Cursor cur = sqldb.rawQuery(sentencia, null);
+        int countAntes = 0;
+        if (cur.moveToFirst()) {
+            countAntes = cur.getInt(0);
+        }
+        cur.close();
+
+
+        GestorBD.CrearPerfil(appContext, "foo", "bar");
+        int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
+        int idTipo = 1; // abrigo
+        int idTalla = 1; // XS
+
+        GestorBD.crearPrenda(appContext,
+                "PrendaFoo",
+                "rojo",
+                idTipo,
+                idTalla,
+                1,
+                idPerfil
+        );
+
+        cur = sqldb.rawQuery(sentencia, null);
+        int countDespues = 0;
+        if (cur.moveToFirst()) {
+            countDespues = cur.getInt(0);
+        }
+        cur.close();
+
+        bd.close();
+        sqldb.close();
+
+        assertEquals(countDespues, countAntes + 1);
+
+    }
+
+    // TODO: Solucionar esto
+    /*
+    @Test
+    public void obtenerIDMaximoPrendaFuncionaBien() {
+
+        // Extraer ID máximo, que debería tener la prenda
+        int maxId = GestorBD.obtenIDMaximoPrenda(appContext);
+
+        // Añadir la prenda
+
+        GestorBD.CrearPerfil(appContext, "foo", "bar");
+        int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
+        int idTipo = 1; // abrigo
+        int idTalla = 1; // XS
+
+        GestorBD.crearPrenda(appContext,
+                "PrendaFoo",
+                "rojo",
+                idTipo,
+                idTalla,
+                1,
+                idPerfil
+        );
+
+
+        assertEquals(maxId, idNuevaPrenda);
+
+    }
+*/
+            /*
+    @Test
+    public void borrarPrendaFuncionaBien() {
+
+        // Añadir la prenda
+
+        GestorBD.CrearPerfil(appContext, nombreBaseDatos, "foo", "bar");
+        int idPerfil = GestorBD.IdPerfilAsociado(appContext, nombreBaseDatos, "foo", "bar");
+        int idTipo = 1; // abrigo
+        int idTalla = 1; // XS
+
+        GestorBD.crearPrenda(appContext, nombreBaseDatos,
+                "PrendaFoo",
+                "rojo",
+                idTipo,
+                idTalla,
+                1,
+                idPerfil
+        );
+
+
+    }
+
+             */
 
 }

@@ -18,71 +18,57 @@ public class GestorBD {
      */
     public static int idPerfil;
 
-    private static Context contexto;
-    private String LoginUsuario;
-    private String LoginContrasena;
-    private String RegistroUsuario;
-    private String RegistroContrasena;
 
-    public GestorBD(Context context) {
+
+    private static Context contexto; // TODO: eliminar en el futuro
+    private static String nombreBD = "dressmeapp9.db";
+
+    public GestorBD(Context context)  // TODO: Eliminar?
+    {
         contexto = context;
     }
 
-    public static int getIdPerfil() {
+    public static void seleccionarBD(String nombreBD)
+    {
+        GestorBD.nombreBD = nombreBD;
+    }
+
+
+
+
+
+
+
+    ///////////////////////77
+/// PERFIL
+
+    public static int getIdPerfil()
+    {
         return idPerfil;
     }
-    public static void setIdPerfil(int nuevoId) {         idPerfil = nuevoId;     }
-    //PERFIL: int ID, String usuario, String password
 
-    /*public static void IngresoPerfil(String usuario, String pass) {
-        // Clase Entrar
-        String sentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE USUARIO=";
-        sentenciaSQL+=u;
-        String contrasenia;
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if(cursor.moveToFirst()){
-            do{
-                contrasenia = LibreriaBD.Campo(cursor, "CONTRASENIA");
-            } while(cursor.moveToNext());
-        }
-
-        baseDatos.close();
-        base.close();
-        cursor.close();
-    } */
-
-    /*
-    public static void RegistroPerfil(String u, String p) {
-        int id = obtenIDMaximoPerfil();
-
-        String SentenciaSQL = "INSERT INTO PERFIL(ID, USUARIO, PASSWORD) VALUES(";
-        SentenciaSQL += id + ",'" + u + "', '" + p + "')";
-
-        BaseDatos bdh = new BaseDatos(contexto);
-        SQLiteDatabase bd;
-        bd = bdh.getWritableDatabase();
-        bd.execSQL(SentenciaSQL);
-        bd.close();
-        bdh.close();
+    public static void setIdPerfil(int nuevoId)
+    {
+        idPerfil = nuevoId;
     }
-    */
+
+
+
+
 
     /**
      * Devuelve el ID correspondiente al siguiente perfil que se cree.
      * (Este método debería ser privado, ya que solo se invoca al crear un perfil.)
-     * @param contexto El contexto a usar.
+     * @param context El contexto a usar.
      * @return El ID correspondiente al siguiente perfil que se cree (máximo + 1)
      */
-    public static int obtenIDMaximoPerfil(Context contexto) {
+    public static int obtenIDMaximoPerfil(Context context)
+    {
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
 
         Cursor cursor;
-        BaseDatos base = new BaseDatos(contexto);
+        BaseDatos base = new BaseDatos(context, nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -99,13 +85,226 @@ public class GestorBD {
     }
 
 
-    public static List<Prenda> PrendasVisibles(Context context, String texto) {
+    /**
+     * Devuelve el ID correspondiente a la siguiente prenda que se cree.
+     * (Este método quizás debería ser privado, ya que solo se invoca al crear un perfil.)
+     * @param context El contexto a usar.
+     * @return El ID correspondiente a la siguiente prenda que se cree.
+     */
+    public static int obtenIDMaximoPrenda(Context context){
+        int resultado = 0;
+        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PRENDA";
 
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        if(cursor.moveToFirst()){
+            do{
+                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
+            } while(cursor.moveToNext());
+        }
+        resultado++;
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return resultado;
+    }
+
+
+    /**
+     * Comprueba si un string corresponde a un nombre de perfil existente.
+     * @param context El contexto en el que comprobar.
+     * @param nombre El nombre a buscar
+     * @return true sii el nombre corresponde a algún perfil
+     */
+    public static boolean UsuarioEstaEnBD(Context context, String nombre) {
+        // clase Registro
+        String sentenciaSQL;
+        sentenciaSQL= "SELECT ID FROM PERFIL WHERE NOMBRE='" + nombre + "'";
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        // Compruebo que el cursor esté vacío. Si no, habrá traído algo de la BD
+        boolean resultado = false;
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                resultado = true;
+            }
+            cursor.close();
+        }
+
+        return resultado;
+
+    }
+
+    /**
+     * Devuelve el ID de un perfil dado su nombre y contraseña.
+     * @param context El contexto en el cual comprobar.
+     * @param usuario El usuario cuyo ID buscar
+     * @param password La contraseña cuyo ID buscar
+     * @return El ID del perfil definido, o 0 si no existe un perfil con los datos dados
+     */
+    public static int IdPerfilAsociado(Context context, String usuario, String password) {
+
+        int id = 0;
+        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE ='" + usuario + "' AND CONTRASENIA ='"+ password+ "'";
+
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if(cursor.moveToFirst()){
+            id = LibreriaBD.CampoInt(cursor, "ID");
+        }
+
+
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return id;
+    }
+
+    /**
+     * Comprueba si el par (nombre de perfil, contraseña) dado corresponde a un usuario.
+     * @param contexto El contexto en el cual comprobar.
+     * @param usuario El nombre del perfil a comprobar
+     * @param password La contraseña del perfil a comprobar.
+     * @return true sii el par (nombre de perfil, contraseña) corresponden a un usuario.
+     */
+    public static boolean PassCorrecta(Context contexto, String usuario, String password) {
+
+        boolean encontrado = false;
+
+        String sentenciaSQL = "SELECT * FROM PERFIL WHERE NOMBRE='"
+                + usuario + "' AND CONTRASENIA='" + password + "'";
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        encontrado = cursor.moveToFirst();
+        cursor.close();
+
+        return encontrado;
+    }
+
+    /**
+     * Crea un nuevo perfil.
+     * @param contexto El contexto en el que crear el perfil
+     * @param usuario El nombre del perfil
+     * @param contrasenia La contraseña para el perfil.
+     */
+    public static void CrearPerfil(Context contexto, String usuario, String contrasenia){
+        int id = obtenIDMaximoPerfil(contexto);
+        String sentenciaSQL;
+        sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE,  CONTRASENIA) VALUES (";
+        sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "')";
+
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        SQLiteDatabase baseDatos;
+        baseDatos=base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
+    }
+
+    public static void BorrarPerfil(Context contexto, int id){
+
+        String sentenciaSQL;
+        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
+
+        //  Hace falta ademas borrar las prendas, conjuntos e historial
+
+    }
+
+    public static void ActualizarPerfil(Context contexto, int idPerfil, String password){
+
+        String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
+                + password + "' WHERE ID=" + idPerfil;
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
+
+    }
+    public static String getUser(Context context, int idPerfil){
+        String SentenciaSQL = "SELECT NOMBRE FROM PERFIL WHERE ID=" + idPerfil;
+        String res="";
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos=base.getWritableDatabase();
+        Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
+        if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"NOMBRE");
+        base.close();
+        baseDatos.close();
+        cursor.close();
+        return res;
+    }
+    public static  String getPass(Context context, int idPerfil){
+        String SentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE ID=" + idPerfil;
+        String res="";
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos=base.getWritableDatabase();
+        Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
+        if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"CONTRASENIA");
+        base.close();
+        baseDatos.close();
+        cursor.close();
+        return res;
+
+    }
+
+    ///////////////////////////////////////////////////////////////
+    //          PRENDAS                                        ////
+    //////////////////////////////////////////////////////////////
+
+
+    /**
+     * Crea una nueva prenda.
+     * @param contexto El contexto a usar.
+     * @param nombre El nombre de la prenda.
+     * @param color El color de la prenda.
+     * @param tipo Qué tipo de prenda es.
+     * @param talla La talla de la prenda.
+     * @param visible Si la prenda será visible o no en la lista de prendas
+     *                (siempre lo será en el historial)
+     * @param id_perfil El ID del perfil que tendrá la prenda.
+     */
+    public static void crearPrenda(Context contexto, String nombre, String color, int tipo , int talla, int visible,int id_perfil){
+
+        int id= obtenIDMaximoPrenda(contexto);
+        String sentenciaSQL;
+        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%s', %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil);
+
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        SQLiteDatabase baseDatos;
+        baseDatos=base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
+
+    }
+
+
+    public static List<Prenda> PrendasVisibles(Context context, String texto)
+    {
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 AND UPPER(NOMBRE) LIKE '%" + texto.toUpperCase() + "%'";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context);
+        BaseDatos base = new BaseDatos(context, nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -131,181 +330,6 @@ public class GestorBD {
         return res;
     }
 
-
-
-
-
-    /**
-     * Devuelve el ID correspondiente a la siguiente prenda que se cree.
-     * (Este método quizás debería ser privado, ya que solo se invoca al crear un perfil.)
-     * @param context El contexto a usar.
-     * @return El ID correspondiente a la siguiente prenda que se cree.
-     */
-    public static int obtenIDMaximoPrenda(Context context){
-        int resultado = 0;
-        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PRENDA";
-
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(context);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if(cursor.moveToFirst()){
-            do{
-                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
-            } while(cursor.moveToNext());
-        }
-        resultado++;
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return resultado;
-    }
-
-
-    /**
-     * Comprueba si un string corresponde a un nombre de perfil existente.
-     * @param contexto El contexto en el que comprobar.
-     * @param nombre El nombre a buscar
-     * @return true sii el nombre corresponde a algún perfil
-     */
-    public static boolean UsuarioEstaEnBD(Context contexto, String nombre) {
-        // clase Registro
-        String sentenciaSQL;
-        sentenciaSQL= "SELECT ID FROM PERFIL WHERE NOMBRE='" + nombre + "'";
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
-
-        // Compruebo que el cursor esté vacío. Si no, habrá traído algo de la BD
-        boolean resultado = false;
-        if (cursor != null) {
-            if (cursor.getCount() > 0) {
-                resultado = true;
-            }
-            cursor.close();
-        }
-
-        return resultado;
-
-    }
-
-    /**
-     * Devuelve el ID de un perfil dado su nombre y contraseña.
-     * @param contexto El contexto en el cual comprobar.
-     * @param usuario El usuario cuyo ID buscar
-     * @param password La contraseña cuyo ID buscar
-     * @return El ID del perfil definido, o 0 si no existe un perfil con los datos dados
-     */
-    public static int IdPerfilAsociado(Context contexto, String usuario, String password) {
-
-        int id = 0;
-        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE ='" + usuario + "' AND CONTRASENIA ='"+ password+ "'";
-
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-
-        if(cursor.moveToFirst()){
-            id = LibreriaBD.CampoInt(cursor, "ID");
-        }
-
-
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return id;
-
-
-    }
-
-    /**
-     * Comprueba si el par (nombre de perfil, contraseña) dado corresponde a un usuario.
-     * @param contexto El contexto en el cual comprobar.
-     * @param usuario El nombre del perfil a comprobar
-     * @param password La contraseña del perfil a comprobar.
-     * @return true sii el par (nombre de perfil, contraseña) corresponden a un usuario.
-     */
-    public static boolean PassCorrecta(Context contexto, String usuario, String password) {
-
-        boolean encontrado = false;
-
-        String sentenciaSQL = "SELECT * FROM PERFIL WHERE NOMBRE='"
-                + usuario + "' AND CONTRASENIA='" + password + "'";
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        encontrado = cursor.moveToFirst();
-        cursor.close();
-
-        return encontrado;
-    }
-
-    /**
-     * Crea un nuevo perfil.
-     * @param contexto El contexto en el que crear el perfil
-     * @param usuario El nombre del perfil
-     * @param contrasenia La contraseña para el perfil.
-     */
-    public static void CrearPerfil(Context contexto, String usuario, String contrasenia){
-        int id = obtenIDMaximoPerfil(contexto);
-        String sentenciaSQL;
-        sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE,  CONTRASENIA) VALUES (";
-        sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "')";
-
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos;
-        baseDatos=base.getWritableDatabase();
-        baseDatos.execSQL(sentenciaSQL);
-        baseDatos.close();
-        base.close();
-    }
-
-    /**
-     * Crea una nueva prenda.
-     * @param contexto El contexto a usar.
-     * @param nombre El nombre de la prenda.
-     * @param color El color de la prenda.
-     * @param tipo Qué tipo de prenda es.
-     * @param talla La talla de la prenda.
-     * @param visible Si la prenda será visible o no en la lista de prendas
-     *                (siempre lo será en el historial)
-     * @param id_perfil El ID del perfil que tendrá la prenda.
-     */
-    public static void crearPrenda(Context contexto, String nombre, String color, int tipo , int talla, int visible,int id_perfil){
-
-        int id= obtenIDMaximoPrenda(contexto);
-        String sentenciaSQL;
-        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%s', %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil);
-
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos;
-        baseDatos=base.getWritableDatabase();
-        baseDatos.execSQL(sentenciaSQL);
-        baseDatos.close();
-        base.close();
-
-    }
-
-    public static void BorrarPerfil(Context contexto, int id){
-
-        String sentenciaSQL;
-        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos;
-        baseDatos = base.getWritableDatabase();
-        baseDatos.execSQL(sentenciaSQL);
-        baseDatos.close();
-        base.close();
-
-        //  Hace falta ademas borrar las prendas, conjuntos e historial
-
-    }
-
     /**
      * Pone el flag "visible" a 0 en una prenda, ocultándola en la lista de prendas y en
      * el algoritmo vestidor pero no en el historial.
@@ -319,7 +343,7 @@ public class GestorBD {
         SentenciaSQL+= "VISIBLE = '0' ";
         SentenciaSQL+= "WHERE ID = " + idPrenda;
 
-        BaseDatos base = new BaseDatos(contexto);
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(SentenciaSQL);
@@ -337,7 +361,7 @@ public class GestorBD {
         String SentenciaSQL;
         SentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + id;
 
-        BaseDatos base = new BaseDatos(contexto);
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(SentenciaSQL);
@@ -350,7 +374,7 @@ public class GestorBD {
         // Definir cómo se hará una entrada en el historia (información de salida + prendas sugeridas)
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM ENTRADA_HISTORIAL WHERE ID = " + String.valueOf(idPerfil);
-        BaseDatos base = new BaseDatos(contexto);
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
@@ -364,7 +388,7 @@ public class GestorBD {
     public static void BorrarConjunto(int idConjunto){
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM CONJUNTO WHERE ID = " + String.valueOf(idConjunto);
-        BaseDatos base = new BaseDatos(contexto);
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
@@ -372,49 +396,13 @@ public class GestorBD {
         base.close();
     }
 
-    public static void ActualizarPerfil(Context contexto, int idPerfil, String password){
 
-        String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
-                + password + "' WHERE ID=" + idPerfil;
-        BaseDatos base = new BaseDatos(contexto);
-        SQLiteDatabase baseDatos;
-        baseDatos = base.getWritableDatabase();
-        baseDatos.execSQL(sentenciaSQL);
-        baseDatos.close();
-        base.close();
-
-    }
-    public static String getUser(Context context, int idPerfil){
-        String SentenciaSQL = "SELECT NOMBRE FROM PERFIL WHERE ID=" + idPerfil;
-        String res="";
-        BaseDatos base = new BaseDatos(context);
-        SQLiteDatabase baseDatos=base.getWritableDatabase();
-        Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
-        if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"NOMBRE");
-        base.close();
-        baseDatos.close();
-        cursor.close();
-        return res;
-    }
-    public static  String getPass(Context context, int idPerfil){
-        String SentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE ID=" + idPerfil;
-        String res="";
-        BaseDatos base = new BaseDatos(context);
-        SQLiteDatabase baseDatos=base.getWritableDatabase();
-        Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
-        if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"CONTRASENIA");
-        base.close();
-        baseDatos.close();
-        cursor.close();
-        return res;
-
-    }
     public static Prenda Obtener_Prenda(Context context,int id){
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE ID = " + id + " AND VISIBLE = 1";
         Cursor cursor;
 
 
-        BaseDatos base = new BaseDatos(context);
+        BaseDatos base = new BaseDatos(context, nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -440,7 +428,7 @@ public class GestorBD {
         String sentenciaSQL = "SELECT NOMBRE FROM TIPO WHERE ID = " + tipo;
         Cursor cursor;
 
-        BaseDatos base = new BaseDatos(context);
+        BaseDatos base = new BaseDatos(context, nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
@@ -462,7 +450,7 @@ public class GestorBD {
         String sentenciaSQL = "SELECT NOMBRE FROM TALLA WHERE ID = " + talla;
         Cursor cursor;
 
-        BaseDatos base = new BaseDatos(context);
+        BaseDatos base = new BaseDatos(context, nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
@@ -484,7 +472,7 @@ public class GestorBD {
         Cursor cursor;
         List<String> res = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context);
+        BaseDatos base = new BaseDatos(context, nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -509,7 +497,7 @@ public class GestorBD {
         Cursor cursor;
         List<String> res = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context);
+        BaseDatos base = new BaseDatos(context, nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
