@@ -32,7 +32,7 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
         contexto = getApplicationContext();
         gestor=new GestorBD(contexto);
         rellenaConjunto();
-        gestor.addConjunto();//Esta funcion añadirá un conjunto a la Base de Datos
+       // gestor.addConjunto();//Esta funcion añadirá un conjunto a la Base de Datos
         muestraConjuntos();
     }
 
