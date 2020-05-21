@@ -97,6 +97,9 @@ public class VestuarioActivity extends AppCompatActivity {
     void ir_a_anydir()
     {
         Intent anydir = new Intent(this, AniadirPrendaActivity.class);
+
+
+
         startActivity(anydir);
     }
 
