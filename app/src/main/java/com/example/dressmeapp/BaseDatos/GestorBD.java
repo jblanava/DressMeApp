@@ -384,10 +384,10 @@ public class GestorBD {
         base.close();
 
     }
-    public static String getUser(int idPerfil){
+    public static String getUser(Context context, int idPerfil){
         String SentenciaSQL = "SELECT NOMBRE FROM PERFIL WHERE ID=" + idPerfil;
         String res="";
-        BaseDatos base = new BaseDatos(contexto);
+        BaseDatos base = new BaseDatos(context);
         SQLiteDatabase baseDatos=base.getWritableDatabase();
         Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
         if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"NOMBRE");
@@ -396,10 +396,10 @@ public class GestorBD {
         cursor.close();
         return res;
     }
-    public static  String getPass(int idPerfil){
+    public static  String getPass(Context context, int idPerfil){
         String SentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE ID=" + idPerfil;
         String res="";
-        BaseDatos base = new BaseDatos(contexto);
+        BaseDatos base = new BaseDatos(context);
         SQLiteDatabase baseDatos=base.getWritableDatabase();
         Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
         if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"CONTRASENIA");
