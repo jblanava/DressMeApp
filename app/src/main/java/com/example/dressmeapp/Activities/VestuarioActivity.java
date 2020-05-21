@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import java.util.List;
 
 public class VestuarioActivity extends AppCompatActivity {
 
+    EditText Ebusqueda;
     Button bOrdenar,bAgrupar,bAnydir, bBuscar;
     LinearLayout listaPrendas;
 
@@ -30,13 +32,18 @@ public class VestuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vestuario);
 
         enlazar_controles();
-/*
-        List<Prenda> prendas = GestorBD.Dar_Prendas(this);
 
-        for(Prenda p : prendas)
-        {
-            añadir_elemento(p);
-        }*/
+        mostrar_prendas("");
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        listaPrendas.removeAllViews();
+
+        mostrar_prendas("");
     }
 
     void enlazar_controles()
@@ -45,6 +52,8 @@ public class VestuarioActivity extends AppCompatActivity {
         bAgrupar = (Button) findViewById(R.id.boton_agrupar);
         bAnydir = (Button) findViewById(R.id.boton_añadir);
         bBuscar = (Button) findViewById(R.id.boton_buscar);
+        Ebusqueda = (EditText) findViewById(R.id.editText_busqueda);
+
 
         listaPrendas = (LinearLayout) findViewById(R.id.lista_prendas);
 
@@ -93,16 +102,26 @@ public class VestuarioActivity extends AppCompatActivity {
     {
         Intent anydir = new Intent(this, AniadirPrendaActivity.class);
 
-
-
         startActivity(anydir);
     }
 
-    void buscar()
+    void buscar()    // TODO: Ahora solo filtra por nombre. Queremos que filtre por otras cosas?
     {
-        // No se que hay que poner aqui aun
+        listaPrendas.removeAllViews();
+
+        mostrar_prendas(Ebusqueda.getText().toString());
     }
 
+
+    void mostrar_prendas(String busqueda)
+    {
+        List<Prenda> prendas = GestorBD.PrendasVisibles(this, busqueda);
+
+        for(Prenda p : prendas)
+        {
+            añadir_elemento(p);
+        }
+    }
 
     void añadir_elemento(final Prenda prenda)
     {
