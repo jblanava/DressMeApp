@@ -98,9 +98,9 @@ public class GestorBD {
     }
 
 
-    public static List<Prenda> PrendasVisibles(Context context) {
+    public static List<Prenda> PrendasVisibles(Context context, String texto) {
 
-        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
+        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 AND UPPER(NOMBRE) LIKE '%UPPER(" + texto + ")%'";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
 
@@ -532,4 +532,6 @@ public class GestorBD {
         CambiarVisibilidadPrenda(context, p.id );
         crearPrenda(context,p.nombre,p.color,p.tipo,p.talla,1,getIdPerfil());
     }
+
+
 }
