@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.dressmeapp.R;
 
-public class OrdenarPrendasActivity extends AppCompatActivity {
+public class ConjuntoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ordenar);
+        setContentView(R.layout.activity_conjunto_view);
     }
 }

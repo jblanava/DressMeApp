@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.dressmeapp.Activities.AniadirPrendaActivity;
+import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp9.db";
+    private static String nombreBD = "dressmeapp11.db";
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -520,5 +521,107 @@ public class GestorBD {
     public static void  Modificar_Prenda (Context context, Prenda p){
         CambiarVisibilidadPrenda(context, p.id );
         crearPrenda(context,p.nombre,p.color,p.tipo,p.talla,1,getIdPerfil());
+    }
+
+
+    public int num_conjuntos(Context context) {
+        String sentenciaSQL = "SELECT COUNT (ID) AS NUM FROM CONJUNTO GROUP BY ID";
+        Cursor cursor;
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        int cont = 0;
+        if (cursor.moveToFirst()) {
+            do {
+             cont = LibreriaBD.CampoInt(cursor, "NUM");
+            } while (cursor.moveToNext());
+        }
+        return cont;
+    }
+
+    public static List<Conjunto>  ConjuntosEnBD(Context context){
+
+        List<Conjunto> res = new ArrayList<>();
+
+
+        String sentenciaSQL = "SELECT * FROM CONJUNTO";
+        Cursor cursor;
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                Conjunto c = new Conjunto();
+
+                int id =  LibreriaBD.CampoInt(cursor, "ID");
+                int Abrigo =  LibreriaBD.CampoInt(cursor, "ABRIGO");
+                int Sudadera =  LibreriaBD.CampoInt(cursor, "SUDADERA");
+                int Camiseta =  LibreriaBD.CampoInt(cursor, "CAMISETA");
+                int Pantalon =  LibreriaBD.CampoInt(cursor, "PANTALON");
+                int Zapato =  LibreriaBD.CampoInt(cursor, "ZAPATO");
+                int Complemento =  LibreriaBD.CampoInt(cursor, "COMPLEMENTO");
+
+                c.add(id);
+                c.add(Abrigo);
+                c.add(Sudadera);
+                c.add(Camiseta);
+                c.add(Pantalon);
+                c.add(Zapato);
+                c.add(Complemento);
+
+
+                res.add(c);
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return res;
+
+    }
+
+
+    public static List<Prenda> Ordenar_Prendas (Context context, int num ){// 0 nombre, 1 color, 2 tipo, 3 talla
+        String orden;
+        if(num==0) orden="NOMBRE";
+        else if(num == 1) orden ="COLOR";
+        else if(num == 2) orden = "TIPO";
+        else orden= "TALLA";
+        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 ORDER BY " + orden;
+        Cursor cursor;
+        List<Prenda> res = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = LibreriaBD.CampoInt(cursor,"ID");
+                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+                String color = LibreriaBD.Campo(cursor, "COLOR");
+                int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
+                int talla = LibreriaBD.CampoInt(cursor, "TALLA");
+
+
+
+                Prenda p = new Prenda(id, nombre,color,tipo,talla);
+                res.add(p);
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return res;
     }
 }

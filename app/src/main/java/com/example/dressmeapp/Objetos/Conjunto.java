@@ -10,6 +10,20 @@ public class Conjunto {
         idPrendas= new ArrayList<Integer>();
     }
 
+    /*
+    Significado de posiciones del ArrayList
+    pos 0 -> ID conjunto
+    pos 1 -> ID Abrigo
+    pos 2 -> ID Sudadera
+    pos 3 -> ID Camiseta
+    pos 4 -> ID Pantalon
+    pos 5 -> ID Zapatos
+    pos 6 -> ID Complementos
+
+    un valor de -1 significa que ese conjunto no tiene una prenda de ese tipo
+
+     */
+
     public void add(int idPrenda){
         if(idPrendas.size()<6){
             idPrendas.add(idPrenda);

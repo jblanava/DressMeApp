@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.*;
 import com.example.dressmeapp.R;
 
@@ -22,9 +21,10 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
     private LinearLayout listaPrendas;
     private Conjunto conjunto;
     private Context contexto;
-    private GestorBD gestor;
+  //  private GestorBD gestor;
      //La idea es de cada vez que se genere un conjunto se añada a la lista, que luego
-                                                    //se le pasará a Historial
+
+           /*                                         //se le pasará a Historial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +92,9 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
 
         listaPrendas.addView(v);
     }
+
+    */
+
     }
 
 

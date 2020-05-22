@@ -1,14 +1,12 @@
 package com.example.dressmeapp.Activities;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;

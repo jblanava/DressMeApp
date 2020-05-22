@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.HistorialActivity"></activity>
+        <activity android:name=".Activities.ConjuntoActivity"></activity>
+        <activity android:name=".Activities.HistorialActivity" />
+        <activity android:name=".Activities.CabeceraAgrupacion"></activity>
+        <activity android:name=".Activities.HistorialActivity" />
         <activity android:name=".Activities.AlgoritmoRecomendador" />
         <activity android:name=".Activities.MostrarDatosActivity" />
         <activity android:name=".Activities.Modificar_Prenda" />
