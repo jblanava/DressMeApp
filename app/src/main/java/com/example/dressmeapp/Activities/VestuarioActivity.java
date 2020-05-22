@@ -32,13 +32,14 @@ import java.util.List;
 public class VestuarioActivity extends AppCompatActivity {
 
     EditText Ebusqueda;
-    Button bAnydir, bBuscar, bOrdenar;
+    Button bAnydir, bBuscar, bOrdenar, bAgrupar;
     LinearLayout listaPrendas;
     Spinner sOrdenar, sAgrupar;
 
 
     String busqueda = "";
     Comparator<Prenda> comparator = new OrdenNombre();
+    int agrupacion = 0;
 
     private final static String[] ordernarPor = {"Ordenar por:", "Nombre", "Color", "Tipo", "Talla"};
     private final static String[] agruparPor = {"Agrupar por:", "Tipo", "Talla"};
@@ -72,6 +73,7 @@ public class VestuarioActivity extends AppCompatActivity {
         bAnydir = (Button) findViewById(R.id.boton_añadir);
         bBuscar = (Button) findViewById(R.id.boton_buscar);
         bOrdenar = (Button) findViewById(R.id.boton_ordenar);
+        bAgrupar = (Button) findViewById(R.id.boton_agrupar);
         Ebusqueda = (EditText) findViewById(R.id.editText_busqueda);
 
 
@@ -109,6 +111,14 @@ public class VestuarioActivity extends AppCompatActivity {
                 ordenar();
             }
         });
+
+        bAgrupar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                agrupar();
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -132,6 +142,14 @@ public class VestuarioActivity extends AppCompatActivity {
         {
             comparator =new OrdenTalla(this);
         }
+
+        mostrar_prendas();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    void agrupar()
+    {
+        agrupacion = sAgrupar.getSelectedItemPosition();
 
         mostrar_prendas();
     }
@@ -160,10 +178,55 @@ public class VestuarioActivity extends AppCompatActivity {
 
         prendas.sort(this.comparator);
 
-        for(Prenda p : prendas)
+        if(agrupacion == 0)
         {
-            añadir_elemento(p);
+            for(Prenda p : prendas)
+            {
+                añadir_elemento(p);
+            }
         }
+        else  if(agrupacion == 1)
+        {
+            List<String> tipos = GestorBD.getTipos(this);
+            for(String t : tipos)
+            {
+                //TODO mostrar cabecera
+                View v = getLayoutInflater().inflate(R.layout.activity_cabecera_agrupacion, null);
+                TextView nombre = (TextView) v.findViewById(R.id.Cabecera);
+                nombre.setText(t);
+                listaPrendas.addView(v);
+
+                for(Prenda p : prendas)
+                {
+                    if(GestorBD.Dar_Tipo(this, p.tipo).equalsIgnoreCase(t))
+                    {
+                        añadir_elemento(p);
+                    }
+                }
+            }
+        }
+        else  if(agrupacion == 2)
+        {
+            List<String> tallas = GestorBD.getTallas(this);
+            for(String t : tallas)
+            {
+                //TODO mostrar cabecera
+
+                View v = getLayoutInflater().inflate(R.layout.activity_cabecera_agrupacion, null);
+                TextView nombre = (TextView) v.findViewById(R.id.Cabecera);
+                nombre.setText(t);
+                listaPrendas.addView(v);
+
+                for(Prenda p : prendas)
+                {
+                    if(GestorBD.Dar_Talla(this, p.talla).equalsIgnoreCase(t))
+                    {
+                        añadir_elemento(p);
+                    }
+                }
+            }
+        }
+
     }
 
     void añadir_elemento(final Prenda prenda)

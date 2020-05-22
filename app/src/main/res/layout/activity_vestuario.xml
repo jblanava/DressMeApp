@@ -31,6 +31,13 @@
                 android:layout_weight="1"
                 android:text="Buscar" />
 
+            <Button
+                android:id="@+id/boton_añadir"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Añadir" />
+
         </TableRow>
 
         <TableRow
@@ -63,14 +70,14 @@
                 android:id="@+id/spinner_agrupar"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="2" />
 
             <Button
-                android:id="@+id/boton_añadir"
+                android:id="@+id/boton_agrupar"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Añadir" />
+                android:text="Agrupar" />
 
         </TableRow>
 
