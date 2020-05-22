@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.dressmeapp.Activities.AniadirPrendaActivity;
+import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 
 import java.util.ArrayList;
@@ -521,6 +522,73 @@ public class GestorBD {
         CambiarVisibilidadPrenda(context, p.id );
         crearPrenda(context,p.nombre,p.color,p.tipo,p.talla,1,getIdPerfil());
     }
+
+
+    public static List<Conjunto>  ConjuntosEnBD(Context context){
+
+        List<Conjunto> res = new ArrayList<>();
+
+
+        String sentenciaSQL = "SELECT * FROM CONJUNTO ";
+        Cursor cursor;
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                Conjunto c = new Conjunto();
+
+                int id =  LibreriaBD.CampoInt(cursor, "ID");
+                int Abrigo =  LibreriaBD.CampoInt(cursor, "ABRIGO");
+                int Sudadera =  LibreriaBD.CampoInt(cursor, "SUDADERA");
+                int Camiseta =  LibreriaBD.CampoInt(cursor, "CAMISETA");
+                int Pantalon =  LibreriaBD.CampoInt(cursor, "PANTALON");
+                int Zapato =  LibreriaBD.CampoInt(cursor, "ZAPATO");
+                int Complemento =  LibreriaBD.CampoInt(cursor, "COMPLEMENTO");
+
+                c.add(id);
+
+                if ((Abrigo) == (Integer) null) {
+                    c.add(-1);
+                } else {
+                    c.add(Abrigo);
+                }
+
+
+                if ((Sudadera == (Integer) null)) {
+                    c.add(-1);
+                } else {
+                    c.add(Sudadera);
+                }
+
+
+                c.add(Camiseta);
+
+                c.add(Pantalon);
+
+                c.add(Zapato);
+
+                if (Complemento == (Integer) null) {
+                    c.add(-1);
+                } else {
+                    c.add(Complemento);
+                }
+
+                res.add(c);
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return res;
+
+    }
+
 
     public static List<Prenda> Ordenar_Prendas (Context context, int num ){// 0 nombre, 1 color, 2 tipo, 3 talla
         String orden;
