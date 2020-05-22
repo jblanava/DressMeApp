@@ -22,7 +22,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp9.db";
+    private static String nombreBD = "dressmeapp11.db";
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -524,12 +524,30 @@ public class GestorBD {
     }
 
 
+    public int num_conjuntos(Context context) {
+        String sentenciaSQL = "SELECT COUNT (ID) AS NUM FROM CONJUNTO GROUP BY ID";
+        Cursor cursor;
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        int cont = 0;
+        if (cursor.moveToFirst()) {
+            do {
+             cont = LibreriaBD.CampoInt(cursor, "NUM");
+            } while (cursor.moveToNext());
+        }
+        return cont;
+    }
+
     public static List<Conjunto>  ConjuntosEnBD(Context context){
 
         List<Conjunto> res = new ArrayList<>();
 
 
-        String sentenciaSQL = "SELECT * FROM CONJUNTO ";
+        String sentenciaSQL = "SELECT * FROM CONJUNTO";
         Cursor cursor;
 
         BaseDatos base = new BaseDatos(context, nombreBD);
@@ -551,32 +569,13 @@ public class GestorBD {
                 int Complemento =  LibreriaBD.CampoInt(cursor, "COMPLEMENTO");
 
                 c.add(id);
-
-                if ((Abrigo) == (Integer) null) {
-                    c.add(-1);
-                } else {
-                    c.add(Abrigo);
-                }
-
-
-                if ((Sudadera == (Integer) null)) {
-                    c.add(-1);
-                } else {
-                    c.add(Sudadera);
-                }
-
-
+                c.add(Abrigo);
+                c.add(Sudadera);
                 c.add(Camiseta);
-
                 c.add(Pantalon);
-
                 c.add(Zapato);
+                c.add(Complemento);
 
-                if (Complemento == (Integer) null) {
-                    c.add(-1);
-                } else {
-                    c.add(Complemento);
-                }
 
                 res.add(c);
 
