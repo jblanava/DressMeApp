@@ -65,7 +65,7 @@
             android:layout_weight="18">
 
             <ScrollView
-                android:id="@+id/scrollView2"
+                android:id="@+id/scrollView3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5">
@@ -74,7 +74,7 @@
                     android:id="@+id/lista_prendas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
+                    android:orientation="vertical" />
             </ScrollView>
         </TableRow>
 
