@@ -1,31 +1,49 @@
 package com.example.dressmeapp.Activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.Objetos.OrdenColor;
+import com.example.dressmeapp.Objetos.OrdenNombre;
+import com.example.dressmeapp.Objetos.OrdenTalla;
+import com.example.dressmeapp.Objetos.OrdenTipo;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class VestuarioActivity extends AppCompatActivity {
 
     EditText Ebusqueda;
-    Button bOrdenar,bAgrupar,bAnydir, bBuscar;
+    Button bAnydir, bBuscar, bOrdenar;
     LinearLayout listaPrendas;
+    Spinner sOrdenar, sAgrupar;
 
+
+    String busqueda = "";
+    Comparator<Prenda> comparator = new OrdenNombre();
+
+    private final static String[] ordernarPor = {"Ordenar por:", "Nombre", "Color", "Tipo", "Talla"};
+    private final static String[] agruparPor = {"Agrupar por:", "Tipo", "Talla"};
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +51,10 @@ public class VestuarioActivity extends AppCompatActivity {
 
         enlazar_controles();
 
-        mostrar_prendas("");
+        mostrar_prendas();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onResume()
     {
@@ -43,33 +62,30 @@ public class VestuarioActivity extends AppCompatActivity {
 
         listaPrendas.removeAllViews();
 
-        mostrar_prendas("");
+        mostrar_prendas();
     }
 
     void enlazar_controles()
     {
-        bOrdenar = (Button) findViewById(R.id.boton_ordenar);
-        bAgrupar = (Button) findViewById(R.id.boton_agrupar);
+        sOrdenar = (Spinner) findViewById(R.id.spinner_ordenar);
+        sAgrupar = (Spinner) findViewById(R.id.spinner_agrupar);
         bAnydir = (Button) findViewById(R.id.boton_añadir);
         bBuscar = (Button) findViewById(R.id.boton_buscar);
+        bOrdenar = (Button) findViewById(R.id.boton_ordenar);
         Ebusqueda = (EditText) findViewById(R.id.editText_busqueda);
 
 
         listaPrendas = (LinearLayout) findViewById(R.id.lista_prendas);
 
-        bAgrupar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ir_a_agrupar();
-            }
-        });
 
-        bOrdenar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ir_a_ordenar();
-            }
-        });
+        ArrayAdapter<String> adapterOrden = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ordernarPor);
+        adapterOrden.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sOrdenar.setAdapter(adapterOrden);
+
+        ArrayAdapter<String> adapterAgrupar = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, agruparPor);
+        adapterAgrupar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sAgrupar.setAdapter(adapterAgrupar);
+
 
         bAnydir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,23 +95,45 @@ public class VestuarioActivity extends AppCompatActivity {
         });
 
         bBuscar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 buscar();
             }
         });
+
+        bOrdenar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                ordenar();
+            }
+        });
     }
 
-    void ir_a_ordenar()
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    void ordenar()
     {
-        Intent ordenar = new Intent(this, OrdenarPrendasActivity.class);
-        startActivity(ordenar);
-    }
+        int criterio = sOrdenar.getSelectedItemPosition();
 
-    void ir_a_agrupar()
-    {
-        Intent agrupar = new Intent(this, AgruparPrendasActivity.class); //CAMBIAR A AGRUPAR
-        startActivity(agrupar);
+        if(criterio == 1)
+        {
+            comparator = new OrdenNombre();
+        }
+        else if(criterio == 2)
+        {
+            comparator =new OrdenColor();
+        }
+        else if(criterio == 3)
+        {
+            comparator =new OrdenTipo(this);
+        }
+        else if(criterio == 4)
+        {
+            comparator =new OrdenTalla(this);
+        }
+
+        mostrar_prendas();
     }
 
     void ir_a_anydir()
@@ -105,17 +143,22 @@ public class VestuarioActivity extends AppCompatActivity {
         startActivity(anydir);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     void buscar()    // TODO: Ahora solo filtra por nombre. Queremos que filtre por otras cosas?
     {
-        listaPrendas.removeAllViews();
-
-        mostrar_prendas(Ebusqueda.getText().toString());
+        busqueda = Ebusqueda.getText().toString();
+        mostrar_prendas();
     }
 
 
-    void mostrar_prendas(String busqueda)
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    void mostrar_prendas()
     {
-        List<Prenda> prendas = GestorBD.PrendasVisibles(this, busqueda);
+        listaPrendas.removeAllViews();
+
+        List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda);
+
+        prendas.sort(this.comparator);
 
         for(Prenda p : prendas)
         {

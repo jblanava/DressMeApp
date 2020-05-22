@@ -85,7 +85,7 @@ public class Modificar_Prenda extends AppCompatActivity {
         });
     }
 
-    void eliminar()
+    void eliminar() // TODO: Preguntar al usuario si está seguro
     {
         GestorBD.borrarPrenda(this, prenda.id);
 
