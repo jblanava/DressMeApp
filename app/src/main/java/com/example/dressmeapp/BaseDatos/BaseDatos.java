@@ -69,32 +69,32 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
         db.execSQL( "INSERT INTO TIPO VALUES (1  , 'ABRIGO') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (2  , 'BLUSA') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (3 , 'BAÑADOR/BIKINI') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (4  , 'CHAQUETA') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (5  , 'CAMISA'  ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (6  , 'CAMISETA' ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (7 , 'CHANCLAS') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (8  , 'FALDA' ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (9  , 'PANTALON') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (10  , 'POLO') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (11  , 'SUDADERA') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (12 , 'TRAJE') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (13 , 'TENNIS') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (14  , 'JERSEY') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (15  , 'ZAPATOS' ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (16  , 'COMPLEMENTO') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (2  ,'BAÑADOR/BIKINI' ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (3 , 'BLUSA') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (4  , 'CAMISA') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (5  ,  'CAMISETA'  ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (6  ,'CHANCLAS'  ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (7 , 'CHAQUETA') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (8  ,'COMPLEMENTO'  ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (9  , 'FALDA') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (10  ,'JERSEY' ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (11  ,'PANTALON' ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (12 ,'POLO' ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (13 , 'SUDADERA') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (14  , 'TENNIS') ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (15  , 'TRAJE' ) ") ;
+        db.execSQL( "INSERT INTO TIPO VALUES (16  ,'ZAPATOS' ) ") ;
 
     }
 
     private void crearTalla(SQLiteDatabase db){
 
-        db.execSQL( "INSERT INTO TALLA VALUES (1  , 'XS') ") ;
-        db.execSQL( "INSERT INTO TALLA VALUES (2  , 'S') ") ;
-        db.execSQL( "INSERT INTO TALLA VALUES (3  , 'M') ") ;
-        db.execSQL( "INSERT INTO TALLA VALUES (4  , 'L') ") ;
-        db.execSQL( "INSERT INTO TALLA VALUES (5  , 'XL') ") ;
-        db.execSQL( "INSERT INTO TALLA VALUES (6  , '2XL') ") ;
+        db.execSQL( "INSERT INTO TALLA VALUES (1  , 'M') ") ;
+        db.execSQL( "INSERT INTO TALLA VALUES (2  , 'L') ") ;
+        db.execSQL( "INSERT INTO TALLA VALUES (3  , 'S') ") ;
+        db.execSQL( "INSERT INTO TALLA VALUES (4  , 'XL') ") ;
+        db.execSQL( "INSERT INTO TALLA VALUES (5  , 'XS') ") ;
+        db.execSQL( "INSERT INTO TALLA VALUES (6  , 'XXL') ") ;
 
     }
 

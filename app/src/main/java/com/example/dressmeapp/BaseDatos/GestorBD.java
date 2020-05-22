@@ -521,4 +521,40 @@ public class GestorBD {
         CambiarVisibilidadPrenda(context, p.id );
         crearPrenda(context,p.nombre,p.color,p.tipo,p.talla,1,getIdPerfil());
     }
+
+    public static List<Prenda> Ordenar_Prendas (Context context, int num ){// 0 nombre, 1 color, 2 tipo, 3 talla
+        String orden;
+        if(num==0) orden="NOMBRE";
+        else if(num == 1) orden ="COLOR";
+        else if(num == 2) orden = "TIPO";
+        else orden= "TALLA";
+        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 ORDER BY " + orden;
+        Cursor cursor;
+        List<Prenda> res = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = LibreriaBD.CampoInt(cursor,"ID");
+                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+                String color = LibreriaBD.Campo(cursor, "COLOR");
+                int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
+                int talla = LibreriaBD.CampoInt(cursor, "TALLA");
+
+
+
+                Prenda p = new Prenda(id, nombre,color,tipo,talla);
+                res.add(p);
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return res;
+    }
 }
