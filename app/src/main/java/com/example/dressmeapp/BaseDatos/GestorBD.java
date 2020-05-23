@@ -301,7 +301,7 @@ public class GestorBD {
 
     public static List<Prenda> PrendasVisibles(Context context, String texto)
     {
-        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 AND UPPER(NOMBRE) LIKE '%" + texto.toUpperCase() + "%'";
+        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
 
@@ -318,10 +318,21 @@ public class GestorBD {
                 int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
                 int talla = LibreriaBD.CampoInt(cursor, "TALLA");
 
+                String Stipo = Dar_Tipo(context, tipo);
+                String Stalla = Dar_Talla(context, talla);
 
+                boolean cumpleFiltro = false;
 
-                Prenda p = new Prenda(id, nombre,color,tipo,talla);
-                res.add(p);
+                cumpleFiltro = cumpleFiltro || nombre.toUpperCase().contains(texto.toUpperCase());
+                cumpleFiltro = cumpleFiltro || color.toUpperCase().contains(texto.toUpperCase());
+                cumpleFiltro = cumpleFiltro || Stipo.toUpperCase().contains(texto.toUpperCase());
+                cumpleFiltro = cumpleFiltro || Stalla.toUpperCase().contains(texto.toUpperCase());
+
+                if(cumpleFiltro)
+                {
+                    Prenda p = new Prenda(id, nombre,color,tipo,talla);
+                    res.add(p);
+                }
 
             } while (cursor.moveToNext());
         }
