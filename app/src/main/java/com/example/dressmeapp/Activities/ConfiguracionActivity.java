@@ -58,15 +58,18 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
 
     private void cambioPrendas() {
-    //Por definir
+    Intent cambio = new Intent(this,CambioPrendasActivity.class);
+    startActivity(cambio);
     }
 
     private void cambioTallas() {
-    //Por definir
+    Intent cambio = new Intent(this,CambioTallasActivity.class);
+    startActivity(cambio);
     }
 
     private void cambiaColor() {
-        //Por definir
+        Intent cambio = new Intent(this,CambioColorActivity.class);
+        startActivity(cambio);
     }
 
     private void cambiaPerfil() {
