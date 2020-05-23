@@ -97,20 +97,7 @@ public class HistorialActivity extends AppCompatActivity {
 
         TableLayout t = (TableLayout) v.findViewById(R.id.boton_prenda);
 
-        final Context a = this;
 
-/* Aqui se accede a la prenda
-        t.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("Debug", "Boton pulsado, prenda con nombre: " + prenda.nombre);
-
-                Intent modificar = new Intent(a, Modificar_Prenda.class);
-                modificar.putExtra("intVariableName", prenda.id);
-                startActivity(modificar);
-            }
-        });
-*/
         listaPrendas.addView(v);
     }
 }
