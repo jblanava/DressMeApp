@@ -558,7 +558,34 @@ public class GestorBD {
 
         return null;
     }
+    public  static  Prenda getCamiseta(Context context,int tiempo, int actividad){
+        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE ID = " +  + " AND VISIBLE = 1";
+        Cursor cursor;
 
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        Prenda p=null;
+
+        if (cursor.moveToFirst())
+        {
+            String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+            String color = LibreriaBD.Campo(cursor, "COLOR");
+            int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
+            int talla = LibreriaBD.CampoInt(cursor, "TALLA");
+
+            p = new Prenda(id, nombre,color,tipo,talla);
+
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return p;
+
+
+    }
 
 
 
