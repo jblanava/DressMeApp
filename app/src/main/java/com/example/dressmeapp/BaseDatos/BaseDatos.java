@@ -79,7 +79,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 
     private void crearTipos(SQLiteDatabase db){
         // ACTUALIZAR LOS VALORES
+        /*LEYENDA:
+        TIEMPO:
+            1.FRIO
+            2.MEDIO
+            3.CALOR
 
+        ACTIVIDAD:
+            1.FORMAL
+            2.SEMIFORMAL
+            3.CASUAL
+            4.DEPORTIVO
+            5.BAÑO
+
+         */
 
         db.execSQL( "INSERT INTO TIPO VALUES (1  , 'ABRIGO') ") ;
         db.execSQL( "INSERT INTO TIPO VALUES (2  ,'BAÑADOR/BIKINI' ) ") ;

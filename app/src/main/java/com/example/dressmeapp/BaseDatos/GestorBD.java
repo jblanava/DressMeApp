@@ -10,6 +10,7 @@ import com.example.dressmeapp.Objetos.Prenda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class GestorBD {
@@ -559,7 +560,9 @@ public class GestorBD {
         return null;
     }
     public  static  Prenda getCamiseta(Context context,int tiempo, int actividad){
-        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE ID = " +  + " AND VISIBLE = 1";
+        String sentenciaSQL = "SELECT p.ID, p.NOMBRE, p.COLOR, p.TIPO, p.TALLA " +
+                "FROM PRENDA p LEFT JOIN TIPO t ON p.TIPO=t.ID" +
+                " WHERE (p.TIPO = 5  OR p.TIPO = 3 OR p.TIPO = 4 OR p.TIPO=12)  AND p.VISIBLE = 1 AND t.ACTIVIDAD=" + actividad +" AND t.TIEMPO=" +tiempo  ;
         Cursor cursor;
 
 
@@ -568,21 +571,27 @@ public class GestorBD {
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
         Prenda p=null;
+        List<Prenda> listaPrendas= new ArrayList<>();
 
         if (cursor.moveToFirst())
-        {
-            String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
-            String color = LibreriaBD.Campo(cursor, "COLOR");
-            int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
-            int talla = LibreriaBD.CampoInt(cursor, "TALLA");
+        {do {
+            String nombre = LibreriaBD.Campo(cursor, "p.NOMBRE");
+            String color = LibreriaBD.Campo(cursor, "p.COLOR");
+            int tipo = LibreriaBD.CampoInt(cursor, "p.TIPO");
+            int talla = LibreriaBD.CampoInt(cursor, "p.TALLA");
+            int id = LibreriaBD.CampoInt(cursor, "p.ID");
 
-            p = new Prenda(id, nombre,color,tipo,talla);
-
+            p = new Prenda(id, nombre, color, tipo, talla);
+            listaPrendas.add(p);
+        }while(cursor.moveToNext());
         }
         baseDatos.close();
         base.close();
         cursor.close();
-        return p;
+        Random r = new Random();
+       int i= r.nextInt(listaPrendas.size());
+
+        return listaPrendas.get(i);
 
 
     }
