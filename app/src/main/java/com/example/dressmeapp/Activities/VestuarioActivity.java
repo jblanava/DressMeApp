@@ -136,11 +136,11 @@ public class VestuarioActivity extends AppCompatActivity {
         }
         else if(criterio == 3)
         {
-            comparator =new OrdenTipo(this);
+            comparator =new OrdenTipo(this); // TODO: Este comparator es muy lento
         }
         else if(criterio == 4)
         {
-            comparator =new OrdenTalla(this);
+            comparator =new OrdenTalla(this);// TODO: Este comparator es muy lento
         }
 
         mostrar_prendas();
@@ -253,8 +253,6 @@ public class VestuarioActivity extends AppCompatActivity {
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Debug", "Boton pulsado, prenda con nombre: " + prenda.nombre);
-
                 Intent modificar = new Intent(a, Modificar_Prenda.class);
                 modificar.putExtra("intVariableName", prenda.id);
                 startActivity(modificar);
