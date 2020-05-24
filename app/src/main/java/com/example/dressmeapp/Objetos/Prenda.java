@@ -4,11 +4,11 @@ public class Prenda
 {
     public int id;
     public String nombre;
-    public String color;
+    public int color;
     public int tipo;
     public int talla;
 
-    public Prenda(int i, String n, String c, int ti, int ta)
+    public Prenda(int i, String n, int c, int ti, int ta)
     {
         this.id = i;
         this.nombre = n;

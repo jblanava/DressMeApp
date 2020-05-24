@@ -3,6 +3,9 @@ package com.example.dressmeapp.BaseDatos;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.dressmeapp.Activities.AniadirPrendaActivity;
 import com.example.dressmeapp.Objetos.Conjunto;
@@ -11,6 +14,7 @@ import com.example.dressmeapp.Objetos.Prenda;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.StringJoiner;
 
 
 public class GestorBD {
@@ -21,7 +25,6 @@ public class GestorBD {
     public static int idPerfil;
 
 
-
     private static Context contexto; // TODO: eliminar en el futuro
     private static String nombreBD = "dressmeapp11.db";
 
@@ -30,42 +33,31 @@ public class GestorBD {
         contexto = context;
     }
 
-    public static void seleccionarBD(String nombreBD)
-    {
+    public static void seleccionarBD(String nombreBD) {
         GestorBD.nombreBD = nombreBD;
     }
-
-
-
-
-
 
 
     ///////////////////////77
 /// PERFIL
 
-    public static int getIdPerfil()
-    {
+    public static int getIdPerfil() {
         return idPerfil;
     }
 
-    public static void setIdPerfil(int nuevoId)
-    {
+    public static void setIdPerfil(int nuevoId) {
         idPerfil = nuevoId;
     }
-
-
-
 
 
     /**
      * Devuelve el ID correspondiente al siguiente perfil que se cree.
      * (Este método debería ser privado, ya que solo se invoca al crear un perfil.)
+     *
      * @param context El contexto a usar.
      * @return El ID correspondiente al siguiente perfil que se cree (máximo + 1)
      */
-    public static int obtenIDMaximoPerfil(Context context)
-    {
+    public static int obtenIDMaximoPerfil(Context context) {
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
 
@@ -90,10 +82,11 @@ public class GestorBD {
     /**
      * Devuelve el ID correspondiente a la siguiente prenda que se cree.
      * (Este método quizás debería ser privado, ya que solo se invoca al crear un perfil.)
+     *
      * @param context El contexto a usar.
      * @return El ID correspondiente a la siguiente prenda que se cree.
      */
-    public static int obtenIDMaximoPrenda(Context context){
+    public static int obtenIDMaximoPrenda(Context context) {
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PRENDA";
 
@@ -102,10 +95,10 @@ public class GestorBD {
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if(cursor.moveToFirst()){
-            do{
+        if (cursor.moveToFirst()) {
+            do {
                 resultado = LibreriaBD.CampoInt(cursor, "MAXID");
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         resultado++;
         baseDatos.close();
@@ -117,14 +110,15 @@ public class GestorBD {
 
     /**
      * Comprueba si un string corresponde a un nombre de perfil existente.
+     *
      * @param context El contexto en el que comprobar.
-     * @param nombre El nombre a buscar
+     * @param nombre  El nombre a buscar
      * @return true sii el nombre corresponde a algún perfil
      */
     public static boolean UsuarioEstaEnBD(Context context, String nombre) {
         // clase Registro
         String sentenciaSQL;
-        sentenciaSQL= "SELECT ID FROM PERFIL WHERE NOMBRE='" + nombre + "'";
+        sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE='" + nombre + "'";
         BaseDatos base = new BaseDatos(context, nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
@@ -145,15 +139,16 @@ public class GestorBD {
 
     /**
      * Devuelve el ID de un perfil dado su nombre y contraseña.
-     * @param context El contexto en el cual comprobar.
-     * @param usuario El usuario cuyo ID buscar
+     *
+     * @param context  El contexto en el cual comprobar.
+     * @param usuario  El usuario cuyo ID buscar
      * @param password La contraseña cuyo ID buscar
      * @return El ID del perfil definido, o 0 si no existe un perfil con los datos dados
      */
     public static int IdPerfilAsociado(Context context, String usuario, String password) {
 
         int id = 0;
-        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE ='" + usuario + "' AND CONTRASENIA ='"+ password+ "'";
+        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE ='" + usuario + "' AND CONTRASENIA ='" + password + "'";
 
         Cursor cursor;
         BaseDatos base = new BaseDatos(context, nombreBD);
@@ -161,7 +156,7 @@ public class GestorBD {
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             id = LibreriaBD.CampoInt(cursor, "ID");
         }
 
@@ -174,8 +169,9 @@ public class GestorBD {
 
     /**
      * Comprueba si el par (nombre de perfil, contraseña) dado corresponde a un usuario.
+     *
      * @param contexto El contexto en el cual comprobar.
-     * @param usuario El nombre del perfil a comprobar
+     * @param usuario  El nombre del perfil a comprobar
      * @param password La contraseña del perfil a comprobar.
      * @return true sii el par (nombre de perfil, contraseña) corresponden a un usuario.
      */
@@ -197,11 +193,12 @@ public class GestorBD {
 
     /**
      * Crea un nuevo perfil.
-     * @param contexto El contexto en el que crear el perfil
-     * @param usuario El nombre del perfil
+     *
+     * @param contexto    El contexto en el que crear el perfil
+     * @param usuario     El nombre del perfil
      * @param contrasenia La contraseña para el perfil.
      */
-    public static void CrearPerfil(Context contexto, String usuario, String contrasenia){
+    public static void CrearPerfil(Context contexto, String usuario, String contrasenia) {
         int id = obtenIDMaximoPerfil(contexto);
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE,  CONTRASENIA) VALUES (";
@@ -209,13 +206,13 @@ public class GestorBD {
 
         BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
-        baseDatos=base.getWritableDatabase();
+        baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
         baseDatos.close();
         base.close();
     }
 
-    public static void BorrarPerfil(Context contexto, int id){
+    public static void BorrarPerfil(Context contexto, int id) {
 
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
@@ -230,7 +227,7 @@ public class GestorBD {
 
     }
 
-    public static void ActualizarPerfil(Context contexto, int idPerfil, String password){
+    public static void ActualizarPerfil(Context contexto, int idPerfil, String password) {
 
         String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
                 + password + "' WHERE ID=" + idPerfil;
@@ -242,25 +239,27 @@ public class GestorBD {
         base.close();
 
     }
-    public static String getUser(Context context, int idPerfil){
+
+    public static String getUser(Context context, int idPerfil) {
         String SentenciaSQL = "SELECT NOMBRE FROM PERFIL WHERE ID=" + idPerfil;
-        String res="";
+        String res = "";
         BaseDatos base = new BaseDatos(context, nombreBD);
-        SQLiteDatabase baseDatos=base.getWritableDatabase();
-        Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
-        if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"NOMBRE");
+        SQLiteDatabase baseDatos = base.getWritableDatabase();
+        Cursor cursor = baseDatos.rawQuery(SentenciaSQL, null);
+        if (cursor.moveToFirst()) res = LibreriaBD.Campo(cursor, "NOMBRE");
         base.close();
         baseDatos.close();
         cursor.close();
         return res;
     }
-    public static  String getPass(Context context, int idPerfil){
+
+    public static String getPass(Context context, int idPerfil) {
         String SentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE ID=" + idPerfil;
-        String res="";
+        String res = "";
         BaseDatos base = new BaseDatos(context, nombreBD);
-        SQLiteDatabase baseDatos=base.getWritableDatabase();
-        Cursor cursor=baseDatos.rawQuery(SentenciaSQL,null);
-        if(cursor.moveToFirst()) res=LibreriaBD.Campo(cursor,"CONTRASENIA");
+        SQLiteDatabase baseDatos = base.getWritableDatabase();
+        Cursor cursor = baseDatos.rawQuery(SentenciaSQL, null);
+        if (cursor.moveToFirst()) res = LibreriaBD.Campo(cursor, "CONTRASENIA");
         base.close();
         baseDatos.close();
         cursor.close();
@@ -275,24 +274,25 @@ public class GestorBD {
 
     /**
      * Crea una nueva prenda.
-     * @param contexto El contexto a usar.
-     * @param nombre El nombre de la prenda.
-     * @param color El color de la prenda.
-     * @param tipo Qué tipo de prenda es.
-     * @param talla La talla de la prenda.
-     * @param visible Si la prenda será visible o no en la lista de prendas
-     *                (siempre lo será en el historial)
+     *
+     * @param contexto  El contexto a usar.
+     * @param nombre    El nombre de la prenda.
+     * @param color     El color de la prenda.
+     * @param tipo      Qué tipo de prenda es.
+     * @param talla     La talla de la prenda.
+     * @param visible   Si la prenda será visible o no en la lista de prendas
+     *                  (siempre lo será en el historial)
      * @param id_perfil El ID del perfil que tendrá la prenda.
      */
-    public static void crearPrenda(Context contexto, String nombre, String color, int tipo , int talla, int visible,int id_perfil){
+    public static void crearPrenda(Context contexto, String nombre, String color, int tipo, int talla, int visible, int id_perfil) {
 
-        int id= obtenIDMaximoPrenda(contexto);
+        int id = obtenIDMaximoPrenda(contexto);
         String sentenciaSQL;
         sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%s', %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil);
 
         BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
-        baseDatos=base.getWritableDatabase();
+        baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
         baseDatos.close();
         base.close();
@@ -300,8 +300,7 @@ public class GestorBD {
     }
 
 
-    public static List<Prenda> PrendasVisibles(Context context, String texto)
-    {
+    public static List<Prenda> PrendasVisibles(Context context, String texto) {
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
@@ -313,10 +312,10 @@ public class GestorBD {
 
         if (cursor.moveToFirst()) {
             do {
-                int id = LibreriaBD.CampoInt(cursor,"ID");
-                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+                int id = LibreriaBD.CampoInt(cursor, "ID");
+                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
                 String color = LibreriaBD.Campo(cursor, "COLOR");
-                int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
+                int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
                 int talla = LibreriaBD.CampoInt(cursor, "TALLA");
 
                 String Stipo = Dar_Tipo(context, tipo);
@@ -329,9 +328,8 @@ public class GestorBD {
                 cumpleFiltro = cumpleFiltro || Stipo.toUpperCase().contains(texto.toUpperCase());
                 cumpleFiltro = cumpleFiltro || Stalla.toUpperCase().contains(texto.toUpperCase());
 
-                if(cumpleFiltro)
-                {
-                    Prenda p = new Prenda(id, nombre,color,tipo,talla);
+                if (cumpleFiltro) {
+                    Prenda p = new Prenda(id, nombre, color, tipo, talla);
                     res.add(p);
                 }
 
@@ -346,15 +344,16 @@ public class GestorBD {
     /**
      * Pone el flag "visible" a 0 en una prenda, ocultándola en la lista de prendas y en
      * el algoritmo vestidor pero no en el historial.
+     *
      * @param contexto El contexto a usar.
      * @param idPrenda El ID de la prenda a borrar.
      */
-    public static void CambiarVisibilidadPrenda(Context contexto, int idPrenda){ // este metodo es para cambiar la visibilidad, pero la prenda se mantiene en la base de datos
+    public static void CambiarVisibilidadPrenda(Context contexto, int idPrenda) { // este metodo es para cambiar la visibilidad, pero la prenda se mantiene en la base de datos
 
         String SentenciaSQL;
         SentenciaSQL = "UPDATE PRENDA SET ";
-        SentenciaSQL+= "VISIBLE = '0' ";
-        SentenciaSQL+= "WHERE ID = " + idPrenda;
+        SentenciaSQL += "VISIBLE = '0' ";
+        SentenciaSQL += "WHERE ID = " + idPrenda;
 
         BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
@@ -366,11 +365,11 @@ public class GestorBD {
 
     /**
      * Borra definitivamente la prenda indicada
+     *
      * @param contexto El contexto a usar.
-     * @param id El ID de la prenda que quieres borrar
+     * @param id       El ID de la prenda que quieres borrar
      */
-    public static void borrarPrenda(Context contexto, int id)
-    {
+    public static void borrarPrenda(Context contexto, int id) {
         String SentenciaSQL;
         SentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + id;
 
@@ -382,7 +381,7 @@ public class GestorBD {
         base.close();
     }
 
-    public static void BorrarHistorial(Context contexto, int idPerfil){
+    public static void BorrarHistorial(Context contexto, int idPerfil) {
 
         // Definir cómo se hará una entrada en el historia (información de salida + prendas sugeridas)
         String sentenciaSQL;
@@ -395,10 +394,9 @@ public class GestorBD {
         base.close();
 
 
-
     }
 
-    public static void BorrarConjunto(int idConjunto){
+    public static void BorrarConjunto(int idConjunto) {
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM CONJUNTO WHERE ID = " + String.valueOf(idConjunto);
         BaseDatos base = new BaseDatos(contexto, nombreBD);
@@ -410,7 +408,7 @@ public class GestorBD {
     }
 
 
-    public static Prenda Obtener_Prenda(Context context,int id){
+    public static Prenda Obtener_Prenda(Context context, int id) {
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE ID = " + id + " AND VISIBLE = 1";
         Cursor cursor;
 
@@ -419,16 +417,15 @@ public class GestorBD {
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        Prenda p=null;
+        Prenda p = null;
 
-        if (cursor.moveToFirst())
-        {
-            String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+        if (cursor.moveToFirst()) {
+            String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
             String color = LibreriaBD.Campo(cursor, "COLOR");
-            int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
+            int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
             int talla = LibreriaBD.CampoInt(cursor, "TALLA");
 
-            p = new Prenda(id, nombre,color,tipo,talla);
+            p = new Prenda(id, nombre, color, tipo, talla);
 
         }
         baseDatos.close();
@@ -437,7 +434,7 @@ public class GestorBD {
         return p;
     }
 
-    public static String Dar_Tipo (Context context,int tipo){
+    public static String Dar_Tipo(Context context, int tipo) {
         String sentenciaSQL = "SELECT NOMBRE FROM TIPO WHERE ID = " + tipo;
         Cursor cursor;
 
@@ -447,9 +444,8 @@ public class GestorBD {
 
         String nombre = "Error";
 
-        if(cursor.moveToFirst())
-        {
-             nombre = LibreriaBD.Campo(cursor, "NOMBRE");
+        if (cursor.moveToFirst()) {
+            nombre = LibreriaBD.Campo(cursor, "NOMBRE");
         }
 
 
@@ -459,7 +455,7 @@ public class GestorBD {
         return nombre;
     }
 
-    public static String Dar_Talla (Context context,int talla){
+    public static String Dar_Talla(Context context, int talla) {
         String sentenciaSQL = "SELECT NOMBRE FROM TALLA WHERE ID = " + talla;
         Cursor cursor;
 
@@ -469,8 +465,7 @@ public class GestorBD {
 
         String nombre = "Error";
 
-        if(cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             nombre = LibreriaBD.Campo(cursor, "NOMBRE");
         }
 
@@ -480,7 +475,7 @@ public class GestorBD {
         return nombre;
     }
 
-    public static List<String> getTipos (Context context){
+    public static List<String> getTipos(Context context) {
         String sentenciaSQL = "SELECT NOMBRE FROM TIPO ";
         Cursor cursor;
         List<String> res = new ArrayList<>();
@@ -493,7 +488,7 @@ public class GestorBD {
         if (cursor.moveToFirst()) {
             do {
 
-                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
 
                 res.add(nombre);
 
@@ -505,7 +500,7 @@ public class GestorBD {
         return res;
     }
 
-    public static List<String> getTallas (Context context){
+    public static List<String> getTallas(Context context) {
         String sentenciaSQL = "SELECT NOMBRE FROM TALLA ";
         Cursor cursor;
         List<String> res = new ArrayList<>();
@@ -518,7 +513,7 @@ public class GestorBD {
         if (cursor.moveToFirst()) {
             do {
 
-                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
 
                 res.add(nombre);
 
@@ -530,7 +525,7 @@ public class GestorBD {
         return res;
     }
 
-    public static List<Integer> getColor(Context context){
+    public static List<Integer> getColor(Context context) {
         String sentenciaSQL = "SELECT ID FROM COLOR ";
         Cursor cursor;
         List<Integer> res = new ArrayList<>();
@@ -555,9 +550,10 @@ public class GestorBD {
         return res;
     }
 
-    public static void  Modificar_Prenda (Context context, Prenda p){
-        CambiarVisibilidadPrenda(context, p.id );
-        crearPrenda(context,p.nombre,p.color,p.tipo,p.talla,1,getIdPerfil());
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static void Modificar_Prenda(Context context, Prenda p) {
+        CambiarVisibilidadPrenda(context, p.id);
+        crearPrenda(context, p.nombre, p.color, p.tipo, p.talla, 1, getIdPerfil());
     }
 
 
@@ -573,21 +569,93 @@ public class GestorBD {
         int cont = 0;
         if (cursor.moveToFirst()) {
             do {
-             cont = LibreriaBD.CampoInt(cursor, "NUM");
+                cont = LibreriaBD.CampoInt(cursor, "NUM");
             } while (cursor.moveToNext());
         }
         return cont;
     }
 
-    public static  Conjunto resAlgoritmo(Context context){ //Este método debe devolver el resultado que arroje el algoritmo
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad) { //Este método debe devolver el resultado que arroje el algoritmo
+
+        List<Integer> colores = getColor(context);
+
+        int[] tiposAbrigo = {1, 7};
+        int[] tiposSudadera = {10, 13};
+        int[] tiposCamiseta = {3, 4, 5, 12};
+        int[] tiposPantalon = {9, 11};
+        int[] tiposZapatos = {6, 14, 16};
+        int[] tiposComplementos = {8};
 
 
-        return null;
+        Conjunto res = new Conjunto();
+
+        for (int color : colores) {
+            int idAbrigo = NombreTemporal(context, tiempo, actividad, tiposAbrigo);
+            int idSudadera = NombreTemporal(context, tiempo, actividad, tiposSudadera);
+            int idCamiseta = NombreTemporal(context, tiempo, actividad, tiposCamiseta);
+            int idPantalon = NombreTemporal(context, tiempo, actividad, tiposPantalon);
+            int idZapatos = NombreTemporal(context, tiempo, actividad, tiposZapatos);
+            int idCompementos = NombreTemporal(context, tiempo, actividad, tiposComplementos);
+
+            res.add(idAbrigo);
+            res.add(idSudadera);
+            res.add(idCamiseta);
+            res.add(idPantalon);
+            res.add(idZapatos);
+            res.add(idCompementos);
+        }
+
+        return res;
     }
-    public  static  Prenda getCamiseta(Context context,int tiempo, int actividad){
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static int NombreTemporal(Context context, int tiempo, int actividad, int[] tipos) // TODO: Buscarle un nombre a esto
+    {
+        String sentenciaSQL = "SELECT p.ID, p.NOMBRE, p.COLOR, p.TIPO, p.TALLA FROM PRENDA p LEFT JOIN TIPO t ON p.TIPO=t.ID  WHERE (";
+
+        StringJoiner sj = new StringJoiner(" OR ", "( ", " )");
+
+        for (int tipo : tipos) {
+            sj.add("p.TIPO" + tipo);
+        }
+
+        sentenciaSQL += sj.toString();
+
+        sentenciaSQL += "AND p.VISIBLE = 1 AND t.ACTIVIDAD=" + actividad + " AND t.TIEMPO=" + tiempo;
+
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        Cursor cursor;
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        List<Integer> listaPrendas = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                int id = LibreriaBD.CampoInt(cursor, "p.ID");
+
+                listaPrendas.add(id);
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        Random r = new Random();
+        int i = r.nextInt(listaPrendas.size());
+
+        return listaPrendas.get(i);
+
+    }
+/* TODO: Eliminar
+
+    public static int getCamiseta(Context context, int tiempo, int actividad) {
         String sentenciaSQL = "SELECT p.ID, p.NOMBRE, p.COLOR, p.TIPO, p.TALLA " +
                 "FROM PRENDA p LEFT JOIN TIPO t ON p.TIPO=t.ID" +
-                " WHERE (p.TIPO = 5  OR p.TIPO = 3 OR p.TIPO = 4 OR p.TIPO=12)  AND p.VISIBLE = 1 AND t.ACTIVIDAD=" + actividad +" AND t.TIEMPO=" +tiempo  ;
+                " WHERE (p.TIPO = 5  OR p.TIPO = 3 OR p.TIPO = 4 OR p.TIPO=12)  AND p.VISIBLE = 1 AND t.ACTIVIDAD=" + actividad + " AND t.TIEMPO=" + tiempo;
         Cursor cursor;
 
 
@@ -595,36 +663,28 @@ public class GestorBD {
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        Prenda p=null;
-        List<Prenda> listaPrendas= new ArrayList<>();
 
-        if (cursor.moveToFirst())
-        {do {
-            String nombre = LibreriaBD.Campo(cursor, "p.NOMBRE");
-            String color = LibreriaBD.Campo(cursor, "p.COLOR");
-            int tipo = LibreriaBD.CampoInt(cursor, "p.TIPO");
-            int talla = LibreriaBD.CampoInt(cursor, "p.TALLA");
-            int id = LibreriaBD.CampoInt(cursor, "p.ID");
+        List<Integer> listaPrendas = new ArrayList<>();
 
-            p = new Prenda(id, nombre, color, tipo, talla);
-            listaPrendas.add(p);
-        }while(cursor.moveToNext());
+        if (cursor.moveToFirst()) {
+            do {
+
+                int id = LibreriaBD.CampoInt(cursor, "p.ID");
+
+                listaPrendas.add(id);
+            } while (cursor.moveToNext());
         }
         baseDatos.close();
         base.close();
         cursor.close();
         Random r = new Random();
-       int i= r.nextInt(listaPrendas.size());
+        int i = r.nextInt(listaPrendas.size());
 
         return listaPrendas.get(i);
-
-
     }
+*/
 
-
-
-
-    public static List<Conjunto>  ConjuntosEnBD(Context context){
+    public static List<Conjunto> ConjuntosEnBD(Context context) {
 
         List<Conjunto> res = new ArrayList<>();
 
@@ -642,13 +702,13 @@ public class GestorBD {
 
                 Conjunto c = new Conjunto();
 
-                int id =  LibreriaBD.CampoInt(cursor, "ID");
-                int Abrigo =  LibreriaBD.CampoInt(cursor, "ABRIGO");
-                int Sudadera =  LibreriaBD.CampoInt(cursor, "SUDADERA");
-                int Camiseta =  LibreriaBD.CampoInt(cursor, "CAMISETA");
-                int Pantalon =  LibreriaBD.CampoInt(cursor, "PANTALON");
-                int Zapato =  LibreriaBD.CampoInt(cursor, "ZAPATO");
-                int Complemento =  LibreriaBD.CampoInt(cursor, "COMPLEMENTO");
+                int id = LibreriaBD.CampoInt(cursor, "ID");
+                int Abrigo = LibreriaBD.CampoInt(cursor, "ABRIGO");
+                int Sudadera = LibreriaBD.CampoInt(cursor, "SUDADERA");
+                int Camiseta = LibreriaBD.CampoInt(cursor, "CAMISETA");
+                int Pantalon = LibreriaBD.CampoInt(cursor, "PANTALON");
+                int Zapato = LibreriaBD.CampoInt(cursor, "ZAPATO");
+                int Complemento = LibreriaBD.CampoInt(cursor, "COMPLEMENTO");
 
                 c.add(id);
                 c.add(Abrigo);
@@ -671,12 +731,12 @@ public class GestorBD {
     }
 
 
-    public static List<Prenda> Ordenar_Prendas (Context context, int num ){// 0 nombre, 1 color, 2 tipo, 3 talla
+    public static List<Prenda> Ordenar_Prendas(Context context, int num) {// 0 nombre, 1 color, 2 tipo, 3 talla
         String orden;
-        if(num==0) orden="NOMBRE";
-        else if(num == 1) orden ="COLOR";
-        else if(num == 2) orden = "TIPO";
-        else orden= "TALLA";
+        if (num == 0) orden = "NOMBRE";
+        else if (num == 1) orden = "COLOR";
+        else if (num == 2) orden = "TIPO";
+        else orden = "TALLA";
         String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 ORDER BY " + orden;
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
@@ -688,15 +748,14 @@ public class GestorBD {
 
         if (cursor.moveToFirst()) {
             do {
-                int id = LibreriaBD.CampoInt(cursor,"ID");
-                String nombre= LibreriaBD.Campo(cursor, "NOMBRE");
+                int id = LibreriaBD.CampoInt(cursor, "ID");
+                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
                 String color = LibreriaBD.Campo(cursor, "COLOR");
-                int tipo = LibreriaBD.CampoInt(cursor,"TIPO");
+                int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
                 int talla = LibreriaBD.CampoInt(cursor, "TALLA");
 
 
-
-                Prenda p = new Prenda(id, nombre,color,tipo,talla);
+                Prenda p = new Prenda(id, nombre, color, tipo, talla);
                 res.add(p);
 
             } while (cursor.moveToNext());
