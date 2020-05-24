@@ -530,6 +530,31 @@ public class GestorBD {
         return res;
     }
 
+    public static List<Integer> getColor(Context context){
+        String sentenciaSQL = "SELECT ID FROM COLOR ";
+        Cursor cursor;
+        List<Integer> res = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                int id = LibreriaBD.CampoInt(cursor, "ID");
+
+                res.add(id);
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return res;
+    }
+
     public static void  Modificar_Prenda (Context context, Prenda p){
         CambiarVisibilidadPrenda(context, p.id );
         crearPrenda(context,p.nombre,p.color,p.tipo,p.talla,1,getIdPerfil());
