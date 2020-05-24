@@ -18,8 +18,8 @@ public class OrdenTipo implements Comparator<Prenda> {
     @Override
     public int compare(Prenda o1, Prenda o2) {
 
-        String a = GestorBD.Dar_Tipo(context, o1.tipo);
-        String b = GestorBD.Dar_Tipo(context, o2.tipo);
+        String a = GestorBD.get_nombre_tabla(context, "tipo", o1.tipo);
+        String b = GestorBD.get_nombre_tabla(context, "tipo", o2.tipo);
 
         return a.compareToIgnoreCase(b);
     }

@@ -87,8 +87,8 @@ public class HistorialActivity extends AppCompatActivity {
         TextView color = (TextView) v.findViewById(R.id.prenda_color);
         TextView talla = (TextView) v.findViewById(R.id.prenda_talla);
 
-        String tipoText = GestorBD.Dar_Tipo(this, prenda.tipo);
-        String tallaText = GestorBD.Dar_Talla(this, prenda.talla);
+        String tipoText = GestorBD.get_nombre_tabla(this, "tipo", prenda.tipo);
+        String tallaText = GestorBD.get_nombre_tabla(this, "talla", prenda.talla);
 
         nombre.setText(prenda.nombre);
         tipo.setText(tipoText);

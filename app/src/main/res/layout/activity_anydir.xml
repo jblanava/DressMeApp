@@ -103,7 +103,7 @@
             android:layout_weight="1">
 
             <Spinner
-                android:id="@+id/rellena_tipo"
+                android:id="@+id/spinner_tipo"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -134,7 +134,7 @@
             android:layout_weight="1">
 
             <Spinner
-                android:id="@+id/rellena_talla"
+                android:id="@+id/spinner_talla"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"

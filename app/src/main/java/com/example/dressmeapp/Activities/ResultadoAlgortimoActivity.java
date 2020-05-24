@@ -31,9 +31,10 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
     }
 
+/* TODO: Solucionar problemas varios
 
     private void hagoCosas() {
-        conjunto = GestorBD.resAlgoritmo(this);
+        //conjunto = GestorBD.resAlgoritmo(this);
 
 
         for (int j = 1; j < conjunto.getSize(); j++) { // empezamos en 1, porque la pos 0 es para el propio ID del conjunto //
@@ -55,6 +56,8 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         TextView color = (TextView) v.findViewById(R.id.prenda_color);
         TextView talla = (TextView) v.findViewById(R.id.prenda_talla);
 
+
+
         String tipoText = GestorBD.Dar_Tipo(this, prenda.tipo);
         String tallaText = GestorBD.Dar_Talla(this, prenda.talla);
 
@@ -68,7 +71,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
         listaPrendas.addView(v);
     }
-
+*/
 
 
 }

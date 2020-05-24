@@ -284,11 +284,11 @@ public class GestorBD {
      *                  (siempre lo será en el historial)
      * @param id_perfil El ID del perfil que tendrá la prenda.
      */
-    public static void crearPrenda(Context contexto, String nombre, String color, int tipo, int talla, int visible, int id_perfil) {
+    public static void crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
 
         int id = obtenIDMaximoPrenda(contexto);
         String sentenciaSQL;
-        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%s', %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil);
+        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%d', %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil);
 
         BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
@@ -314,17 +314,20 @@ public class GestorBD {
             do {
                 int id = LibreriaBD.CampoInt(cursor, "ID");
                 String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-                String color = LibreriaBD.Campo(cursor, "COLOR");
+                int  color = LibreriaBD.CampoInt(cursor, "COLOR");
                 int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
                 int talla = LibreriaBD.CampoInt(cursor, "TALLA");
 
-                String Stipo = Dar_Tipo(context, tipo);
-                String Stalla = Dar_Talla(context, talla);
+
+
+                String Stipo = get_nombre_tabla(context, "tipo", tipo);
+                String Stalla = get_nombre_tabla(context, "talla", talla);
+                String Scolor = get_nombre_tabla(context, "color", color);
 
                 boolean cumpleFiltro = false;
 
                 cumpleFiltro = cumpleFiltro || nombre.toUpperCase().contains(texto.toUpperCase());
-                cumpleFiltro = cumpleFiltro || color.toUpperCase().contains(texto.toUpperCase());
+                cumpleFiltro = cumpleFiltro || Scolor.toUpperCase().contains(texto.toUpperCase());
                 cumpleFiltro = cumpleFiltro || Stipo.toUpperCase().contains(texto.toUpperCase());
                 cumpleFiltro = cumpleFiltro || Stalla.toUpperCase().contains(texto.toUpperCase());
 
@@ -421,7 +424,7 @@ public class GestorBD {
 
         if (cursor.moveToFirst()) {
             String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-            String color = LibreriaBD.Campo(cursor, "COLOR");
+            int  color = LibreriaBD.CampoInt(cursor, "COLOR");
             int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
             int talla = LibreriaBD.CampoInt(cursor, "TALLA");
 
@@ -434,29 +437,11 @@ public class GestorBD {
         return p;
     }
 
-    public static String Dar_Tipo(Context context, int tipo) {
-        String sentenciaSQL = "SELECT NOMBRE FROM TIPO WHERE ID = " + tipo;
-        Cursor cursor;
+    // TODO: Crear una funcion general que generalize estas 3
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-
-        String nombre = "Error";
-
-        if (cursor.moveToFirst()) {
-            nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-        }
-
-
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return nombre;
-    }
-
-    public static String Dar_Talla(Context context, int talla) {
-        String sentenciaSQL = "SELECT NOMBRE FROM TALLA WHERE ID = " + talla;
+    public static String get_nombre_tabla(Context context, String tabla, int id)
+    {
+        String sentenciaSQL = String.format("SELECT NOMBRE FROM %s WHERE ID = %d", tabla.toUpperCase(), id);
         Cursor cursor;
 
         BaseDatos base = new BaseDatos(context, nombreBD);
@@ -475,8 +460,10 @@ public class GestorBD {
         return nombre;
     }
 
-    public static List<String> getTipos(Context context) {
-        String sentenciaSQL = "SELECT NOMBRE FROM TIPO ";
+    public static List<String> get_nombres_tabla(Context context, String tabla)
+    {
+        String sentenciaSQL = "SELECT NOMBRE FROM " + tabla.toUpperCase();
+
         Cursor cursor;
         List<String> res = new ArrayList<>();
 
@@ -500,33 +487,10 @@ public class GestorBD {
         return res;
     }
 
-    public static List<String> getTallas(Context context) {
-        String sentenciaSQL = "SELECT NOMBRE FROM TALLA ";
-        Cursor cursor;
-        List<String> res = new ArrayList<>();
+    public static List<Integer> get_ids_tabla(Context context, String tabla)
+    {
+        String sentenciaSQL = "SELECT NOMBRE FROM " + tabla.toUpperCase();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-
-                res.add(nombre);
-
-            } while (cursor.moveToNext());
-        }
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return res;
-    }
-
-    public static List<Integer> getColor(Context context) {
-        String sentenciaSQL = "SELECT ID FROM COLOR ";
         Cursor cursor;
         List<Integer> res = new ArrayList<>();
 
@@ -549,6 +513,7 @@ public class GestorBD {
         cursor.close();
         return res;
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static void Modificar_Prenda(Context context, Prenda p) {
@@ -576,9 +541,9 @@ public class GestorBD {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad) { //Este método debe devolver el resultado que arroje el algoritmo
+    public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad) { // TODO: Este método debe devolver el resultado que arroje el algoritmo
 
-        List<Integer> colores = getColor(context);
+        List<Integer> colores = get_ids_tabla(context, "color");
 
         int[] tiposAbrigo = {1, 7};
         int[] tiposSudadera = {10, 13};
@@ -730,39 +695,4 @@ public class GestorBD {
 
     }
 
-
-    public static List<Prenda> Ordenar_Prendas(Context context, int num) {// 0 nombre, 1 color, 2 tipo, 3 talla
-        String orden;
-        if (num == 0) orden = "NOMBRE";
-        else if (num == 1) orden = "COLOR";
-        else if (num == 2) orden = "TIPO";
-        else orden = "TALLA";
-        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1 ORDER BY " + orden;
-        Cursor cursor;
-        List<Prenda> res = new ArrayList<>();
-
-        BaseDatos base = new BaseDatos(context, nombreBD);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                int id = LibreriaBD.CampoInt(cursor, "ID");
-                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-                String color = LibreriaBD.Campo(cursor, "COLOR");
-                int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
-                int talla = LibreriaBD.CampoInt(cursor, "TALLA");
-
-
-                Prenda p = new Prenda(id, nombre, color, tipo, talla);
-                res.add(p);
-
-            } while (cursor.moveToNext());
-        }
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return res;
-    }
 }
