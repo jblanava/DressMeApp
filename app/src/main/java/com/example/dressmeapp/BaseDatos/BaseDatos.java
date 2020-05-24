@@ -96,26 +96,38 @@ public class BaseDatos extends SQLiteOpenHelper {
 
          */
 
-        int[] formalidades = {1, 2, 4, 8, 16};
         int[] temperaturas = {1, 2, 4};
+        int[] formalidades = {1, 2, 4, 8, 16};
 
+         // Esquema:   (ID, TipoPrenda, Temperaturas(temp1 | temp 2), Formalidades( form1 | form2 ))
 
         db.execSQL("INSERT INTO TIPO VALUES (1  , 'ABRIGO', 1, 1 | 2 | 4) ");
         db.execSQL("INSERT INTO TIPO VALUES (2  ,'BAÑADOR/BIKINI', 4,  16) ");
         db.execSQL("INSERT INTO TIPO VALUES (3 , 'BLUSA', 1 | 2 | 4, 1 | 2 | 4) ");
         db.execSQL("INSERT INTO TIPO VALUES (4  , 'CAMISA', 1 | 2 | 4, 1 | 2) ");
-        db.execSQL("INSERT INTO TIPO VALUES (5  ,  'CAMISETA' , 1 | 2 | 4, 2 | 4) ");
-        db.execSQL("INSERT INTO TIPO VALUES (6  ,'CHANCLAS', 1 | 2 | 4, 2 | 4  ) ");
-        db.execSQL("INSERT INTO TIPO VALUES (7 , 'CHAQUETA') ");
-        db.execSQL("INSERT INTO TIPO VALUES (8  ,'COMPLEMENTO'  ) ");
-        db.execSQL("INSERT INTO TIPO VALUES (9  , 'FALDA') ");
-        db.execSQL("INSERT INTO TIPO VALUES (10  ,'JERSEY' ) ");
-        db.execSQL("INSERT INTO TIPO VALUES (11  ,'PANTALON' ) ");
-        db.execSQL("INSERT INTO TIPO VALUES (12 ,'POLO' ) ");
-        db.execSQL("INSERT INTO TIPO VALUES (13 , 'SUDADERA') ");
-        db.execSQL("INSERT INTO TIPO VALUES (14  , 'TENNIS') ");
-        db.execSQL("INSERT INTO TIPO VALUES (15  , 'TRAJE' ) ");
-        db.execSQL("INSERT INTO TIPO VALUES (16  ,'ZAPATOS' ) ");
+        db.execSQL("INSERT INTO TIPO VALUES (5  ,  'CAMISETA M.CORTA' , 1 | 2 | 4, 2 | 4 | 8 | 16) ");
+        db.execSQL("INSERT INTO TIPO VALUES (6  ,'CHANCLAS', 2 | 4,  4 | 16) ");
+        db.execSQL("INSERT INTO TIPO VALUES (7 , 'CHAQUETA', 1 | 2 , 1 | 2 | 4) ");
+        db.execSQL("INSERT INTO TIPO VALUES (8  ,'COMPLEMENTO' , 1 | 2 | 4, 1 | 2 | 4 | 8 | 16)");
+        db.execSQL("INSERT INTO TIPO VALUES (9  , 'FALDA', 2 | 4, 2 | 4 | 8)");
+        db.execSQL("INSERT INTO TIPO VALUES (10  ,'JERSEY', 1 | 2, 2 | 4) ");
+        db.execSQL("INSERT INTO TIPO VALUES (11  ,'PANTALON', 1 | 2 | 4, 1 | 2 | 4 ) ");
+        db.execSQL("INSERT INTO TIPO VALUES (12 ,'POLO', 2 | 4, 1 | 2) ");
+        db.execSQL("INSERT INTO TIPO VALUES (13 , 'SUDADERA', 1 | 2, 4 | 8) ");
+        db.execSQL("INSERT INTO TIPO VALUES (14  , 'TENNIS', 1 | 2 | 4, 2 | 4 | 8  )");
+        db.execSQL("INSERT INTO TIPO VALUES (15  , 'TRAJE', 1 | 2 | 4, 1 | 2) ");
+        db.execSQL("INSERT INTO TIPO VALUES (16  ,'ZAPATOS/TACONES', 1 | 2 | 4, 1 | 2 ) ");
+        db.execSQL("INSERT INTO TIPO VALUES (17  ,'CHANDAL',  1 | 2, 4 | 8) ");
+        db.execSQL("INSERT INTO TIPO VALUES (18  ,'BERMUDAS',  2 | 4, 2 | 4 | 8) ");
+        db.execSQL("INSERT INTO TIPO VALUES (19  ,'SHORTS',  2 | 4, 4 | 8) ");
+        db.execSQL("INSERT INTO TIPO VALUES (20  ,'VESTIDO',  1 | 2 | 4, 1 | 2) ");
+        db.execSQL("INSERT INTO TIPO VALUES (21  ,'TOP',  2 | 4, 2 | 4 | 8) ");
+        db.execSQL("INSERT INTO TIPO VALUES (22  ,'SANDALIAS', 2 | 4, 2 | 4) ");
+        db.execSQL("INSERT INTO TIPO VALUES (23  ,'CAMISETA M.LARGA' , 1 | 2 , 2 | 4 | 8 ) ");
+        db.execSQL("INSERT INTO TIPO VALUES (24  ,'ZAPATILLAS', 1 | 2 | 4, 2 | 4 ) ");
+        db.execSQL("INSERT INTO TIPO VALUES (25  ,'POLAR', 1 , 8 ) ");
+
+
 
     }
 

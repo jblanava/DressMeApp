@@ -11,7 +11,8 @@ public class Conjunto {
     }
 
     /*
-    Significado de posiciones del ArrayList
+    Significado de posiciones del ArrayList:
+
     pos 0 -> ID conjunto
     pos 1 -> ID Abrigo
     pos 2 -> ID Sudadera
