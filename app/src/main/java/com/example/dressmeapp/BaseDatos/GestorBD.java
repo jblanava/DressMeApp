@@ -502,7 +502,7 @@ public class GestorBD {
         if (cursor.moveToFirst()) {
             do {
 
-                int id = LibreriaBD.CampoInt(cursor, "ID");
+                int id = LibreriaBD.CampoInt(cursor, "ID"); // TODO: averiguar porque peta esto. Idea: creo que puede ser porque tendo que crear una nueva base de datos
 
                 res.add(id);
 

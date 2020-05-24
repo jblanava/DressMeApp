@@ -40,7 +40,7 @@ public class VestuarioActivity extends AppCompatActivity {
     int agrupacion = 0;
 
     private final static String[] ordernarPor = {"Ordenar por:", "Nombre", "Color", "Tipo", "Talla"};
-    private final static String[] agruparPor = {"Agrupar por:", "Tipo", "Talla"};
+    private final static String[] agruparPor = {"Agrupar por:", "Color", "Tipo", "Talla"};
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -169,6 +169,31 @@ public class VestuarioActivity extends AppCompatActivity {
         }
         else
         {
+            String[] campos = {"Error", "color", "tipo", "talla"};
+
+            String tabla = campos[agrupacion];
+
+            List<Integer> tags = GestorBD.get_ids_tabla(this, tabla);
+
+            for(int tag : tags)
+            {
+                View v = getLayoutInflater().inflate(R.layout.activity_cabecera_agrupacion, null);
+                TextView nombre = v.findViewById(R.id.Cabecera);
+                String nombreTag = GestorBD.get_nombre_tabla(this, tabla, tag);
+                nombre.setText(nombreTag);
+                listaPrendas.addView(v);
+
+                for (Prenda p : prendas)
+                {
+                    int[] camposPrenda = {-1, p.color, p.tipo, p.talla};
+
+                    if(camposPrenda[agrupacion] == tag)
+                    {
+                        añadir_elemento(p);
+                    }
+                }
+            }
+
             /*
             TODO: rehacer esto porque es basura
 
