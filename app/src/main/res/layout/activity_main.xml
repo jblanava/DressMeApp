@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity">
 
+
     <ScrollView
         android:layout_width="409dp"
         android:layout_height="729dp"
@@ -14,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,13 +72,17 @@
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="#99ffbb"
                 android:text="@string/iniciar_sesion" />
 
             <Button
                 android:id="@+id/btnRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:scrollbarDefaultDelayBeforeFade="400"
                 android:text="Registro"
+                android:background="#99ffbb"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                 android:textColor="#ED0E0E"
                 android:textSize="18sp" />
