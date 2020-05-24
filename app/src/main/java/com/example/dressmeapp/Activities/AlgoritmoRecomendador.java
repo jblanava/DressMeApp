@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.*;
 import com.example.dressmeapp.R;
 
@@ -24,37 +25,18 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
   //  private GestorBD gestor;
      //La idea es de cada vez que se genere un conjunto se añada a la lista, que luego
 
-           /*                                         //se le pasará a Historial
+                                                    //se le pasará a Historial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algoritmo_recomendador);
         contexto = getApplicationContext();
-        gestor=new GestorBD(contexto);
-        rellenaConjunto();
+      //  rellenaConjunto();
        // gestor.addConjunto();//Esta funcion añadirá un conjunto a la Base de Datos
-        muestraConjuntos();
+       // muestraConjuntos();
     }
 
-    private void muestraConjuntos(){
-    if(conjunto != null) {
-        for (int i = 0; i < conjunto.getSize(); i++) {
-            Prenda prenda = GestorBD.Obtener_Prenda(contexto, conjunto.obtenId(i));
-            metodoChavales(prenda);
-        }//PROBABLEMENTE EL FOR NO CIERRE AQUÍ :D
-    }
-    }
 
-    private void rellenaConjunto(){
-        //Esto es provisional porque no se me ocurre nada mejor de momento para rellenar conjuntos:D
-        int limite= GestorBD.obtenIDMaximoPrenda(contexto);
-        Random rnd = new Random();
-        int id;
-        for(int i=0;i<6;i++){
-        id=rnd.nextInt(limite);
-        conjunto.add(id);
-        }
-    }
 
 
 
@@ -93,7 +75,7 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
         listaPrendas.addView(v);
     }
 
-    */
+
 
     }
 

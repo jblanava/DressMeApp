@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.CambioTallasActivity"></activity>
+        <activity android:name=".Activities.ResultadoAlgortimoActivity"></activity>
+        <activity android:name=".Activities.CambioTallasActivity" />
         <activity android:name=".Activities.CambioColorActivity" />
         <activity android:name=".Activities.CambioPrendasActivity" />
         <activity android:name=".Activities.ConjuntoActivity" />

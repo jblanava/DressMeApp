@@ -553,6 +553,16 @@ public class GestorBD {
         return cont;
     }
 
+    public static  Conjunto resAlgoritmo(Context context){ //Este método debe devolver el resultado que arroje el algoritmo
+
+
+        return null;
+    }
+
+
+
+
+
     public static List<Conjunto>  ConjuntosEnBD(Context context){
 
         List<Conjunto> res = new ArrayList<>();

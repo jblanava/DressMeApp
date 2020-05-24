@@ -73,6 +73,8 @@ import android.database.sqlite.SQLiteOpenHelper;
         db.execSQL("CREATE TABLE \"COLOR\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
         db.execSQL("CREATE TABLE \"TIPO\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
         db.execSQL("CREATE TABLE \"TALLA\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
+
+        db.execSQL("CREATE TABLE \"COMBO_COLOR\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"COLOR1\" INTEGER NOT NULL,\"COLOR2\" INTEGER NOT NULL)");
     }
 
     private void crearTipos(SQLiteDatabase db){
