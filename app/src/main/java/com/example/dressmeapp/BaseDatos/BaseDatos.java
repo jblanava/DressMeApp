@@ -19,8 +19,6 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-
         // TABLA PRENDA
 
         crearTablas(db);
