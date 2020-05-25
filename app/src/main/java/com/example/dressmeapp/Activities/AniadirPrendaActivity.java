@@ -2,7 +2,6 @@ package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,19 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
 
 import java.util.List;
 
 public class AniadirPrendaActivity extends AppCompatActivity {
 
+    EditText Enombre;
+    Spinner Scolor;
     Spinner Stipo;
     Spinner Stalla;
-    EditText Enombre;
-    EditText Ecolor;
 
     Button Bcrear;
     Button Bcancelar;
@@ -38,20 +35,25 @@ public class AniadirPrendaActivity extends AppCompatActivity {
 
     void enlazar_controles() // Enlaza los controles y rellena los Spinner con la lista de opciones
     {
-        Stipo = (Spinner) findViewById(R.id.rellena_tipo);
-        Stalla = (Spinner) findViewById(R.id.rellena_talla);
-        Enombre = (EditText) findViewById(R.id.rellena_nombre);
-        Ecolor = (EditText) findViewById(R.id.rellena_color);
-        Bcrear = (Button) findViewById(R.id.boton_crear);
-        Bcancelar = (Button) findViewById(R.id.boton_cancelar);
+        Enombre =  findViewById(R.id.rellena_nombre);
+        Scolor = findViewById(R.id.spinner_color);
+        Stipo = findViewById(R.id.spinner_tipo);
+        Stalla = findViewById(R.id.spinner_talla);
+        Bcrear =  findViewById(R.id.boton_crear);
+        Bcancelar = findViewById(R.id.boton_cancelar);
 
-        List<String> tipos = GestorBD.getTipos(this);
-        ArrayAdapter<String> adapterTipos = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipos);
+        List<String> colores = GestorBD.get_nombres_tabla(this, "color");
+        ArrayAdapter<String> adapterColores = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colores);
+        adapterColores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Scolor.setAdapter(adapterColores);
+
+        List<String> tipos = GestorBD.get_nombres_tabla(this, "tipo");
+        ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos);
         adapterTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Stipo.setAdapter(adapterTipos);
 
-        List<String> tallas = GestorBD.getTallas(this);
-        ArrayAdapter<String> adapterTallas = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tallas);
+        List<String> tallas = GestorBD.get_nombres_tabla(this, "talla");
+        ArrayAdapter<String> adapterTallas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tallas);
         adapterTallas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Stalla.setAdapter(adapterTallas);
 
@@ -61,8 +63,6 @@ public class AniadirPrendaActivity extends AppCompatActivity {
                 cancelar();
             }
         });
-
-
 
         Bcrear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class AniadirPrendaActivity extends AppCompatActivity {
     void crear()
     {
         String nombre = Enombre.getText().toString();
-        String color = Ecolor.getText().toString();
+        int color = Scolor.getSelectedItemPosition() + 1;
         int tipo = Stipo.getSelectedItemPosition() + 1;
         int talla = Stalla.getSelectedItemPosition() + 1;
 

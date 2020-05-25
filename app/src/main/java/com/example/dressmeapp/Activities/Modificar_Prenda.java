@@ -1,8 +1,10 @@
 package com.example.dressmeapp.Activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
@@ -19,10 +20,10 @@ import java.util.List;
 
 public class Modificar_Prenda extends AppCompatActivity {
 
+    EditText Enombre;
+    Spinner Scolor;
     Spinner Stipo;
     Spinner Stalla;
-    EditText Enombre;
-    EditText Ecolor;
 
     Button Bguardar;
     Button Beliminar;
@@ -32,8 +33,7 @@ public class Modificar_Prenda extends AppCompatActivity {
     Prenda prenda;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificar__prenda);
 
@@ -44,22 +44,26 @@ public class Modificar_Prenda extends AppCompatActivity {
 
     void enlazar_controles() {// Enlaza los controles y rellena los Spinner con la lista de opciones
 
+        Enombre = findViewById(R.id.rellena_nombre);
+        Scolor = findViewById(R.id.spinner_color);
+        Stipo = findViewById(R.id.spinner_tipo);
+        Stalla = findViewById(R.id.spinner_talla);
+        Bguardar = findViewById(R.id.boton_guardar);
+        Beliminar = findViewById(R.id.boton_eliminar);
+        Bintercambiar = findViewById(R.id.boton_intercambiar);
 
-        Stipo = (Spinner) findViewById(R.id.rellena_tipo);
-        Stalla = (Spinner) findViewById(R.id.rellena_talla);
-        Enombre = (EditText) findViewById(R.id.rellena_nombre);
-        Ecolor = (EditText) findViewById(R.id.rellena_color);
-        Bguardar = (Button) findViewById(R.id.boton_guardar);
-        Beliminar = (Button) findViewById(R.id.boton_eliminar);
-        Bintercambiar = (Button) findViewById(R.id.boton_intercambiar);
+        List<String> colores = GestorBD.get_nombres_tabla(this, "color");
+        ArrayAdapter<String> adapterColores = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colores);
+        adapterColores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Scolor.setAdapter(adapterColores);
 
-        List<String> tipos = GestorBD.getTipos(this);
-        ArrayAdapter<String> adapterTipos = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipos);
+        List<String> tipos = GestorBD.get_nombres_tabla(this, "tipo");
+        ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos);
         adapterTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Stipo.setAdapter(adapterTipos);
 
-        List<String> tallas = GestorBD.getTallas(this);
-        ArrayAdapter<String> adapterTallas = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tallas);
+        List<String> tallas = GestorBD.get_nombres_tabla(this, "talla");
+        ArrayAdapter<String> adapterTallas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tallas);
         adapterTallas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Stalla.setAdapter(adapterTallas);
 
@@ -78,6 +82,7 @@ public class Modificar_Prenda extends AppCompatActivity {
         });
 
         Bguardar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 guardar();
@@ -92,15 +97,14 @@ public class Modificar_Prenda extends AppCompatActivity {
         finish();
     }
 
-    void intercambiar()
-    {
+    void intercambiar() {
         // TODO
     }
 
-    void guardar()
-    {
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    void guardar() {
         prenda.nombre = Enombre.getText().toString();
-        prenda.color = Ecolor.getText().toString();
+        prenda.color = Scolor.getSelectedItemPosition() + 1;
         prenda.tipo = Stipo.getSelectedItemPosition() + 1;
         prenda.talla = Stalla.getSelectedItemPosition() + 1;
 
@@ -119,10 +123,10 @@ public class Modificar_Prenda extends AppCompatActivity {
 
         prenda.id = id;
 
+        Enombre.setText(prenda.nombre);
+        Scolor.setSelection(prenda.color - 1);
         Stipo.setSelection(prenda.tipo - 1);
         Stalla.setSelection(prenda.talla - 1);
-        Enombre.setText(prenda.nombre);
-        Ecolor.setText(prenda.color);
 
     }
 }

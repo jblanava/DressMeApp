@@ -4,16 +4,16 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-    public class BaseDatos extends SQLiteOpenHelper {
+
+public class BaseDatos extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
 
-/* TODO: Eliminar, es innecesario
-    public BaseDatos (Context contexto) {
-        this(contexto, NOMBRE_BASE_DATOS);
-    }*/
-    public BaseDatos (Context contexto, String nombrebd)
-    {
+    /* TODO: Eliminar, es innecesario
+        public BaseDatos (Context contexto) {
+            this(contexto, NOMBRE_BASE_DATOS);
+        }*/
+    public BaseDatos(Context contexto, String nombrebd) {
         super(contexto, nombrebd, null, VERSION);
     }
 
@@ -28,30 +28,31 @@ import android.database.sqlite.SQLiteOpenHelper;
         crearTalla(db);
         crearTipos(db);
 
-        db.execSQL( "INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ") ;
+        db.execSQL("INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ");
 
-        db.execSQL( "INSERT INTO PRENDA VALUES (1  , 'Prueba1', 'azul',1,3, 1, 1) ") ;
-        db.execSQL( "INSERT INTO PRENDA VALUES (2  , 'Prueba21', 'verda', 4, 2, 1, 1) ") ;
+        db.execSQL("INSERT INTO PRENDA VALUES (1  , 'Prueba1', 4,1,3, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (2  , 'Prueba21', 2, 4, 2, 1, 1) ");
 
-        db.execSQL( "INSERT INTO PRENDA VALUES (3  , 'Prueba14', 'amarillo', 7,1, 1, 1) ") ;
-        db.execSQL( "INSERT INTO PRENDA VALUES (4  , 'Prueba22', 'verda', 4, 2, 1, 1) ") ;
-        db.execSQL( "INSERT INTO PRENDA VALUES (5  , 'Prueba23', 'amarillo', 7,1, 1, 1) ") ;
-        db.execSQL( "INSERT INTO PRENDA VALUES (6  , 'Prueba24', 'verda', 4, 2, 1, 1) ") ;
-        db.execSQL( "INSERT INTO PRENDA VALUES (7  , 'Prueba25', 'amarillo', 7,1, 1, 1) ") ;
-        db.execSQL( "INSERT INTO PRENDA VALUES (8  , 'Prueba26', 'verda', 4, 2, 1, 1) ") ;
-        db.execSQL( "INSERT INTO PRENDA VALUES (9  , 'Prueba27', 'amarillo', 7,1, 1, 1) ") ;
+        db.execSQL("INSERT INTO PRENDA VALUES (3  , 'Prueba14', 3, 7,1, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (4  , 'Prueba22', 2, 4, 2, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (5  , 'Prueba23', 4, 7,1, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (6  , 'Prueba24', 1, 4, 2, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (7  , 'Prueba25', 1, 7,1, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (8  , 'Prueba26', 2, 4, 2, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (9  , 'Prueba27', 5, 7,1, 1, 1) ");
 
-        db.execSQL( "INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6) ") ;
-        db.execSQL( "INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1) ") ;
+        db.execSQL("INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6) ");
+        db.execSQL("INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1) ");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion != newVersion) { }
+        if (oldVersion != newVersion) {
+        }
     }
 
-    private void crearTablas(SQLiteDatabase db){
+    private void crearTablas(SQLiteDatabase db) {
         String vsql;
         vsql = "CREATE TABLE \"PERFIL\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"CONTRASENIA\" VARCHAR(50) NOT NULL)";
         db.execSQL(vsql);
@@ -71,59 +72,91 @@ import android.database.sqlite.SQLiteOpenHelper;
         db.execSQL(vsql);
 
         db.execSQL("CREATE TABLE \"COLOR\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
-        db.execSQL("CREATE TABLE \"TIPO\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
+        db.execSQL("CREATE TABLE \"TIPO\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL, \"TIEMPO\" INTEGER NOT NULL,\"ACTIVIDAD\" INTEGER NOT NULL)");
         db.execSQL("CREATE TABLE \"TALLA\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
+
+        db.execSQL("CREATE TABLE \"COMBO_COLOR\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"COLOR1\" INTEGER NOT NULL,\"COLOR2\" INTEGER NOT NULL)");
     }
 
-    private void crearTipos(SQLiteDatabase db){
+    private void crearTipos(SQLiteDatabase db) {
         // ACTUALIZAR LOS VALORES
+        /*LEYENDA:
+        TIEMPO:
+            1.FRIO
+            2.MEDIO
+            3.CALOR
 
 
-        db.execSQL( "INSERT INTO TIPO VALUES (1  , 'ABRIGO') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (2  ,'BAÑADOR/BIKINI' ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (3 , 'BLUSA') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (4  , 'CAMISA') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (5  ,  'CAMISETA'  ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (6  ,'CHANCLAS'  ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (7 , 'CHAQUETA') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (8  ,'COMPLEMENTO'  ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (9  , 'FALDA') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (10  ,'JERSEY' ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (11  ,'PANTALON' ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (12 ,'POLO' ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (13 , 'SUDADERA') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (14  , 'TENNIS') ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (15  , 'TRAJE' ) ") ;
-        db.execSQL( "INSERT INTO TIPO VALUES (16  ,'ZAPATOS' ) ") ;
+        ACTIVIDAD:
+            1.FORMAL
+            2.SEMIFORMAL
+            3.CASUAL
+            4.DEPORTIVO
+            5.BAÑO
+
+         */
+
+        int[] temperaturas = {1, 2, 4};
+        int[] formalidades = {1, 2, 4, 8, 16};
+
+         // Esquema:   (ID, TipoPrenda, Temperaturas(temp1 | temp 2), Formalidades( form1 | form2 ))
+
+        db.execSQL("INSERT INTO TIPO VALUES (1  , 'ABRIGO', 1, 1 | 2 | 4) ");
+        db.execSQL("INSERT INTO TIPO VALUES (2  ,'BAÑADOR/BIKINI', 4,  16) ");
+        db.execSQL("INSERT INTO TIPO VALUES (3 , 'BLUSA', 1 | 2 | 4, 1 | 2 | 4) ");
+        db.execSQL("INSERT INTO TIPO VALUES (4  , 'CAMISA', 1 | 2 | 4, 1 | 2) ");
+        db.execSQL("INSERT INTO TIPO VALUES (5  ,  'CAMISETA M.CORTA' , 1 | 2 | 4, 2 | 4 | 8 | 16) ");
+        db.execSQL("INSERT INTO TIPO VALUES (6  ,'CHANCLAS', 2 | 4,  4 | 16) ");
+        db.execSQL("INSERT INTO TIPO VALUES (7 , 'CHAQUETA', 1 | 2 , 1 | 2 | 4) ");
+        db.execSQL("INSERT INTO TIPO VALUES (8  ,'COMPLEMENTO' , 1 | 2 | 4, 1 | 2 | 4 | 8 | 16)");
+        db.execSQL("INSERT INTO TIPO VALUES (9  , 'FALDA', 2 | 4, 2 | 4 | 8)");
+        db.execSQL("INSERT INTO TIPO VALUES (10  ,'JERSEY', 1 | 2, 2 | 4) ");
+        db.execSQL("INSERT INTO TIPO VALUES (11  ,'PANTALON', 1 | 2 | 4, 1 | 2 | 4 ) ");
+        db.execSQL("INSERT INTO TIPO VALUES (12 ,'POLO', 2 | 4, 1 | 2) ");
+        db.execSQL("INSERT INTO TIPO VALUES (13 , 'SUDADERA', 1 | 2, 4 | 8) ");
+        db.execSQL("INSERT INTO TIPO VALUES (14  , 'TENNIS', 1 | 2 | 4, 2 | 4 | 8  )");
+        db.execSQL("INSERT INTO TIPO VALUES (15  , 'TRAJE', 1 | 2 | 4, 1 | 2) ");
+        db.execSQL("INSERT INTO TIPO VALUES (16  ,'ZAPATOS/TACONES', 1 | 2 | 4, 1 | 2 ) ");
+        db.execSQL("INSERT INTO TIPO VALUES (17  ,'CHANDAL',  1 | 2, 4 | 8) ");
+        db.execSQL("INSERT INTO TIPO VALUES (18  ,'BERMUDAS',  2 | 4, 2 | 4 | 8) ");
+        db.execSQL("INSERT INTO TIPO VALUES (19  ,'SHORTS',  2 | 4, 4 | 8) ");
+        db.execSQL("INSERT INTO TIPO VALUES (20  ,'VESTIDO',  1 | 2 | 4, 1 | 2) ");
+        db.execSQL("INSERT INTO TIPO VALUES (21  ,'TOP',  2 | 4, 2 | 4 | 8) ");
+        db.execSQL("INSERT INTO TIPO VALUES (22  ,'SANDALIAS', 2 | 4, 2 | 4) ");
+        db.execSQL("INSERT INTO TIPO VALUES (23  ,'CAMISETA M.LARGA' , 1 | 2 , 2 | 4 | 8 ) ");
+        db.execSQL("INSERT INTO TIPO VALUES (24  ,'ZAPATILLAS', 1 | 2 | 4, 2 | 4 ) ");
+        db.execSQL("INSERT INTO TIPO VALUES (25  ,'POLAR', 1 , 8 ) ");
+
+
 
     }
 
-    private void crearTalla(SQLiteDatabase db){
+    private void crearTalla(SQLiteDatabase db) {
 
-        db.execSQL( "INSERT INTO TALLA VALUES (1  , 'M') ") ;
-        db.execSQL( "INSERT INTO TALLA VALUES (2  , 'L') ") ;
-        db.execSQL( "INSERT INTO TALLA VALUES (3  , 'S') ") ;
-        db.execSQL( "INSERT INTO TALLA VALUES (4  , 'XL') ") ;
-        db.execSQL( "INSERT INTO TALLA VALUES (5  , 'XS') ") ;
-        db.execSQL( "INSERT INTO TALLA VALUES (6  , 'XXL') ") ;
+        db.execSQL("INSERT INTO TALLA VALUES (1  , 'M') ");
+        db.execSQL("INSERT INTO TALLA VALUES (2  , 'L') ");
+        db.execSQL("INSERT INTO TALLA VALUES (3  , 'S') ");
+        db.execSQL("INSERT INTO TALLA VALUES (4  , 'XL') ");
+        db.execSQL("INSERT INTO TALLA VALUES (5  , 'XS') ");
+        db.execSQL("INSERT INTO TALLA VALUES (6  , 'XXL') ");
 
     }
 
-    private void crearColor(SQLiteDatabase db){
+    private void crearColor(SQLiteDatabase db) {
 
 
-        db.execSQL( "INSERT INTO COLOR VALUES (1  , 'AZUL') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (2  , 'AMARILLO') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (3  , 'BLANCO') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (4  , 'GRIS') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (5  , 'MARRON') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (6  , 'MORADO') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (7  , 'NARANJA') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (8  , 'NEGRO') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (9  , 'ROJO') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (10  , 'ROSA') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (11  , 'VERDE') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (12 , 'VIOLETA') ") ;
+        db.execSQL("INSERT INTO COLOR VALUES (1  , 'AZUL') ");
+        db.execSQL("INSERT INTO COLOR VALUES (2  , 'AMARILLO') ");
+        db.execSQL("INSERT INTO COLOR VALUES (3  , 'BLANCO') ");
+        db.execSQL("INSERT INTO COLOR VALUES (4  , 'GRIS') ");
+        db.execSQL("INSERT INTO COLOR VALUES (5  , 'MARRON') ");
+        db.execSQL("INSERT INTO COLOR VALUES (6  , 'MORADO') ");
+        db.execSQL("INSERT INTO COLOR VALUES (7  , 'NARANJA') ");
+        db.execSQL("INSERT INTO COLOR VALUES (8  , 'NEGRO') ");
+        db.execSQL("INSERT INTO COLOR VALUES (9  , 'ROJO') ");
+        db.execSQL("INSERT INTO COLOR VALUES (10  , 'ROSA') ");
+        db.execSQL("INSERT INTO COLOR VALUES (11  , 'VERDE') ");
+        db.execSQL("INSERT INTO COLOR VALUES (12 , 'VIOLETA') ");
 
     }
 

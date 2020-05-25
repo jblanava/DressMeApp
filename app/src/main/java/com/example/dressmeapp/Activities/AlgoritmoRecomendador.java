@@ -7,10 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.*;
 import com.example.dressmeapp.R;
 
@@ -18,83 +23,61 @@ import java.util.List;
 import java.util.Random;
 
 public class AlgoritmoRecomendador extends AppCompatActivity {
-    private LinearLayout listaPrendas;
-    private Conjunto conjunto;
-    private Context contexto;
-  //  private GestorBD gestor;
-     //La idea es de cada vez que se genere un conjunto se añada a la lista, que luego
 
-           /*                                         //se le pasará a Historial
+    String[] formalidades = {"Formal", "Semi-formal", "Casual", "Deportivo", "Baño"};
+    String[] temperaturas = {"Frio", "Normal", "Calor"};
+
+    EditText eNombre;
+    Spinner sFormalidad;
+    Spinner sTemperatura;
+    Button bRecomiendame;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algoritmo_recomendador);
-        contexto = getApplicationContext();
-        gestor=new GestorBD(contexto);
-        rellenaConjunto();
-       // gestor.addConjunto();//Esta funcion añadirá un conjunto a la Base de Datos
-        muestraConjuntos();
+
+        enlazar_controles();
     }
 
-    private void muestraConjuntos(){
-    if(conjunto != null) {
-        for (int i = 0; i < conjunto.getSize(); i++) {
-            Prenda prenda = GestorBD.Obtener_Prenda(contexto, conjunto.obtenId(i));
-            metodoChavales(prenda);
-        }//PROBABLEMENTE EL FOR NO CIERRE AQUÍ :D
-    }
-    }
+    void enlazar_controles()
+    {
+        eNombre = (EditText) findViewById(R.id.editText_nombre_evento);
+        sFormalidad = (Spinner) findViewById(R.id.spinner_formalidad_evento);
+        sTemperatura = (Spinner) findViewById(R.id.spinner_temperatura_evento);
+        bRecomiendame = (Button) findViewById(R.id.boton_recomiendame);
 
-    private void rellenaConjunto(){
-        //Esto es provisional porque no se me ocurre nada mejor de momento para rellenar conjuntos:D
-        int limite= GestorBD.obtenIDMaximoPrenda(contexto);
-        Random rnd = new Random();
-        int id;
-        for(int i=0;i<6;i++){
-        id=rnd.nextInt(limite);
-        conjunto.add(id);
-        }
-    }
+        ArrayAdapter<String> adapterFormalidades = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, formalidades);
+        adapterFormalidades.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sFormalidad.setAdapter(adapterFormalidades);
+
+        ArrayAdapter<String> adapterTemperaturas = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, temperaturas);
+        adapterTemperaturas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sTemperatura.setAdapter(adapterTemperaturas);
 
 
-
-
-    private void metodoChavales(final Prenda prenda){
-        View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
-
-        TextView nombre = (TextView) v.findViewById(R.id.prenda_nombre);
-        TextView tipo = (TextView) v.findViewById(R.id.prenda_tipo);
-        TextView color = (TextView) v.findViewById(R.id.prenda_color);
-        TextView talla = (TextView) v.findViewById(R.id.prenda_talla);
-
-        String tipoText = GestorBD.Dar_Tipo(this, prenda.tipo);
-        String tallaText = GestorBD.Dar_Talla(this, prenda.talla);
-
-        nombre.setText(prenda.nombre);
-        tipo.setText(tipoText);
-        color.setText(prenda.color);
-        talla.setText(tallaText);
-
-        TableLayout t = (TableLayout) v.findViewById(R.id.boton_prenda);
-
-        final Context a = this;
-
-        t.setOnClickListener(new View.OnClickListener() {
+        bRecomiendame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Debug", "Boton pulsado, prenda con nombre: " + prenda.nombre);
-
-                Intent modificar = new Intent(a, Modificar_Prenda.class);
-                modificar.putExtra("intVariableName", prenda.id);
-                startActivity(modificar);
+                ir_a_resultado_activity();
             }
         });
 
-        listaPrendas.addView(v);
     }
 
-    */
+    void ir_a_resultado_activity()
+    {
+        int form = sFormalidad.getSelectedItemPosition();
+        int temp = sTemperatura.getSelectedItemPosition();
 
+        Intent resultado_recomendador = new Intent(this, ResultadoAlgortimoActivity.class);
+        resultado_recomendador.putExtra("formalidad", form);
+        resultado_recomendador.putExtra("temperatura", temp);
+        startActivity(resultado_recomendador);
     }
+
+
+}
 
 
