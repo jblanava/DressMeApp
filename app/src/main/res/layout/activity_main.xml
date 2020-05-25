@@ -17,30 +17,39 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="#b0ebbd"
             android:padding="30dp">
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="64dp"
+                android:layout_width="329dp"
+                android:layout_height="268dp"
+
+                android:layout_marginBottom="30dp"
                 android:contentDescription="@string/app_name"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
+                app:srcCompat="@drawable/Logo" />
 
             <TextView
                 android:id="@+id/textBienvenida"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+
+
                 android:text="@string/bienvenida"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#199415"
-                android:textStyle="bold" />
+
+                android:textAllCaps="true"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
 
             <TextView
                 android:id="@+id/textError"
@@ -57,35 +66,50 @@
                 android:layout_marginBottom="16dp"
                 android:ems="10"
                 android:hint="@string/nombre"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:typeface="sans" />
 
             <EditText
                 android:id="@+id/textContrasenia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="10dp"
                 android:ems="10"
                 android:hint="@string/contrasenia"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textStyle="bold"
+                android:typeface="sans" />
 
             <Button
                 android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="#99ffbb"
-                android:text="@string/iniciar_sesion" />
+                android:layout_gravity="center"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/mybutton"
+                android:text="@string/iniciar_sesion"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
 
             <Button
                 android:id="@+id/btnRegistro"
-                android:layout_width="match_parent"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/mybutton"
                 android:scrollbarDefaultDelayBeforeFade="400"
                 android:text="Registro"
-                android:background="#99ffbb"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="#ED0E0E"
-                android:textSize="18sp" />
+
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
 
             android:bottomRightRadius="2000dp"
             android:bottomLeftRadius="2000dp"
