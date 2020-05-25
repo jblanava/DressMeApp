@@ -1,7 +1,10 @@
 package com.example.dressmeapp.Activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -19,11 +22,14 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
     private Conjunto conjunto;
     private LinearLayout listaPrendas;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado_algoritmo);
         enlazaControles();
+
+        hagoCosas();
     }
 
     private void enlazaControles() {
@@ -31,10 +37,13 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
     }
 
-/* TODO: Solucionar problemas varios
-
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void hagoCosas() {
-        //conjunto = GestorBD.resAlgoritmo(this);
+        Intent mIntent = getIntent();
+        int tiempo = mIntent.getIntExtra("temperatura", 0);;
+        int actividad = mIntent.getIntExtra("formalidad", 0);;
+
+        conjunto = GestorBD.resAlgoritmo(this, tiempo, actividad);
 
 
         for (int j = 1; j < conjunto.getSize(); j++) { // empezamos en 1, porque la pos 0 es para el propio ID del conjunto //
@@ -56,14 +65,13 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         TextView color = (TextView) v.findViewById(R.id.prenda_color);
         TextView talla = (TextView) v.findViewById(R.id.prenda_talla);
 
-
-
-        String tipoText = GestorBD.Dar_Tipo(this, prenda.tipo);
-        String tallaText = GestorBD.Dar_Talla(this, prenda.talla);
+        String colorText = GestorBD.get_nombre_tabla(this, "color", prenda.color);
+        String tipoText = GestorBD.get_nombre_tabla(this, "tipo", prenda.tipo);
+        String tallaText = GestorBD.get_nombre_tabla(this, "talla", prenda.talla);
 
         nombre.setText(prenda.nombre);
+        color.setText(colorText);
         tipo.setText(tipoText);
-        color.setText(prenda.color);
         talla.setText(tallaText);
 
         TableLayout t = (TableLayout) v.findViewById(R.id.boton_prenda);
@@ -71,7 +79,6 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
         listaPrendas.addView(v);
     }
-*/
 
 
 }
