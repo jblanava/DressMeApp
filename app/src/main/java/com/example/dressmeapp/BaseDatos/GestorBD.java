@@ -27,7 +27,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp12.db";
+    private static String nombreBD = "dressmeapp13.db";
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -552,6 +552,22 @@ public class GestorBD {
         return cont;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ///// Algoritmo
+
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad) { // TODO: Este método debe devolver el resultado que arroje el algoritmo
 
@@ -567,7 +583,8 @@ public class GestorBD {
 
         Conjunto res = new Conjunto();
 
-        for (int color : colores) {
+        for (int color : colores)
+        {
             int idAbrigo = NombreTemporal(context, tiempo, actividad, tiposAbrigo);
             int idSudadera = NombreTemporal(context, tiempo, actividad, tiposSudadera);
             int idCamiseta = NombreTemporal(context, tiempo, actividad, tiposCamiseta);
@@ -589,7 +606,7 @@ public class GestorBD {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static int NombreTemporal(Context context, int tiempo, int actividad, int[] tipos) // TODO: Buscarle un nombre a esto
     {
-        String sentenciaSQL = "SELECT p.ID, p.NOMBRE, p.COLOR, p.TIPO, p.TALLA FROM PRENDA p LEFT JOIN TIPO t ON p.TIPO=t.ID  WHERE (";
+        String sentenciaSQL = "SELECT p.ID, p.TIPO FROM PRENDA p LEFT JOIN TIPO t ON p.TIPO=t.ID  WHERE (";
 
         StringJoiner sj = new StringJoiner(" OR ", "( ", " )");
 
@@ -599,7 +616,15 @@ public class GestorBD {
 
         sentenciaSQL += sj.toString();
 
-        sentenciaSQL += "AND p.VISIBLE = 1 AND t.ACTIVIDAD=" + actividad + " AND t.TIEMPO=" + tiempo;
+        StringJoiner sj2 = new StringJoiner(" OR ", "( ", " )");
+
+        for (int tipo : tipos) {
+            sj.add("p.TIPO" + tipo);
+        }
+
+        sentenciaSQL += sj.toString();
+
+        sentenciaSQL += "AND p.VISIBLE = 1";
 
 
         BaseDatos base = new BaseDatos(context, nombreBD);
@@ -614,8 +639,17 @@ public class GestorBD {
             do {
 
                 int id = LibreriaBD.CampoInt(cursor, "p.ID");
+                int tipo = LibreriaBD.CampoInt(cursor, "p.TIPO");
 
-                listaPrendas.add(id);
+
+                int pActividad = tipoActividad(context, tipo);
+                int pTiempo = tipoTiempo(context, tipo);
+
+                if((pActividad & actividad) != 0 && (pTiempo & tiempo) != 0)
+                {
+                    listaPrendas.add(id);
+                }
+
             } while (cursor.moveToNext());
         }
         baseDatos.close();
@@ -627,39 +661,44 @@ public class GestorBD {
         return listaPrendas.get(i);
 
     }
-/* TODO: Eliminar
 
-    public static int getCamiseta(Context context, int tiempo, int actividad) {
-        String sentenciaSQL = "SELECT p.ID, p.NOMBRE, p.COLOR, p.TIPO, p.TALLA " +
-                "FROM PRENDA p LEFT JOIN TIPO t ON p.TIPO=t.ID" +
-                " WHERE (p.TIPO = 5  OR p.TIPO = 3 OR p.TIPO = 4 OR p.TIPO=12)  AND p.VISIBLE = 1 AND t.ACTIVIDAD=" + actividad + " AND t.TIEMPO=" + tiempo;
+
+    public static int tipoActividad(Context context, int idPrenda) {
+        String sentenciaSQL = "SELECT ACTIVIDAD FROM PRENDA WHERE ID = " + idPrenda;
         Cursor cursor;
-
+        int res = -1;
 
         BaseDatos base = new BaseDatos(context, nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
-        List<Integer> listaPrendas = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                res = LibreriaBD.CampoInt(cursor, "ACTIVIDAD");
+            } while (cursor.moveToNext());
+        }
+        return res;
+    }
+
+    public static int tipoTiempo(Context context, int idPrenda) {
+        String sentenciaSQL = "SELECT TIEMPO FROM PRENDA WHERE ID = " + idPrenda;
+        Cursor cursor;
+        int res = -1;
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
         if (cursor.moveToFirst()) {
             do {
-
-                int id = LibreriaBD.CampoInt(cursor, "p.ID");
-
-                listaPrendas.add(id);
+                res = LibreriaBD.CampoInt(cursor, "TIEMPO");
             } while (cursor.moveToNext());
         }
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        Random r = new Random();
-        int i = r.nextInt(listaPrendas.size());
-
-        return listaPrendas.get(i);
+        return res;
     }
-*/
+
 
     public static List<Conjunto> ConjuntosEnBD(Context context) {
 
