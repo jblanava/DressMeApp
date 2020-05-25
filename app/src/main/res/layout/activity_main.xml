@@ -90,9 +90,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="18dp"
                 android:background="@drawable/mybutton"
-
                 android:text="@string/iniciar_sesion"
-
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
