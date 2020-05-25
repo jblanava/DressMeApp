@@ -27,7 +27,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp13.db";
+    private static String nombreBD = "dressmeapp14.db";
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -686,12 +686,15 @@ public class GestorBD {
         base.close();
         cursor.close();
         Random r = new Random();
-        int i = r.nextInt(listaPrendas.size());
 
         if(listaPrendas.size() == 0)
         {
             return -1;
         }
+
+
+        int i = r.nextInt(listaPrendas.size());
+
 
         return listaPrendas.get(i);
 
@@ -725,8 +728,8 @@ public class GestorBD {
         return colores;
     }
 
-    public static int tipoActividad(Context context, int idPrenda) {
-        String sentenciaSQL = "SELECT ACTIVIDAD FROM PRENDA WHERE ID = " + idPrenda;
+    public static int tipoActividad(Context context, int idTipo) {
+        String sentenciaSQL = "SELECT ACTIVIDAD FROM TIPO WHERE ID = " + idTipo;
         Cursor cursor;
         int res = -1;
 
@@ -743,8 +746,8 @@ public class GestorBD {
         return res;
     }
 
-    public static int tipoTiempo(Context context, int idPrenda) {
-        String sentenciaSQL = "SELECT TIEMPO FROM PRENDA WHERE ID = " + idPrenda;
+    public static int tipoTiempo(Context context, int idTipo) {
+        String sentenciaSQL = "SELECT TIEMPO FROM TIPO WHERE ID = " + idTipo;
         Cursor cursor;
         int res = -1;
 

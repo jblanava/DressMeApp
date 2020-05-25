@@ -27,6 +27,7 @@ public class BaseDatos extends SQLiteOpenHelper {
         crearColor(db);
         crearTalla(db);
         crearTipos(db);
+        crearCombo(db);
 
         db.execSQL("INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ");
 

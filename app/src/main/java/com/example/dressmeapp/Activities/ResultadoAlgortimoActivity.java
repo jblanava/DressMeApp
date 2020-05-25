@@ -49,8 +49,12 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         for (int j = 1; j < conjunto.getSize(); j++) { // empezamos en 1, porque la pos 0 es para el propio ID del conjunto //
             //Voy mostrando todas las prendas por pantalla
             int idPrenda = conjunto.obtenId(j);
-            Prenda prenda = GestorBD.Obtener_Prenda(this, idPrenda);
-            metodoChavales(prenda);
+
+            if(idPrenda != -1)
+            {
+                Prenda prenda = GestorBD.Obtener_Prenda(this, idPrenda);
+                metodoChavales(prenda);
+            }
         }
 
 
