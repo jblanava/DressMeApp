@@ -36,13 +36,12 @@ public class VestuarioActivity extends AppCompatActivity {
 
 
     String busqueda = "";
-    Comparator<Prenda> comparator = new OrdenNombre();
+    String ordenacion = "nombre";
     int agrupacion = 0;
 
     private final static String[] ordernarPor = {"Ordenar por:", "Nombre", "Color", "Tipo", "Talla"};
     private final static String[] agruparPor = {"Agrupar por:", "Color", "Tipo", "Talla"};
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +52,7 @@ public class VestuarioActivity extends AppCompatActivity {
         mostrar_prendas();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -117,19 +116,10 @@ public class VestuarioActivity extends AppCompatActivity {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     void ordenar() {
         int criterio = sOrdenar.getSelectedItemPosition();
 
-        if (criterio == 1) {
-            comparator = new OrdenNombre();
-        } else if (criterio == 2) {
-            comparator = new OrdenColor(this);// TODO: Este comparator es muy lento
-        } else if (criterio == 3) {
-            comparator = new OrdenTipo(this); // TODO: Este comparator es muy lento
-        } else if (criterio == 4) {
-            comparator = new OrdenTalla(this);// TODO: Este comparator es muy lento
-        }
+        ordenacion = ordernarPor[criterio];
 
         mostrar_prendas();
     }
@@ -147,20 +137,16 @@ public class VestuarioActivity extends AppCompatActivity {
         startActivity(anydir);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     void buscar() {
         busqueda = Ebusqueda.getText().toString();
         mostrar_prendas();
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     void mostrar_prendas() {
         listaPrendas.removeAllViews();
 
-        List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda);
-
-        prendas.sort(this.comparator);
+        List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion);
 
         if (agrupacion == 0) {
             for (Prenda p : prendas) {

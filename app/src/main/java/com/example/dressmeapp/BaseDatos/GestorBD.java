@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompatSideChannelService;
 
 import com.example.dressmeapp.Activities.AniadirPrendaActivity;
 import com.example.dressmeapp.Objetos.Conjunto;
@@ -300,8 +301,21 @@ public class GestorBD {
     }
 
 
-    public static List<Prenda> PrendasVisibles(Context context, String texto) {
-        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE VISIBLE = 1";
+    public static List<Prenda> PrendasVisibles(Context context, String busqueda, String ordenacion)
+    {
+        String sentenciaSQL;
+        if(ordenacion.equalsIgnoreCase("nombre"))
+        {
+            sentenciaSQL = "SELECT PRENDA.ID, PRENDA.NOMBRE, PRENDA.COLOR, PRENDA.TIPO, PRENDA.TALLA FROM PRENDA WHERE PRENDA.VISIBLE = 1 ORDER BY NOMBRE";
+        }
+        else
+        {
+            String tabla = ordenacion.toUpperCase().trim();
+
+            sentenciaSQL = "SELECT PRENDA.ID, PRENDA.NOMBRE, PRENDA.COLOR, PRENDA.TIPO, PRENDA.TALLA FROM PRENDA LEFT JOIN " + tabla + " ON " + tabla + ".ID = PRENDA." + tabla + " WHERE PRENDA.VISIBLE = 1 ORDER BY " + tabla + ".NOMBRE";
+        }
+
+
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
 
@@ -326,10 +340,10 @@ public class GestorBD {
 
                 boolean cumpleFiltro = false;
 
-                cumpleFiltro = cumpleFiltro || nombre.toUpperCase().contains(texto.toUpperCase());
-                cumpleFiltro = cumpleFiltro || Scolor.toUpperCase().contains(texto.toUpperCase());
-                cumpleFiltro = cumpleFiltro || Stipo.toUpperCase().contains(texto.toUpperCase());
-                cumpleFiltro = cumpleFiltro || Stalla.toUpperCase().contains(texto.toUpperCase());
+                cumpleFiltro = cumpleFiltro || nombre.toUpperCase().contains(busqueda.toUpperCase());
+                cumpleFiltro = cumpleFiltro || Scolor.toUpperCase().contains(busqueda.toUpperCase());
+                cumpleFiltro = cumpleFiltro || Stipo.toUpperCase().contains(busqueda.toUpperCase());
+                cumpleFiltro = cumpleFiltro || Stalla.toUpperCase().contains(busqueda.toUpperCase());
 
                 if (cumpleFiltro) {
                     Prenda p = new Prenda(id, nombre, color, tipo, talla);
@@ -437,8 +451,6 @@ public class GestorBD {
         return p;
     }
 
-    // TODO: Crear una funcion general que generalize estas 3
-
     public static String get_nombre_tabla(Context context, String tabla, int id)
     {
         String sentenciaSQL = String.format("SELECT NOMBRE FROM %s WHERE ID = %d", tabla.toUpperCase(), id);
@@ -502,7 +514,7 @@ public class GestorBD {
         if (cursor.moveToFirst()) {
             do {
 
-                int id = LibreriaBD.CampoInt(cursor, "ID"); // TODO: averiguar porque peta esto. Idea: creo que puede ser porque tendo que crear una nueva base de datos
+                int id = LibreriaBD.CampoInt(cursor, "ID");
 
                 res.add(id);
 
