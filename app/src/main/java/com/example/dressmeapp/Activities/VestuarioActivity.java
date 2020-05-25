@@ -17,14 +17,9 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.Objetos.OrdenColor;
-import com.example.dressmeapp.Objetos.OrdenNombre;
-import com.example.dressmeapp.Objetos.OrdenTalla;
-import com.example.dressmeapp.Objetos.OrdenTipo;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class VestuarioActivity extends AppCompatActivity {

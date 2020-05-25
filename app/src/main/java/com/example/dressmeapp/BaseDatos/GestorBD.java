@@ -27,7 +27,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp11.db";
+    private static String nombreBD = "dressmeapp12.db";
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {

@@ -30,16 +30,16 @@ public class BaseDatos extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ");
 
-        db.execSQL("INSERT INTO PRENDA VALUES (1  , 'Prueba1', 'azul',1,3, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (2  , 'Prueba21', 'verda', 4, 2, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (1  , 'Prueba1', 4,1,3, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (2  , 'Prueba21', 2, 4, 2, 1, 1) ");
 
-        db.execSQL("INSERT INTO PRENDA VALUES (3  , 'Prueba14', 'amarillo', 7,1, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (4  , 'Prueba22', 'verda', 4, 2, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (5  , 'Prueba23', 'amarillo', 7,1, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (6  , 'Prueba24', 'verda', 4, 2, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (7  , 'Prueba25', 'amarillo', 7,1, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (8  , 'Prueba26', 'verda', 4, 2, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (9  , 'Prueba27', 'amarillo', 7,1, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (3  , 'Prueba14', 3, 7,1, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (4  , 'Prueba22', 2, 4, 2, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (5  , 'Prueba23', 4, 7,1, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (6  , 'Prueba24', 1, 4, 2, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (7  , 'Prueba25', 1, 7,1, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (8  , 'Prueba26', 2, 4, 2, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (9  , 'Prueba27', 5, 7,1, 1, 1) ");
 
         db.execSQL("INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6) ");
         db.execSQL("INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1) ");
