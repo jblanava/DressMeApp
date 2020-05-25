@@ -489,7 +489,7 @@ public class GestorBD {
 
     public static List<Integer> get_ids_tabla(Context context, String tabla)
     {
-        String sentenciaSQL = "SELECT NOMBRE FROM " + tabla.toUpperCase();
+        String sentenciaSQL = "SELECT ID FROM " + tabla.toUpperCase();
 
         Cursor cursor;
         List<Integer> res = new ArrayList<>();

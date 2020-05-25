@@ -193,47 +193,6 @@ public class VestuarioActivity extends AppCompatActivity {
                     }
                 }
             }
-
-            /*
-            TODO: rehacer esto porque es basura
-
-            List<String> tags;
-            String tabla;
-            if (agrupacion == 1)
-            {
-                tags = GestorBD.get_nombres_tabla(this, "tipo");
-                tabla = "tipo";
-            }
-            else
-            {
-                tags = GestorBD.get_nombres_tabla(this, "talla");
-                tabla = "talla";
-            }
-
-
-            for (String t : tags) {
-                View v = getLayoutInflater().inflate(R.layout.activity_cabecera_agrupacion, null);
-                TextView nombre = v.findViewById(R.id.Cabecera);
-                nombre.setText(t);
-                listaPrendas.addView(v);
-
-                for (Prenda p : prendas) {
-
-                    int id;
-                    if (agrupacion == 1)
-                    {
-                        id = p.tipo;
-                    }
-                    else
-                    {
-                        id = p.talla;
-                    }
-                    if (GestorBD.get_nombre_tabla(this, tabla, id).equalsIgnoreCase(t)) {
-                        añadir_elemento(p);
-                    }
-                }
-            }*/
-
         }
 
     }
