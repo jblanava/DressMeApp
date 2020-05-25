@@ -7,117 +7,107 @@
     tools:context=".Activities.MainActivity">
 
 
-    <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:paddingTop="64dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#b0ebbd"
+        android:orientation="vertical"
+        android:padding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="15"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/textBienvenida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
 
 
-        <LinearLayout
+            android:layout_weight="1"
+
+            android:text="@string/bienvenida"
+            android:textAllCaps="true"
+            android:textColor="#000000"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+
+        <EditText
+            android:id="@+id/textNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#b0ebbd"
-            android:padding="30dp">
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/nombre"
+            android:inputType="textPersonName"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="329dp"
-                android:layout_height="268dp"
+        <EditText
+            android:id="@+id/textContrasenia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/contrasenia"
+            android:inputType="textPassword"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
-                android:layout_marginBottom="30dp"
-                android:contentDescription="@string/app_name"
-                app:srcCompat="@drawable/Logo" />
+        <Button
+            android:id="@+id/btnLogin"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="18dp"
+            android:layout_weight="1"
+            android:background="@drawable/mybutton"
+            android:text="@string/iniciar_sesion"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
-            <TextView
-                android:id="@+id/textBienvenida"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
+        <Button
+            android:id="@+id/btnRegistro"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/mybutton"
+            android:scrollbarDefaultDelayBeforeFade="400"
 
+            android:text="Registro"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
-                android:text="@string/bienvenida"
+        android:bottomRightRadius="2000dp"
+        android:bottomLeftRadius="2000dp"
+        android:topRightRadius="2000dp"
+        android:topLeftRadius="2000dp"
 
-                android:textAllCaps="true"
-                android:textColor="#000000"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:typeface="sans" />
-
-
-            <TextView
-                android:id="@+id/textError"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:textColor="@color/colorError"
-                tools:visibility="visible" />
-
-            <EditText
-                android:id="@+id/textNombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:ems="10"
-                android:hint="@string/nombre"
-                android:inputType="textPersonName"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:typeface="sans" />
-
-            <EditText
-                android:id="@+id/textContrasenia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:ems="10"
-                android:hint="@string/contrasenia"
-                android:inputType="textPassword"
-                android:textStyle="bold"
-                android:typeface="sans" />
-
-            <Button
-                android:id="@+id/btnLogin"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="18dp"
-                android:background="@drawable/mybutton"
-                android:text="@string/iniciar_sesion"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:typeface="sans" />
-
-            <Button
-                android:id="@+id/btnRegistro"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/mybutton"
-                android:scrollbarDefaultDelayBeforeFade="400"
-                android:text="Registro"
-
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:typeface="sans" />
-
-            android:bottomRightRadius="2000dp"
-            android:bottomLeftRadius="2000dp"
-            android:topRightRadius="2000dp"
-            android:topLeftRadius="2000dp"
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
