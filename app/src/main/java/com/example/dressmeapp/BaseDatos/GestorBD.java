@@ -27,7 +27,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp14.db";
+    private static String nombreBD = "dressmeapp15.db";
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -605,7 +605,7 @@ public class GestorBD {
         int idCamiseta = NombreTemporal(context, tiempo, actividad, tiposCamiseta, coloresCombo);
         if(idCamiseta == -1)
         {
-            idCamiseta = NombreTemporal(context, tiempo, actividad, tiposSudadera, colores);
+            idCamiseta = NombreTemporal(context, tiempo, actividad, tiposCamiseta, colores);
         }
         int idPantalon = NombreTemporal(context, tiempo, actividad, tiposPantalon, coloresCombo);
         if(idPantalon == -1)
