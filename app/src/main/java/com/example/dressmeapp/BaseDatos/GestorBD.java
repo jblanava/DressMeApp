@@ -27,7 +27,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp13.db";
+    private static String nombreBD = "dressmeapp14.db";
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -573,6 +573,9 @@ public class GestorBD {
 
         List<Integer> colores = get_ids_tabla(context, "color");
 
+        Random rng = new Random();
+
+
         int[] tiposAbrigo = {1, 7};
         int[] tiposSudadera = {10, 13};
         int[] tiposCamiseta = {3, 4, 5, 12};
@@ -583,48 +586,75 @@ public class GestorBD {
 
         Conjunto res = new Conjunto();
 
-        for (int color : colores)
-        {
-            int idAbrigo = NombreTemporal(context, tiempo, actividad, tiposAbrigo);
-            int idSudadera = NombreTemporal(context, tiempo, actividad, tiposSudadera);
-            int idCamiseta = NombreTemporal(context, tiempo, actividad, tiposCamiseta);
-            int idPantalon = NombreTemporal(context, tiempo, actividad, tiposPantalon);
-            int idZapatos = NombreTemporal(context, tiempo, actividad, tiposZapatos);
-            int idCompementos = NombreTemporal(context, tiempo, actividad, tiposComplementos);
+        int prendasAdicionales = rng.nextInt(3);
 
-            res.add(idAbrigo);
-            res.add(idSudadera);
-            res.add(idCamiseta);
-            res.add(idPantalon);
-            res.add(idZapatos);
-            res.add(idCompementos);
+        int idColor = colores.get(rng.nextInt(colores.size()));
+
+        List<Integer> coloresCombo = ColorCombo(context, idColor);
+
+        int idAbrigo = NombreTemporal(context, tiempo, actividad, tiposAbrigo, coloresCombo);
+        if(idAbrigo == -1)
+        {
+            idAbrigo = NombreTemporal(context, tiempo, actividad, tiposAbrigo, colores);
         }
+        int idSudadera = NombreTemporal(context, tiempo, actividad, tiposSudadera, coloresCombo);
+        if(idSudadera == -1)
+        {
+            idSudadera = NombreTemporal(context, tiempo, actividad, tiposSudadera, colores);
+        }
+        int idCamiseta = NombreTemporal(context, tiempo, actividad, tiposCamiseta, coloresCombo);
+        if(idCamiseta == -1)
+        {
+            idCamiseta = NombreTemporal(context, tiempo, actividad, tiposSudadera, colores);
+        }
+        int idPantalon = NombreTemporal(context, tiempo, actividad, tiposPantalon, coloresCombo);
+        if(idPantalon == -1)
+        {
+            idPantalon = NombreTemporal(context, tiempo, actividad, tiposPantalon, colores);
+        }
+        int idZapatos = NombreTemporal(context, tiempo, actividad, tiposZapatos, coloresCombo);
+        if(idZapatos == -1)
+        {
+            idZapatos = NombreTemporal(context, tiempo, actividad, tiposZapatos, colores);
+        }
+        int idCompementos = NombreTemporal(context, tiempo, actividad, tiposComplementos, coloresCombo);
+        if(idCompementos == -1)
+        {
+            idCompementos = NombreTemporal(context, tiempo, actividad, tiposComplementos, colores);
+        }
+
+
+        res.add(idAbrigo);
+        res.add(idSudadera);
+        res.add(idCamiseta);
+        res.add(idPantalon);
+        res.add(idZapatos);
+        res.add(idCompementos);
 
         return res;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static int NombreTemporal(Context context, int tiempo, int actividad, int[] tipos) // TODO: Buscarle un nombre a esto
+    public static int NombreTemporal(Context context, int tiempo, int actividad, int[] tipos, List<Integer> colores) // TODO: Buscarle un nombre a esto
     {
-        String sentenciaSQL = "SELECT p.ID, p.TIPO FROM PRENDA p LEFT JOIN TIPO t ON p.TIPO=t.ID  WHERE (";
-
         StringJoiner sj = new StringJoiner(" OR ", "( ", " )");
 
         for (int tipo : tipos) {
-            sj.add("p.TIPO" + tipo);
+            sj.add("TIPO = " + tipo);
         }
 
-        sentenciaSQL += sj.toString();
+        String codicionTipos = sj.toString();
 
-        StringJoiner sj2 = new StringJoiner(" OR ", "( ", " )");
+        sj = new StringJoiner(" OR ", "( ", " )");
 
-        for (int tipo : tipos) {
-            sj.add("p.TIPO" + tipo);
+        for (int color : colores) {
+            sj.add("COLOR = " + color);
         }
 
-        sentenciaSQL += sj.toString();
+        String codicionColores = sj.toString();
 
-        sentenciaSQL += "AND p.VISIBLE = 1";
+        String sentenciaSQL = "SELECT ID, TIPO FROM PRENDA  WHERE " + codicionTipos + " AND " + codicionColores + " AND VISIBLE = 1";
+
 
 
         BaseDatos base = new BaseDatos(context, nombreBD);
@@ -638,8 +668,8 @@ public class GestorBD {
         if (cursor.moveToFirst()) {
             do {
 
-                int id = LibreriaBD.CampoInt(cursor, "p.ID");
-                int tipo = LibreriaBD.CampoInt(cursor, "p.TIPO");
+                int id = LibreriaBD.CampoInt(cursor, "ID");
+                int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
 
 
                 int pActividad = tipoActividad(context, tipo);
@@ -656,15 +686,50 @@ public class GestorBD {
         base.close();
         cursor.close();
         Random r = new Random();
+
+        if(listaPrendas.size() == 0)
+        {
+            return -1;
+        }
+
+
         int i = r.nextInt(listaPrendas.size());
+
 
         return listaPrendas.get(i);
 
     }
 
+    public static List<Integer> ColorCombo (Context context, int idColor)
+    {
+        String sentenciaSQL = "SELECT COLOR2 FROM COMBO_COLOR WHERE COLOR1 =  " +  idColor;
 
-    public static int tipoActividad(Context context, int idPrenda) {
-        String sentenciaSQL = "SELECT ACTIVIDAD FROM PRENDA WHERE ID = " + idPrenda;
+        Cursor cursor;
+        List<Integer> colores = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                int combo = LibreriaBD.CampoInt(cursor, "COLOR2");
+
+                colores .add(combo);
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+
+        return colores;
+    }
+
+    public static int tipoActividad(Context context, int idTipo) {
+        String sentenciaSQL = "SELECT ACTIVIDAD FROM TIPO WHERE ID = " + idTipo;
         Cursor cursor;
         int res = -1;
 
@@ -681,8 +746,8 @@ public class GestorBD {
         return res;
     }
 
-    public static int tipoTiempo(Context context, int idPrenda) {
-        String sentenciaSQL = "SELECT TIEMPO FROM PRENDA WHERE ID = " + idPrenda;
+    public static int tipoTiempo(Context context, int idTipo) {
+        String sentenciaSQL = "SELECT TIEMPO FROM TIPO WHERE ID = " + idTipo;
         Cursor cursor;
         int res = -1;
 

@@ -27,6 +27,7 @@ public class BaseDatos extends SQLiteOpenHelper {
         crearColor(db);
         crearTalla(db);
         crearTipos(db);
+        crearCombo(db);
 
         db.execSQL("INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ");
 
@@ -159,5 +160,36 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO COLOR VALUES (12 , 'VIOLETA') ");
 
     }
+    private void crearCombo(SQLiteDatabase db){
 
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (1,2,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (2,4,5)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (3,3,5)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (4,10,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (5,2,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (6,4,5)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (7,3,5)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (8,10,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (9,1,10)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (10,3,1)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (11,3,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (12,1,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (13,2,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (14,2,5)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (15,3,5)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (16,1,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (17,1,1)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (18,2,2)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (19,3,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (20,4,4)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (21,5,5)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (22,6,6)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (23,7,7)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (24,8,8)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (25,9,9)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (26,10,10)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (27,11,11)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (28,12,12)");
+
+    }
 }
