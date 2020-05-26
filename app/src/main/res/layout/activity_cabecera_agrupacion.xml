@@ -10,12 +10,14 @@
         android:id="@+id/Cabecera"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:background="#8BC34A"
         android:gravity="center"
         android:text="TextView"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

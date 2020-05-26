@@ -104,9 +104,10 @@ public class Modificar_Prenda extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     void guardar() {
         prenda.nombre = Enombre.getText().toString();
-        prenda.color = Scolor.getSelectedItemPosition() + 1;
-        prenda.tipo = Stipo.getSelectedItemPosition() + 1;
-        prenda.talla = Stalla.getSelectedItemPosition() + 1;
+        prenda.color = GestorBD.get_nombre_tabla(this, "color", Scolor.getSelectedItemPosition() + 1);
+        prenda.tipo = GestorBD.get_nombre_tabla(this, "tipo", Stipo.getSelectedItemPosition() + 1);
+        prenda.talla = GestorBD.get_nombre_tabla(this, "talla", Stalla.getSelectedItemPosition() + 1);
+
 
         GestorBD.Modificar_Prenda(this, prenda);
 
@@ -124,10 +125,9 @@ public class Modificar_Prenda extends AppCompatActivity {
         prenda.id = id;
 
         Enombre.setText(prenda.nombre);
-        Scolor.setSelection(prenda.color - 1);
-        Stipo.setSelection(prenda.tipo - 1);
-        Stalla.setSelection(prenda.talla - 1);
-
+        Scolor.setSelection(GestorBD.get_id_tabla(this, "color", prenda.color) - 1);
+        Stipo.setSelection(GestorBD.get_id_tabla(this, "tipo", prenda.tipo) - 1);
+        Stalla.setSelection(GestorBD.get_id_tabla(this, "talla", prenda.talla) - 1);
     }
 }
 
