@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ResultadoAlgortimoActivity"></activity>
+        <activity android:name=".Activities.PrimeraActivity"></activity>
+        <activity android:name=".Activities.ResultadoAlgortimoActivity" />
         <activity android:name=".Activities.CambioTallasActivity" />
         <activity android:name=".Activities.CambioColorActivity" />
         <activity android:name=".Activities.CambioPrendasActivity" />
         <activity android:name=".Activities.ConjuntoActivity" />
         <activity android:name=".Activities.HistorialActivity" />
         <activity android:name=".Activities.CabeceraAgrupacion" />
+        <!-- <activity android:name=".Activities.HistorialActivity" /> -->
         <activity android:name=".Activities.AlgoritmoRecomendador" />
         <activity android:name=".Activities.MostrarDatosActivity" />
         <activity android:name=".Activities.Modificar_Prenda" />
