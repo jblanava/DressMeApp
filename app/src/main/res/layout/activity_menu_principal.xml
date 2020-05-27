@@ -10,7 +10,7 @@
     <Button
         android:id="@+id/boton_vestuario"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/mybutton"
         android:text="Visitar mis prendas y complementos"
@@ -24,7 +24,7 @@
     <Button
         android:id="@+id/boton_recomendador"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/mybutton"
         android:text="¿Qué me pongo hoy?"
@@ -38,7 +38,7 @@
     <Button
         android:id="@+id/boton_configuracion"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/mybutton"
         android:text="Configuración"
