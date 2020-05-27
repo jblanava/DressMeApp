@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorFondo"
     tools:context=".Activities.ConfiguracionContraseniaActivity">
 
     <EditText
@@ -13,6 +14,7 @@
         android:ems="10"
         android:hint="Introduzca su contraseña"
         android:inputType="textPassword"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.323"
@@ -49,10 +51,12 @@
         app:layout_constraintVertical_bias="0.616" />
 
     <Button
+        style="?android:attr/borderlessButtonStyle"
         android:id="@+id/botonActualizar"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:text="Actualizar contraseña"
+        android:background="@drawable/mybutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
