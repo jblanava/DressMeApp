@@ -300,7 +300,7 @@ public class GestorBD {
         base.close();
     }
 
-    public static List<Prenda> PrendasVisibles(Context context, String busqueda, String ordenacion)
+    public static List<Prenda> PrendasVisibles(Context context, String busqueda, String ordenacion, String agrupacion)
     {
         String sentenciaSQL;
 
@@ -314,11 +314,17 @@ public class GestorBD {
         sentenciaSQL += "OR UPPER(TIPO.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";
         sentenciaSQL += "OR UPPER(TALLA.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' )";
 
+
+        if (agrupacion.length() != 0)
+        {
+            sentenciaSQL += "GROUP BY " + tabla + ".NOMBRE";
+        }
+
         if(ordenacion.equalsIgnoreCase("nombre"))
         {
             sentenciaSQL += "ORDER BY PRENDA.NOMBRE";
         }
-        else
+        else if(ordenacion.length() != 0)
         {
             sentenciaSQL += "ORDER BY " + tabla + ".NOMBRE";
         }
