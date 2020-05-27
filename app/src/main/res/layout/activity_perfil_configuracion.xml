@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorFondo"
     tools:context=".Activities.PerfilConfiguracionActivity">
 
     <TextView
+        style="?android:attr/borderlessButtonStyle"
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cambie su configuración del perfil aquí"
+        android:layout_width="wrap_content"
+        android:text="Cambie su configuración de perfil aquí"
+        android:textColor="#000000"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.471"
@@ -19,10 +23,12 @@
         app:layout_constraintVertical_bias="0.15" />
 
     <Button
+        style="?android:attr/borderlessButtonStyle"
         android:id="@+id/botonCambiaDatos"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:text="MOSTRAR MIS DATOS"
+        android:background="@drawable/mybutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -31,10 +37,12 @@
         app:layout_constraintVertical_bias="0.311" />
 
     <Button
+        style="?android:attr/borderlessButtonStyle"
         android:id="@+id/botonCambiaContrasenia"
-        android:layout_width="wrap_content"
+        android:layout_width="225dp"
         android:layout_height="wrap_content"
         android:text="Cambiar mi contraseña"
+        android:background="@drawable/mybutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -43,10 +51,12 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <Button
+        style="?android:attr/borderlessButtonStyle"
         android:id="@+id/botonBorrarPerfil"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:text="Borrar perfil"
+        android:background="@drawable/mybutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
