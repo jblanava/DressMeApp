@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import android.widget.Spinner;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.Objetos.PrendaAdapter;
+import com.example.dressmeapp.Objetos.RecyclerViewOnItemClickListener;
 import com.example.dressmeapp.R;
 
 import java.util.List;
@@ -28,6 +31,8 @@ public class VestuarioActivity extends AppCompatActivity {
     Button bAnydir, bBuscar, bOrdenar, bAgrupar;
     RecyclerView listaPrendas;
     Spinner sOrdenar, sAgrupar;
+
+
 
 
 
@@ -141,18 +146,22 @@ public class VestuarioActivity extends AppCompatActivity {
     void mostrar_prendas() {
         listaPrendas.removeAllViews();
 
-        List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion);
+        final List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion);
 
+        final Context a = this;
 
-        listaPrendas.setAdapter(new PrendaAdapter(prendas));
+        listaPrendas.setAdapter(new PrendaAdapter(prendas, new RecyclerViewOnItemClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+
+                Intent modificar = new Intent(a, Modificar_Prenda.class);
+                modificar.putExtra("intVariableName", prendas.get(position).id);
+                startActivity(modificar);
+            }
+        }));
 
         listaPrendas.setLayoutManager(new LinearLayoutManager(this));
-/*
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(listaPrendas.getContext(),
-                ((LinearLayoutManager) listaPrendas.getLayoutManager()).getOrientation());
 
-        listaPrendas.addItemDecoration(dividerItemDecoration);
-*/
         /*
         TODO eliminar esto
 
@@ -194,36 +203,4 @@ public class VestuarioActivity extends AppCompatActivity {
 
     }
 
-/*
-    void añadir_elemento(final Prenda prenda) {
-
-        View v = inflater.inflate(R.layout.activity_prenda_view, null);
-        TextView nombre = v.findViewById(R.id.prenda_nombre);
-        TextView tipo = v.findViewById(R.id.prenda_tipo);
-        TextView color = v.findViewById(R.id.prenda_color);
-        TextView talla = v.findViewById(R.id.prenda_talla);
-
-        nombre.setText(prenda.nombre);
-        color.setText(prenda.color);
-        tipo.setText(prenda.tipo);
-        talla.setText(prenda.talla);
-
-
-        TableLayout t = v.findViewById(R.id.boton_prenda);
-
-        final Context a = this;
-
-        t.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent modificar = new Intent(a, Modificar_Prenda.class);
-                modificar.putExtra("intVariableName", prenda.id);
-                startActivity(modificar);
-            }
-        });
-
-        listaPrendas.addView(v);
-    }
-
-    */
 }
