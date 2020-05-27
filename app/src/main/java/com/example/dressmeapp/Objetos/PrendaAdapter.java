@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,18 @@ import com.example.dressmeapp.R;
 
 import java.util.List;
 
+
+
+
 public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaViewHolder>
 {
     private List<Prenda> data;
+    private RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
 
-    public PrendaAdapter(@NonNull List<Prenda> data) {
+    public PrendaAdapter(@NonNull List<Prenda> data, @NonNull RecyclerViewOnItemClickListener recyclerViewOnItemClickListener)
+    {
         this.data = data;
+        this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
     }
 
 
@@ -44,13 +51,14 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         return data.size();
     }
 
-    public class PrendaViewHolder extends RecyclerView.ViewHolder //implements View.OnClickListener
+    public class PrendaViewHolder extends RecyclerView.ViewHolder
     {
-        int id;
         TextView nombre;
         TextView tipo;
         TextView color;
         TextView talla;
+
+        TableLayout t;
 
         public PrendaViewHolder(@NonNull View v) {
             super(v);
@@ -59,6 +67,14 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
             tipo = v.findViewById(R.id.prenda_tipo);
             color = v.findViewById(R.id.prenda_color);
             talla = v.findViewById(R.id.prenda_talla);
+            t = v.findViewById(R.id.boton_prenda);
+
+            t.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    recyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
+                }
+            });
         }
 
         TextView getNombre()
@@ -77,15 +93,5 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         {
             return talla;
         }
-
-            /*todo solucionar
-        @Override
-        public void onClick(View v) {
-            Intent modificar = new Intent(, Modificar_Prenda.class);
-            modificar.putExtra("intVariableName", id);
-            startActivity(modificar);
-        }
-
-             */
     }
 }
