@@ -24,6 +24,7 @@ public class MostrarDatosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_datos); //Puede ser
+        getSupportActionBar().hide();
         enlazarControles();
         muestraDatos();
     }

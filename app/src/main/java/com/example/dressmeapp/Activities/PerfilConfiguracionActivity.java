@@ -22,6 +22,7 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_configuracion);
+        getSupportActionBar().hide();
         enlazarControles();
     }
 
