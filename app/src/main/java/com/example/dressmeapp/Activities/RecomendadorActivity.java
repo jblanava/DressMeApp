@@ -15,8 +15,9 @@ public class RecomendadorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-           setContentView(R.layout.activity_recomendador);
-           enlazaControles();
+        setContentView(R.layout.activity_recomendador);
+        getSupportActionBar().hide();
+        enlazaControles();
     }
     private void enlazaControles(){
         bRecomendador= findViewById(R.id.bRecomendador);

@@ -37,7 +37,7 @@ public class Modificar_Prenda extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificar__prenda);
-
+        getSupportActionBar().hide();
         enlazar_controles();
 
         enlazar_prenda();

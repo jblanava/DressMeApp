@@ -19,6 +19,7 @@ public class PrimeraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_primera);
+        getSupportActionBar().hide();
         timer = new Timer();
         ct = this;
     }
