@@ -68,8 +68,11 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
 
     void ir_a_resultado_activity()
     {
-        int form = sFormalidad.getSelectedItemPosition();
-        int temp = sTemperatura.getSelectedItemPosition();
+        int[] temperaturas = {1, 2, 4};
+        int[] formalidades = {1, 2, 4, 8, 16};
+
+        int form = formalidades[sFormalidad.getSelectedItemPosition()];
+        int temp = temperaturas[sTemperatura.getSelectedItemPosition()];
 
         Intent resultado_recomendador = new Intent(this, ResultadoAlgortimoActivity.class);
         resultado_recomendador.putExtra("formalidad", form);

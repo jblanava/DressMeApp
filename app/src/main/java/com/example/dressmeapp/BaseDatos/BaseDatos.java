@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.Random;
+
 
 public class BaseDatos extends SQLiteOpenHelper {
 
@@ -26,9 +28,10 @@ public class BaseDatos extends SQLiteOpenHelper {
         crearTalla(db);
         crearTipos(db);
         crearCombo(db);
-
         db.execSQL("INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ");
 
+        crearPrendas(db);
+/*
         db.execSQL("INSERT INTO PRENDA VALUES (1  , 'Prueba1', 4,1,3, 1, 1) ");
         db.execSQL("INSERT INTO PRENDA VALUES (2  , 'Prueba21', 2, 4, 2, 1, 1) ");
 
@@ -38,10 +41,28 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO PRENDA VALUES (6  , 'Prueba24', 1, 4, 2, 1, 1) ");
         db.execSQL("INSERT INTO PRENDA VALUES (7  , 'Prueba25', 1, 7,1, 1, 1) ");
         db.execSQL("INSERT INTO PRENDA VALUES (8  , 'Prueba26', 2, 4, 2, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (9  , 'Prueba27', 5, 7,1, 1, 1) ");
+        db.execSQL("INSERT INTO PRENDA VALUES (9  , 'Prueba27', 5, 7,1, 1, 1) ");*/
 
         db.execSQL("INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6) ");
         db.execSQL("INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1) ");
+
+    }
+
+    private void crearPrendas(SQLiteDatabase db) {
+
+        Random rng = new Random();
+
+        for(int i = 1; i <= 120; i++)
+        {
+
+
+            int color = rng.nextInt(11) + 1;
+            int tipo = rng.nextInt(24) + 1;
+            int talla = rng.nextInt(5) + 1;
+
+            String sentencia = String.format("INSERT INTO PRENDA VALUES (%d  , '%s', %d, %d, %d, 1, 1)", i, "Prueba" + i ,color, tipo, talla);
+            db.execSQL(sentencia);
+        }
 
     }
 
