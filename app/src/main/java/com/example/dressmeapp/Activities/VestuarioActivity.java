@@ -49,7 +49,7 @@ public class VestuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vestuario);
-
+        getSupportActionBar().hide();
         enlazar_controles();
     }
 

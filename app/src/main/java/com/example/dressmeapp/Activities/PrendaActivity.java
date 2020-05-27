@@ -12,5 +12,6 @@ public class PrendaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prenda_view);
+        getSupportActionBar().hide();
     }
 }

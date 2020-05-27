@@ -20,6 +20,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
+        getSupportActionBar().hide();
         enlazaControles();
     }
 
