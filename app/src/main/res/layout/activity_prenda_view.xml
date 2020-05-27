@@ -5,14 +5,14 @@
     android:background="?attr/selectableItemBackground"
     android:clickable="false"
     android:orientation="vertical"
-    android:paddingTop="20dp">
+    android:padding="8dp">
     android:clickable="true"
 
     <TableLayout
         android:id="@+id/boton_prenda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2196F3"
+        android:background="@color/colorCeleste"
         android:clickable="true">
 
         <TableRow

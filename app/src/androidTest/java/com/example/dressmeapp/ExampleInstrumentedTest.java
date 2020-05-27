@@ -145,6 +145,7 @@ public class ExampleInstrumentedTest {
         int idTipo = 1; // abrigo
         int idTalla = 1; // XS
 
+        /*
         GestorBD.crearPrenda(appContext,
                 "PrendaFoo",
                 "rojo",
@@ -153,7 +154,7 @@ public class ExampleInstrumentedTest {
                 1,
                 idPerfil
         );
-
+        */
         cur = sqldb.rawQuery(sentencia, null);
         int countDespues = 0;
         if (cur.moveToFirst()) {

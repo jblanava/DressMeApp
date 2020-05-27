@@ -109,10 +109,6 @@
             android:textStyle="bold"
             android:typeface="sans" />
 
-        android:bottomRightRadius="2000dp"
-        android:bottomLeftRadius="2000dp"
-        android:topRightRadius="2000dp"
-        android:topLeftRadius="2000dp"
 
     </LinearLayout>
 
