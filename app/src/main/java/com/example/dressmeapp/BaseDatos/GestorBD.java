@@ -13,6 +13,7 @@ import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 import java.util.StringJoiner;
@@ -178,7 +179,7 @@ public class GestorBD {
      */
     public static boolean PassCorrecta(Context contexto, String usuario, String password) {
 
-        boolean encontrado = false;
+        boolean encontrado;
 
         String sentenciaSQL = "SELECT * FROM PERFIL WHERE NOMBRE='"
                 + usuario + "' AND CONTRASENIA='" + password + "'";
@@ -297,22 +298,29 @@ public class GestorBD {
         baseDatos.execSQL(sentenciaSQL);
         baseDatos.close();
         base.close();
-
     }
-
 
     public static List<Prenda> PrendasVisibles(Context context, String busqueda, String ordenacion)
     {
         String sentenciaSQL;
+
+        String tabla = ordenacion.toUpperCase().trim();
+        sentenciaSQL =  "SELECT PRENDA.ID , PRENDA.NOMBRE \"NOMBRE\", COLOR.NOMBRE \"COLOR\", TIPO.NOMBRE \"TIPO\", TALLA.NOMBRE \"TALLA\" ";
+        sentenciaSQL += "FROM PRENDA, COLOR, TIPO, TALLA ";
+        sentenciaSQL += "WHERE PRENDA.VISIBLE = 1 AND PRENDA.ID_PERFIL = " + idPerfil + " ";
+        sentenciaSQL += "AND COLOR.ID = PRENDA.COLOR AND TIPO.ID = PRENDA.TIPO AND TALLA.ID = PRENDA.TALLA ";
+        sentenciaSQL += "AND (UPPER(PRENDA.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";
+        sentenciaSQL += "OR UPPER(COLOR.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";
+        sentenciaSQL += "OR UPPER(TIPO.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";
+        sentenciaSQL += "OR UPPER(TALLA.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' )";
+
         if(ordenacion.equalsIgnoreCase("nombre"))
         {
-            sentenciaSQL = "SELECT PRENDA.ID, PRENDA.NOMBRE, PRENDA.COLOR, PRENDA.TIPO, PRENDA.TALLA FROM PRENDA WHERE PRENDA.VISIBLE = 1 ORDER BY NOMBRE";
+            sentenciaSQL += "ORDER BY PRENDA.NOMBRE";
         }
         else
         {
-            String tabla = ordenacion.toUpperCase().trim();
-
-            sentenciaSQL = "SELECT PRENDA.ID, PRENDA.NOMBRE, PRENDA.COLOR, PRENDA.TIPO, PRENDA.TALLA FROM PRENDA LEFT JOIN " + tabla + " ON " + tabla + ".ID = PRENDA." + tabla + " WHERE PRENDA.VISIBLE = 1 ORDER BY " + tabla + ".NOMBRE";
+            sentenciaSQL += "ORDER BY " + tabla + ".NOMBRE";
         }
 
 
@@ -326,29 +334,14 @@ public class GestorBD {
 
         if (cursor.moveToFirst()) {
             do {
+
                 int id = LibreriaBD.CampoInt(cursor, "ID");
                 String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-                int  color = LibreriaBD.CampoInt(cursor, "COLOR");
-                int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
-                int talla = LibreriaBD.CampoInt(cursor, "TALLA");
+                String color = LibreriaBD.Campo(cursor, "COLOR");
+                String tipo = LibreriaBD.Campo(cursor, "TIPO");
+                String talla = LibreriaBD.Campo(cursor, "TALLA");
 
-
-
-                String Stipo = get_nombre_tabla(context, "tipo", tipo);
-                String Stalla = get_nombre_tabla(context, "talla", talla);
-                String Scolor = get_nombre_tabla(context, "color", color);
-
-                boolean cumpleFiltro = false;
-
-                cumpleFiltro = cumpleFiltro || nombre.toUpperCase().contains(busqueda.toUpperCase());
-                cumpleFiltro = cumpleFiltro || Scolor.toUpperCase().contains(busqueda.toUpperCase());
-                cumpleFiltro = cumpleFiltro || Stipo.toUpperCase().contains(busqueda.toUpperCase());
-                cumpleFiltro = cumpleFiltro || Stalla.toUpperCase().contains(busqueda.toUpperCase());
-
-                if (cumpleFiltro) {
-                    Prenda p = new Prenda(id, nombre, color, tipo, talla);
-                    res.add(p);
-                }
+                res.add(new Prenda(id, nombre, color, tipo, talla));
 
             } while (cursor.moveToNext());
         }
@@ -424,23 +417,27 @@ public class GestorBD {
         base.close();
     }
 
-
     public static Prenda Obtener_Prenda(Context context, int id) {
-        String sentenciaSQL = "SELECT ID, NOMBRE, COLOR, TIPO, TALLA FROM PRENDA WHERE ID = " + id + " AND VISIBLE = 1";
-        Cursor cursor;
 
+
+        String sentenciaSQL =  "SELECT PRENDA.NOMBRE \"NOMBRE\", COLOR.NOMBRE \"COLOR\", TIPO.NOMBRE \"TIPO\", TALLA.NOMBRE \"TALLA\" ";
+        sentenciaSQL += "FROM PRENDA, COLOR, TIPO, TALLA ";
+        sentenciaSQL += "WHERE PRENDA.VISIBLE = 1 AND PRENDA.ID = " + id + " ";
+        sentenciaSQL += "AND COLOR.ID = PRENDA.COLOR AND TIPO.ID = PRENDA.TIPO AND TALLA.ID = PRENDA.TALLA ";
 
         BaseDatos base = new BaseDatos(context, nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
         Prenda p = null;
 
         if (cursor.moveToFirst()) {
+
             String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-            int  color = LibreriaBD.CampoInt(cursor, "COLOR");
-            int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
-            int talla = LibreriaBD.CampoInt(cursor, "TALLA");
+            String  color = LibreriaBD.Campo(cursor, "COLOR");
+            String tipo = LibreriaBD.Campo(cursor, "TIPO");
+            String talla = LibreriaBD.Campo(cursor, "TALLA");
+
 
             p = new Prenda(id, nombre, color, tipo, talla);
 
@@ -499,6 +496,27 @@ public class GestorBD {
         return res;
     }
 
+    public static int get_id_tabla(Context context, String tabla, String nombre)
+    {
+        String sentenciaSQL = String.format("SELECT ID FROM %s WHERE UPPER(NOMBRE) LIKE '%s'", tabla.toUpperCase(), nombre.toUpperCase());
+        Cursor cursor;
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        int id = -1;
+
+        if (cursor.moveToFirst()) {
+            id = LibreriaBD.CampoInt(cursor, "ID");
+        }
+
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return id;
+    }
+
     public static List<Integer> get_ids_tabla(Context context, String tabla)
     {
         String sentenciaSQL = "SELECT ID FROM " + tabla.toUpperCase();
@@ -526,11 +544,15 @@ public class GestorBD {
         return res;
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static void Modificar_Prenda(Context context, Prenda p) {
         CambiarVisibilidadPrenda(context, p.id);
-        crearPrenda(context, p.nombre, p.color, p.tipo, p.talla, 1, getIdPerfil());
+
+        int color = GestorBD.get_id_tabla(context, "color", p.color);
+        int tipo = GestorBD.get_id_tabla(context, "tipo", p.tipo);
+        int talla = GestorBD.get_id_tabla(context, "talla", p.talla);
+
+        crearPrenda(context, p.nombre, color, tipo, talla, 1, getIdPerfil());
     }
 
 
@@ -569,7 +591,7 @@ public class GestorBD {
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad) { // TODO: Este método debe devolver el resultado que arroje el algoritmo
+    public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad) {
 
         List<Integer> colores = get_ids_tabla(context, "color");
 

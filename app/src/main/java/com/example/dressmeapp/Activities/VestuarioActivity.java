@@ -2,8 +2,10 @@ package com.example.dressmeapp.Activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
@@ -11,13 +13,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Prenda;
+import com.example.dressmeapp.Objetos.PrendaAdapter;
 import com.example.dressmeapp.R;
 
 import java.util.List;
@@ -26,8 +26,10 @@ public class VestuarioActivity extends AppCompatActivity {
 
     EditText Ebusqueda;
     Button bAnydir, bBuscar, bOrdenar, bAgrupar;
-    LinearLayout listaPrendas;
+    RecyclerView listaPrendas;
     Spinner sOrdenar, sAgrupar;
+
+
 
 
     String busqueda = "";
@@ -43,8 +45,6 @@ public class VestuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vestuario);
 
         enlazar_controles();
-
-        mostrar_prendas();
     }
 
 
@@ -143,10 +143,25 @@ public class VestuarioActivity extends AppCompatActivity {
 
         List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion);
 
+
+        listaPrendas.setAdapter(new PrendaAdapter(prendas));
+
+        listaPrendas.setLayoutManager(new LinearLayoutManager(this));
+/*
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(listaPrendas.getContext(),
+                ((LinearLayoutManager) listaPrendas.getLayoutManager()).getOrientation());
+
+        listaPrendas.addItemDecoration(dividerItemDecoration);
+*/
+        /*
+        TODO eliminar esto
+
         if (agrupacion == 0) {
+
             for (Prenda p : prendas) {
                 añadir_elemento(p);
             }
+
         }
         else
         {
@@ -154,46 +169,45 @@ public class VestuarioActivity extends AppCompatActivity {
 
             String tabla = campos[agrupacion];
 
-            List<Integer> tags = GestorBD.get_ids_tabla(this, tabla);
+            List<String> tags = GestorBD.get_nombres_tabla(this, tabla);
 
-            for(int tag : tags)
+            for(String tag : tags)
             {
                 View v = getLayoutInflater().inflate(R.layout.activity_cabecera_agrupacion, null);
                 TextView nombre = v.findViewById(R.id.Cabecera);
-                String nombreTag = GestorBD.get_nombre_tabla(this, tabla, tag);
-                nombre.setText(nombreTag);
+                nombre.setText(tag);
                 listaPrendas.addView(v);
 
                 for (Prenda p : prendas)
                 {
-                    int[] camposPrenda = {-1, p.color, p.tipo, p.talla};
+                    String[] camposPrenda = {"", p.color, p.tipo, p.talla};
 
-                    if(camposPrenda[agrupacion] == tag)
+                    if(camposPrenda[agrupacion].equalsIgnoreCase(tag))
                     {
                         añadir_elemento(p);
                     }
                 }
             }
         }
+         */
+
 
     }
 
+/*
     void añadir_elemento(final Prenda prenda) {
-        View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
 
+        View v = inflater.inflate(R.layout.activity_prenda_view, null);
         TextView nombre = v.findViewById(R.id.prenda_nombre);
         TextView tipo = v.findViewById(R.id.prenda_tipo);
         TextView color = v.findViewById(R.id.prenda_color);
         TextView talla = v.findViewById(R.id.prenda_talla);
 
-        String colorText = GestorBD.get_nombre_tabla(this, "color", prenda.color);
-        String tipoText = GestorBD.get_nombre_tabla(this, "tipo", prenda.tipo);
-        String tallaText = GestorBD.get_nombre_tabla(this, "talla", prenda.talla);
-
         nombre.setText(prenda.nombre);
-        color.setText(colorText);
-        tipo.setText(tipoText);
-        talla.setText(tallaText);
+        color.setText(prenda.color);
+        tipo.setText(prenda.tipo);
+        talla.setText(prenda.talla);
+
 
         TableLayout t = v.findViewById(R.id.boton_prenda);
 
@@ -210,4 +224,6 @@ public class VestuarioActivity extends AppCompatActivity {
 
         listaPrendas.addView(v);
     }
+
+    */
 }

@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
+    <color name="colorFondo">#b0ebbd</color>
+
     <color name="colorError">#ED0E0E</color>
 
     <!-- Estos van a ser los colores naranjas -->
