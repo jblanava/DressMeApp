@@ -38,8 +38,9 @@ public class VestuarioActivity extends AppCompatActivity {
 
 
     String busqueda = "";
-    String ordenacion = "nombre";
-    int agrupacion = 0;
+    String ordenacion = "";
+    String agrupacion = "";
+
 
     private final static String[] ordernarPor = {"Ordenar por:", "Nombre", "Color", "Tipo", "Talla"};
     private final static String[] agruparPor = {"Agrupar por:", "Color", "Tipo", "Talla"};
@@ -119,14 +120,30 @@ public class VestuarioActivity extends AppCompatActivity {
     void ordenar() {
         int criterio = sOrdenar.getSelectedItemPosition();
 
-        ordenacion = ordernarPor[criterio];
+        if(criterio == 0)
+        {
+            ordenacion = "";
+        }
+        else
+        {
+            ordenacion = ordernarPor[criterio];
+        }
 
         mostrar_prendas();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     void agrupar() {
-        agrupacion = sAgrupar.getSelectedItemPosition();
+        int criterio = sAgrupar.getSelectedItemPosition();
+
+        if(criterio == 0)
+        {
+            agrupacion = "";
+        }
+        else
+        {
+            agrupacion = agruparPor[criterio];
+        }
 
         mostrar_prendas();
     }
@@ -146,7 +163,7 @@ public class VestuarioActivity extends AppCompatActivity {
     void mostrar_prendas() {
         listaPrendas.removeAllViews();
 
-        final List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion);
+        final List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion, this.agrupacion);
 
         final Context a = this;
 
@@ -161,46 +178,6 @@ public class VestuarioActivity extends AppCompatActivity {
         }));
 
         listaPrendas.setLayoutManager(new LinearLayoutManager(this));
-
-        /*
-        TODO eliminar esto
-
-        if (agrupacion == 0) {
-
-            for (Prenda p : prendas) {
-                añadir_elemento(p);
-            }
-
-        }
-        else
-        {
-            String[] campos = {"Error", "color", "tipo", "talla"};
-
-            String tabla = campos[agrupacion];
-
-            List<String> tags = GestorBD.get_nombres_tabla(this, tabla);
-
-            for(String tag : tags)
-            {
-                View v = getLayoutInflater().inflate(R.layout.activity_cabecera_agrupacion, null);
-                TextView nombre = v.findViewById(R.id.Cabecera);
-                nombre.setText(tag);
-                listaPrendas.addView(v);
-
-                for (Prenda p : prendas)
-                {
-                    String[] camposPrenda = {"", p.color, p.tipo, p.talla};
-
-                    if(camposPrenda[agrupacion].equalsIgnoreCase(tag))
-                    {
-                        añadir_elemento(p);
-                    }
-                }
-            }
-        }
-         */
-
-
     }
 
 }

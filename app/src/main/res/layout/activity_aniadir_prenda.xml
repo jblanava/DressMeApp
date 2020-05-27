@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorFondo"
     tools:context=".Activities.AniadirPrendaActivity"
     tools:ignore="MissingDefaultResource">
 
@@ -27,6 +28,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Nombre"
+                android:textColor="#000000"
                 android:textSize="24sp" />
         </TableRow>
 
@@ -39,12 +41,12 @@
                 android:id="@+id/rellena_nombre"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="Nombre de la Prenda" />
         </TableRow>
 
         <TableRow
@@ -61,7 +63,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Color"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="italic" />
         </TableRow>
 
         <TableRow
@@ -90,7 +94,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Tipo"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="italic" />
         </TableRow>
 
         <TableRow
@@ -121,7 +127,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Talla"
-                android:textSize="24sp" />
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="italic" />
         </TableRow>
 
         <TableRow
@@ -144,17 +152,25 @@
             android:layout_weight="1">
 
             <Button
+                style="?android:attr/borderlessButtonStyle"
                 android:id="@+id/boton_cancelar"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/mybutton"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
                 android:text="CANCELAR" />
 
             <Button
+                style="?android:attr/borderlessButtonStyle"
                 android:id="@+id/boton_crear"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
+                android:background="@drawable/mybutton"
+
+                android:layout_marginRight="35dp"
                 android:text="CREAR" />
         </TableRow>
     </TableLayout>
