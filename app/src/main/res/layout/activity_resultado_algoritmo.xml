@@ -6,17 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Activities.ResultadoAlgortimoActivity">
 
-    <TextView
-        android:id="@+id/prendasSeleccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Se han seleccionado las siguientes prendas:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
     <TableRow
+        android:id="@+id/tableRow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="18">
@@ -34,5 +25,35 @@
                 android:orientation="vertical" />
         </ScrollView>
     </TableRow>
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="683dp"
+        android:layout_marginBottom="80dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="@+id/tableRow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <Button
+            android:id="@+id/boton_guardar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="GUARDAR" />
+
+        <Button
+            android:id="@+id/boton_reintentar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="REINTENTAR" />
+
+    </TableRow>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
