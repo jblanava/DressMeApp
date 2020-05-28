@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorFondo"
     tools:context=".Activities.RecomendadorActivity">
 
     <Button
         android:id="@+id/bRecomendador"
-        android:layout_width="wrap_content"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/mybutton"
         android:text="Recomiéndame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,8 +22,10 @@
 
     <Button
         android:id="@+id/bHistorial"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="129dp"
         android:layout_height="55dp"
+        android:background="@drawable/mybutton"
         android:text="Historial"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
