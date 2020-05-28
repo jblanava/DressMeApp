@@ -478,6 +478,7 @@ public class GestorBD {
 
     public static List<String> get_nombres_tabla(Context context, String tabla)
     {
+        //String sentenciasSQL = "SELECT NOMBRE FROM (SELECT NOMBRE FROM COLOR WHERE ID = " + id " )";
         String sentenciaSQL = "SELECT NOMBRE FROM " + tabla.toUpperCase();
 
         Cursor cursor;
@@ -868,6 +869,27 @@ public class GestorBD {
         cursor.close();
         return res;
 
+    }
+
+    public static int obtenIDMaximoConjunto(Context context) {
+        int resultado = 0;
+        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM CONJUNTO";
+
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        if (cursor.moveToFirst()) {
+            do {
+                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
+            } while (cursor.moveToNext());
+        }
+        resultado++;
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return resultado;
     }
 
 }

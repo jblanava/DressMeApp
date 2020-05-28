@@ -47,6 +47,9 @@ public class Conjunto {
     public void remove(int idPrenda){
         idPrendas.remove(idPrenda);
     }
+    public List<Integer> getPrendas(){
+        return this.idPrendas;
+    }
 
 
 }

@@ -36,13 +36,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/prenda_color"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Color"
-                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/prenda_tipo"
@@ -51,6 +44,23 @@
                 android:layout_weight="1"
                 android:text="Tipo"
                 android:textSize="24sp" />
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/prenda_color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Color"
+                android:textSize="24sp" />
+
+
 
             <TextView
                 android:id="@+id/prenda_talla"
