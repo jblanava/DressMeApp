@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompatSideChannelService;
 
 import com.example.dressmeapp.Activities.AniadirPrendaActivity;
+import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 
@@ -28,7 +29,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp15.db";
+    private static String nombreBD = "dressmeapp16.db";
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -829,6 +830,36 @@ public class GestorBD {
 
 
                 res.add(c);
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return res;
+
+    }
+
+    public static List<ColorPrenda> ObtenerColores(Context context) {
+
+        List<ColorPrenda> res = new ArrayList<>();
+
+        String sentenciaSQL = "SELECT * FROM COLOR";
+        Cursor cursor;
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                int id = LibreriaBD.CampoInt(cursor, "ID");
+                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
+                String hex = LibreriaBD.Campo(cursor, "HEX");
+
+                res.add(new ColorPrenda(id, nombre, hex));
 
             } while (cursor.moveToNext());
         }

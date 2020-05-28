@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         enlazarControles();
-        GestorBD.seleccionarBD("test.db");
     }
 
     private void enlazarControles() {
