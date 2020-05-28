@@ -25,14 +25,14 @@
                 android:text="Introducir busqueda" />
 
             <Button
-                android:id="@+id/boton_guardar"
+                android:id="@+id/boton_buscar"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Buscar" />
 
             <Button
-                android:id="@+id/boton_reintentar"
+                android:id="@+id/boton_añadir"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

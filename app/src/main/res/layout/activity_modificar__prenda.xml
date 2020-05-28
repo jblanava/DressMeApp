@@ -160,7 +160,7 @@
                 android:text="ELIMINAR" />
 
             <Button
-                android:id="@+id/boton_guardar"
+                android:id="@+id/boton_buscar"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="10dp"
                 android:layout_height="50dp"
