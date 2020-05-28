@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorFondo"
     tools:context=".Activities.RegistroActivity">
 
     <ScrollView
@@ -27,11 +28,18 @@
                 android:id="@+id/textBienvenida2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+
+
+                android:layout_weight="1"
+
                 android:text="@string/bienvenida_registro"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#199415"
-                android:textStyle="bold" />
+                android:textAllCaps="true"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
 
             <EditText
                 android:id="@+id/textNombre"
@@ -68,10 +76,21 @@
 
             <Button
                 android:id="@+id/buttonRegistro"
-                android:layout_width="match_parent"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:text="@string/crear_perfil" />
+                android:layout_weight="1"
+                android:background="@drawable/mybutton"
+                android:scrollbarDefaultDelayBeforeFade="400"
+
+                android:text="@string/crear_perfil"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
         </LinearLayout>
     </ScrollView>
 

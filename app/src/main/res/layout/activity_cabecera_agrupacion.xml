@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorFondo"
     tools:context=".Activities.CabeceraAgrupacion">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:background="#8BC34A"
+        android:background="@drawable/mybutton"
         android:gravity="center"
         android:text="TextView"
         android:textSize="32sp"

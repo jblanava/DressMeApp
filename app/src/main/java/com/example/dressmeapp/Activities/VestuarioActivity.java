@@ -2,38 +2,45 @@ package com.example.dressmeapp.Activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Prenda;
+import com.example.dressmeapp.Objetos.PrendaAdapter;
+import com.example.dressmeapp.Objetos.RecyclerViewOnItemClickListener;
 import com.example.dressmeapp.R;
 
-import java.util.Hashtable;
 import java.util.List;
 
 public class VestuarioActivity extends AppCompatActivity {
 
     EditText Ebusqueda;
     Button bAnydir, bBuscar, bOrdenar, bAgrupar;
-    LinearLayout listaPrendas;
+    RecyclerView listaPrendas;
     Spinner sOrdenar, sAgrupar;
 
 
+
+
+
+
     String busqueda = "";
-    String ordenacion = "nombre";
-    int agrupacion = 0;
+    String ordenacion = "";
+    String agrupacion = "";
+
 
     private final static String[] ordernarPor = {"Ordenar por:", "Nombre", "Color", "Tipo", "Talla"};
     private final static String[] agruparPor = {"Agrupar por:", "Color", "Tipo", "Talla"};
@@ -42,10 +49,8 @@ public class VestuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vestuario);
-
+        getSupportActionBar().hide();
         enlazar_controles();
-
-        mostrar_prendas();
     }
 
 
@@ -115,14 +120,30 @@ public class VestuarioActivity extends AppCompatActivity {
     void ordenar() {
         int criterio = sOrdenar.getSelectedItemPosition();
 
-        ordenacion = ordernarPor[criterio];
+        if(criterio == 0)
+        {
+            ordenacion = "";
+        }
+        else
+        {
+            ordenacion = ordernarPor[criterio];
+        }
 
         mostrar_prendas();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     void agrupar() {
-        agrupacion = sAgrupar.getSelectedItemPosition();
+        int criterio = sAgrupar.getSelectedItemPosition();
+
+        if(criterio == 0)
+        {
+            agrupacion = "";
+        }
+        else
+        {
+            agrupacion = agruparPor[criterio];
+        }
 
         mostrar_prendas();
     }
@@ -142,70 +163,21 @@ public class VestuarioActivity extends AppCompatActivity {
     void mostrar_prendas() {
         listaPrendas.removeAllViews();
 
-        List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion);
-
-
-        if (agrupacion == 0) {
-            for (Prenda p : prendas) {
-                añadir_elemento(p);
-            }
-        }
-        else
-        {
-            String[] campos = {"Error", "color", "tipo", "talla"};
-
-            String tabla = campos[agrupacion];
-
-            List<String> tags = GestorBD.get_nombres_tabla(this, tabla);
-
-            for(String tag : tags)
-            {
-                View v = getLayoutInflater().inflate(R.layout.activity_cabecera_agrupacion, null);
-                TextView nombre = v.findViewById(R.id.Cabecera);
-                nombre.setText(tag);
-                listaPrendas.addView(v);
-
-                for (Prenda p : prendas)
-                {
-                    String[] camposPrenda = {"", p.color, p.tipo, p.talla};
-
-                    if(camposPrenda[agrupacion].equalsIgnoreCase(tag))
-                    {
-                        añadir_elemento(p);
-                    }
-                }
-            }
-        }
-
-
-    }
-
-    void añadir_elemento(final Prenda prenda) {
-        View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
-
-        TextView nombre = v.findViewById(R.id.prenda_nombre);
-        TextView tipo = v.findViewById(R.id.prenda_tipo);
-        TextView color = v.findViewById(R.id.prenda_color);
-        TextView talla = v.findViewById(R.id.prenda_talla);
-
-        nombre.setText(prenda.nombre);
-        color.setText(prenda.color);
-        tipo.setText(prenda.tipo);
-        talla.setText(prenda.talla);
-
-        TableLayout t = v.findViewById(R.id.boton_prenda);
+        final List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion, this.agrupacion);
 
         final Context a = this;
 
-        t.setOnClickListener(new View.OnClickListener() {
+        listaPrendas.setAdapter(new PrendaAdapter(prendas, new RecyclerViewOnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v, int position) {
+
                 Intent modificar = new Intent(a, Modificar_Prenda.class);
-                modificar.putExtra("intVariableName", prenda.id);
+                modificar.putExtra("intVariableName", prendas.get(position).id);
                 startActivity(modificar);
             }
-        });
+        }));
 
-        listaPrendas.addView(v);
+        listaPrendas.setLayoutManager(new LinearLayoutManager(this));
     }
+
 }

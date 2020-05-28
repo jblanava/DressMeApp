@@ -27,8 +27,8 @@ public class AniadirPrendaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anydir);
-
+        setContentView(R.layout.activity_aniadir_prenda);
+        getSupportActionBar().hide();
         enlazar_controles();
     }
 

@@ -37,6 +37,8 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algoritmo_recomendador);
+        getSupportActionBar().hide(); //quita la barra superior, bastaria con descomentar esto para
+        //que no la quite
 
         enlazar_controles();
     }

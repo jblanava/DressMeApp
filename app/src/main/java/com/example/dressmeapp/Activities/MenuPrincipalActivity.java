@@ -18,7 +18,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
-
+        getSupportActionBar().hide();
         bVestuario = (Button) findViewById(R.id.boton_vestuario);
         bRecomendador = (Button) findViewById(R.id.boton_recomendador);
         bConfiguracion = (Button) findViewById(R.id.boton_configuracion);

@@ -300,25 +300,31 @@ public class GestorBD {
         base.close();
     }
 
-    public static List<Prenda> PrendasVisibles(Context context, String busqueda, String ordenacion)
+    public static List<Prenda> PrendasVisibles(Context context, String busqueda, String ordenacion, String agrupacion)
     {
         String sentenciaSQL;
 
         String tabla = ordenacion.toUpperCase().trim();
         sentenciaSQL =  "SELECT PRENDA.ID , PRENDA.NOMBRE \"NOMBRE\", COLOR.NOMBRE \"COLOR\", TIPO.NOMBRE \"TIPO\", TALLA.NOMBRE \"TALLA\" ";
         sentenciaSQL += "FROM PRENDA, COLOR, TIPO, TALLA ";
-        sentenciaSQL += "WHERE PRENDA.VISIBLE = 1 ";
+        sentenciaSQL += "WHERE PRENDA.VISIBLE = 1 AND PRENDA.ID_PERFIL = " + idPerfil + " ";
         sentenciaSQL += "AND COLOR.ID = PRENDA.COLOR AND TIPO.ID = PRENDA.TIPO AND TALLA.ID = PRENDA.TALLA ";
         sentenciaSQL += "AND (UPPER(PRENDA.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";
         sentenciaSQL += "OR UPPER(COLOR.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";
         sentenciaSQL += "OR UPPER(TIPO.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";
         sentenciaSQL += "OR UPPER(TALLA.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' )";
 
+
+        if (agrupacion.length() != 0)
+        {
+            sentenciaSQL += "GROUP BY " + tabla + ".NOMBRE";
+        }
+
         if(ordenacion.equalsIgnoreCase("nombre"))
         {
             sentenciaSQL += "ORDER BY PRENDA.NOMBRE";
         }
-        else
+        else if(ordenacion.length() != 0)
         {
             sentenciaSQL += "ORDER BY " + tabla + ".NOMBRE";
         }

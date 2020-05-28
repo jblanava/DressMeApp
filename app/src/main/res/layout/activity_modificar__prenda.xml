@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorFondo"
     tools:context=".Activities.Modificar_Prenda">
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="1dp"
@@ -17,6 +19,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
+
             <TextView
                 android:id="@+id/texto_nombre"
                 android:layout_width="0dp"
@@ -26,7 +29,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Nombre"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
         </TableRow>
 
         <TableRow
@@ -42,8 +47,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="Nombre"
+                android:inputType="textPersonName" />
         </TableRow>
 
         <TableRow
@@ -60,7 +65,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Color"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </TableRow>
 
         <TableRow
@@ -89,13 +95,14 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Tipo"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <Spinner
                 android:id="@+id/spinner_tipo"
@@ -120,7 +127,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Talla"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </TableRow>
 
         <TableRow
@@ -140,28 +148,31 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/boton_eliminar"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_weight="1"
+                android:background="@drawable/mybutton"
                 android:text="ELIMINAR" />
 
             <Button
-                android:id="@+id/boton_intercambiar"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="INTERCAMBIAR" />
-
-            <Button
                 android:id="@+id/boton_guardar"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="10dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/mybutton"
+                android:text="GUARDAR" />
+
+            <Spinner
+                android:id="@+id/spinner_perfiles"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="GUARDAR" />
+                android:layout_weight="1" />
         </TableRow>
     </TableLayout>
 
