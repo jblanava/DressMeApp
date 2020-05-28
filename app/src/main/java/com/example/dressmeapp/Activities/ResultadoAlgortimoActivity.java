@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -21,6 +22,8 @@ import java.util.Collections;
 public class ResultadoAlgortimoActivity extends AppCompatActivity {
     private Conjunto conjunto;
     private LinearLayout listaPrendas;
+    private Button guardar;
+    private Button reintentar;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -35,7 +38,32 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
     private void enlazaControles() {
         listaPrendas = (LinearLayout) findViewById(R.id.lista_prendas);
+        guardar=findViewById(R.id.boton_guardar);
+        reintentar=findViewById(R.id.boton_reintentar);
+        reintentar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardaConjunto();
+            }
+        });
 
+        reintentar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                retryConjunto();
+            }
+        });
+    }
+
+    private void retryConjunto() {
+    Intent salto = new Intent(this, AlgoritmoRecomendador.class);
+    startActivity(salto);
+    this.finish();
+
+    }
+
+    private void guardaConjunto() {
+        GestorBD.addConjunto(this,this.conjunto);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
