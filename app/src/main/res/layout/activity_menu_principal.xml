@@ -10,7 +10,7 @@
     <Button
         android:id="@+id/boton_vestuario"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:background="@drawable/mybutton"
         android:text="Visitar mis prendas y complementos"
