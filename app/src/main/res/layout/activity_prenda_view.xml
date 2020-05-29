@@ -12,7 +12,7 @@
         android:id="@+id/boton_prenda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorCeleste"
+        android:background="#ffffff"
         android:clickable="true">
 
         <TableRow
