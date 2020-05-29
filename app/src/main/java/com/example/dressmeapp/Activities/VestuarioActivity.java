@@ -201,6 +201,8 @@ public class VestuarioActivity extends AppCompatActivity {
                     }
                 }
 
+                if(prendasConTag.size() == 0) continue;
+
                 View view = getLayoutInflater().inflate(R.layout.activity_agrupar_view, null);
 
                 TextView texto = view.findViewById(R.id.texto_tag);
