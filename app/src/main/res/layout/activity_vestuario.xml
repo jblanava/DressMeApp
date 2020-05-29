@@ -11,10 +11,10 @@
         android:layout_height="match_parent">
 
         <TableRow
-            android:background="@color/colorFondo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorFondo">
 
             <EditText
                 android:id="@+id/editText_busqueda"
@@ -26,31 +26,31 @@
                 android:text="Introducir busqueda" />
 
             <Button
-                android:background="@drawable/mybutton"
-                style="?android:attr/borderlessButtonStyle"
                 android:id="@+id/boton_buscar"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
+                android:background="@drawable/mybutton"
                 android:text="Buscar" />
 
             <Button
-                android:background="@drawable/mybutton"
-                style="?android:attr/borderlessButtonStyle"
                 android:id="@+id/boton_añadir"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
+                android:background="@drawable/mybutton"
                 android:text="Añadir" />
 
         </TableRow>
 
         <TableRow
-            android:background="@color/colorFondo"
-
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorFondo">
 
             <Spinner
                 android:id="@+id/spinner_ordenar"
@@ -60,21 +60,21 @@
                 android:addStatesFromChildren="false" />
 
             <Button
-                android:background="@drawable/mybutton"
-                style="?android:attr/borderlessButtonStyle"
                 android:id="@+id/boton_ordenar"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
+                android:background="@drawable/mybutton"
                 android:text="Ordenar" />
 
         </TableRow>
 
         <TableRow
-            android:background="@color/colorFondo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorFondo">
 
             <Spinner
                 android:id="@+id/spinner_agrupar"
