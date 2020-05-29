@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AgruparView"></activity>
         <activity android:name=".Activities.PrimeraActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +23,7 @@
         <activity android:name=".Activities.CambioPrendasActivity" />
         <activity android:name=".Activities.ConjuntoActivity" />
         <activity android:name=".Activities.HistorialActivity" />
-        <activity android:name=".Activities.CabeceraAgrupacion" />
-        <!-- <activity android:name=".Activities.HistorialActivity" /> -->
+        <activity android:name=".Activities.CabeceraAgrupacion" /> <!-- <activity android:name=".Activities.HistorialActivity" /> -->
         <activity android:name=".Activities.AlgoritmoRecomendador" />
         <activity android:name=".Activities.MostrarDatosActivity" />
         <activity android:name=".Activities.Modificar_Prenda" />
@@ -36,7 +36,7 @@
         <activity android:name=".Activities.VestuarioActivity" />
         <activity android:name=".Activities.MenuPrincipalActivity" />
         <activity android:name=".Activities.PerfilConfiguracionActivity" />
-        <activity android:name=".Activities.MainActivity"/>
+        <activity android:name=".Activities.MainActivity" />
     </application>
 
 </manifest>

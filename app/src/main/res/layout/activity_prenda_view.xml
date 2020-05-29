@@ -17,7 +17,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1">
 
             <TextView
@@ -42,6 +42,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="Tipo"
                 android:textSize="24sp" />
 
@@ -57,18 +58,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="Color"
                 android:textSize="24sp" />
-
-
 
             <TextView
                 android:id="@+id/prenda_talla"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="Talla"
                 android:textSize="24sp" />
+
+
         </TableRow>
 
     </TableLayout>
