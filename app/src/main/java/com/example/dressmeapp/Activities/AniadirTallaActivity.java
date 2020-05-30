@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.dressmeapp.BaseDatos.GestorBD2;
+import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
 
 public class AniadirTallaActivity extends AppCompatActivity {
@@ -22,6 +22,9 @@ public class AniadirTallaActivity extends AppCompatActivity {
     }
 
     private void enlazarControles() {
+
+        tallaNueva = findViewById(R.id.recogeTalla);
+
         bGuardar=findViewById(R.id.guardarTalla);
         bGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +36,7 @@ public class AniadirTallaActivity extends AppCompatActivity {
 
     private void guardarTalla() {
         String talla = tallaNueva.getText().toString();
-        GestorBD2.CrearTalla(this, talla);
+        GestorBD.CrearTalla(this, talla);
+        finish();
     }
 }
