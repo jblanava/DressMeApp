@@ -979,4 +979,44 @@ public class GestorBD {
         }
 
 
+
+
+
+
+    public static void CrearTalla(Context contexto, String talla) {
+        int id = obtenIDMaximoTalla(contexto);
+        String sentenciaSQL;
+        sentenciaSQL = "INSERT INTO TALLA (ID, NOMBRE) VALUES (";
+        sentenciaSQL += id + ",'" + talla.trim() + "')";
+
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        SQLiteDatabase baseDatos;
+        baseDatos = base.getWritableDatabase();
+        baseDatos.execSQL(sentenciaSQL);
+        baseDatos.close();
+        base.close();
+    }
+
+    public static int obtenIDMaximoTalla(Context context) {
+        int resultado = 0;
+        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM TALLA";
+
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        if (cursor.moveToFirst()) {
+            do {
+                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
+            } while (cursor.moveToNext());
+        }
+        resultado++;
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return resultado;
+    }
+
+
 } // Fin de clase

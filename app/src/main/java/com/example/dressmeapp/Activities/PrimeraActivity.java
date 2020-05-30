@@ -34,6 +34,6 @@ public class PrimeraActivity extends AppCompatActivity {
                 startActivity(it);
                 finish();
             }
-        }, 2000);
+        }, 1500);
     }
 }

@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ConfiguracionActivity extends AppCompatActivity {
     private TextView textView ;
     private Button botonCambioTallas;
-    private Button botonCambioPrendas;
     private Button botonTipoColor;
     private Button botonCambioPerfil;
     @Override
@@ -25,11 +24,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
 
     private void enlazaControles() {
-        textView=findViewById(R.id.textView4);
         botonCambioPerfil=findViewById(R.id.botonCambioPerfil);
         botonCambioTallas=findViewById(R.id.botonCambioTallas);
         botonTipoColor=findViewById(R.id.botonTipoColor);
-        botonCambioPrendas=findViewById(R.id.botonCambioPrendas);
 
         botonCambioPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,19 +46,8 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 cambioTallas();
             }
         });
-        botonCambioPrendas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cambioPrendas();
-            }
-        });
-
     }
 
-    private void cambioPrendas() {
-    Intent cambio = new Intent(this,CambioPrendasActivity.class);
-    startActivity(cambio);
-    }
 
     private void cambioTallas() {
     Intent cambio = new Intent(this,CambioTallasActivity.class);
