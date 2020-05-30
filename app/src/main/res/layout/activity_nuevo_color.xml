@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorFondo"
+    tools:context=".Activities.NuevoColorActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="32dp">
+
+            <ImageView
+                android:id="@+id/imgColor"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#000000"
+                android:src="?android:attr/activatedBackgroundIndicator" />
+
+            <TextView
+                android:id="@+id/txtError"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="32dp"
+                android:textColor="@color/colorError" />
+
+            <EditText
+                android:id="@+id/txtNombreColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Nombre del color"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/txtRojo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Rojo" />
+
+            <SeekBar
+                android:id="@+id/barRojo"
+                style="@style/Widget.AppCompat.SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:alpha="1"
+                android:indeterminate="false"
+                android:max="255"
+                android:progress="0"
+                android:thumb="@drawable/slider_rojo" />
+
+            <TextView
+                android:id="@+id/txtRojo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Verde" />
+
+            <SeekBar
+                android:id="@+id/barVerde"
+                style="@style/Widget.AppCompat.SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:max="255"
+                android:thumb="@drawable/slider_verde" />
+
+            <TextView
+                android:id="@+id/txtRojo3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Azul" />
+
+            <SeekBar
+                android:id="@+id/barAzul"
+                style="@style/Widget.AppCompat.SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:max="255"
+                android:thumb="@drawable/slider_azul" />
+
+            <Button
+                android:id="@+id/btnAniadirColor"
+                android:layout_width="151dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/mybutton"
+                android:text="Añadir color"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

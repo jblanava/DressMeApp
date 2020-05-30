@@ -30,7 +30,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp19.db"; // Antonio ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp20.db"; // Antonio ha cambiado a la BD__17
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {

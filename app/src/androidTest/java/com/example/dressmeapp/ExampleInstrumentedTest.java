@@ -9,6 +9,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBD2;
 import com.example.dressmeapp.Debug.Debug;
 import com.example.dressmeapp.Objetos.Prenda;
 
@@ -395,6 +396,32 @@ public class ExampleInstrumentedTest {
         Prenda prendaNuevaReobtenida = GestorBD.Obtener_Prenda(appContext, idPrendaNuevo);
 
         assertEquals(prendaNueva.nombre, prendaNuevaReobtenida.nombre);
+
+    }
+
+    /********************************************************************************
+     COLORES
+     ********************************************************************************/
+
+    @Test
+    public void insertarColorFuncionaBien() {
+
+        int numColoresAntes = GestorBD.ObtenerColores(appContext).size();
+        GestorBD2.crearColor(appContext, "ColorPrueba", "#123456");
+        int numColoresDespues = GestorBD.ObtenerColores(appContext).size();
+
+        assertEquals(numColoresDespues, numColoresAntes + 1);
+
+    }
+
+    @Test
+    public void obtenerIDMaximoColorFuncionaBien() {
+
+        int maxIdAntes = GestorBD2.obtenIDMaximoColor(appContext);
+        GestorBD2.crearColor(appContext, "ColorPrueba", "#123456");
+        int maxIdDespues = GestorBD2.obtenIDMaximoColor(appContext);
+
+        assertEquals(maxIdDespues, maxIdAntes + 1);
 
     }
 

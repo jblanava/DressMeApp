@@ -25,11 +25,11 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
 
     private void enlazaControles() {
-        textView=findViewById(R.id.textView4);
+        //textView=findViewById(R.id.textView4);
         botonCambioPerfil=findViewById(R.id.botonCambioPerfil);
         botonCambioTallas=findViewById(R.id.botonCambioTallas);
         botonTipoColor=findViewById(R.id.botonTipoColor);
-        botonCambioPrendas=findViewById(R.id.botonCambioPrendas);
+        //botonCambioPrendas=findViewById(R.id.botonCambioPrendas);
 
         botonCambioPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,12 +49,12 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 cambioTallas();
             }
         });
-        botonCambioPrendas.setOnClickListener(new View.OnClickListener() {
+        /*botonCambioPrendas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cambioPrendas();
             }
-        });
+        });*/
 
     }
 

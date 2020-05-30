@@ -38,6 +38,7 @@
         <activity android:name=".Activities.MenuPrincipalActivity" />
         <activity android:name=".Activities.PerfilConfiguracionActivity" />
         <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.NuevoColorActivity" />
     </application>
 
 </manifest>
