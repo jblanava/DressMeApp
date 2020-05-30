@@ -102,19 +102,6 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         TextView color = (TextView) v.findViewById(R.id.prenda_color);
         TextView talla = (TextView) v.findViewById(R.id.prenda_talla);
 
-        /*
-        TODO: Eliminar
-
-        String colorText = GestorBD.get_nombre_tabla(this, "color", prenda.color);
-        String tipoText = GestorBD.get_nombre_tabla(this, "tipo", prenda.tipo);
-        String tallaText = GestorBD.get_nombre_tabla(this, "talla", prenda.talla);
-
-        nombre.setText(prenda.nombre);
-        color.setText(colorText);
-        tipo.setText(tipoText);
-        talla.setText(tallaText);
-
-         */
 
         nombre.setText(prenda.nombre);
         color.setText(prenda.color);

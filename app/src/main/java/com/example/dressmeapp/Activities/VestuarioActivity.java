@@ -11,30 +11,31 @@ import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.example.dressmeapp.AgruparView;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.Objetos.PrendaAdapter;
 import com.example.dressmeapp.Objetos.RecyclerViewOnItemClickListener;
 import com.example.dressmeapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VestuarioActivity extends AppCompatActivity {
 
     EditText Ebusqueda;
     Button bAnydir, bBuscar, bOrdenar, bAgrupar;
-    RecyclerView listaPrendas;
+    LinearLayout listaPrendas;
     Spinner sOrdenar, sAgrupar;
-
-
-
-
 
 
     String busqueda = "";
@@ -148,9 +149,9 @@ public class VestuarioActivity extends AppCompatActivity {
         mostrar_prendas();
     }
 
-    void ir_a_anydir() {
+    void ir_a_anydir()
+    {
         Intent anydir = new Intent(this, AniadirPrendaActivity.class);
-
         startActivity(anydir);
     }
 
@@ -163,21 +164,93 @@ public class VestuarioActivity extends AppCompatActivity {
     void mostrar_prendas() {
         listaPrendas.removeAllViews();
 
-        final List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion, this.agrupacion);
+        final List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion);
 
         final Context a = this;
 
-        listaPrendas.setAdapter(new PrendaAdapter(prendas, new RecyclerViewOnItemClickListener() {
-            @Override
-            public void onClick(View v, int position) {
+        if(this.agrupacion != "")
+        {
+            List<String> tags =  GestorBD.get_nombres_tabla(this, this.agrupacion);
 
-                Intent modificar = new Intent(a, Modificar_Prenda.class);
-                modificar.putExtra("intVariableName", prendas.get(position).id);
-                startActivity(modificar);
+            for(String tag : tags)
+            {
+                final List<Prenda> prendasConTag = new ArrayList<>();
+
+                for (Prenda prenda : prendas)
+                {
+                    if(agrupacion.equalsIgnoreCase("color"))
+                    {
+                        if(prenda.color.equalsIgnoreCase(tag))
+                        {
+                            prendasConTag.add(prenda);
+                        }
+                    }
+                    else if(agrupacion.equalsIgnoreCase("tipo"))
+                    {
+                        if(prenda.tipo.equalsIgnoreCase(tag))
+                        {
+                            prendasConTag.add(prenda);
+                        }
+                    }
+                    else if(agrupacion.equalsIgnoreCase("talla"))
+                    {
+                        if(prenda.talla.equalsIgnoreCase(tag))
+                        {
+                            prendasConTag.add(prenda);
+                        }
+                    }
+                }
+
+                if(prendasConTag.size() == 0) continue;
+
+                View view = getLayoutInflater().inflate(R.layout.activity_agrupar_view, null);
+
+                TextView texto = view.findViewById(R.id.texto_tag);
+                RecyclerView rv = view.findViewById(R.id.prendas_agrupadas);
+
+                texto.setText(tag);
+
+                rv.setAdapter(new PrendaAdapter(prendasConTag, new RecyclerViewOnItemClickListener() {
+                    @Override
+                    public void onClick(View v, int position) {
+
+                        Intent modificar = new Intent(a, Modificar_Prenda.class);
+                        modificar.putExtra("intVariableName", prendasConTag.get(position).id);
+                        startActivity(modificar);
+                    }
+                }));
+
+
+                rv.setLayoutManager(new LinearLayoutManager(this));
+
+                listaPrendas.addView(view);
             }
-        }));
+        }
+        else
+        {
+            View view = getLayoutInflater().inflate(R.layout.activity_agrupar_view, null);
 
-        listaPrendas.setLayoutManager(new LinearLayoutManager(this));
+            TextView texto = view.findViewById(R.id.texto_tag);
+            RecyclerView rv = view.findViewById(R.id.prendas_agrupadas);
+
+            texto.setText("Tus prendas");
+
+            rv.setAdapter(new PrendaAdapter(prendas, new RecyclerViewOnItemClickListener() {
+                @Override
+                public void onClick(View v, int position) {
+
+                    Intent modificar = new Intent(a, Modificar_Prenda.class);
+                    modificar.putExtra("intVariableName", prendas.get(position).id);
+                    startActivity(modificar);
+                }
+            }));
+
+
+            rv.setLayoutManager(new LinearLayoutManager(this));
+
+            listaPrendas.addView(view);
+        }
+
     }
 
 }

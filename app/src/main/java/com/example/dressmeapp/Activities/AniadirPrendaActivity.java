@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.Objetos.ColorPrenda;
+import com.example.dressmeapp.Objetos.PrendaAdapter;
 import com.example.dressmeapp.R;
 
 import java.util.List;
