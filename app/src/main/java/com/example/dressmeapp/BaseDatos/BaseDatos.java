@@ -20,9 +20,8 @@ public class BaseDatos extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        // TABLA PRENDA
-
+    public void onCreate(SQLiteDatabase db)
+    {
         crearTablas(db);
         crearColor(db);
         crearTalla(db);
@@ -31,24 +30,9 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ");
 
         crearPrendas(db);
-/*
-        db.execSQL("INSERT INTO PRENDA VALUES (1  , 'Prueba1', 4,1,3, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (2  , 'Prueba21', 2, 4, 2, 1, 1) ");
 
-        db.execSQL("INSERT INTO PRENDA VALUES (3  , 'Prueba14', 3, 7,1, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (4  , 'Prueba22', 2, 4, 2, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (5  , 'Prueba23', 4, 7,1, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (6  , 'Prueba24', 1, 4, 2, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (7  , 'Prueba25', 1, 7,1, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (8  , 'Prueba26', 2, 4, 2, 1, 1) ");
-        db.execSQL("INSERT INTO PRENDA VALUES (9  , 'Prueba27', 5, 7,1, 1, 1) ");*/
-
-        db.execSQL("INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6) ");
-        db.execSQL("INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1) ");
-
-
-
-
+        db.execSQL("INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6, 1) ");
+        db.execSQL("INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1, 1) ");
     }
 
     private void crearPrendas(SQLiteDatabase db) {
@@ -92,7 +76,7 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL(vsql);
 
         vsql = "CREATE TABLE \"CONJUNTO\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"ABRIGO\" INTEGER ,\"SUDADERA\" INTEGER , \"CAMISETA\" INTEGER NOT NULL, " +
-                "\"PANTALON\" INTEGER NOT NULL, \"ZAPATO\" INTEGER NOT NULL, \"COMPLEMENTO\" INTEGER )";
+                "\"PANTALON\" INTEGER NOT NULL, \"ZAPATO\" INTEGER NOT NULL, \"COMPLEMENTO\" INTEGER, \"ID_PERFIL\" INTEGER)";
         db.execSQL(vsql);
 
         // db.execSQL("CREATE TABLE \"COLOR\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
@@ -120,9 +104,6 @@ public class BaseDatos extends SQLiteOpenHelper {
             5.BAÑO
 
          */
-
-        int[] temperaturas = {1, 2, 4};
-        int[] formalidades = {1, 2, 4, 8, 16};
 
          // Esquema:   (ID, TipoPrenda, Temperaturas(temp1 | temp 2), Formalidades( form1 | form2 ))
 

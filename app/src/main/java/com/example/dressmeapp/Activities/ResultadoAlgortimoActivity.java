@@ -41,6 +41,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         listaPrendas = (LinearLayout) findViewById(R.id.lista_prendas);
         guardar=findViewById(R.id.boton_guardar);
         reintentar=findViewById(R.id.boton_reintentar);
+
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

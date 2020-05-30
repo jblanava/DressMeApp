@@ -4,14 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.CambioTallasActivity">
+    android:background="@color/colorFondo"
+    tools:context=".Activities.CambioTallasActivity" >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="198dp"
-        android:layout_height="137dp"
-        android:text="CAMBIO TALLAS"
-        android:textSize="30dp"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="283dp" />
+    <Button
+        android:id="@+id/bAddTalla"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mybutton"
+        android:text="Añadir una nueva talla"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.828" />
 </androidx.constraintlayout.widget.ConstraintLayout>

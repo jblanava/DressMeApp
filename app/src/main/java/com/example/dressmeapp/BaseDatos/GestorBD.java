@@ -30,7 +30,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp18.db"; // Antonio ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp19.db"; // Antonio ha cambiado a la BD__17
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -473,7 +473,6 @@ public class GestorBD {
 
     public static List<String> get_nombres_tabla(Context context, String tabla)
     {
-        //String sentenciasSQL = "SELECT NOMBRE FROM (SELECT NOMBRE FROM COLOR WHERE ID = " + id " )";
         String sentenciaSQL = "SELECT NOMBRE FROM " + tabla.toUpperCase();
 
         Cursor cursor;
@@ -678,7 +677,7 @@ public class GestorBD {
 
         String codicionColores = sj.toString();
 
-        String sentenciaSQL = "SELECT ID, TIPO FROM PRENDA  WHERE " + codicionTipos + " AND " + codicionColores + " AND VISIBLE = 1";
+        String sentenciaSQL = "SELECT ID, TIPO FROM PRENDA  WHERE " + codicionTipos + " AND " + codicionColores + " AND VISIBLE = 1 AND ID_PERFIL = " + idPerfil;
 
 
 
@@ -795,7 +794,7 @@ public class GestorBD {
         List<Conjunto> res = new ArrayList<>();
 
 
-        String sentenciaSQL = "SELECT * FROM CONJUNTO";
+        String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + idPerfil;
         Cursor cursor;
 
         BaseDatos base = new BaseDatos(context, nombreBD);
@@ -964,18 +963,19 @@ public class GestorBD {
 
             } // Fin de while
 
+            if(abrigo != -1 || sudadera != -1 || camiseta != -1 || pantalon != -1 || zapato != -1 ||complemento != -1)
+            {
+                String sentenciaSQL;
+                sentenciaSQL = "INSERT INTO CONJUNTO (ID, ABRIGO, SUDADERA, CAMISETA, PANTALON, ZAPATO, COMPLEMENTO, ID_PERFIL) VALUES ('";
+                sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "', '" + idPerfil + "' )";
 
-
-            String sentenciaSQL;
-            sentenciaSQL = "INSERT INTO CONJUNTO (ID, ABRIGO, SUDADERA, CAMISETA, PANTALON, ZAPATO, COMPLEMENTO) VALUES ('";
-            sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "')";
-
-            BaseDatos base = new BaseDatos(contexto, nombreBD);
-            SQLiteDatabase baseDatos;
-            baseDatos = base.getWritableDatabase();
-            baseDatos.execSQL(sentenciaSQL);
-            baseDatos.close();
-            base.close();
+                BaseDatos base = new BaseDatos(contexto, nombreBD);
+                SQLiteDatabase baseDatos;
+                baseDatos = base.getWritableDatabase();
+                baseDatos.execSQL(sentenciaSQL);
+                baseDatos.close();
+                base.close();
+            }
         }
 
 
