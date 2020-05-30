@@ -56,6 +56,7 @@ public class CambioTallasActivity extends AppCompatActivity {
         {
             TextView textView = new TextView(this);
             textView.setText(t);
+            textView.setAllCaps(true); // aniadido para probar , se puede quitar
             listaTallas.addView(textView);
         }
     }
