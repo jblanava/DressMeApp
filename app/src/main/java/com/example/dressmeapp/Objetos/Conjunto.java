@@ -1,13 +1,18 @@
 package com.example.dressmeapp.Objetos;
 
+import com.example.dressmeapp.BaseDatos.GestorBD;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Conjunto {
     private List<Integer> idPrendas;
 
+    int idPerfil;
+
     public Conjunto(){
-        idPrendas= new ArrayList<Integer>();
+        idPerfil = GestorBD.getIdPerfil();
+        idPrendas = new ArrayList<>();
     }
 
     /*
@@ -26,7 +31,7 @@ public class Conjunto {
      */
 
     public void add(int idPrenda){
-        if(idPrendas.size()<6){
+        if(idPrendas.size()<=6){
             idPrendas.add(idPrenda);
         }
     }
