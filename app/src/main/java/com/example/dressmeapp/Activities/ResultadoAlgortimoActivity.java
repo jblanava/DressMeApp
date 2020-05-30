@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -40,7 +41,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         listaPrendas = (LinearLayout) findViewById(R.id.lista_prendas);
         guardar=findViewById(R.id.boton_guardar);
         reintentar=findViewById(R.id.boton_reintentar);
-        reintentar.setOnClickListener(new View.OnClickListener() {
+        guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 guardaConjunto();
@@ -64,6 +65,9 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
     private void guardaConjunto() {
         GestorBD.addConjunto(this,this.conjunto);
+        Intent salto = new Intent(this, MenuPrincipalActivity.class);
+        startActivity(salto);
+        this.finish();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

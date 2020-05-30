@@ -46,6 +46,9 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6) ");
         db.execSQL("INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1) ");
 
+
+
+
     }
 
     private void crearPrendas(SQLiteDatabase db) {

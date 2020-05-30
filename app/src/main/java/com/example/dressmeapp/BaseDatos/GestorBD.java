@@ -16,6 +16,7 @@ import com.example.dressmeapp.Objetos.Prenda;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 import java.util.StringJoiner;
 
@@ -29,7 +30,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp16.db";
+    private static String nombreBD = "dressmeapp18.db"; // Antonio ha cambiado a la BD__17
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -892,4 +893,96 @@ public class GestorBD {
         return resultado;
     }
 
-}
+
+        public static  int getTipoID (Context context, int idPrenda){
+            int resultado = -1;
+            String sentenciaSQL = "SELECT TIPO.ID  FROM TIPO, PRENDA   WHERE PRENDA.TIPO = TIPO.NOMBRE AND PRENDA.ID = " + idPrenda;
+
+            Cursor cursor;
+            BaseDatos base = new BaseDatos(context, nombreBD);
+            SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+            cursor = baseDatos.rawQuery(sentenciaSQL, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    resultado = LibreriaBD.CampoInt(cursor, "TIPO.ID");
+                } while (cursor.moveToNext());
+            }
+
+            baseDatos.close();
+            base.close();
+            cursor.close();
+            return resultado;
+        }
+
+
+        public static void addConjunto(Context contexto, Conjunto conj) {
+
+            int id = obtenIDMaximoConjunto(contexto); // ID
+
+            List<Integer> idPrendas = conj.getPrendas();
+            ListIterator<Integer> it = idPrendas.listIterator();
+
+
+            int abrigo = -1;
+            int sudadera = -1;
+            int camiseta = -1;
+            int zapato = -1;
+            int complemento = -1;
+            int pantalon = -1;
+
+
+
+
+            while(it.hasNext()) {
+
+                Prenda aux = Obtener_Prenda(contexto, it.next());
+
+                if(aux != null){
+
+                    //Abrigo:
+                    if(aux.tipo.equalsIgnoreCase("abrigo") || aux.tipo.equalsIgnoreCase("chaqueta")) {
+                        abrigo = aux.id;
+                    }
+                    // Sudadera
+                    else if(aux.tipo.equalsIgnoreCase("jersey") || aux.tipo.equalsIgnoreCase("sudadera")|| aux.tipo.equalsIgnoreCase("polar") ) {
+                        sudadera = aux.id;
+                    }
+                    //Camiseta
+                    else if(aux.tipo.equalsIgnoreCase("blusa") || aux.tipo.equalsIgnoreCase("camisa") || aux.tipo.equalsIgnoreCase("camiseta m.corta") || aux.tipo.equalsIgnoreCase("polo") || aux.tipo.equalsIgnoreCase("traje") || aux.tipo.equalsIgnoreCase("chandal") || aux.tipo.equalsIgnoreCase("vestido") || aux.tipo.equalsIgnoreCase("camiseta m.larga") || aux.tipo.equalsIgnoreCase("top")  ) {
+                        camiseta = aux.id;
+                    }
+                    //Pantalon
+                    else if(aux.tipo.equalsIgnoreCase("bañador/bikini") || aux.tipo.equalsIgnoreCase("falda") || aux.tipo.equalsIgnoreCase("pantalon") || aux.tipo.equalsIgnoreCase("shorts") || aux.tipo.equalsIgnoreCase("bermudas") ) {
+                        pantalon = aux.id;
+                    }
+                    //Zapatos
+                    else if(aux.tipo.equalsIgnoreCase("chanclas") || aux.tipo.equalsIgnoreCase("tennis") || aux.tipo.equalsIgnoreCase("zapatos/tacones") || aux.tipo.equalsIgnoreCase("sandalias") || aux.tipo.equalsIgnoreCase("zapatillas") ) {
+                        zapato = aux.id;
+                    }
+                    //Complemento
+                    else if(aux.tipo.equalsIgnoreCase("complemento")) {
+                        complemento = aux.id;
+                    }
+
+                } // Fin de if
+
+
+            } // Fin de while
+
+
+
+            String sentenciaSQL;
+            sentenciaSQL = "INSERT INTO CONJUNTO (ID, ABRIGO, SUDADERA, CAMISETA, PANTALON, ZAPATO, COMPLEMENTO) VALUES ('";
+            sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "')";
+
+            BaseDatos base = new BaseDatos(contexto, nombreBD);
+            SQLiteDatabase baseDatos;
+            baseDatos = base.getWritableDatabase();
+            baseDatos.execSQL(sentenciaSQL);
+            baseDatos.close();
+            base.close();
+        }
+
+
+} // Fin de clase
