@@ -3,6 +3,7 @@ package com.example.dressmeapp;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -10,12 +11,16 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBD2;
+import com.example.dressmeapp.BaseDatos.LibreriaBD;
 import com.example.dressmeapp.Debug.Debug;
+import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -28,7 +33,7 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
 
     private static Context appContext;
-    private static String nombreBaseDatos = "BaseDeDatosPruebas.db";
+    private static String nombreBaseDatos = "dressmeapp21.db";
 
     @Before
     public void prepararTest() {
@@ -211,7 +216,7 @@ public class ExampleInstrumentedTest {
         int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
         int idColor = 1; // azul
         int idTipo = 1; // abrigo
-        int idTalla = 1; // XS
+        int idTalla = 1; // M
 
         int idPrenda = GestorBD.obtenIDMaximoPrenda(appContext);
         GestorBD.crearPrenda(appContext,
@@ -257,7 +262,7 @@ public class ExampleInstrumentedTest {
         int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
         int idColor = 1; // azul
         int idTipo = 1; // abrigo
-        int idTalla = 1; // XS
+        int idTalla = 1; // M
 
         int idPrenda = GestorBD.obtenIDMaximoPrenda(appContext);
         GestorBD.crearPrenda(appContext,
@@ -303,7 +308,7 @@ public class ExampleInstrumentedTest {
         int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
         int idColor = 1; // azul
         int idTipo = 1; // abrigo
-        int idTalla = 1; // XS
+        int idTalla = 1; // M
 
         int idPrenda = GestorBD.obtenIDMaximoPrenda(appContext);
         GestorBD.crearPrenda(appContext,
@@ -422,6 +427,142 @@ public class ExampleInstrumentedTest {
         int maxIdDespues = GestorBD2.obtenIDMaximoColor(appContext);
 
         assertEquals(maxIdDespues, maxIdAntes + 1);
+
+    }
+
+    /********************************************************************************
+     HISTORIAL & CONJUNTOS
+     ********************************************************************************/
+
+    @Test
+    public void borrarConjuntoFuncionaBien() {
+
+        // Crear conjunto
+
+        int idPerfil = GestorBD.obtenIDMaximoPerfil(appContext);
+        GestorBD.CrearPerfil(appContext, "foo", "bar");
+        GestorBD.setIdPerfil(idPerfil);
+
+        Conjunto cjto = new Conjunto();
+        int idCjto = GestorBD.obtenIDMaximoConjunto(appContext);
+        cjto.add(idCjto);
+
+        int[] idsPrenda = new int[6];
+        int[] tiposPrenda = {1, 13, 4, 11, 16, 8};
+        for (int i = 0; i < 6; i++) {
+            idsPrenda[i] = GestorBD.obtenIDMaximoPrenda(appContext);
+            GestorBD.crearPrenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
+            cjto.add(idsPrenda[i]);
+        }
+
+        GestorBD.addConjunto(appContext, cjto);
+
+        int numConjuntosAntes = GestorBD.ConjuntosEnBD(appContext).size();
+
+        // Borrarlo
+
+        GestorBD gestor = new GestorBD(appContext);
+        GestorBD.BorrarConjunto(idCjto);
+
+        int numConjuntosDespues = GestorBD.ConjuntosEnBD(appContext).size();
+        assertEquals(numConjuntosDespues, numConjuntosAntes - 1);
+
+        // Comprobar que no está el conjunto
+        String sql = "SELECT COUNT(*) AS CUENTA FROM CONJUNTO WHERE ABRIGO=" + idsPrenda[0]
+                + " AND SUDADERA=" + idsPrenda[1]
+                + " AND CAMISETA=" + idsPrenda[2]
+                + " AND PANTALON=" + idsPrenda[3]
+                + " AND ZAPATO=" + idsPrenda[4]
+                + " AND COMPLEMENTO=" + idsPrenda[5]
+                + " AND ID_PERFIL=" + idPerfil;
+        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        SQLiteDatabase sqldb = bd.getReadableDatabase();
+
+        int ok = -1;
+        Cursor cur = sqldb.rawQuery(sql, null);
+        if (cur.moveToFirst()) {
+            ok = cur.getInt(0);
+        }
+        cur.close();
+        bd.close();
+        sqldb.close();
+
+        assertEquals(0, ok);
+
+    }
+
+    @Test
+    public void obtenIDMaximoConjuntoFuncionaBien() {
+
+        int idPerfil = GestorBD.obtenIDMaximoPerfil(appContext);
+        GestorBD.CrearPerfil(appContext, "foo", "bar");
+
+        Conjunto cjto = new Conjunto();
+        int idCjto = GestorBD.obtenIDMaximoConjunto(appContext);
+        cjto.add(idCjto);
+
+        int[] idsPrenda = new int[6];
+        int[] tiposPrenda = {1, 13, 4, 11, 16, 8};
+        for (int i = 0; i < 6; i++) {
+            idsPrenda[i] = GestorBD.obtenIDMaximoPrenda(appContext);
+            GestorBD.crearPrenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
+            cjto.add(idsPrenda[i]);
+        }
+
+        GestorBD.addConjunto(appContext, cjto);
+        int idCjtoDespues = GestorBD.obtenIDMaximoConjunto(appContext);
+
+        assertEquals(idCjtoDespues, idCjto + 1);
+
+    }
+
+    @Test
+    public void insertarConjuntoFuncionaBien() {
+
+        int cjtosExistentesAntes = GestorBD.ConjuntosEnBD(appContext).size();
+
+        int idPerfil = GestorBD.obtenIDMaximoPerfil(appContext);
+        GestorBD.CrearPerfil(appContext, "foo", "bar");
+        GestorBD.setIdPerfil(idPerfil);
+
+        Conjunto cjto = new Conjunto();
+        int idCjto = GestorBD.obtenIDMaximoConjunto(appContext);
+        cjto.add(idCjto);
+
+        int[] idsPrenda = new int[6];
+        int[] tiposPrenda = {1, 13, 4, 11, 16, 8};
+        for (int i = 0; i < 6; i++) {
+            idsPrenda[i] = GestorBD.obtenIDMaximoPrenda(appContext);
+            GestorBD.crearPrenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
+            cjto.add(idsPrenda[i]);
+        }
+
+        GestorBD.addConjunto(appContext, cjto);
+
+        String sql = "SELECT COUNT(*) AS CUENTA FROM CONJUNTO WHERE ABRIGO=" + idsPrenda[0]
+                + " AND SUDADERA=" + idsPrenda[1]
+                + " AND CAMISETA=" + idsPrenda[2]
+                + " AND PANTALON=" + idsPrenda[3]
+                + " AND ZAPATO=" + idsPrenda[4]
+                + " AND COMPLEMENTO=" + idsPrenda[5]
+                + " AND ID_PERFIL=" + idPerfil;
+        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        SQLiteDatabase sqldb = bd.getReadableDatabase();
+
+        int ok = -1;
+        Cursor cur = sqldb.rawQuery(sql, null);
+        if (cur.moveToFirst()) {
+            ok = cur.getInt(0);
+        }
+        cur.close();
+        bd.close();
+        sqldb.close();
+
+
+        int cjtosExistentesDespues = GestorBD.ConjuntosEnBD(appContext).size();
+
+        assertEquals(cjtosExistentesDespues, cjtosExistentesAntes + 1);
+        assertEquals(1, ok);
 
     }
 

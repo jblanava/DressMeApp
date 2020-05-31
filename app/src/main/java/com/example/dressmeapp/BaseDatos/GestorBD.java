@@ -30,7 +30,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp20.db"; // Antonio ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp21.db"; // Antonio ha cambiado a la BD__17
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -391,21 +391,6 @@ public class GestorBD {
         baseDatos.execSQL(SentenciaSQL);
         baseDatos.close();
         base.close();
-    }
-
-    public static void BorrarHistorial(Context contexto, int idPerfil) {
-
-        // Definir cómo se hará una entrada en el historia (información de salida + prendas sugeridas)
-        String sentenciaSQL;
-        sentenciaSQL = "DELETE FROM ENTRADA_HISTORIAL WHERE ID = " + String.valueOf(idPerfil);
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
-        SQLiteDatabase baseDatos;
-        baseDatos = base.getWritableDatabase();
-        baseDatos.execSQL(sentenciaSQL);
-        baseDatos.close();
-        base.close();
-
-
     }
 
     public static void BorrarConjunto(int idConjunto) {
