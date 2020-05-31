@@ -46,8 +46,8 @@
                 android:layout_marginRight="35dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Nombre de la Prenda" />
+                android:hint="Nombre de la Prenda"
+                android:inputType="textPersonName" />
         </TableRow>
 
         <TableRow

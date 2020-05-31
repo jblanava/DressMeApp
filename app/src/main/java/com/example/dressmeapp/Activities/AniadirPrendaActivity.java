@@ -82,6 +82,11 @@ public class AniadirPrendaActivity extends AppCompatActivity {
     void crear()
     {
         String nombre = Enombre.getText().toString();
+
+        if(nombre.length() == 0) return; // TODO mandar un mensajito
+
+        Enombre.setText("");    // Esto es porque si pulsas crear muchas veces rapido se crea repetido
+
         int color = Scolor.getSelectedItemPosition() + 1;
         int tipo = Stipo.getSelectedItemPosition() + 1;
         int talla = Stalla.getSelectedItemPosition() + 1;
