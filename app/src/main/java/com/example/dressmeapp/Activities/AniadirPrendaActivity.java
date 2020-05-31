@@ -1,7 +1,9 @@
 package com.example.dressmeapp.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -83,7 +85,18 @@ public class AniadirPrendaActivity extends AppCompatActivity {
     {
         String nombre = Enombre.getText().toString();
 
-        if(nombre.length() == 0) return; // TODO mandar un mensajito
+        if(nombre.trim().length() == 0)
+        {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setMessage("El nombre introducido no es adecuado");
+            alertDialog.setTitle("ATENCIÓN");
+            alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+            alertDialog.setCancelable(true);
+
+
+            alertDialog.show(); // esto es importante :D
+            return;
+        }
 
         Enombre.setText("");    // Esto es porque si pulsas crear muchas veces rapido se crea repetido
 
