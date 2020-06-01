@@ -1028,12 +1028,13 @@ public class GestorBD {
 
         if (cursor.moveToFirst()) {
             do {
+                ColorBD c = new ColorBD();
 
-                int id = LibreriaBD.CampoInt(cursor, "ID");
-                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-                String hex = LibreriaBD.Campo(cursor, "HEX");
-                colores.add(new ColorBD());
+                c.id = LibreriaBD.CampoInt(cursor, "ID");
+                c.nombre = LibreriaBD.Campo(cursor, "NOMBRE");
+                c.hex = LibreriaBD.Campo(cursor, "HEX");
 
+                colores.add(c);
             } while (cursor.moveToNext());
         }
         baseDatos.close();
