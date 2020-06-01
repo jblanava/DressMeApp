@@ -12,6 +12,7 @@ import com.example.dressmeapp.Activities.AniadirPrendaActivity;
 import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
+import com.example.dressmeapp.Objetos.Structs.ColorBD;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -1002,6 +1003,55 @@ public class GestorBD {
         cursor.close();
         return resultado;
     }
+
+
+
+
+
+
+
+
+
+    // Funciones para exportar TODO hacer las funciones que falten
+
+    static public List<ColorBD> expColores(Context context)
+    {
+        String sentenciaSQL = "SELECT * FROM COLOR";
+
+        Cursor cursor;
+        List<ColorBD> colores = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                int id = LibreriaBD.CampoInt(cursor, "ID");
+                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
+                String hex = LibreriaBD.Campo(cursor, "HEX");
+                colores.add(new ColorBD());
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+
+        return colores;
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 } // Fin de clase
