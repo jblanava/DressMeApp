@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompatSideChannelService;
 
 import com.example.dressmeapp.Activities.AniadirPrendaActivity;
+import com.example.dressmeapp.Activities.ResultadoAlgortimoActivity;
 import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
@@ -31,7 +32,8 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp21.db"; // Antonio ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp22.db"; // Antonio ha cambiado a la BD__17
+                                                        // Maria ha cambiado a BD 22
 
     public GestorBD(Context context)  // TODO: Eliminar?
     {
@@ -821,6 +823,51 @@ public class GestorBD {
 
     }
 
+    public static List<Conjunto> ConjuntosFavoritosEnBD(Context context) {
+
+        List<Conjunto> res = new ArrayList<>();
+
+
+        String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + idPerfil + " AND FAVORITO=1";
+        Cursor cursor;
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                Conjunto c = new Conjunto();
+
+                int id = LibreriaBD.CampoInt(cursor, "ID");
+                int Abrigo = LibreriaBD.CampoInt(cursor, "ABRIGO");
+                int Sudadera = LibreriaBD.CampoInt(cursor, "SUDADERA");
+                int Camiseta = LibreriaBD.CampoInt(cursor, "CAMISETA");
+                int Pantalon = LibreriaBD.CampoInt(cursor, "PANTALON");
+                int Zapato = LibreriaBD.CampoInt(cursor, "ZAPATO");
+                int Complemento = LibreriaBD.CampoInt(cursor, "COMPLEMENTO");
+
+                c.add(id);
+                c.add(Abrigo);
+                c.add(Sudadera);
+                c.add(Camiseta);
+                c.add(Pantalon);
+                c.add(Zapato);
+                c.add(Complemento);
+
+
+                res.add(c);
+
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return res;
+
+    }
     public static List<ColorPrenda> ObtenerColores(Context context) {
 
         List<ColorPrenda> res = new ArrayList<>();
@@ -895,9 +942,73 @@ public class GestorBD {
         }
 
 
-        public static void addConjunto(Context contexto, Conjunto conj) {
-
+        public static void addConjunto(Context contexto, Conjunto conj, int flag) {
             int id = obtenIDMaximoConjunto(contexto); // ID
+
+            List<Integer> idPrendas = conj.getPrendas();
+            ListIterator<Integer> it = idPrendas.listIterator();
+
+
+            int abrigo = -1;
+            int sudadera = -1;
+            int camiseta = -1;
+            int zapato = -1;
+            int complemento = -1;
+            int pantalon = -1;
+
+
+
+
+            while(it.hasNext()) {
+
+                Prenda aux = Obtener_Prenda(contexto, it.next());
+
+                if(aux != null){
+
+                    //Abrigo:
+                    if(aux.tipo.equalsIgnoreCase("abrigo") || aux.tipo.equalsIgnoreCase("chaqueta")) {
+                        abrigo = aux.id;
+                    }
+                    // Sudadera
+                    else if(aux.tipo.equalsIgnoreCase("jersey") || aux.tipo.equalsIgnoreCase("sudadera")|| aux.tipo.equalsIgnoreCase("polar") ) {
+                        sudadera = aux.id;
+                    }
+                    //Camiseta
+                    else if(aux.tipo.equalsIgnoreCase("blusa") || aux.tipo.equalsIgnoreCase("camisa") || aux.tipo.equalsIgnoreCase("camiseta m.corta") || aux.tipo.equalsIgnoreCase("polo") || aux.tipo.equalsIgnoreCase("traje") || aux.tipo.equalsIgnoreCase("chandal") || aux.tipo.equalsIgnoreCase("vestido") || aux.tipo.equalsIgnoreCase("camiseta m.larga") || aux.tipo.equalsIgnoreCase("top")  ) {
+                        camiseta = aux.id;
+                    }
+                    //Pantalon
+                    else if(aux.tipo.equalsIgnoreCase("bañador/bikini") || aux.tipo.equalsIgnoreCase("falda") || aux.tipo.equalsIgnoreCase("pantalon") || aux.tipo.equalsIgnoreCase("shorts") || aux.tipo.equalsIgnoreCase("bermudas") ) {
+                        pantalon = aux.id;
+                    }
+                    //Zapatos
+                    else if(aux.tipo.equalsIgnoreCase("chanclas") || aux.tipo.equalsIgnoreCase("tennis") || aux.tipo.equalsIgnoreCase("zapatos/tacones") || aux.tipo.equalsIgnoreCase("sandalias") || aux.tipo.equalsIgnoreCase("zapatillas") ) {
+                        zapato = aux.id;
+                    }
+                    //Complemento
+                    else if(aux.tipo.equalsIgnoreCase("complemento")) {
+                        complemento = aux.id;
+                    }
+
+                } // Fin de if
+
+
+            } // Fin de while
+
+            if(abrigo != -1 || sudadera != -1 || camiseta != -1 || pantalon != -1 || zapato != -1 ||complemento != -1)
+            {
+                String sentenciaSQL;
+                sentenciaSQL = "INSERT INTO CONJUNTO (ID, ABRIGO, SUDADERA, CAMISETA, PANTALON, ZAPATO, COMPLEMENTO, ID_PERFIL, FAVORITO) VALUES ('";
+                sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "', '" + idPerfil + "', '" + flag + "' )";
+
+                BaseDatos base = new BaseDatos(contexto, nombreBD);
+                SQLiteDatabase baseDatos;
+                baseDatos = base.getWritableDatabase();
+                baseDatos.execSQL(sentenciaSQL);
+                baseDatos.close();
+                base.close();
+            }
+            /*int id = obtenIDMaximoConjunto(contexto); // ID
 
             List<Integer> idPrendas = conj.getPrendas();
             ListIterator<Integer> it = idPrendas.listIterator();
@@ -961,7 +1072,7 @@ public class GestorBD {
                 baseDatos.execSQL(sentenciaSQL);
                 baseDatos.close();
                 base.close();
-            }
+            } */
         }
 
 

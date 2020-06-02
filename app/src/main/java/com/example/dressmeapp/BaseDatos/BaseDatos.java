@@ -27,8 +27,8 @@ public class BaseDatos extends SQLiteOpenHelper {
 
         crearPrendas(db);
 
-        db.execSQL("INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6, 1) ");
-        db.execSQL("INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1, 1) ");
+        db.execSQL("INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6, 1, 0) ");
+        db.execSQL("INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1, 1, 0) ");
     }
 
     private void crearPrendas(SQLiteDatabase db) {
@@ -66,7 +66,7 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL(vsql);
 
         vsql = "CREATE TABLE \"CONJUNTO\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"ABRIGO\" INTEGER ,\"SUDADERA\" INTEGER , \"CAMISETA\" INTEGER NOT NULL, " +
-                "\"PANTALON\" INTEGER NOT NULL, \"ZAPATO\" INTEGER NOT NULL, \"COMPLEMENTO\" INTEGER, \"ID_PERFIL\" INTEGER)";
+                "\"PANTALON\" INTEGER NOT NULL, \"ZAPATO\" INTEGER NOT NULL, \"COMPLEMENTO\" INTEGER, \"ID_PERFIL\" INTEGER, \"FAVORITO\" INTEGER)";
         db.execSQL(vsql);
 
         db.execSQL("CREATE TABLE \"COLOR\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL, \"HEX\" VARCHAR(7) NOT NULL)");

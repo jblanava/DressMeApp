@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dressmeapp">
-   <uses-permission android:name="android.permission.CAMERA" />
-    <!--  Esto no sé si es el adecuado, pero no me ha sonado mal, es cuestión de probar -->
-   <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +9,8 @@
         android:roundIcon="@drawable/logomaniqui"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.AniadirTallaActivity"></activity>
+        <activity android:name=".Activities.ConjuntosFavoritosActivity"></activity>
+        <activity android:name=".Activities.AniadirTallaActivity" />
         <activity android:name=".AgruparView" />
         <activity android:name=".Activities.PrimeraActivity">
             <intent-filter>
@@ -23,11 +21,9 @@
         </activity>
         <activity android:name=".Activities.ResultadoAlgortimoActivity" />
         <activity android:name=".Activities.CambioTallasActivity" />
-        <activity android:name=".Activities.CambioColorActivity" />
-     <!--   <activity android:name=".Activities.CambioPrendasActivity" /> -->
+        <activity android:name=".Activities.CambioColorActivity" /> <!-- <activity android:name=".Activities.CambioPrendasActivity" /> -->
         <activity android:name=".Activities.ConjuntoActivity" />
-        <activity android:name=".Activities.HistorialActivity" />
-        <!--   <activity android:name=".Activities.CabeceraAgrupacion" /> <activity android:name=".Activities.HistorialActivity" /> -->
+        <activity android:name=".Activities.HistorialActivity" /> <!-- <activity android:name=".Activities.CabeceraAgrupacion" /> <activity android:name=".Activities.HistorialActivity" /> -->
         <activity android:name=".Activities.AlgoritmoRecomendador" />
         <activity android:name=".Activities.MostrarDatosActivity" />
         <activity android:name=".Activities.Modificar_Prenda" />
@@ -42,6 +38,9 @@
         <activity android:name=".Activities.PerfilConfiguracionActivity" />
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.NuevoColorActivity" />
-    </application>
+    </application> <!-- Esto no sé si es el adecuado, pero no me ha sonado mal, es cuestión de probar -->
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

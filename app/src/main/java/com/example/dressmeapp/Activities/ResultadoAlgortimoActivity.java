@@ -25,6 +25,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
     private LinearLayout listaPrendas;
     private Button guardar;
     private Button reintentar;
+    private Button bFavoritos;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -41,6 +42,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         listaPrendas = (LinearLayout) findViewById(R.id.lista_prendas);
         guardar=findViewById(R.id.boton_guardar);
         reintentar=findViewById(R.id.boton_reintentar);
+        bFavoritos = findViewById(R.id.bAddFav);
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,13 +50,26 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
                 guardaConjunto();
             }
         });
-
         reintentar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 retryConjunto();
             }
         });
+        bFavoritos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aniadeAFavoritos();
+            }
+        });
+    }
+
+    private void aniadeAFavoritos() {
+        GestorBD.addConjunto(this, this.conjunto, 1);
+        bFavoritos.setText("Conjunto añadido");
+        Intent salto = new Intent(this, MenuPrincipalActivity.class);
+        startActivity(salto);
+        this.finish();
     }
 
     private void retryConjunto() {
@@ -65,7 +80,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
     }
 
     private void guardaConjunto() {
-        GestorBD.addConjunto(this,this.conjunto);
+        GestorBD.addConjunto(this,this.conjunto, 0);
         Intent salto = new Intent(this, MenuPrincipalActivity.class);
         startActivity(salto);
         this.finish();

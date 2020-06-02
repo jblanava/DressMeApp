@@ -12,6 +12,7 @@ import com.example.dressmeapp.R;
 public class RecomendadorActivity extends AppCompatActivity {
     private Button bRecomendador;
     private Button bHistorial;
+    private Button bFavoritos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,7 @@ public class RecomendadorActivity extends AppCompatActivity {
     private void enlazaControles(){
         bRecomendador= findViewById(R.id.bRecomendador);
         bHistorial = findViewById(R.id.bHistorial);
+        bFavoritos = findViewById(R.id.bConjFavs);
 
         bRecomendador.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +37,19 @@ public class RecomendadorActivity extends AppCompatActivity {
                 saltoHistorial();
             }
         });
+        bFavoritos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saltoFavoritos();
+            }
+        });
     }
+
+    private void saltoFavoritos() {
+        Intent saltoFav = new Intent(this, ConjuntosFavoritosActivity.class);
+        startActivity(saltoFav);
+    }
+
     private void saltoAlgoritmo(){
         Intent salto = new Intent(this,AlgoritmoRecomendador.class);
         startActivity(salto);

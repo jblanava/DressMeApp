@@ -39,6 +39,14 @@
 
 
         <Button
+            android:id="@+id/bAddFav"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mybutton"
+            android:text="AÑADIR A FAVORITOS" />
+
+        <Button
             style="?android:attr/borderlessButtonStyle"
             android:background="@drawable/mybutton"
             android:id="@+id/boton_guardar"
