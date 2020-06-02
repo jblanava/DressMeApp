@@ -8,6 +8,7 @@
     android:padding="8dp">
     android:clickable="true"
 
+
     <TableLayout
         android:id="@+id/boton_prenda"
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
 
             <TextView
                 android:id="@+id/prenda_nombre"
-                android:layout_width="match_parent"
+                android:layout_width="321dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
@@ -73,6 +74,8 @@
 
 
         </TableRow>
+
+
 
     </TableLayout>
 </RelativeLayout>
