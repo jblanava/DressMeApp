@@ -8,11 +8,11 @@ public class ComboColorBD
 
     public ComboColorBD(){}
 
-    public ComboColorBD(String text, int baseID)
+    public ComboColorBD(String text)
     {
         String[] campos = text.split(";");
 
-        id = Integer.parseInt(campos[0]) + baseID;
+        id = Integer.parseInt(campos[0]);
         color2 = Integer.parseInt(campos[1]);
         color1 = Integer.parseInt(campos[2]);
     }

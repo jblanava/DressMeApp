@@ -13,6 +13,7 @@ import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.Objetos.Structs.ColorBD;
+import com.example.dressmeapp.Objetos.Structs.ComboColorBD;
 import com.example.dressmeapp.Objetos.Structs.ConjuntoBD;
 import com.example.dressmeapp.Objetos.Structs.PerfilBD;
 import com.example.dressmeapp.Objetos.Structs.PrendaBD;
@@ -1050,6 +1051,35 @@ public class GestorBD {
         cursor.close();
 
         return colores;
+    }
+
+    static public List<ComboColorBD> expComboColor(Context context) {
+        String sentenciaSQL = "SELECT * FROM COMBO_COLOR";
+
+        Cursor cursor;
+        List<ComboColorBD> combos = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ComboColorBD cc = new ComboColorBD();
+
+                cc.id = LibreriaBD.CampoInt(cursor, "ID");
+                cc.color1 = LibreriaBD.CampoInt(cursor, "COLOR1");
+                cc.color2 = LibreriaBD.CampoInt(cursor, "COLOR2");
+
+                combos.add(cc);
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+
+        return combos;
     }
 
     static public List<PerfilBD> expPerfiles(Context context)

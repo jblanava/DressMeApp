@@ -12,11 +12,11 @@ public class PrendaBD
 
     public PrendaBD(){}
 
-    public PrendaBD(String text, int baseID)
+    public PrendaBD(String text)
     {
         String[] campos = text.split(";");
 
-        id = Integer.parseInt(campos[0]) + baseID;
+        id = Integer.parseInt(campos[0]);
         nombre = campos[1];
         color = Integer.parseInt(campos[2]);
         tipo= Integer.parseInt(campos[3]);
