@@ -13,6 +13,10 @@ import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.Objetos.Structs.ColorBD;
+import com.example.dressmeapp.Objetos.Structs.ConjuntoBD;
+import com.example.dressmeapp.Objetos.Structs.PerfilBD;
+import com.example.dressmeapp.Objetos.Structs.PrendaBD;
+import com.example.dressmeapp.Objetos.Structs.TallaBD;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -1048,12 +1052,134 @@ public class GestorBD {
         return colores;
     }
 
+    static public List<PerfilBD> expPerfiles(Context context)
+    {
+        String sentenciaSQL = "SELECT * FROM PERFIL";
+
+        Cursor cursor;
+        List<PerfilBD> perfiles = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                PerfilBD c = new PerfilBD();
+
+                c.id = LibreriaBD.CampoInt(cursor, "ID");
+                c.clave = LibreriaBD.Campo(cursor, "CONTRASENIA");
+                c.usuario = LibreriaBD.Campo(cursor, "NOMBRE");
+
+                perfiles.add(c);
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+
+        return perfiles;
+    }
+
+    static public List<PrendaBD> expPrendas(Context context)
+    {
+        String sentenciaSQL = "SELECT * FROM PRENDA";
+
+        Cursor cursor;
+        List<PrendaBD> prendas = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                PrendaBD c = new PrendaBD();
+
+                c.id = LibreriaBD.CampoInt(cursor, "ID");
+                c.color = LibreriaBD.CampoInt(cursor, "COLOR");
+                c.nombre = LibreriaBD.Campo(cursor, "NOMBRE");
+                c.perfil = LibreriaBD.CampoInt(cursor,"ID_PERFIL");
+                c.talla = LibreriaBD.CampoInt(cursor,"TALLA");
+                c.tipo = LibreriaBD.CampoInt(cursor,"TIPO");
+                c.visible = LibreriaBD.CampoInt(cursor,"VISIBLE");
+
+                prendas.add(c);
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+
+        return prendas;
+    }
+    static public List<TallaBD> expTallas(Context context)
+    {
+        String sentenciaSQL = "SELECT * FROM PRENDA";
+
+        Cursor cursor;
+        List<TallaBD> tallas = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                TallaBD c = new TallaBD();
+
+                c.id = LibreriaBD.CampoInt(cursor, "ID");
+
+                c.nombre = LibreriaBD.Campo(cursor, "NOMBRE");
+
+                tallas.add(c);
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+
+        return tallas;
+    }
+
+    static public List<ConjuntoBD> expConjuntos(Context context)
+    {
+        String sentenciaSQL = "SELECT * FROM PRENDA";
+
+        Cursor cursor;
+        List<ConjuntoBD> conjuntos = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ConjuntoBD c = new ConjuntoBD();
+
+                c.id = LibreriaBD.CampoInt(cursor, "ID");
+                c.prendas[0] = LibreriaBD.CampoInt(cursor, "ABRIGO");
+                c.prendas[1] = LibreriaBD.CampoInt(cursor, "SUDADERA");
+                c.prendas[2] = LibreriaBD.CampoInt(cursor, "CAMISETA");
+                c.prendas[3] = LibreriaBD.CampoInt(cursor, "PANTALON");
+                c.prendas[4] = LibreriaBD.CampoInt(cursor, "ZAPATO");
+                c.prendas[5] = LibreriaBD.CampoInt(cursor, "COMPLEMENTO");
+                c.perfil = LibreriaBD.CampoInt(cursor,"ID_PERFIL");
 
 
+                conjuntos.add(c);
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
 
-
-
-
+        return conjuntos;
+    }
 
 
 

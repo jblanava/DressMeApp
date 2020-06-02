@@ -12,7 +12,7 @@
         android:roundIcon="@drawable/logomaniqui"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.AniadirTallaActivity"></activity>
+        <activity android:name=".Activities.AniadirTallaActivity" />
         <activity android:name=".AgruparView" />
         <activity android:name=".Activities.PrimeraActivity">
             <intent-filter>

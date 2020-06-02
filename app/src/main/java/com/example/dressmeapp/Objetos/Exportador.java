@@ -22,9 +22,10 @@ public class Exportador
 
         exportar(GestorBD.expColores(context), "perfiles.txt");
         exportar(GestorBD.expColores(context), "colores.txt");
-        exportar(GestorBD.expColores(context), "combo_colores.txt");
+        exportar(GestorBD.expComboColor(context), "combo_colores.txt");
         exportar(GestorBD.expColores(context), "tallas.txt");
         exportar(GestorBD.expColores(context), "prendas.txt");
+
     }
 
     public void exportar(List<?> objetos, String archivo)
