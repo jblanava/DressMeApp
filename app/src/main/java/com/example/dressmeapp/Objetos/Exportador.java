@@ -20,11 +20,11 @@ public class Exportador
     {
         this.context = context;
 
-        exportar(GestorBD.expColores(context), "perfiles.txt");
+        exportar(GestorBD.expPerfiles(context), "perfiles.txt");
         exportar(GestorBD.expColores(context), "colores.txt");
         exportar(GestorBD.expComboColor(context), "combo_colores.txt");
-        exportar(GestorBD.expColores(context), "tallas.txt");
-        exportar(GestorBD.expColores(context), "prendas.txt");
+        exportar(GestorBD.expTallas(context), "tallas.txt");
+        exportar(GestorBD.expPrendas(context), "prendas.txt");
 
     }
 
@@ -39,6 +39,7 @@ public class Exportador
             }
 
             outputStreamWriter.close();
+            Log.i("Exportador", "Creado fichero " + archivo);
         }
         catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());

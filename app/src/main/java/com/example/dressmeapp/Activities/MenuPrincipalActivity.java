@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.dressmeapp.Objetos.Exportador;
 import com.example.dressmeapp.R;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
@@ -43,6 +44,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
                 ir_a_configuracion();
             }
         });
+
     }
 
     void ir_a_vestuario()

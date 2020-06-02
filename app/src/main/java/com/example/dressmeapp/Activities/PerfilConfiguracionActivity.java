@@ -10,12 +10,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.Objetos.Exportador;
 import com.example.dressmeapp.R;
 
 
 public class PerfilConfiguracionActivity extends AppCompatActivity {
     private Button cambioDatos;
     private Button cambioContrasenia;
+    private Button exportarDatos;
     private Button borrarPerfil;
     private Context contexto;
     @Override
@@ -31,6 +33,7 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
         contexto = getApplicationContext();
         cambioDatos = findViewById(R.id.botonCambiaDatos);
         cambioContrasenia = findViewById(R.id.botonCambiaContrasenia);
+        exportarDatos = findViewById(R.id.botonExportarDatos);
         borrarPerfil = findViewById(R.id.botonBorrarPerfil);
         cambioContrasenia.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -41,6 +44,12 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
         cambioDatos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 MostrarDatos();
+            }
+        });
+
+        exportarDatos.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ExportarDatos();
             }
         });
 
@@ -100,6 +109,10 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     startActivity(salto);
 
 
+    }
+
+    protected void ExportarDatos() {
+        new Exportador(this);
     }
 
     protected void irCambiarContrasenia() {
