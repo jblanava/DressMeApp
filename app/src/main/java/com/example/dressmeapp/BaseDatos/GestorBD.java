@@ -1014,71 +1014,7 @@ public class GestorBD {
                 baseDatos.close();
                 base.close();
             }
-            /*int id = obtenIDMaximoConjunto(contexto); // ID
 
-            List<Integer> idPrendas = conj.getPrendas();
-            ListIterator<Integer> it = idPrendas.listIterator();
-
-
-            int abrigo = -1;
-            int sudadera = -1;
-            int camiseta = -1;
-            int zapato = -1;
-            int complemento = -1;
-            int pantalon = -1;
-
-
-
-
-            while(it.hasNext()) {
-
-                Prenda aux = Obtener_Prenda(contexto, it.next());
-
-                if(aux != null){
-
-                    //Abrigo:
-                    if(aux.tipo.equalsIgnoreCase("abrigo") || aux.tipo.equalsIgnoreCase("chaqueta")) {
-                        abrigo = aux.id;
-                    }
-                    // Sudadera
-                    else if(aux.tipo.equalsIgnoreCase("jersey") || aux.tipo.equalsIgnoreCase("sudadera")|| aux.tipo.equalsIgnoreCase("polar") ) {
-                        sudadera = aux.id;
-                    }
-                    //Camiseta
-                    else if(aux.tipo.equalsIgnoreCase("blusa") || aux.tipo.equalsIgnoreCase("camisa") || aux.tipo.equalsIgnoreCase("camiseta m.corta") || aux.tipo.equalsIgnoreCase("polo") || aux.tipo.equalsIgnoreCase("traje") || aux.tipo.equalsIgnoreCase("chandal") || aux.tipo.equalsIgnoreCase("vestido") || aux.tipo.equalsIgnoreCase("camiseta m.larga") || aux.tipo.equalsIgnoreCase("top")  ) {
-                        camiseta = aux.id;
-                    }
-                    //Pantalon
-                    else if(aux.tipo.equalsIgnoreCase("bañador/bikini") || aux.tipo.equalsIgnoreCase("falda") || aux.tipo.equalsIgnoreCase("pantalon") || aux.tipo.equalsIgnoreCase("shorts") || aux.tipo.equalsIgnoreCase("bermudas") ) {
-                        pantalon = aux.id;
-                    }
-                    //Zapatos
-                    else if(aux.tipo.equalsIgnoreCase("chanclas") || aux.tipo.equalsIgnoreCase("tennis") || aux.tipo.equalsIgnoreCase("zapatos/tacones") || aux.tipo.equalsIgnoreCase("sandalias") || aux.tipo.equalsIgnoreCase("zapatillas") ) {
-                        zapato = aux.id;
-                    }
-                    //Complemento
-                    else if(aux.tipo.equalsIgnoreCase("complemento")) {
-                        complemento = aux.id;
-                    }
-
-                } // Fin de if
-
-
-            } // Fin de while
-
-            if(abrigo != -1 || sudadera != -1 || camiseta != -1 || pantalon != -1 || zapato != -1 ||complemento != -1)
-            {
-                String sentenciaSQL;
-                sentenciaSQL = "INSERT INTO CONJUNTO (ID, ABRIGO, SUDADERA, CAMISETA, PANTALON, ZAPATO, COMPLEMENTO, ID_PERFIL) VALUES ('";
-                sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "', '" + idPerfil + "' )";
-
-                BaseDatos base = new BaseDatos(contexto, nombreBD);
-                SQLiteDatabase baseDatos;
-                baseDatos = base.getWritableDatabase();
-                baseDatos.execSQL(sentenciaSQL);
-                baseDatos.close();
-                base.close();
-            }
             return id;
         }
 
