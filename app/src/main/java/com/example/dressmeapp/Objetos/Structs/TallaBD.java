@@ -7,11 +7,11 @@ public class TallaBD
 
     public TallaBD(){}
 
-    public TallaBD(String text, int baseID)
+    public TallaBD(String text)
     {
         String[] campos = text.split(";");
 
-        id = Integer.parseInt(campos[0]) + baseID;
+        id = Integer.parseInt(campos[0]);
         nombre = campos[1];
 
     }

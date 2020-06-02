@@ -12,11 +12,11 @@ public class ConjuntoBD
 
     public ConjuntoBD(){}
 
-    public ConjuntoBD(String text, int baseID)
+    public ConjuntoBD(String text)
     {
         String[] campos = text.split(";");
 
-        id = Integer.parseInt(campos[0]) + baseID;
+        id = Integer.parseInt(campos[0]);
         //Esto creo que es así, puede que no
         for(int i =1;i<7;i++)
         prendas[i] = Integer.parseInt(campos[i]);

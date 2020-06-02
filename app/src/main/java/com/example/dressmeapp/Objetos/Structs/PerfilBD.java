@@ -8,11 +8,11 @@ public class PerfilBD
 
     public PerfilBD(){}
 
-    public PerfilBD(String text, int baseID)
+    public PerfilBD(String text)
     {
         String[] campos = text.split(";");
 
-        id = Integer.parseInt(campos[0]) + baseID;
+        id = Integer.parseInt(campos[0]);
         usuario = campos[1];
         clave = campos[2];
 

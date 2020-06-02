@@ -1082,7 +1082,6 @@ public class GestorBD {
         return combos;
     }
 
-
     static public List<PerfilBD> expPerfiles(Context context)
     {
         String sentenciaSQL = "SELECT * FROM PERFIL";
@@ -1211,10 +1210,6 @@ public class GestorBD {
 
         return conjuntos;
     }
-
-
-
-
 
 
 
