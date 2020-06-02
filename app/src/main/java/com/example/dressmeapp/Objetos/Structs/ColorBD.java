@@ -14,11 +14,11 @@ public class ColorBD
 
     public ColorBD(){}
 
-    public ColorBD(String text, int baseID)
+    public ColorBD(String text)
     {
         String[] campos = text.split(";");
 
-        id = Integer.parseInt(campos[0]) + baseID;
+        id = Integer.parseInt(campos[0]);
         nombre = campos[1];
         hex = campos[2];
     }

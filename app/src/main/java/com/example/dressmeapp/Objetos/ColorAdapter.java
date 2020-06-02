@@ -52,9 +52,16 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
 
         LinearLayout layout;
 
-        public ColorViewHolder(@NonNull View v) {
+        ColorViewHolder(@NonNull View v) {
             super(v);
 
+            layout = v.findViewById(R.id.spColor);
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    recyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
+                }
+            });
             txtColor = v.findViewById(R.id.txtColor);
             cuadrado = v.findViewById(R.id.imgColor);
         }

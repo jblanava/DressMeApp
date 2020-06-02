@@ -6,6 +6,11 @@ import android.util.Log;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBD2;
 import com.example.dressmeapp.Objetos.Structs.ColorBD;
+import com.example.dressmeapp.Objetos.Structs.ComboColorBD;
+import com.example.dressmeapp.Objetos.Structs.ConjuntoBD;
+import com.example.dressmeapp.Objetos.Structs.PerfilBD;
+import com.example.dressmeapp.Objetos.Structs.PrendaBD;
+import com.example.dressmeapp.Objetos.Structs.TallaBD;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -13,7 +18,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Importador
 {
@@ -32,19 +39,78 @@ public class Importador
         porque sino los mapas estarán vacios y no sabré que ID ponerle en esos campos)
          */
 
+        Map<Integer, Integer> Mapaperfiles = new HashMap<>();
+        Map<Integer, Integer> Mapacolores = new HashMap<>();
+        Map<Integer, Integer> Mapatallas = new HashMap<>();
+        Map<Integer, Integer> Mapaprendas = new HashMap<>();
+
+
         List<String> prefiles = importar("perfiles.txt");
         List<String> colores = importar("colores.txt");
         List<String> combos = importar("combo_colores.txt");
         List<String> tallas = importar("tallas.txt");
         List<String> prendas = importar("prendas.txt");
+        List<String> conjuntos = importar("conjuntos.txt");
 
-        int baseID = 0; // Todo: GestorBD.get_id_maximo_tabla(context, "color");
-        for(String s : colores)
+
+        for(String s : prefiles)
         {
-            ColorBD c = new ColorBD(s, baseID);
-            GestorBD2.crearColor(context, c.nombre, c.hex);
+            PerfilBD p = new PerfilBD(s);
+            int nuevoId = GestorBD.CrearPerfil(context, p.usuario, p.clave);
+
+            Mapaperfiles.put(p.id, nuevoId);
         }
 
+        for(String s : colores)
+        {
+            ColorBD c = new ColorBD(s);
+
+            if(c.id <= 12) continue; // Los primeros 12 son los que vienen por defecto y me los salto
+
+            int nuevoId = GestorBD2.crearColor(context, c.nombre, c.hex);
+
+            Mapacolores.put(c.id, nuevoId);
+        }
+
+        for(String s : combos)
+        {
+            ComboColorBD c = new ComboColorBD(s);
+            GestorBD2.crearComboColor(context, c.color1, c.color2);
+        }
+
+        for(String s : tallas)
+        {
+            TallaBD t = new TallaBD(s);
+
+            if(t.id <= 6) continue; // Las primeras 6 son las que vienen por defecto y me las salto
+
+            int nuevoId = GestorBD.CrearTalla(context, t.nombre);
+
+            Mapatallas.put(t.id, nuevoId);
+        }
+
+
+        for(String s : prendas)
+        {
+            PrendaBD p = new PrendaBD(s);
+
+            int nuevoId = GestorBD.crearPrenda(context, p.nombre, Mapacolores.get(p.color), p.tipo, Mapatallas.get(p.talla), p.visible, Mapaperfiles.get(p.perfil));
+
+            Mapaprendas.put(p.id, nuevoId);
+        }
+
+        for(String s : conjuntos)
+        {
+            ConjuntoBD p = new ConjuntoBD(s);
+            Conjunto c = new Conjunto();
+
+            for(int i : p.prendas)
+            {
+                c.add(Mapaprendas.get(i));
+            }
+
+            GestorBD.addConjunto(context, c);
+        }
 
     }
 

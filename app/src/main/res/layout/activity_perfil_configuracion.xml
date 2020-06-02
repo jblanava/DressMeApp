@@ -51,16 +51,29 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <Button
+        android:id="@+id/botonExportarDatos"
         style="?android:attr/borderlessButtonStyle"
+        android:layout_width="267dp"
+        android:layout_height="43dp"
+        android:background="@drawable/mybutton"
+        android:text="Exportar datos de DressMeApp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.669" />
+
+    <Button
         android:id="@+id/botonBorrarPerfil"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:text="Borrar perfil"
         android:background="@drawable/mybutton"
+        android:text="Borrar perfil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.841" />
 </androidx.constraintlayout.widget.ConstraintLayout>

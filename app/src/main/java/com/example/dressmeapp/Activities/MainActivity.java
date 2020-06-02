@@ -15,6 +15,7 @@ import com.example.dressmeapp.Activities.MenuPrincipalActivity;
 import com.example.dressmeapp.Activities.RegistroActivity;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Debug.Debug;
+import com.example.dressmeapp.Objetos.Exportador;
 import com.example.dressmeapp.R;
 
 public class MainActivity extends AppCompatActivity {

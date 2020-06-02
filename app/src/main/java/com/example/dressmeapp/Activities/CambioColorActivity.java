@@ -59,18 +59,10 @@ public class CambioColorActivity extends AppCompatActivity {
         final Context context = this;
         final List<ColorPrenda> colores = GestorBD.ObtenerColores(context);
 
-        for (ColorPrenda color : colores) {
-            Log.i("COLOR", color.getHex());
-        }
-        Log.i("NUMERO COLORES", "" + colores.size());
-
         listaColores.setAdapter(new ColorAdapter(colores, new RecyclerViewOnItemClickListener() {
             @Override
             public void onClick(View v, int position) {
-
-                //Intent modificar = new Intent(context, Modificar_Prenda.class);
-                //modificar.putExtra("intVariableName", colores.get(position).id);
-                //startActivity(modificar);
+                // no pasa nada al tocar el color
             }
         }));
 
