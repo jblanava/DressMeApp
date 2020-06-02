@@ -1,9 +1,14 @@
 package com.example.dressmeapp.BaseDatos;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
+import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompatSideChannelService;
@@ -20,6 +25,7 @@ import com.example.dressmeapp.Objetos.Structs.PerfilBD;
 import com.example.dressmeapp.Objetos.Structs.PrendaBD;
 import com.example.dressmeapp.Objetos.Structs.TallaBD;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -1060,11 +1066,54 @@ public class GestorBD {
 
 
 
+    /*********************************************************************************************************/
+                        /** Fotos **/
+     /*********************************************************************************************************/
+
+     public static void guardarFoto(Context context, byte [] img, String id_activo){
+
+         BaseDatos bdh = new BaseDatos(context, nombreBD);
+         SQLiteDatabase bd;
+         bd = bdh.getWritableDatabase();
+
+         ContentValues cv = new ContentValues();
+         cv.put("FOTO", img);
+         cv.put("ID", Integer.parseInt(id_activo));
+         bd.insert("FOTOS",null, cv);
+
+         bd.close();
+         bdh.close();
+     }
+
+    public static void eliminar_foto_antigua(Context context, String id_activo){
+        String vsql = "DELETE FROM FOTOS WHERE ID = " + id_activo;
+
+        BaseDatos bdh = new BaseDatos(context, nombreBD);
+        SQLiteDatabase bd;
+        bd = bdh.getWritableDatabase();
+        bd.execSQL(vsql);
+        bd.close();
+        bdh.close();
+    }
 
 
+    public static void cargarFoto(Context context, String id_modificar, ImageView imagen){
 
+         String vsql = "SELECT * FROM FOTOS WHERE ID = " + id_modificar;
+        Cursor rs ;
+        BaseDatos bdh =  new BaseDatos(context, nombreBD);
+        SQLiteDatabase bd ;
+        bd = bdh.getReadableDatabase();
+        rs = bd.rawQuery(vsql,null);
 
+        if(rs.moveToNext())
+        {
+            byte[] image = rs.getBlob(1);
+            Bitmap bmp= BitmapFactory.decodeByteArray(image, 0 , image.length);
+            imagen.setImageBitmap(bmp);
 
+        }
+    }
 
     // Funciones para exportar TODO hacer las funciones que falten
 

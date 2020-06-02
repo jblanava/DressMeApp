@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dressmeapp">
 
+    <!-- Esto no sé si es el adecuado, pero no me ha sonado mal, es cuestión de probar -->
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logomaniqui"
@@ -38,9 +42,8 @@
         <activity android:name=".Activities.PerfilConfiguracionActivity" />
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.NuevoColorActivity" />
-    </application> <!-- Esto no sé si es el adecuado, pero no me ha sonado mal, es cuestión de probar -->
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+        <activity android:name=".Activities.Fotos" />
 
-    <uses-permission android:name="android.permission.CAMERA" />
+    </application>
 
 </manifest>

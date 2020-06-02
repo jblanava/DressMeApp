@@ -4,12 +4,18 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
@@ -28,6 +34,9 @@ public class Modificar_Prenda extends AppCompatActivity {
 
     Button Bguardar;
     Button Beliminar;
+    Button BFotos;
+
+    ImageView imagen;
 
 
 
@@ -43,6 +52,12 @@ public class Modificar_Prenda extends AppCompatActivity {
         enlazar_prenda();
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        this.cargar_foto();
+    }
+
     void enlazar_controles() {// Enlaza los controles y rellena los Spinner con la lista de opciones
 
         Enombre = findViewById(R.id.rellena_nombre);
@@ -52,6 +67,8 @@ public class Modificar_Prenda extends AppCompatActivity {
         Sperfiles = findViewById(R.id.spinner_perfiles);
         Bguardar = findViewById(R.id.boton_guardar);
         Beliminar = findViewById(R.id.boton_eliminar);
+        BFotos = findViewById(R.id.boton_foto);
+        imagen = findViewById(R.id.prenda_foto);
 
         List<String> colores = GestorBD.get_nombres_tabla(this, "color");
         ArrayAdapter<String> adapterColores = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colores);
@@ -87,12 +104,36 @@ public class Modificar_Prenda extends AppCompatActivity {
                 guardar();
             }
         });
+
+        BFotos.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                ir_a_fotos();
+            }
+        });
     }
+
+
+    public void ir_a_fotos(){
+/*
+        Intent ventanaVestuario = new Intent(this, VestuarioActivity.class);
+        String id_modificar = ventanaVestuario.getStringExtra("intVariableName"); */
+
+        Intent mIntent = getIntent();
+        int id = mIntent.getIntExtra("intVariableName", 0);
+
+        Intent nuevaVentana = new Intent(this,Fotos.class);
+        nuevaVentana.putExtra("id_modificar", String.valueOf(id));
+        startActivity(nuevaVentana);
+    }
+
+
+
 
     void eliminar() // TODO: Preguntar al usuario si está seguro
     {
         GestorBD.CambiarVisibilidadPrenda(this, prenda.id);
-
         finish();
     }
 
@@ -130,5 +171,19 @@ public class Modificar_Prenda extends AppCompatActivity {
         Stalla.setSelection(GestorBD.get_id_tabla(this, "talla", prenda.talla) - 1);
         Sperfiles.setSelection(GestorBD.getIdPerfil() - 1);
     }
+
+    protected void cargar_foto(){
+        Intent mIntent = getIntent();
+        int id = mIntent.getIntExtra("intVariableName", 0);
+        String id_modificar = String.valueOf(id);
+
+        GestorBD.cargarFoto(this, id_modificar, imagen);
+
+    }
+
+
+
+
+
 }
 

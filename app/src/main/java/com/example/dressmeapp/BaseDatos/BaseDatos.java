@@ -74,6 +74,13 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE \"TALLA\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(20) NOT NULL)");
 
         db.execSQL("CREATE TABLE \"COMBO_COLOR\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"COLOR1\" INTEGER NOT NULL,\"COLOR2\" INTEGER NOT NULL)");
+
+        // TABLA FOTOS
+        vsql = "CREATE TABLE \"FOTOS\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"FOTO\" BLOB) ";
+
+        db.execSQL(vsql);
+
+
     }
 
     private void crearTipos(SQLiteDatabase db) {
