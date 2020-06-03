@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class GestorBD2 {
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp22.db"; // Antonio ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp23.db"; // Antonio ha cambiado a la BD__17
 
     public GestorBD2(Context context)  // TODO: Eliminar?
     {

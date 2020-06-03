@@ -104,17 +104,12 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
 
         Intent borrado = new Intent(this, MainActivity.class);
         startActivity(borrado);
-
-
-
     }
 
     protected void MostrarDatos() {
         //No sabemos que hase, preguntar a María :D
-    Intent salto = new Intent(this,MostrarDatosActivity.class);
-    startActivity(salto);
-
-
+        Intent salto = new Intent(this,MostrarDatosActivity.class);
+        startActivity(salto);
     }
 
     protected void ExportarDatos() {
@@ -130,12 +125,10 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     private void verificarYPedirPermisosDeAlmacenamiento() {
         int estadoDePermiso = ContextCompat.checkSelfPermission(PerfilConfiguracionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (estadoDePermiso == PackageManager.PERMISSION_GRANTED) {
-            // En caso de que haya dado permisos ponemos la bandera en true
-            // y llamar al método
-            permisoDeAlmacenamientoConcedido();
-            // toma_foto_2();
-        } else {
+            new Exportador(this);
+            Toast.makeText(PerfilConfiguracionActivity.this, "Se han exportado tus prendas en la carpeta de descargas", Toast.LENGTH_SHORT).show();
 
+        } else {
             ActivityCompat.requestPermissions(PerfilConfiguracionActivity.this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     0);
@@ -145,26 +138,18 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
 
-
             case 0:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    permisoDeAlmacenamientoConcedido();
+                    new Exportador(this);
+                    Toast.makeText(PerfilConfiguracionActivity.this, "Se han exportado tus prendas en la carpeta de descargas", Toast.LENGTH_SHORT).show();
+
                 } else {
-                    permisoDeAlmacenamientoDenegado();
+                    Toast.makeText(PerfilConfiguracionActivity.this, "El permiso para el almacenamiento está denegado", Toast.LENGTH_SHORT).show();
+
                 }
                 break;
 
         }
     }
-
-    private void permisoDeAlmacenamientoConcedido() {
-        new Exportador(this);
-        Toast.makeText(PerfilConfiguracionActivity.this, "Se han exportado tus prendas en la carpeta de descargas", Toast.LENGTH_SHORT).show();
-    }
-    private void permisoDeAlmacenamientoDenegado() {
-
-        Toast.makeText(PerfilConfiguracionActivity.this, "El permiso para el almacenamiento está denegado", Toast.LENGTH_SHORT).show();
-    }
-
 
 }

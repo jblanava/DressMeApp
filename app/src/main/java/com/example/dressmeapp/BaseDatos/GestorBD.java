@@ -43,7 +43,7 @@ public class GestorBD {
 
 
     private static Context contexto; // TODO: eliminar en el futuro
-    private static String nombreBD = "dressmeapp22.db"; // Antonio ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp23.db"; // Antonio ha cambiado a la BD__17
                                                         // Maria ha cambiado a BD 22
 
     public GestorBD(Context context)  // TODO: Eliminar?
@@ -1247,7 +1247,7 @@ public class GestorBD {
     }
     static public List<TallaBD> expTallas(Context context)
     {
-        String sentenciaSQL = "SELECT * FROM PRENDA";
+        String sentenciaSQL = "SELECT * FROM TALLA";
 
         Cursor cursor;
         List<TallaBD> tallas = new ArrayList<>();

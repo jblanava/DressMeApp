@@ -1,6 +1,7 @@
 package com.example.dressmeapp.Objetos;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
@@ -13,7 +14,9 @@ import com.example.dressmeapp.Objetos.Structs.PrendaBD;
 import com.example.dressmeapp.Objetos.Structs.TallaBD;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -65,7 +68,11 @@ public class Importador
         {
             ColorBD c = new ColorBD(s);
 
-            if(c.id <= 12) continue; // Los primeros 12 son los que vienen por defecto y me los salto
+            if(c.id <= 12)
+            {
+                Mapacolores.put(c.id, c.id);
+                continue; // Los primeros 12 son los que vienen por defecto y me los salto
+            }
 
             int nuevoId = GestorBD2.crearColor(context, c.nombre, c.hex);
 
@@ -82,7 +89,11 @@ public class Importador
         {
             TallaBD t = new TallaBD(s);
 
-            if(t.id <= 6) continue; // Las primeras 6 son las que vienen por defecto y me las salto
+            if(t.id <= 6)
+            {
+                Mapatallas.put(t.id, t.id);
+                continue; // Las primeras 6 son las que vienen por defecto y me las salto
+            }
 
             int nuevoId = GestorBD.CrearTalla(context, t.nombre);
 
@@ -93,6 +104,7 @@ public class Importador
         for(String s : prendas)
         {
             PrendaBD p = new PrendaBD(s);
+
 
             int nuevoId = GestorBD.crearPrenda(context, p.nombre, Mapacolores.get(p.color), p.tipo, Mapatallas.get(p.talla), p.visible, Mapaperfiles.get(p.perfil));
 
@@ -119,19 +131,15 @@ public class Importador
         List<String> res = new ArrayList<>();
 
         try {
-            InputStream inputStream = context.openFileInput(archivo);
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), archivo);
 
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String receiveString = "";
 
-                while ((receiveString = bufferedReader.readLine()) != null) {
-                    res.add(receiveString);
-                }
-
-                inputStream.close();
+            while ((receiveString = bufferedReader.readLine()) != null) {
+                res.add(receiveString);
             }
+
         } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
         } catch (IOException e) {
