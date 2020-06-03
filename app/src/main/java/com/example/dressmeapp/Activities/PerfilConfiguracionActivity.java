@@ -1,14 +1,21 @@
 package com.example.dressmeapp.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Exportador;
 import com.example.dressmeapp.R;
@@ -59,7 +66,6 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
             }
         });
     }
-
 
     protected void irBorrarPerfil() {
 
@@ -112,11 +118,53 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     }
 
     protected void ExportarDatos() {
-        new Exportador(this);
+        verificarYPedirPermisosDeAlmacenamiento();
     }
 
     protected void irCambiarContrasenia() {
         Intent cambioContra = new Intent(this, ConfiguracionContraseniaActivity.class);
         startActivity(cambioContra);
     }
+
+
+    private void verificarYPedirPermisosDeAlmacenamiento() {
+        int estadoDePermiso = ContextCompat.checkSelfPermission(PerfilConfiguracionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (estadoDePermiso == PackageManager.PERMISSION_GRANTED) {
+            // En caso de que haya dado permisos ponemos la bandera en true
+            // y llamar al método
+            permisoDeAlmacenamientoConcedido();
+            // toma_foto_2();
+        } else {
+
+            ActivityCompat.requestPermissions(PerfilConfiguracionActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    0);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+
+
+            case 0:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    permisoDeAlmacenamientoConcedido();
+                } else {
+                    permisoDeAlmacenamientoDenegado();
+                }
+                break;
+
+        }
+    }
+
+    private void permisoDeAlmacenamientoConcedido() {
+        new Exportador(this);
+        Toast.makeText(PerfilConfiguracionActivity.this, "Se han exportado tus prendas en la carpeta de descargas", Toast.LENGTH_SHORT).show();
+    }
+    private void permisoDeAlmacenamientoDenegado() {
+
+        Toast.makeText(PerfilConfiguracionActivity.this, "El permiso para el almacenamiento está denegado", Toast.LENGTH_SHORT).show();
+    }
+
+
 }

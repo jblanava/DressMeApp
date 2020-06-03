@@ -1277,7 +1277,7 @@ public class GestorBD {
 
     static public List<ConjuntoBD> expConjuntos(Context context)
     {
-        String sentenciaSQL = "SELECT * FROM PRENDA";
+        String sentenciaSQL = "SELECT * FROM CONJUNTO";
 
         Cursor cursor;
         List<ConjuntoBD> conjuntos = new ArrayList<>();

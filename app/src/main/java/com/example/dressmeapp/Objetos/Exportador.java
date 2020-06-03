@@ -2,12 +2,15 @@ package com.example.dressmeapp.Objetos;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Environment;
 import android.util.Log;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBD2;
 import com.example.dressmeapp.Objetos.Structs.ColorBD;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
@@ -20,6 +23,7 @@ public class Exportador
     public  Exportador(Context context)
     {
         this.context = context;
+
         // TODO cuando se creen las funciones correspondientes substituir aqui
         exportar(GestorBD.expPerfiles(context), "perfiles.txt");
         exportar(GestorBD.expColores(context), "colores.txt");
@@ -32,14 +36,15 @@ public class Exportador
     public void exportar(List<?> objetos, String archivo)
     {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(archivo, Context.MODE_PRIVATE));
 
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), archivo);
+            FileWriter myWriter = new FileWriter(file);
             for (Object o : objetos)
             {
-                outputStreamWriter.write(o.toString());
+                myWriter.write(o.toString());
             }
 
-            outputStreamWriter.close();
+            myWriter.close();
             Log.i("Exportador", "Creado fichero " + archivo);
         }
         catch (IOException e) {
