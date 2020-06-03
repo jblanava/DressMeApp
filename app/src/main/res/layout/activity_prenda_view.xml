@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/weigth"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
@@ -9,73 +11,91 @@
     android:clickable="true"
 
 
-    <TableLayout
-        android:id="@+id/boton_prenda"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:clickable="true">
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="122dp">
 
-        <TableRow
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="2"
+             />
 
-            <TextView
-                android:id="@+id/prenda_nombre"
-                android:layout_width="321dp"
+
+
+        <TableLayout
+            android:id="@+id/boton_prenda"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="#ffffff"
+            android:clickable="true">
+
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="@string/nombre"
-                android:textSize="24sp" />
+                android:layout_weight="1">
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/prenda_nombre"
+                    android:layout_width="321dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="23dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/nombre"
+                    android:textSize="24sp" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            </TableRow>
 
-
-            <TextView
-                android:id="@+id/prenda_tipo"
-                android:layout_width="0dp"
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Tipo"
-                android:textSize="16sp" />
+                android:layout_weight="1">
 
 
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+                <TextView
+                    android:id="@+id/prenda_tipo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Tipo"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/prenda_color"
-                android:layout_width="0dp"
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Color"
-                android:textSize="16sp" />
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/prenda_talla"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Talla"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/prenda_color"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/prenda_talla"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Talla"
+                    android:textSize="16sp" />
 
 
-        </TableRow>
+            </TableRow>
 
 
+        </TableLayout>
 
-    </TableLayout>
+    </TableRow>
+
 </RelativeLayout>
