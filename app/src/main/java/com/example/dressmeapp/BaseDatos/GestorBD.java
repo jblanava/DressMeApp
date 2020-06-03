@@ -216,7 +216,7 @@ public class GestorBD {
      * @param usuario     El nombre del perfil
      * @param contrasenia La contraseña para el perfil.
      */
-    public static void CrearPerfil(Context contexto, String usuario, String contrasenia) {
+    public static int CrearPerfil(Context contexto, String usuario, String contrasenia) {
         int id = obtenIDMaximoPerfil(contexto);
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE,  CONTRASENIA) VALUES (";
@@ -228,6 +228,8 @@ public class GestorBD {
         baseDatos.execSQL(sentenciaSQL);
         baseDatos.close();
         base.close();
+
+        return id;
     }
 
     public static void BorrarPerfil(Context contexto, int id) {
@@ -302,7 +304,7 @@ public class GestorBD {
      *                  (siempre lo será en el historial)
      * @param id_perfil El ID del perfil que tendrá la prenda.
      */
-    public static void crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
+    public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
 
         int id = obtenIDMaximoPrenda(contexto);
         String sentenciaSQL;
@@ -314,6 +316,8 @@ public class GestorBD {
         baseDatos.execSQL(sentenciaSQL);
         baseDatos.close();
         base.close();
+
+        return id;
     }
 
     public static List<Prenda> PrendasVisibles(Context context, String busqueda, String ordenacion)
@@ -1029,7 +1033,7 @@ public class GestorBD {
 
 
 
-    public static void CrearTalla(Context contexto, String talla) {
+    public static int CrearTalla(Context contexto, String talla) {
         int id = obtenIDMaximoTalla(contexto);
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO TALLA (ID, NOMBRE) VALUES (";
@@ -1041,6 +1045,8 @@ public class GestorBD {
         baseDatos.execSQL(sentenciaSQL);
         baseDatos.close();
         base.close();
+
+        return id;
     }
 
     public static int obtenIDMaximoTalla(Context context) {

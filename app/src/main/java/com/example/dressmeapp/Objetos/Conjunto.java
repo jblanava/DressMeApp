@@ -10,6 +10,7 @@ public class Conjunto {
 
     int idPerfil;
 
+
     public Conjunto(){
         idPerfil = GestorBD.getIdPerfil();
         idPrendas = new ArrayList<>();

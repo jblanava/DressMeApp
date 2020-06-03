@@ -109,7 +109,7 @@ public class Importador
                 c.add(Mapaprendas.get(i));
             }
 
-            GestorBD.addConjunto(context, c);
+            GestorBD.addConjunto(context, c, p.favorito);
         }
 
     }
