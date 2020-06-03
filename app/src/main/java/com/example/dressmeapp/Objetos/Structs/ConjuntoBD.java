@@ -9,6 +9,7 @@ public class ConjuntoBD
     public int id;
     public int[] prendas = new int[6];
     public int perfil;
+    public int favorito;
 
     public ConjuntoBD(){}
 
@@ -21,10 +22,11 @@ public class ConjuntoBD
         for(int i =1;i<7;i++)
         prendas[i] = Integer.parseInt(campos[i]);
         perfil = Integer.parseInt(campos[7]);
+        favorito = Integer.parseInt(campos[8]);
     }
 
     public String toString()
     {
-        return id + ";" + Arrays.toString(prendas) + ";" + perfil + "\n";
+        return id + ";" + Arrays.toString(prendas) + ";" + perfil + ";" + favorito + "\n";
     }
 }
