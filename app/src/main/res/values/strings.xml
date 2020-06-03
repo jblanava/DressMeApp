@@ -19,6 +19,7 @@
     <string name="registro_contrasenia">Introduzca una contraseña</string>
     <string name="registro_contrasenia_confirma">Confirme la contraseña</string>
     <string name="crear_perfil">Crear perfil</string>
+    <string name="importar_datos">Importar datos</string>
 
     <string name="registro_error_sinnombre">Escriba un nombre para su perfil</string>
     <string name="registro_error_nombreusado">El nombre ya está en uso</string>

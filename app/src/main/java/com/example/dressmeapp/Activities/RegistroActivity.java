@@ -19,6 +19,7 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText textConfirmaContrasenia;
     private TextView textError;
     private Button btnConfirmar;
+    private Button btnImportar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,15 @@ public class RegistroActivity extends AppCompatActivity {
                 validarCrearCuenta(textNombre.getText().toString(),
                         textContrasenia.getText().toString(),
                         textConfirmaContrasenia.getText().toString());
+            }
+        });
+
+        btnImportar = findViewById(R.id.buttonImportar);
+
+        btnImportar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                importarDatos();
             }
         });
 
@@ -87,6 +97,10 @@ public class RegistroActivity extends AppCompatActivity {
         Intent nuevaActividad = new Intent(this, MenuPrincipalActivity.class);
         startActivity(nuevaActividad);
         finish();
+    }
+
+    private void importarDatos() {
+        // TODO escribir código para importar
     }
 
 
