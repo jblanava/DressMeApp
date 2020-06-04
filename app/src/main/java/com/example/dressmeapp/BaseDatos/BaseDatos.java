@@ -1,5 +1,6 @@
 package com.example.dressmeapp.BaseDatos;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -43,7 +44,7 @@ public class BaseDatos extends SQLiteOpenHelper {
             int tipo = rng.nextInt(24) + 1;
             int talla = rng.nextInt(5) + 1;
 
-            String sentencia = String.format("INSERT INTO PRENDA VALUES (%d  , '%s', %d, %d, %d, 1, 1)", i, "Prueba" + i ,color, tipo, talla);
+            @SuppressLint("DefaultLocale") String sentencia = String.format("INSERT INTO PRENDA VALUES (%d  , '%s', %d, %d, %d, 1, 1)", i, "Prueba" + i ,color, tipo, talla);
             db.execSQL(sentencia);
         }
 
@@ -51,8 +52,7 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion != newVersion) {
-        }
+
     }
 
     private void crearTablas(SQLiteDatabase db) {

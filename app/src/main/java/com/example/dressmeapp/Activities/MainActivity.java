@@ -2,20 +2,14 @@ package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.dressmeapp.Activities.MenuPrincipalActivity;
-import com.example.dressmeapp.Activities.RegistroActivity;
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.Debug.Debug;
-import com.example.dressmeapp.Objetos.Exportador;
 import com.example.dressmeapp.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,10 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView textError;
     private EditText textNombre;
     private EditText textContrasenia;
-    private Button btnLogin;
-    private Button btnRegistro;
-
-    private Context contexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         textNombre = findViewById(R.id.textNombre);
         textContrasenia = findViewById(R.id.textContrasenia);
 
-        btnLogin = findViewById(R.id.btnLogin);
+        Button btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //irAMenuPrincipal();
@@ -53,16 +43,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnRegistro = findViewById(R.id.btnRegistro);
+        Button btnRegistro = findViewById(R.id.btnRegistro);
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 irARegistro();
             }
         });
-
-        contexto = getApplicationContext();
-
     }
 
     private void irAMenuPrincipal() {

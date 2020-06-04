@@ -45,6 +45,7 @@
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.NuevoColorActivity" />
         <activity android:name=".Activities.Fotos" />
+        <activity android:name=".Activities.PrendaActivity" />
 
     </application>
 

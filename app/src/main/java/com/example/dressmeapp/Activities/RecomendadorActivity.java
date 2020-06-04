@@ -10,9 +10,6 @@ import android.widget.Button;
 import com.example.dressmeapp.R;
 
 public class RecomendadorActivity extends AppCompatActivity {
-    private Button bRecomendador;
-    private Button bHistorial;
-    private Button bFavoritos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +18,9 @@ public class RecomendadorActivity extends AppCompatActivity {
         enlazaControles();
     }
     private void enlazaControles(){
-        bRecomendador= findViewById(R.id.bRecomendador);
-        bHistorial = findViewById(R.id.bHistorial);
-        bFavoritos = findViewById(R.id.bConjFavs);
+        Button bRecomendador = findViewById(R.id.bRecomendador);
+        Button bHistorial = findViewById(R.id.bHistorial);
+        Button bFavoritos = findViewById(R.id.bConjFavs);
 
         bRecomendador.setOnClickListener(new View.OnClickListener() {
             @Override

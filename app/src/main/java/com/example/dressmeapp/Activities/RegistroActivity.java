@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.Objetos.Exportador;
 import com.example.dressmeapp.Objetos.Importador;
 import com.example.dressmeapp.R;
 
@@ -26,8 +25,6 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText textContrasenia;
     private EditText textConfirmaContrasenia;
     private TextView textError;
-    private Button btnConfirmar;
-    private Button btnImportar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +40,7 @@ public class RegistroActivity extends AppCompatActivity {
         textContrasenia = findViewById(R.id.textContrasenia);
         textConfirmaContrasenia = findViewById(R.id.textConfirmaContrasenia);
         textError = findViewById(R.id.textError);
-        btnConfirmar = findViewById(R.id.buttonRegistro);
+        Button btnConfirmar = findViewById(R.id.buttonRegistro);
 
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +51,7 @@ public class RegistroActivity extends AppCompatActivity {
             }
         });
 
-        btnImportar = findViewById(R.id.buttonImportar);
+        Button btnImportar = findViewById(R.id.buttonImportar);
 
         btnImportar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,19 +123,15 @@ public class RegistroActivity extends AppCompatActivity {
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
+        if (requestCode == 0) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                new Importador(this);
+                Toast.makeText(RegistroActivity.this, "Se han importado tus prendas desde la carpeta de descargas", Toast.LENGTH_SHORT).show();
 
-            case 0:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    new Importador(this);
-                    Toast.makeText(RegistroActivity.this, "Se han importado tus prendas desde la carpeta de descargas", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(RegistroActivity.this, "El permiso para el almacenamiento está denegado", Toast.LENGTH_SHORT).show();
 
-                } else {
-                    Toast.makeText(RegistroActivity.this, "El permiso para el almacenamiento está denegado", Toast.LENGTH_SHORT).show();
-
-                }
-                break;
-
+            }
         }
     }
 

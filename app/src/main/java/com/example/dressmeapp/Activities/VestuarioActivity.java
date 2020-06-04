@@ -2,16 +2,14 @@ package com.example.dressmeapp.Activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.dressmeapp.AgruparView;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.Objetos.PrendaAdapter;
@@ -161,6 +158,7 @@ public class VestuarioActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SetTextI18n")
     void mostrar_prendas() {
         listaPrendas.removeAllViews();
 
@@ -168,7 +166,7 @@ public class VestuarioActivity extends AppCompatActivity {
 
         final Context a = this;
 
-        if(this.agrupacion != "")
+        if(!this.agrupacion.equals(""))
         {
             List<String> tags =  GestorBD.get_nombres_tabla(this, this.agrupacion);
 
@@ -203,7 +201,7 @@ public class VestuarioActivity extends AppCompatActivity {
 
                 if(prendasConTag.size() == 0) continue;
 
-                View view = getLayoutInflater().inflate(R.layout.activity_agrupar_view, null);
+                @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.activity_agrupar_view, null);
 
                 TextView texto = view.findViewById(R.id.texto_tag);
                 RecyclerView rv = view.findViewById(R.id.prendas_agrupadas);
@@ -228,7 +226,7 @@ public class VestuarioActivity extends AppCompatActivity {
         }
         else
         {
-            View view = getLayoutInflater().inflate(R.layout.activity_agrupar_view, null);
+            @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.activity_agrupar_view, null);
 
             TextView texto = view.findViewById(R.id.texto_tag);
             RecyclerView rv = view.findViewById(R.id.prendas_agrupadas);

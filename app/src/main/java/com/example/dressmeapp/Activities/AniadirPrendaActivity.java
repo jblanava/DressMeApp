@@ -3,17 +3,11 @@ package com.example.dressmeapp.Activities;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.*;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.Objetos.ColorPrenda;
-import com.example.dressmeapp.Objetos.PrendaAdapter;
 import com.example.dressmeapp.R;
 
 import java.util.List;

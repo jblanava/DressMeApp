@@ -3,6 +3,7 @@ package com.example.dressmeapp.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -64,11 +65,12 @@ public class HistorialActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("DefaultLocale")
     private void metodoMisPanas(int cont) {
-        View v = getLayoutInflater().inflate(R.layout.activity_conjunto_view, null);
+        @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_conjunto_view, null);
 
         TextView conjunto = v.findViewById(R.id.conjuntoView);
-        conjunto.setText("CONJUNTO "+cont);
+        conjunto.setText(String.format("CONJUNTO %d", cont));
         listaPrendas.addView(v);
     }
 
@@ -77,7 +79,7 @@ public class HistorialActivity extends AppCompatActivity {
         if(prenda == null) return;      // TODO: porque cojones necesito esto aqui? PS: no quitar o peta el historial
 
 
-        View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
+        @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
 
         TextView nombre = v.findViewById(R.id.prenda_nombre);
         TextView tipo = v.findViewById(R.id.prenda_tipo);

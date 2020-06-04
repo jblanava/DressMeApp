@@ -2,6 +2,7 @@ package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBD2;
 import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.R;
@@ -19,10 +19,6 @@ public class NuevoColorActivity extends AppCompatActivity {
     private TextView txtError;
     private ImageView imgColor;
     private TextView txtNombreColor;
-    private SeekBar barRojo;
-    private SeekBar barVerde;
-    private SeekBar barAzul;
-    private Button btnAniadirColor;
 
     private ColorPrenda miColor;
 
@@ -48,13 +44,13 @@ public class NuevoColorActivity extends AppCompatActivity {
         txtNombreColor = findViewById(R.id.txtNombreColor);
         txtNombreColor.setText(miColor.getNombre());
 
-        barRojo = findViewById(R.id.barRojo);
+        SeekBar barRojo = findViewById(R.id.barRojo);
         barRojo.setProgress(miColor.getRojo());
 
-        barVerde = findViewById(R.id.barVerde);
+        SeekBar barVerde = findViewById(R.id.barVerde);
         barVerde.setProgress(miColor.getVerde());
 
-        barAzul = findViewById(R.id.barAzul);
+        SeekBar barAzul = findViewById(R.id.barAzul);
         barAzul.setProgress(miColor.getAzul());
 
         barRojo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -85,7 +81,7 @@ public class NuevoColorActivity extends AppCompatActivity {
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
-        btnAniadirColor = findViewById(R.id.btnAniadirColor);
+        Button btnAniadirColor = findViewById(R.id.btnAniadirColor);
         btnAniadirColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +91,7 @@ public class NuevoColorActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void confirmarNuevoColor(String nombre, String hex) {
         if (nombre.length() != 0) {
             GestorBD2.crearColor(this, nombre, hex);

@@ -13,12 +13,12 @@ import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
 
 public class ConfiguracionContraseniaActivity extends AppCompatActivity {
-    private GestorBD gestor;
+
     private EditText contraseniaAntigua;
     private EditText nuevaContrasenia;
     private EditText nuevaContrasenia2;
     private TextView textError;
-    private Button  botonActualizar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,7 @@ public class ConfiguracionContraseniaActivity extends AppCompatActivity {
         textError=findViewById(R.id.textError);
         textError.setText("");
 
-        botonActualizar = findViewById(R.id.botonActualizar);
+        Button botonActualizar = findViewById(R.id.botonActualizar);
         botonActualizar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 UpdatePass();
@@ -61,11 +61,13 @@ public class ConfiguracionContraseniaActivity extends AppCompatActivity {
             // La nueva contraseña no debe ser vacía
             ok = false;
             errores += "Introduzca una nueva contraseña";
-        }/* else if (GestorBD.PassCorrecta(getApplicationContext(), , antiguaPass)) {
+        } else if (antiguaPass.equals(GestorBD.getPass(this, GestorBD.getIdPerfil()))) {
             // Hay que introducir la contraseña antigua para cambiarla
+
+            // TODO esto estaba comentado, no sé si funciona.
             ok = false;
             errores += "Introduzca una nueva contraseña";
-        }*/
+        }
 
         if (ok) {
             GestorBD.ActualizarPerfil(getApplicationContext(), GestorBD.getIdPerfil(), nuevaContrasenia.getText().toString());

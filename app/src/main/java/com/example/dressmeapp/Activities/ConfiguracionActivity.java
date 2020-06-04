@@ -4,17 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.dressmeapp.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ConfiguracionActivity extends AppCompatActivity {
-    private TextView textView ;
-    private Button botonCambioTallas;
-    private Button botonTipoColor;
-    private Button botonCambioPerfil;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +21,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
 
     private void enlazaControles() {
-        botonCambioPerfil=findViewById(R.id.botonCambioPerfil);
-        botonCambioTallas=findViewById(R.id.botonCambioTallas);
-        botonTipoColor=findViewById(R.id.botonTipoColor);
+        Button botonCambioPerfil = findViewById(R.id.botonCambioPerfil);
+        Button botonCambioTallas = findViewById(R.id.botonCambioTallas);
+        Button botonTipoColor = findViewById(R.id.botonTipoColor);
 
         botonCambioPerfil.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -22,10 +22,6 @@ import com.example.dressmeapp.R;
 
 
 public class PerfilConfiguracionActivity extends AppCompatActivity {
-    private Button cambioDatos;
-    private Button cambioContrasenia;
-    private Button exportarDatos;
-    private Button borrarPerfil;
     private Context contexto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +34,10 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     private void enlazarControles() {
 
         contexto = getApplicationContext();
-        cambioDatos = findViewById(R.id.botonCambiaDatos);
-        cambioContrasenia = findViewById(R.id.botonCambiaContrasenia);
-        exportarDatos = findViewById(R.id.botonExportarDatos);
-        borrarPerfil = findViewById(R.id.botonBorrarPerfil);
+        Button cambioDatos = findViewById(R.id.botonCambiaDatos);
+        Button cambioContrasenia = findViewById(R.id.botonCambiaContrasenia);
+        Button exportarDatos = findViewById(R.id.botonExportarDatos);
+        Button borrarPerfil = findViewById(R.id.botonBorrarPerfil);
         cambioContrasenia.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 irCambiarContrasenia();
@@ -136,19 +132,15 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
+        if (requestCode == 0) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                new Exportador(this);
+                Toast.makeText(PerfilConfiguracionActivity.this, "Se han exportado tus prendas en la carpeta de descargas", Toast.LENGTH_SHORT).show();
 
-            case 0:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    new Exportador(this);
-                    Toast.makeText(PerfilConfiguracionActivity.this, "Se han exportado tus prendas en la carpeta de descargas", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(PerfilConfiguracionActivity.this, "El permiso para el almacenamiento está denegado", Toast.LENGTH_SHORT).show();
 
-                } else {
-                    Toast.makeText(PerfilConfiguracionActivity.this, "El permiso para el almacenamiento está denegado", Toast.LENGTH_SHORT).show();
-
-                }
-                break;
-
+            }
         }
     }
 

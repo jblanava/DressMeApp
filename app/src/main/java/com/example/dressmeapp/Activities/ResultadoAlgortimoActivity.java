@@ -3,14 +3,13 @@ package com.example.dressmeapp.Activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
@@ -18,13 +17,10 @@ import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
 
-import java.util.Collections;
 
 public class ResultadoAlgortimoActivity extends AppCompatActivity {
     private Conjunto conjunto;
     private LinearLayout listaPrendas;
-    private Button guardar;
-    private Button reintentar;
     private Button bFavoritos;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -39,9 +35,9 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
     }
 
     private void enlazaControles() {
-        listaPrendas = (LinearLayout) findViewById(R.id.lista_prendas);
-        guardar=findViewById(R.id.boton_guardar);
-        reintentar=findViewById(R.id.boton_reintentar);
+        listaPrendas = findViewById(R.id.lista_prendas);
+        Button guardar = findViewById(R.id.boton_guardar);
+        Button reintentar = findViewById(R.id.boton_reintentar);
         bFavoritos = findViewById(R.id.bAddFav);
 
         guardar.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +60,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void aniadeAFavoritos() {
         GestorBD.addConjunto(this, this.conjunto, 1);
         bFavoritos.setText("Conjunto añadido");
@@ -89,8 +86,8 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void hagoCosas() {
         Intent mIntent = getIntent();
-        int tiempo = mIntent.getIntExtra("temperatura", 0);;
-        int actividad = mIntent.getIntExtra("formalidad", 0);;
+        int tiempo = mIntent.getIntExtra("temperatura", 0);
+        int actividad = mIntent.getIntExtra("formalidad", 0);
 
         conjunto = GestorBD.resAlgoritmo(this, tiempo, actividad);
 
@@ -111,20 +108,18 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
     void metodoChavales(final Prenda prenda)
     {
-        View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
+        @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
 
-        TextView nombre = (TextView) v.findViewById(R.id.prenda_nombre);
-        TextView tipo = (TextView) v.findViewById(R.id.prenda_tipo);
-        TextView color = (TextView) v.findViewById(R.id.prenda_color);
-        TextView talla = (TextView) v.findViewById(R.id.prenda_talla);
+        TextView nombre = v.findViewById(R.id.prenda_nombre);
+        TextView tipo = v.findViewById(R.id.prenda_tipo);
+        TextView color = v.findViewById(R.id.prenda_color);
+        TextView talla = v.findViewById(R.id.prenda_talla);
 
 
         nombre.setText(prenda.nombre);
         color.setText(prenda.color);
         tipo.setText(prenda.tipo);
         talla.setText(prenda.talla);
-
-        TableLayout t = (TableLayout) v.findViewById(R.id.boton_prenda);
 
 
         listaPrendas.addView(v);

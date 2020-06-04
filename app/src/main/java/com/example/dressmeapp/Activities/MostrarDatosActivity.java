@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -12,12 +11,9 @@ import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
 
 public class MostrarDatosActivity extends AppCompatActivity {
-    private TextView user;
     private TextView muestraUser;
-    private TextView pass;
     private TextView muestraPassword;
     private Context contexto;
-    private Button BotonPass;
 
 
     @Override
@@ -35,13 +31,11 @@ public class MostrarDatosActivity extends AppCompatActivity {
 
         contexto = getApplicationContext();
 
-        user = findViewById(R.id.userPerfil);
         muestraUser = findViewById(R.id.MuestraUser);
-        pass = findViewById(R.id.Contrasenia);
         muestraPassword = findViewById(R.id.PASSWORD);
 
-        BotonPass = findViewById(R.id.BotonPass);
-        BotonPass.setOnClickListener(new View.OnClickListener() {
+        Button botonPass = findViewById(R.id.BotonPass);
+        botonPass.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mostrarDatos_mas_pass();
             }

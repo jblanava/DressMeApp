@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.example.dressmeapp.R;
 
+// TODO necesitamos esta clase o se puede eliminar?
+
 public class ConjuntoActivity extends AppCompatActivity {
 
     @Override

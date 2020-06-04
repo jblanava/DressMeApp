@@ -1,10 +1,8 @@
 package com.example.dressmeapp.Activities;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -19,9 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.BaseDatos.LibreriaBD;
 import com.example.dressmeapp.R;
 
 import java.io.ByteArrayOutputStream;
@@ -34,8 +30,6 @@ public class Fotos extends AppCompatActivity {
     ImageView imagen;
     Button b_guardar;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-  //  static final int REQUEST_TAKE_PHOTO = 1;
-  //  String currentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +52,8 @@ public class Fotos extends AppCompatActivity {
 
     protected void enlazaControles() {
 
-         imagen = (ImageView) findViewById(R.id.imageView2);
-        b_guardar = (Button) findViewById(R.id.foto_guardar);
+         imagen = findViewById(R.id.imageView2);
+        b_guardar = findViewById(R.id.foto_guardar);
 
         // Ahora pongo los eventos
         b_guardar.setOnClickListener(new View.OnClickListener() {
@@ -112,16 +106,6 @@ public class Fotos extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-    // Banderas que indicarán si tenemos permisos
-    private boolean tienePermisoCamara = false,
-            tienePermisoAlmacenamiento = false;
-
     // Código de permiso, defínelo tú mismo
     private static final int CODIGO_PERMISOS_CAMARA = 1,
             CODIGO_PERMISOS_ALMACENAMIENTO = 2;
@@ -141,20 +125,6 @@ public class Fotos extends AppCompatActivity {
         }
     }
 
-    private void verificarYPedirPermisosDeAlmacenamiento() {
-        int estadoDePermiso = ContextCompat.checkSelfPermission(Fotos.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (estadoDePermiso == PackageManager.PERMISSION_GRANTED) {
-            // En caso de que haya dado permisos ponemos la bandera en true
-            // y llamar al método
-            //permisoDeAlmacenamientoConcedido();
-          // toma_foto_2();
-        } else {
-            // Si no, entonces pedimos permisos. Ahora mira onRequestPermissionsResult
-            ActivityCompat.requestPermissions(Fotos.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    CODIGO_PERMISOS_ALMACENAMIENTO);
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -187,7 +157,6 @@ public class Fotos extends AppCompatActivity {
         // ejemplo puedes poner la bandera en true y más
         // tarde en otra función comprobar esa bandera
        // Toast.makeText(Fotos.this, "El permiso para el almacenamiento está concedido", Toast.LENGTH_SHORT).show();
-        tienePermisoAlmacenamiento = true;
     }
 
     private void permisoDeAlmacenamientoDenegado() {
@@ -202,7 +171,7 @@ public class Fotos extends AppCompatActivity {
         // Por ejemplo puedes poner la bandera en true y más
         // tarde en otra función comprobar esa bandera
       //  Toast.makeText(Fotos.this, "El permiso para la cámara está concedido", Toast.LENGTH_SHORT).show();
-        tienePermisoCamara = true;
+        // Banderas que indicarán si tenemos permisos
     }
 
     private void permisoDeCamaraDenegado() {
