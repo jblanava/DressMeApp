@@ -32,6 +32,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="30dp"
                 android:layout_weight="3"
+                android:contentDescription="@string/bienvenida_registro"
                 app:srcCompat="@drawable/av" />
 
          <!--   <TextView
@@ -58,7 +59,8 @@
                 android:layout_marginBottom="16dp"
                 android:ems="10"
                 android:hint="@string/registro_nombre"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/textContrasenia"
@@ -67,7 +69,8 @@
                 android:layout_marginBottom="16dp"
                 android:ems="10"
                 android:hint="@string/registro_contrasenia"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/textConfirmaContrasenia"
@@ -75,7 +78,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/registro_contrasenia_confirma"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/textError"

@@ -5,7 +5,6 @@
 
     <!-- strings usados en MainActivity -->
     <string name="bienvenida">Bienvenido a DressMeApp</string>
-    <string name="nombre">Nombre</string>
     <string name="contrasenia">Contraseña</string>
     <string name="iniciar_sesion">Entrar</string>
     <string name="nuevo_perfil">Nuevo perfil</string>
@@ -25,6 +24,62 @@
     <string name="registro_error_nombreusado">El nombre ya está en uso</string>
     <string name="registro_error_passnocoincide">La contraseña no coincide</string>
     <string name="registro_error_sinpass">Introduzca una contraseña</string>
+    <string name="textview">TextView</string>
+    <string name="nombre_del_evento">Nombre del evento</string>
+    <string name="tiempo_que_har_en_el_evento">Tiempo que hará en el evento</string>
+    <string name="recomiendame">Recomiendame!</string>
+    <string name="formalidad_del_evento">Formalidad del evento</string>
+    <string name="ej_cumplea_os_de_paco">Ej. Cumpleaños de Paco</string>
+    <string name="nombre">Nombre</string>
+    <string name="nombre_de_la_prenda">Nombre de la Prenda</string>
+    <string name="cancelar">CANCELAR</string>
+    <string name="crear">CREAR</string>
+    <string name="introduzca_aqu_su_nueva_talla">Introduzca aquí su nueva talla</string>
+    <string name="guardar">Guardar</string>
+    <string name="crear_color">Crear color</string>
+    <string name="a_adir_una_nueva_talla">Añadir una nueva talla</string>
+    <string name="a_ada_nuevas_tallas">Añada nuevas tallas</string>
+    <string name="a_ada_nuevos_colores">Añada nuevos colores</string>
+    <string name="cambie_aqu_su_perfil">Cambie aquí su perfil</string>
+    <string name="introduzca_su_contrase_a">Introduzca su contraseña</string>
+    <string name="introduzca_su_nueva_contrase_a">Introduzca su nueva contraseña</string>
+    <string name="actualizar_contrase_a">Actualizar contraseña</string>
+    <string name="repita_la_contrase_a">Repita la contraseña</string>
+    <string name="guardar_foto">Guardar Foto</string>
+    <string name="foto_de_la_prenda">Foto de la prenda</string>
+    <string name="texto_de_error">texto de error</string>
+    <string name="registro">Registro</string>
+    <string name="visitar_mis_prendas_y_complementos">Visitar mis prendas y complementos</string>
+    <string name="qu_me_pongo_hoy">¿Qué me pongo hoy?</string>
+    <string name="configuraci_n">Configuración</string>
+    <string name="foto">FOTO</string>
+    <string name="eliminar">ELIMINAR</string>
+    <string name="usuario">USUARIO</string>
+    <string name="semuestrauser">seMuestraUser</string>
+    <string name="semuestrapass">seMuestraPass</string>
+    <string name="nombre_del_color">Nombre del color</string>
+    <string name="rojo">Rojo</string>
+    <string name="azul">Azul</string>
+    <string name="a_adir_color">Añadir color</string>
+    <string name="verde">Verde</string>
+    <string name="cambie_su_configuraci_n_de_perfil_aqu">Cambie su configuración de perfil aquí</string>
+    <string name="mostrar_mis_datos">MOSTRAR MIS DATOS</string>
+    <string name="exportar_datos_de_dressmeapp">Exportar datos de DressMeApp</string>
+    <string name="cambiar_mi_contrase_a">Cambiar mi contraseña</string>
+    <string name="borrar_perfil">Borrar perfil</string>
+    <string name="color">Color</string>
+    <string name="tipo">Tipo</string>
+    <string name="talla">Talla</string>
+    <string name="recomi_ndame">Recomiéndame</string>
+    <string name="conjuntos_favoritos">CONJUNTOS FAVORITOS</string>
+    <string name="historial">Historial</string>
+    <string name="a_adir_a_favoritos">AÑADIR A FAVORITOS</string>
+    <string name="reintentar">REINTENTAR</string>
+    <string name="buscar">Buscar</string>
+    <string name="agrupar">Agrupar</string>
+    <string name="a_adir">Añadir</string>
+    <string name="ordenar">Ordenar</string>
+    <string name="introducir_busqueda">Introducir busqueda</string>
 
 
 </resources>

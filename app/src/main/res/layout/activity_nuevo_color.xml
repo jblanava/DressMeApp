@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="#000000"
+                android:contentDescription="@string/color"
                 android:src="?android:attr/activatedBackgroundIndicator" />
 
             <TextView
@@ -42,15 +43,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:ems="10"
-                android:hint="Nombre del color"
-                android:inputType="textPersonName" />
+                android:hint="@string/nombre_del_color"
+                android:inputType="textPersonName"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/txtRojo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Rojo" />
+                android:text="@string/rojo" />
 
             <SeekBar
                 android:id="@+id/barRojo"
@@ -68,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Verde" />
+                android:text="@string/verde" />
 
             <SeekBar
                 android:id="@+id/barVerde"
@@ -83,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Azul" />
+                android:text="@string/azul" />
 
             <SeekBar
                 android:id="@+id/barAzul"
@@ -99,7 +101,7 @@
                 android:layout_height="44dp"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/mybutton"
-                android:text="Añadir color"
+                android:text="@string/a_adir_color"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />

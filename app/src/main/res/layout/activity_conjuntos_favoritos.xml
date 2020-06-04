@@ -7,22 +7,17 @@
     android:background="@color/colorFondo"
     tools:context=".Activities.ConjuntosFavoritosActivity">
 
-    <TableRow
+    <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="18">
+        android:layout_weight="5">
 
-        <ScrollView
-            android:id="@+id/scrollView3"
+        <LinearLayout
+            android:id="@+id/lista_prendas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="5">
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
-            <LinearLayout
-                android:id="@+id/lista_prendas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
-    </TableRow>
 </androidx.constraintlayout.widget.ConstraintLayout>

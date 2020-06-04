@@ -22,8 +22,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:ems="10"
-                android:hint="Introducir busqueda"
-                android:inputType="textPersonName" />
+                android:hint="@string/introducir_busqueda"
+                android:inputType="textPersonName"
+                android:autofillHints="" />
 
             <Button
                 android:id="@+id/boton_buscar"
@@ -32,7 +33,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@drawable/mybutton"
-                android:text="Buscar" />
+                android:text="@string/buscar" />
 
             <Button
                 android:id="@+id/boton_añadir"
@@ -41,7 +42,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@drawable/mybutton"
-                android:text="Añadir" />
+                android:text="@string/a_adir" />
 
         </TableRow>
 
@@ -66,7 +67,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@drawable/mybutton"
-                android:text="Ordenar" />
+                android:text="@string/ordenar" />
 
         </TableRow>
 
@@ -89,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/mybutton"
-                android:text="Agrupar" />
+                android:text="@string/agrupar" />
 
         </TableRow>
 
@@ -108,7 +109,7 @@
                 <LinearLayout
                     android:id="@+id/lista_prendas"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"></LinearLayout>
             </ScrollView>
         </TableRow>

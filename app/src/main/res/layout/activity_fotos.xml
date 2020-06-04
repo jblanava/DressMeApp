@@ -7,16 +7,21 @@
     tools:context=".Activities.Fotos">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/foto_guardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/mybutton"
-            android:text="Guardar Foto"
+            android:text="@string/guardar_foto"
             tools:layout_editor_absoluteX="226dp"
             tools:layout_editor_absoluteY="340dp" />
 
@@ -24,17 +29,11 @@
             android:id="@+id/imageView2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/colorFondo" />
-
-
-
-
-
-
+            android:background="@color/colorFondo"
+            android:contentDescription="@string/foto_de_la_prenda" />
 
 
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

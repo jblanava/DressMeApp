@@ -44,20 +44,22 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:background="@drawable/mybutton"
-            android:text="AÑADIR A FAVORITOS" />
+            android:text="@string/a_adir_a_favoritos" />
 
         <Button
-            style="?android:attr/borderlessButtonStyle"
-            android:background="@drawable/mybutton"
             android:id="@+id/boton_guardar"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginRight="15dp"
 
 
-            android:text="GUARDAR" />
+            android:layout_weight="0.5"
+            android:background="@drawable/mybutton"
+            android:text="@string/guardar" />
 
         <Button
             style="?android:attr/borderlessButtonStyle"
@@ -68,7 +70,9 @@
             android:layout_weight="0.5"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="20dp"
-            android:text="REINTENTAR" />
+            android:text="@string/reintentar"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="20dp" />
 
     </TableRow>
 

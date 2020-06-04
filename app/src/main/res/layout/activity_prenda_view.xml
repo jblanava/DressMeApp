@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-             />
+            android:contentDescription="@string/foto_de_la_prenda" />
 
 
 
@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:background="#ffffff"
-            android:clickable="true">
+            android:clickable="true"
+            android:focusable="true">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -61,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Tipo"
+                    android:text="@string/tipo"
                     android:textSize="16sp" />
 
 
@@ -78,7 +79,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Color"
+                    android:text="@string/color"
                     android:textSize="16sp" />
 
                 <TextView
@@ -87,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Talla"
+                    android:text="@string/talla"
                     android:textSize="16sp" />
 
 

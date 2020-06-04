@@ -10,7 +10,8 @@
         android:id="@+id/imgColor"
         android:layout_width="40dp"
         android:layout_height="match_parent"
-        android:background="#BC5F5F" />
+        android:background="#BC5F5F"
+        android:contentDescription="@string/color" />
 
     <TextView
         android:id="@+id/txtColor"

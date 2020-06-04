@@ -33,7 +33,7 @@
         android:layout_width="225dp"
         android:layout_height="wrap_content"
         android:background="@drawable/mybutton"
-        android:text="Añadir una nueva talla"
+        android:text="@string/a_adir_una_nueva_talla"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
