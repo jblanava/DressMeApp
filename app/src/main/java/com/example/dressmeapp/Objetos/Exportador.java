@@ -52,4 +52,37 @@ public class Exportador
         }
     }
 
+    /// VERSION CON UN SOLO ARCHIVO
+
+    public void constructor2()
+    {
+        try
+        {
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "vestuario.txt");
+            FileWriter fw = new FileWriter(file);
+
+            exportar2(fw, GestorBD.expPerfiles(context));
+            exportar2(fw, GestorBD.expColores(context));
+            exportar2(fw, GestorBD.expComboColor(context));
+            exportar2(fw, GestorBD.expTallas(context));
+            exportar2(fw, GestorBD.expPrendas(context));
+            exportar2(fw, GestorBD.expConjuntos(context));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void exportar2(FileWriter fw, List<?> objects) throws IOException
+    {
+        for (Object o : objects)
+        {
+            fw.write(o.toString());
+        }
+
+        fw.write("\n");
+    }
+
 }

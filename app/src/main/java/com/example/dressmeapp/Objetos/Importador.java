@@ -34,14 +34,6 @@ public class Importador
     {
         this.context = context;
 
-        /*
-        Mi idea es tener un Map<int,int> que relacione los antiguos ID con los nuevos, para ello necesito que cada vez
-        que se meta un color, talla, prenda en la base de datos, me devuelva el nuevo ID asociado. Cada vez que quiera meter
-        algo en la base de datos consultaré en el mapa cual es el nuevo ID, puedo hacer esto porque tengo el ID original
-        y estoy siguiendo un orden (antes de meter las prendas tengo que haber metido los perfiles, los colores y las talla
-        porque sino los mapas estarán vacios y no sabré que ID ponerle en esos campos)
-         */
-
         Map<Integer, Integer> Mapaperfiles = new HashMap<>();
         Map<Integer, Integer> Mapacolores = new HashMap<>();
         Map<Integer, Integer> Mapatallas = new HashMap<>();
@@ -144,6 +136,123 @@ public class Importador
             Log.e("login activity", "File not found: " + e.toString());
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return res;
+    }
+
+
+
+    /// VERSION CON UN SOLO ARCHIVO
+
+    public  void constructor2()
+    {
+        try
+        {
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "vestuario.txt");
+
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            Map<Integer, Integer> Mapaperfiles = new HashMap<>();
+            Map<Integer, Integer> Mapacolores = new HashMap<>();
+            Map<Integer, Integer> Mapatallas = new HashMap<>();
+            Map<Integer, Integer> Mapaprendas = new HashMap<>();
+
+            List<String> prefiles = importar2(br);
+            List<String> colores = importar2(br);
+            List<String> combos = importar2(br);
+            List<String> tallas = importar2(br);
+            List<String> prendas = importar2(br);
+            List<String> conjuntos = importar2(br);
+
+            for(String s : prefiles)
+            {
+                PerfilBD p = new PerfilBD(s);
+                int nuevoId = GestorBD.CrearPerfil(context, p.usuario, p.clave);
+
+                Mapaperfiles.put(p.id, nuevoId);
+            }
+
+            for(String s : colores)
+            {
+                ColorBD c = new ColorBD(s);
+
+                if(c.id <= 12)
+                {
+                    Mapacolores.put(c.id, c.id);
+                    continue; // Los primeros 12 son los que vienen por defecto y me los salto
+                }
+
+                int nuevoId = GestorBD2.crearColor(context, c.nombre, c.hex);
+
+                Mapacolores.put(c.id, nuevoId);
+            }
+
+            for(String s : combos)
+            {
+                ComboColorBD c = new ComboColorBD(s);
+                GestorBD2.crearComboColor(context, c.color1, c.color2);
+            }
+
+            for(String s : tallas)
+            {
+                TallaBD t = new TallaBD(s);
+
+                if(t.id <= 6)
+                {
+                    Mapatallas.put(t.id, t.id);
+                    continue; // Las primeras 6 son las que vienen por defecto y me las salto
+                }
+
+                int nuevoId = GestorBD.CrearTalla(context, t.nombre);
+
+                Mapatallas.put(t.id, nuevoId);
+            }
+
+
+            for(String s : prendas)
+            {
+                PrendaBD p = new PrendaBD(s);
+
+
+                int nuevoId = GestorBD.crearPrenda(context, p.nombre, Mapacolores.get(p.color), p.tipo, Mapatallas.get(p.talla), p.visible, Mapaperfiles.get(p.perfil));
+
+                Mapaprendas.put(p.id, nuevoId);
+            }
+
+            for(String s : conjuntos)
+            {
+                ConjuntoBD p = new ConjuntoBD(s);
+                Conjunto c = new Conjunto();
+
+                for(int i : p.prendas)
+                {
+                    c.add(Mapaprendas.get(i));
+                }
+
+                GestorBD.addConjunto(context, c, p.favorito);
+            }
+
+
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<String> importar2(BufferedReader br) throws IOException {
+
+        List<String> res = new ArrayList<>();
+
+        String receiveString = "";
+
+        while ((receiveString = br.readLine()) != null)
+        {
+            if(receiveString.length() == 0) return  res;
+            res.add(receiveString);
         }
 
         return res;
