@@ -201,7 +201,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2">
+            android:layout_weight="1">
 
 
             <TextView
@@ -210,8 +210,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="15dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="15dp"
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:text="@string/nombre"
@@ -223,39 +223,70 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="15dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="15dp"
                 android:layout_weight="1"
+                android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/nombre"
-                android:inputType="textPersonName"
-                android:autofillHints="" />
+                android:inputType="textPersonName" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0">
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/texto_color"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
 
-                android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:text="@string/color"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginEnd="10dp" />
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spinner_color"
                 android:layout_width="0dp"
-                android:layout_height="75dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp" />
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/texto_tipo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="@string/tipo"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_tipo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1" />
         </TableRow>
 
@@ -263,115 +294,88 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2">
-
-            <TextView
-                android:id="@+id/texto_tipo"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-
-                android:layout_marginRight="10dp"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:text="@string/tipo"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginEnd="10dp" />
-
-            <Spinner
-                android:id="@+id/spinner_tipo"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-
-                android:layout_weight="1"
-                android:layout_marginStart="10dp" />
-        </TableRow>
-
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2">
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/texto_talla"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
 
+                android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:text="@string/talla"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginEnd="10dp" />
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spinner_talla"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
 
-                android:layout_weight="1"
-                android:layout_marginStart="10dp" />
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1" />
 
         </TableRow>
 
 
         <TableRow
-            android:layout_width="394dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0">
+            android:layout_weight="10">
 
             <ImageView
                 android:id="@+id/prenda_foto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:adjustViewBounds="false"
                 android:contentDescription="@string/foto_de_la_prenda"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:srcCompat="@drawable/logomaniqui" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.05">
+            android:layout_weight=".5">
 
             <Button
                 android:id="@+id/boton_eliminar"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/mybutton"
-                android:text="@string/eliminar"
-                android:layout_marginStart="10dp" />
+                android:text="@string/eliminar" />
 
             <Button
                 android:id="@+id/boton_guardar"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="10dp"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/mybutton"
-                android:text="@string/guardar"
-                android:layout_marginStart="10dp" />
+                android:text="@string/guardar" />
 
             <Button
                 android:id="@+id/boton_foto"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="10dp"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/mybutton"
-                android:text="@string/foto"
-                android:layout_marginStart="10dp" />
+                android:text="@string/foto" />
 
 
             <Spinner
