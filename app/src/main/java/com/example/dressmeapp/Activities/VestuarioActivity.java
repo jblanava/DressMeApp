@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -153,6 +154,7 @@ public class VestuarioActivity extends AppCompatActivity {
     }
 
     void buscar() {
+        quitarTeclado(Ebusqueda);
         busqueda = Ebusqueda.getText().toString();
         mostrar_prendas();
     }
@@ -249,6 +251,11 @@ public class VestuarioActivity extends AppCompatActivity {
             listaPrendas.addView(view);
         }
 
+    }
+
+    private void quitarTeclado(View v) {
+        InputMethodManager teclado = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        teclado.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
 }

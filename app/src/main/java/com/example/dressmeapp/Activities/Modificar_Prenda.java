@@ -1,8 +1,10 @@
 package com.example.dressmeapp.Activities;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -88,7 +90,32 @@ public class Modificar_Prenda extends AppCompatActivity {
         Beliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 eliminar();
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+                alertDialog.setMessage("¿Desea borrar la prenda?");
+                alertDialog.setTitle("ATENCIÓN");
+                alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+                alertDialog.setCancelable(false);
+                alertDialog.setPositiveButton("Sí, estoy seguro", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        eliminar();
+                        //código Java si se ha pulsado sí
+                    }
+                });
+                alertDialog.setNegativeButton("No, me lo he pensado mejor", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        //No hace nada, se queda en la misma Activity
+                        //código java si se ha pulsado no
+                    }
+                });
+
+                alertDialog.show(); // esto es importante :D
             }
         });
 
