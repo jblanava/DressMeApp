@@ -222,17 +222,20 @@ public class GestorBD {
 
     public static void BorrarPerfil(Context contexto, int id) {
 
-        String sentenciaSQL;
-        sentenciaSQL = "DELETE FROM PERFIL WHERE ID = " + id;
+        String borrarPerfiles = "DELETE FROM PERFIL WHERE ID = " + id;
+        String borrarPrendas = "DELETE FROM PRENDA WHERE ID_PERFIL = " + id;
+        String borrarConjuntos = "DELETE FROM CONJUNTO WHERE ID_PERFIL = " + id;
+
         BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
-        baseDatos.execSQL(sentenciaSQL);
+
+        baseDatos.execSQL(borrarPerfiles);
+        baseDatos.execSQL(borrarPrendas);
+        baseDatos.execSQL(borrarConjuntos);
+
         baseDatos.close();
         base.close();
-
-        //  Hace falta ademas borrar las prendas, conjuntos e historial
-
     }
 
     public static void ActualizarPerfil(Context contexto, int idPerfil, String password) {
@@ -1104,9 +1107,9 @@ public class GestorBD {
         return combos;
     }
 
-    static public List<PerfilBD> expPerfiles(Context context)
+    static public List<PerfilBD> expPerfil(Context context)
     {
-        String sentenciaSQL = "SELECT * FROM PERFIL";
+        String sentenciaSQL = "SELECT * FROM PERFIL WHERE ID = " + idPerfil;
 
         Cursor cursor;
         List<PerfilBD> perfiles = new ArrayList<>();
@@ -1136,7 +1139,7 @@ public class GestorBD {
 
     static public List<PrendaBD> expPrendas(Context context)
     {
-        String sentenciaSQL = "SELECT * FROM PRENDA";
+        String sentenciaSQL = "SELECT * FROM PRENDA WHERE ID_PERFIL = " + idPerfil;
 
         Cursor cursor;
         List<PrendaBD> prendas = new ArrayList<>();
@@ -1199,7 +1202,7 @@ public class GestorBD {
 
     static public List<ConjuntoBD> expConjuntos(Context context)
     {
-        String sentenciaSQL = "SELECT * FROM CONJUNTO";
+        String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + idPerfil;
 
         Cursor cursor;
         List<ConjuntoBD> conjuntos = new ArrayList<>();

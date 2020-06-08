@@ -17,42 +17,6 @@ import java.util.List;
 
 public class Exportador
 {
-
-/*
-    Context context;
-    public  Exportador(Context context)
-    {
-        this.context = context;
-
-        exportar(GestorBD.expPerfiles(context), "perfiles.txt");
-        exportar(GestorBD.expColores(context), "colores.txt");
-        exportar(GestorBD.expComboColor(context), "combo_colores.txt");
-        exportar(GestorBD.expTallas(context), "tallas.txt");
-        exportar(GestorBD.expPrendas(context), "prendas.txt");
-        exportar(GestorBD.expConjuntos(context), "conjuntos.txt");
-    }
-
-    public void exportar(List<?> objetos, String archivo)
-    {
-        try {
-
-            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), archivo);
-            FileWriter myWriter = new FileWriter(file);
-            for (Object o : objetos)
-            {
-                myWriter.write(o.toString());
-            }
-
-            myWriter.close();
-            Log.i("Exportador", "Creado fichero " + archivo);
-        }
-        catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-*/
-    /// VERSION CON UN SOLO ARCHIVO
-
     public Exportador(Context context)
     {
         try
@@ -60,12 +24,12 @@ public class Exportador
             File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "vestuario.txt");
             FileWriter fw = new FileWriter(file);
 
-            exportar2(fw, GestorBD.expPerfiles(context));
-            exportar2(fw, GestorBD.expColores(context));
-            exportar2(fw, GestorBD.expComboColor(context));
-            exportar2(fw, GestorBD.expTallas(context));
-            exportar2(fw, GestorBD.expPrendas(context));
-            exportar2(fw, GestorBD.expConjuntos(context));
+            exportar(fw, GestorBD.expPerfil(context));
+            exportar(fw, GestorBD.expColores(context));
+            exportar(fw, GestorBD.expComboColor(context));
+            exportar(fw, GestorBD.expTallas(context));
+            exportar(fw, GestorBD.expPrendas(context));
+            exportar(fw, GestorBD.expConjuntos(context));
 
             fw.close();
         }
@@ -76,7 +40,7 @@ public class Exportador
     }
 
 
-    public void exportar2(FileWriter fw, List<?> objects) throws IOException
+    public void exportar(FileWriter fw, List<?> objects) throws IOException
     {
         for (Object o : objects)
         {
