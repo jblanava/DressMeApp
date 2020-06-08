@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.Objetos.NothingSelectedSpinner;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
 
@@ -88,7 +89,7 @@ public class Modificar_Prenda extends AppCompatActivity {
         ArrayAdapter<String> adapterPerfiles = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, perfiles);
         adapterPerfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Sperfiles.setPrompt(defaultText);
-        Sperfiles.setAdapter(adapterPerfiles);
+        Sperfiles.setAdapter(new NothingSelectedSpinner(adapterPerfiles,R.layout.contact_spinner_row_nothing_selected,this));
 
 
         Beliminar.setOnClickListener(new View.OnClickListener() {
