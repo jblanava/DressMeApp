@@ -18,13 +18,12 @@ import java.util.List;
 public class Exportador
 {
 
+/*
     Context context;
-
     public  Exportador(Context context)
     {
         this.context = context;
 
-        // TODO cuando se creen las funciones correspondientes substituir aqui
         exportar(GestorBD.expPerfiles(context), "perfiles.txt");
         exportar(GestorBD.expColores(context), "colores.txt");
         exportar(GestorBD.expComboColor(context), "combo_colores.txt");
@@ -51,10 +50,10 @@ public class Exportador
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
-
+*/
     /// VERSION CON UN SOLO ARCHIVO
 
-    public void constructor2()
+    public Exportador(Context context)
     {
         try
         {
@@ -67,6 +66,8 @@ public class Exportador
             exportar2(fw, GestorBD.expTallas(context));
             exportar2(fw, GestorBD.expPrendas(context));
             exportar2(fw, GestorBD.expConjuntos(context));
+
+            fw.close();
         }
         catch (IOException e)
         {

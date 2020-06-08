@@ -28,6 +28,7 @@ import java.util.Map;
 public class Importador
 {
 
+    /*
     Context context;
 
     public  Importador(Context context)
@@ -141,11 +142,11 @@ public class Importador
         return res;
     }
 
-
+*/
 
     /// VERSION CON UN SOLO ARCHIVO
 
-    public  void constructor2()
+    public  Importador(Context context)
     {
         try
         {
