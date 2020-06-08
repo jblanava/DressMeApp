@@ -112,9 +112,7 @@ public class RegistroActivity extends AppCompatActivity {
     private void verificarYPedirPermisosDeAlmacenamiento() {
         int estadoDePermiso = ContextCompat.checkSelfPermission(RegistroActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (estadoDePermiso == PackageManager.PERMISSION_GRANTED) {
-            new Importador(this);
-            Toast.makeText(RegistroActivity.this, "Se han importado tus prendas desde la carpeta de descargas", Toast.LENGTH_SHORT).show();
-
+            importar();
         } else {
             ActivityCompat.requestPermissions(RegistroActivity.this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -125,14 +123,19 @@ public class RegistroActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 0) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                new Importador(this);
-                Toast.makeText(RegistroActivity.this, "Se han importado tus prendas desde la carpeta de descargas", Toast.LENGTH_SHORT).show();
-
+                importar();
             } else {
                 Toast.makeText(RegistroActivity.this, "El permiso para el almacenamiento está denegado", Toast.LENGTH_SHORT).show();
 
             }
         }
+    }
+
+    private void importar()
+    {
+        new Importador(this);
+        Toast.makeText(RegistroActivity.this, "Se han importado tus prendas desde la carpeta de descargas", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
 }

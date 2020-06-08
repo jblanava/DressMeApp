@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     private void irARegistro(){
         Intent nuevaActividad = new Intent(this, RegistroActivity.class);
         startActivity(nuevaActividad);
-        finish();
     }
 
     private void login(String usuario, String pass) {
