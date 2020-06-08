@@ -13,7 +13,7 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
     String[] formalidades = {"Formal", "Semi-formal", "Casual", "Deportivo", "Baño"};
     String[] temperaturas = {"Frio", "Normal", "Calor"};
 
-    EditText eNombre;
+    static EditText eNombre;
     Spinner sFormalidad;
     Spinner sTemperatura;
     Button bRecomiendame;
@@ -68,7 +68,9 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
         startActivity(resultado_recomendador);
     }
 
-
+    public static String getNombreEvento() {
+        return eNombre.getText().toString();
+    }
 }
 
 

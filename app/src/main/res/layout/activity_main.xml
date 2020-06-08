@@ -32,8 +32,8 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
 
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
@@ -59,11 +59,13 @@
                android:typeface="sans" />    -->
 
 
-           <TextView
-               android:id="@+id/textError"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="@string/texto_de_error" />
+        <TextView
+            android:id="@+id/textError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/texto_de_error"
+            android:textColor="@color/colorRojo"
+            android:textStyle="bold" />
 
            <EditText
                android:id="@+id/textNombre"
@@ -79,18 +81,19 @@
                android:typeface="sans"
                android:autofillHints="" />
 
-           <EditText
-               android:id="@+id/textContrasenia"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginBottom="10dp"
-               android:layout_weight="1"
-               android:ems="10"
-               android:hint="@string/contrasenia"
-               android:inputType="textPassword"
-               android:textStyle="bold"
-               android:typeface="sans"
-               android:autofillHints="" />
+        <EditText
+            android:id="@+id/textContrasenia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/contrasenia"
+            android:inputType="textPassword"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
            <Button
                android:id="@+id/btnLogin"
