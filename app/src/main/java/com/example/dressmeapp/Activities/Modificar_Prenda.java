@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.Objetos.NothingSelectedSpinner;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
 
