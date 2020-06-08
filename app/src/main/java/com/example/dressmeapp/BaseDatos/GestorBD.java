@@ -419,7 +419,7 @@ public class GestorBD {
 
         String sentenciaSQL =  "SELECT PRENDA.NOMBRE \"NOMBRE\", COLOR.NOMBRE \"COLOR\", TIPO.NOMBRE \"TIPO\", TALLA.NOMBRE \"TALLA\" ";
         sentenciaSQL += "FROM PRENDA, COLOR, TIPO, TALLA ";
-        sentenciaSQL += "WHERE PRENDA.VISIBLE = 1 AND PRENDA.ID = " + id + " ";
+        sentenciaSQL += "WHERE PRENDA.ID = " + id + " ";
         sentenciaSQL += "AND COLOR.ID = PRENDA.COLOR AND TIPO.ID = PRENDA.TIPO AND TALLA.ID = PRENDA.TALLA ";
 
         BaseDatos base = new BaseDatos(context, nombreBD);

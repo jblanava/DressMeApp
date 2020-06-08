@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.Debug.Debug;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
@@ -29,6 +31,8 @@ public class HistorialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial);
         getSupportActionBar().hide();
+        Log.i("PRENDAS", Debug.getTabla(this, "dressmeapp23.db", "PRENDA", "ID > 110"));
+        Log.i("CONJUNTOS", Debug.getTabla(this, "dressmeapp23.db", "CONJUNTO", null));
         enlazaControles();
         hagoCosas();
 
@@ -70,7 +74,7 @@ public class HistorialActivity extends AppCompatActivity {
         @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_conjunto_view, null);
 
         TextView conjunto = v.findViewById(R.id.conjuntoView);
-        conjunto.setText(String.format("%s", AlgoritmoRecomendador.getNombreEvento()));
+        //conjunto.setText(String.format("%s", AlgoritmoRecomendador.getNombreEvento()));
         listaPrendas.addView(v);
     }
 

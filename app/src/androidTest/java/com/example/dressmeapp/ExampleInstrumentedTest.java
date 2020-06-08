@@ -455,14 +455,13 @@ public class ExampleInstrumentedTest {
             cjto.add(idsPrenda[i]);
         }
 
-        GestorBD.addConjunto(appContext, cjto);
+        GestorBD.addConjunto(appContext, cjto, 0);
 
         int numConjuntosAntes = GestorBD.ConjuntosEnBD(appContext).size();
 
         // Borrarlo
 
-        GestorBD gestor = new GestorBD(appContext);
-        GestorBD.BorrarConjunto(idCjto);
+        GestorBD.BorrarConjunto(appContext, idCjto);
 
         int numConjuntosDespues = GestorBD.ConjuntosEnBD(appContext).size();
         assertEquals(numConjuntosDespues, numConjuntosAntes - 1);
@@ -509,7 +508,7 @@ public class ExampleInstrumentedTest {
             cjto.add(idsPrenda[i]);
         }
 
-        GestorBD.addConjunto(appContext, cjto);
+        GestorBD.addConjunto(appContext, cjto, 0);
         int idCjtoDespues = GestorBD.obtenIDMaximoConjunto(appContext);
 
         assertEquals(idCjtoDespues, idCjto + 1);
@@ -537,7 +536,7 @@ public class ExampleInstrumentedTest {
             cjto.add(idsPrenda[i]);
         }
 
-        GestorBD.addConjunto(appContext, cjto);
+        GestorBD.addConjunto(appContext, cjto, 0);
 
         String sql = "SELECT COUNT(*) AS CUENTA FROM CONJUNTO WHERE ABRIGO=" + idsPrenda[0]
                 + " AND SUDADERA=" + idsPrenda[1]
