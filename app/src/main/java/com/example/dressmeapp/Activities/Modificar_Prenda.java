@@ -35,7 +35,7 @@ public class Modificar_Prenda extends AppCompatActivity {
 
     ImageView imagen;
 
-
+    String defaultText = "ENVIAR A PERFIL";
 
     Prenda prenda;
 
@@ -67,6 +67,7 @@ public class Modificar_Prenda extends AppCompatActivity {
         BFotos = findViewById(R.id.boton_foto);
         imagen = findViewById(R.id.prenda_foto);
 
+
         List<String> colores = GestorBD.get_nombres_tabla(this, "color");
         ArrayAdapter<String> adapterColores = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colores);
         adapterColores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -83,9 +84,12 @@ public class Modificar_Prenda extends AppCompatActivity {
         Stalla.setAdapter(adapterTallas);
 
         List<String> perfiles = GestorBD.get_nombres_tabla(this, "perfil");
+
         ArrayAdapter<String> adapterPerfiles = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, perfiles);
         adapterPerfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Sperfiles.setPrompt(defaultText);
         Sperfiles.setAdapter(adapterPerfiles);
+
 
         Beliminar.setOnClickListener(new View.OnClickListener() {
             @Override

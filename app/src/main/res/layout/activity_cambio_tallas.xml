@@ -7,36 +7,34 @@
     android:background="@color/colorFondo"
     tools:context=".Activities.CambioTallasActivity" >
 
-    <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="564dp"
-        android:layout_marginBottom="37dp"
-        android:padding="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/bAddTalla"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <LinearLayout
-            android:id="@+id/lista_tallas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="20dp" />
-    </ScrollView>
-
-    <Button
-        android:id="@+id/bAddTalla"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="225dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/mybutton"
-        android:text="@string/a_adir_una_nueva_talla"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.879" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_tallas"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:padding="32dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/bAddTalla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:background="@drawable/mybutton"
+            android:text="@string/a_adir_talla"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
