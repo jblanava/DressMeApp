@@ -59,11 +59,13 @@
                android:typeface="sans" />    -->
 
 
-           <TextView
-               android:id="@+id/textError"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="@string/texto_de_error" />
+        <TextView
+            android:id="@+id/textError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/texto_de_error"
+            android:textColor="@color/colorRojo"
+            android:textStyle="bold" />
 
            <EditText
                android:id="@+id/textNombre"
