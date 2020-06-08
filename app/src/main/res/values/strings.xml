@@ -80,6 +80,6 @@
     <string name="a_adir">Añadir</string>
     <string name="ordenar">Ordenar</string>
     <string name="introducir_busqueda">Introducir busqueda</string>
-
+    <string name="a_adir_talla">Añadir talla</string>
 
 </resources>
