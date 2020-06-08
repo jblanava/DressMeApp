@@ -70,7 +70,7 @@ public class HistorialActivity extends AppCompatActivity {
         @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_conjunto_view, null);
 
         TextView conjunto = v.findViewById(R.id.conjuntoView);
-        conjunto.setText(String.format("CONJUNTO %d", cont));
+        conjunto.setText(String.format("%s", AlgoritmoRecomendador.getNombreEvento()));
         listaPrendas.addView(v);
     }
 
