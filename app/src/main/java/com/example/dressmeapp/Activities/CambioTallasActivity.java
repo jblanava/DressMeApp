@@ -1,7 +1,10 @@
 package com.example.dressmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +13,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.Objetos.ColorAdapter;
+import com.example.dressmeapp.Objetos.RecyclerViewOnItemClickListener;
+import com.example.dressmeapp.Objetos.TallaAdapter;
 import com.example.dressmeapp.R;
 
 import java.util.List;
 
 public class CambioTallasActivity extends AppCompatActivity {
     Button bAddTalla;
-    LinearLayout listaTallas;
+    RecyclerView listaTallas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +54,17 @@ public class CambioTallasActivity extends AppCompatActivity {
         });
     }
 
-    void cargarTallas()
-    {
-        List<String> tallas = GestorBD.get_nombres_tabla(this, "talla");
+    void cargarTallas() {
+        final List<String> tallas = GestorBD.get_nombres_tabla(this, "talla");
 
-        for(String t : tallas)
-        {
-            TextView textView = new TextView(this);
-            textView.setText(t);
-            textView.setAllCaps(true); // aniadido para probar , se puede quitar
-            listaTallas.addView(textView);
-        }
+        listaTallas.setAdapter(new TallaAdapter(tallas, new RecyclerViewOnItemClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                // no pasa nada al tocar la talla
+            }
+        }));
+
+        listaTallas.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void aniadirTalla(){
