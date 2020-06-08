@@ -10,8 +10,10 @@
         android:id="@+id/txtTalla"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:padding="6dp"
+        android:text="@string/textview"
+        android:textIsSelectable="false"
         android:textSize="18sp" />
 
 </LinearLayout>
