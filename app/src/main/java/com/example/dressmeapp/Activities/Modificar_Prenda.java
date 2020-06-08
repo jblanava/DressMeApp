@@ -89,7 +89,7 @@ public class Modificar_Prenda extends AppCompatActivity {
         ArrayAdapter<String> adapterPerfiles = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, perfiles);
         adapterPerfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Sperfiles.setPrompt(defaultText);
-        Sperfiles.setAdapter(new NothingSelectedSpinner(adapterPerfiles,R.layout.contact_spinner_row_nothing_selected,this));
+        Sperfiles.setAdapter(adapterPerfiles);
 
 
         Beliminar.setOnClickListener(new View.OnClickListener() {
