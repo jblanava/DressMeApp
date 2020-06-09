@@ -6,14 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Conjunto {
-    private List<Integer> idPrendas;
 
+    private List<Integer> idPrendas;
+    private String nombreCjto;
     int idPerfil;
 
 
-    public Conjunto(){
+    public Conjunto(String nombreCjto){
         idPerfil = GestorBD.getIdPerfil();
         idPrendas = new ArrayList<>();
+        this.nombreCjto = nombreCjto;
+    }
+    public Conjunto() {
+        this("");
     }
 
     /*
@@ -56,6 +61,6 @@ public class Conjunto {
     public List<Integer> getPrendas(){
         return this.idPrendas;
     }
-
+    public String getNombreCjto() { return nombreCjto; }
 
 }

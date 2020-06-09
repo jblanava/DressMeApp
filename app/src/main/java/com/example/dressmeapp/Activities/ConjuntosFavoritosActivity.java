@@ -48,7 +48,7 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
         for(Conjunto c : listaConjuntos){
             contador++;
             //Crear un text view, mostrarlo por pantalla
-            metodoMisPanas(contador);
+            metodoMisPanas(c.getNombreCjto());
             //Recorro el conjunto y muestro las prendas
 
 
@@ -64,11 +64,11 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
     }
 
     @SuppressLint("DefaultLocale")
-    private void metodoMisPanas(int cont) {
+    private void metodoMisPanas(String nombreConj) {
         @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_conjunto_view, null);
 
         TextView conjunto = v.findViewById(R.id.conjuntoView);
-        conjunto.setText(String.format("CONJUNTO %d", cont));
+        conjunto.setText(nombreConj);
         listaPrendas.addView(v);
     }
 

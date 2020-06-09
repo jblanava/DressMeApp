@@ -31,8 +31,7 @@ public class HistorialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial);
         getSupportActionBar().hide();
-        Log.i("PRENDAS", Debug.getTabla(this, "dressmeapp23.db", "PRENDA", "ID > 110"));
-        Log.i("CONJUNTOS", Debug.getTabla(this, "dressmeapp23.db", "CONJUNTO", null));
+        Log.i("CONJUNTOS", Debug.getTabla(this, "dressmeapp25.db", "CONJUNTO", null));
         enlazaControles();
         hagoCosas();
 
@@ -53,8 +52,9 @@ public class HistorialActivity extends AppCompatActivity {
         int contador=0;
         for(Conjunto c : listaConjuntos){
             contador++;
+
             //Crear un text view, mostrarlo por pantalla
-            metodoMisPanas(contador);
+            metodoMisPanas(c.getNombreCjto());
             //Recorro el conjunto y muestro las prendas
 
 
@@ -70,11 +70,11 @@ public class HistorialActivity extends AppCompatActivity {
     }
 
     @SuppressLint("DefaultLocale")
-    private void metodoMisPanas(int cont) {
+    private void metodoMisPanas(String nombreConj) {
         @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_conjunto_view, null);
 
         TextView conjunto = v.findViewById(R.id.conjuntoView);
-        //conjunto.setText(String.format("%s", AlgoritmoRecomendador.getNombreEvento()));
+        conjunto.setText(nombreConj);
         listaPrendas.addView(v);
     }
 

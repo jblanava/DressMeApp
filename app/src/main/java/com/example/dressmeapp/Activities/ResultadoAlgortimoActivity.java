@@ -88,11 +88,12 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         Intent mIntent = getIntent();
         int tiempo = mIntent.getIntExtra("temperatura", 0);
         int actividad = mIntent.getIntExtra("formalidad", 0);
+        String nombre = mIntent.getStringExtra("nombre");
 
-        conjunto = GestorBD.resAlgoritmo(this, tiempo, actividad);
+        conjunto = GestorBD.resAlgoritmo(this, tiempo, actividad, nombre);
 
 
-        for (int j = 1; j < conjunto.getSize(); j++) { // empezamos en 1, porque la pos 0 es para el propio ID del conjunto //
+        for (int j = 0; j < conjunto.getSize(); j++) {
             //Voy mostrando todas las prendas por pantalla
             int idPrenda = conjunto.obtenId(j);
 

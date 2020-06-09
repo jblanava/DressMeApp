@@ -65,6 +65,7 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
         Intent resultado_recomendador = new Intent(this, ResultadoAlgortimoActivity.class);
         resultado_recomendador.putExtra("formalidad", form);
         resultado_recomendador.putExtra("temperatura", temp);
+        resultado_recomendador.putExtra("nombre", getNombreEvento());
         startActivity(resultado_recomendador);
     }
 

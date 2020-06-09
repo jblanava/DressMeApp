@@ -35,7 +35,7 @@ public class GestorBD {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp23.db"; // Antonio ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp25.db"; // Antonio ha cambiado a la BD__17
                                                         // Maria ha cambiado a BD 22
 
 
@@ -544,7 +544,7 @@ public class GestorBD {
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad) {
+    public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad, String nombreCjto) {
 
         List<Integer> colores = get_ids_tabla(context, "color");
 
@@ -559,7 +559,7 @@ public class GestorBD {
         int[] tiposComplementos = {8};
 
 
-        Conjunto res = new Conjunto();
+        Conjunto res = new Conjunto(nombreCjto);
 
         int idColor = colores.get(rng.nextInt(colores.size()));
 
@@ -754,7 +754,7 @@ public class GestorBD {
         if (cursor.moveToFirst()) {
             do {
 
-                Conjunto c = new Conjunto();
+                Conjunto c = new Conjunto(LibreriaBD.Campo(cursor, "NOMBRE_EVENTO"));
 
                 int id = LibreriaBD.CampoInt(cursor, "ID");
                 int Abrigo = LibreriaBD.CampoInt(cursor, "ABRIGO");
@@ -800,7 +800,7 @@ public class GestorBD {
         if (cursor.moveToFirst()) {
             do {
 
-                Conjunto c = new Conjunto();
+                Conjunto c = new Conjunto(LibreriaBD.Campo(cursor, "NOMBRE_EVENTO"));
 
                 int id = LibreriaBD.CampoInt(cursor, "ID");
                 int Abrigo = LibreriaBD.CampoInt(cursor, "ABRIGO");
@@ -938,8 +938,8 @@ public class GestorBD {
         if(abrigo != -1 || sudadera != -1 || camiseta != -1 || pantalon != -1 || zapato != -1 ||complemento != -1)
         {
             String sentenciaSQL;
-            sentenciaSQL = "INSERT INTO CONJUNTO (ID, ABRIGO, SUDADERA, CAMISETA, PANTALON, ZAPATO, COMPLEMENTO, ID_PERFIL, FAVORITO) VALUES ('";
-            sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "', '" + idPerfil + "', '" + flag + "' )";
+            sentenciaSQL = "INSERT INTO CONJUNTO (ID, ABRIGO, SUDADERA, CAMISETA, PANTALON, ZAPATO, COMPLEMENTO, ID_PERFIL, FAVORITO, NOMBRE_EVENTO) VALUES ('";
+            sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "', '" + idPerfil + "', '" + flag + "', '"+ conj.getNombreCjto() +"' )";
 
             BaseDatos base = new BaseDatos(contexto, nombreBD);
             SQLiteDatabase baseDatos;

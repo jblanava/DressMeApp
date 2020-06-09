@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class GestorBD2 {
-    private static String nombreBD = "dressmeapp23.db"; // Antonio ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp25.db"; // Antonio ha cambiado a la BD__17
 
     public static int crearColor(Context contexto, String nombre, String hex) {
         int id = obtenIDMaximoColor(contexto);

@@ -33,7 +33,7 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
 
     private static Context appContext;
-    private static String nombreBaseDatos = "dressmeapp21.db";
+    private static String nombreBaseDatos = "dressmeapp25.db";
 
     @Before
     public void prepararTest() {
@@ -443,7 +443,7 @@ public class ExampleInstrumentedTest {
         GestorBD.CrearPerfil(appContext, "foo", "bar");
         GestorBD.setIdPerfil(idPerfil);
 
-        Conjunto cjto = new Conjunto();
+        Conjunto cjto = new Conjunto("test");
         int idCjto = GestorBD.obtenIDMaximoConjunto(appContext);
         cjto.add(idCjto);
 
@@ -496,7 +496,7 @@ public class ExampleInstrumentedTest {
         int idPerfil = GestorBD.obtenIDMaximoPerfil(appContext);
         GestorBD.CrearPerfil(appContext, "foo", "bar");
 
-        Conjunto cjto = new Conjunto();
+        Conjunto cjto = new Conjunto("test");
         int idCjto = GestorBD.obtenIDMaximoConjunto(appContext);
         cjto.add(idCjto);
 
@@ -524,7 +524,7 @@ public class ExampleInstrumentedTest {
         GestorBD.CrearPerfil(appContext, "foo", "bar");
         GestorBD.setIdPerfil(idPerfil);
 
-        Conjunto cjto = new Conjunto();
+        Conjunto cjto = new Conjunto("test!");
         int idCjto = GestorBD.obtenIDMaximoConjunto(appContext);
         cjto.add(idCjto);
 
