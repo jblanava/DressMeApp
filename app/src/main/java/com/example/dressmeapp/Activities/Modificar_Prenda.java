@@ -94,32 +94,7 @@ public class Modificar_Prenda extends AppCompatActivity {
         Beliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                eliminar();
-
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
-                alertDialog.setMessage("¿Desea borrar la prenda?");
-                alertDialog.setTitle("ATENCIÓN");
-                alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
-                alertDialog.setCancelable(false);
-                alertDialog.setPositiveButton("Sí, estoy seguro", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        eliminar();
-                        //código Java si se ha pulsado sí
-                    }
-                });
-                alertDialog.setNegativeButton("No, me lo he pensado mejor", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        //No hace nada, se queda en la misma Activity
-                        //código java si se ha pulsado no
-                    }
-                });
-
-                alertDialog.show(); // esto es importante :D
+                mostrarAlertaEliminarPrenda();
             }
         });
 
@@ -154,7 +129,31 @@ public class Modificar_Prenda extends AppCompatActivity {
         startActivity(nuevaVentana);
     }
 
+    private void mostrarAlertaEliminarPrenda() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Desea borrar la prenda?");
+        alertDialog.setTitle("ATENCIÓN");
+        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+        alertDialog.setCancelable(false);
+        alertDialog.setPositiveButton("Sí, estoy seguro", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                eliminar();
+                //código Java si se ha pulsado sí
+            }
+        });
+        alertDialog.setNegativeButton("No, me lo he pensado mejor", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //No hace nada, se queda en la misma Activity
+                //código java si se ha pulsado no
+            }
+        });
 
+        alertDialog.show(); // esto es importante :D
+    }
 
 
     void eliminar() // TODO: Preguntar al usuario si está seguro
