@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -77,18 +78,21 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
         if(prenda == null) return;      // TODO: porque cojones necesito esto aqui? PS: no quitar o peta el historial
 
 
-        @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
+        //@SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
+
+        @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.prenda_view_2, null);
 
         TextView nombre = v.findViewById(R.id.prenda_nombre);
         TextView tipo = v.findViewById(R.id.prenda_tipo);
         TextView color = v.findViewById(R.id.prenda_color);
         TextView talla = v.findViewById(R.id.prenda_talla);
-
+        ImageView imagen = v.findViewById(R.id.imageView2);
 
         nombre.setText(prenda.nombre);
         color.setText(prenda.color);
         tipo.setText(prenda.tipo);
         talla.setText(prenda.talla);
+        GestorBD.cargarFoto(this, String.valueOf(prenda.id),imagen);
 
         listaPrendas.addView(v);
     }

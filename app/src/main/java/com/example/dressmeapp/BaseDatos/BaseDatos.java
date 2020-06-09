@@ -24,7 +24,7 @@ public class BaseDatos extends SQLiteOpenHelper {
         crearTalla(db);
         crearTipos(db);
         crearCombo(db);
-        db.execSQL("INSERT INTO PERFIL VALUES (1  , 'PEPE', 'LOTAD') ");
+        db.execSQL("INSERT INTO PERFIL VALUES (1  , '1', '2') "); // PERFIL DE PRUEBA
 
         crearPrendas(db);
 

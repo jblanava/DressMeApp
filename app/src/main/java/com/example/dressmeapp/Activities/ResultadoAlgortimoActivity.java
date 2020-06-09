@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -90,7 +91,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         int actividad = mIntent.getIntExtra("formalidad", 0);
         String nombre = mIntent.getStringExtra("nombre");
 
-        conjunto = GestorBD.resAlgoritmo(this, tiempo, actividad, nombre);
+        conjunto = GestorBD.resAlgoritmo(this, tiempo, actividad);
 
 
         // Empezar en 1 porque el 0 es el ID del conjunto
@@ -116,13 +117,15 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         TextView tipo = v.findViewById(R.id.prenda_tipo);
         TextView color = v.findViewById(R.id.prenda_color);
         TextView talla = v.findViewById(R.id.prenda_talla);
+        ImageView imagen = v.findViewById(R.id.imageView2);
+
 
 
         nombre.setText(prenda.nombre);
         color.setText(prenda.color);
         tipo.setText(prenda.tipo);
         talla.setText(prenda.talla);
-
+        GestorBD.cargarFoto(this, String.valueOf(prenda.id),imagen);
 
         listaPrendas.addView(v);
     }

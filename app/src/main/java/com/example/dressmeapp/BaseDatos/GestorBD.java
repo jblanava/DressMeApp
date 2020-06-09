@@ -20,6 +20,7 @@ import com.example.dressmeapp.Objetos.Structs.ConjuntoBD;
 import com.example.dressmeapp.Objetos.Structs.PerfilBD;
 import com.example.dressmeapp.Objetos.Structs.PrendaBD;
 import com.example.dressmeapp.Objetos.Structs.TallaBD;
+import com.example.dressmeapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -544,7 +545,7 @@ public class GestorBD {
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad, String nombreCjto) {
+    public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad) {
 
         List<Integer> colores = get_ids_tabla(context, "color");
 
@@ -559,7 +560,7 @@ public class GestorBD {
         int[] tiposComplementos = {8};
 
 
-        Conjunto res = new Conjunto(nombreCjto);
+        Conjunto res = new Conjunto();
 
         // Añadir ID al conjunto (necesario para que los índices funcionen bien)
         res.add(obtenIDMaximoConjunto(context));
@@ -1041,12 +1042,46 @@ public class GestorBD {
         {
             byte[] image = rs.getBlob(1);
             Bitmap bmp= BitmapFactory.decodeByteArray(image, 0 , image.length);
-            imagen.setImageBitmap(bmp);
+            try{
+
+                imagen.setImageBitmap(bmp);
+
+
+            }catch (Exception e){
+                imagen.setImageResource(R.drawable.logologo);
+            }
+
+
+        } else {
+         imagen.setImageResource(R.drawable.logologo);
 
         }
 
         rs.close();
         bd.close();
+    }
+
+    public static Bitmap obtenerFoto(Context context, String id_modificar){
+        String vsql = "SELECT * FROM FOTOS WHERE ID = " + id_modificar;
+
+        BaseDatos bdh =  new BaseDatos(context, nombreBD);
+
+        SQLiteDatabase bd = bdh.getReadableDatabase();
+        Cursor rs = bd.rawQuery(vsql,null);
+
+        Bitmap bmp = null;
+
+        if(rs.moveToNext())
+        {
+            byte[] image = rs.getBlob(1);
+             bmp= BitmapFactory.decodeByteArray(image, 0 , image.length);
+
+        }
+
+        rs.close();
+        bd.close();
+
+        return bmp;
     }
 
     // Funciones para exportar TODO hacer las funciones que falten

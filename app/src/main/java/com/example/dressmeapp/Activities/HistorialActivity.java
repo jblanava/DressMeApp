@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -89,12 +90,14 @@ public class HistorialActivity extends AppCompatActivity {
         TextView tipo = v.findViewById(R.id.prenda_tipo);
         TextView color = v.findViewById(R.id.prenda_color);
         TextView talla = v.findViewById(R.id.prenda_talla);
+        ImageView imagen = v.findViewById(R.id.imageView2);
 
 
         nombre.setText(prenda.nombre);
         color.setText(prenda.color);
         tipo.setText(prenda.tipo);
         talla.setText(prenda.talla);
+        GestorBD.cargarFoto(this, String.valueOf(prenda.id),imagen);
 
         listaPrendas.addView(v);
     }

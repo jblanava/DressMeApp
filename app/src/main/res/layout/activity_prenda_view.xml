@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:clickable="false"
-    android:orientation="vertical"
-    android:padding="8dp">
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="?attr/selectableItemBackground"
+android:clickable="false"
+android:orientation="vertical"
+android:padding="8dp">
 
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:background="@color/colorFondo"
+        android:contentDescription="@string/foto_de_la_prenda" />
 
     <TableLayout
         android:id="@+id/boton_prenda"
@@ -80,4 +92,93 @@
 
     </TableLayout>
 
+</LinearLayout>
+
 </RelativeLayout>
+
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="false"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+
+        <TableLayout
+            android:id="@+id/boton_prenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/prenda_nombre"
+                    android:layout_width="321dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="23dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/nombre"
+                    android:textSize="24sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+
+                <TextView
+                    android:id="@+id/prenda_tipo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/tipo"
+                    android:textSize="16sp" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/prenda_color"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/prenda_talla"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/talla"
+                    android:textSize="16sp" />
+
+
+            </TableRow>
+
+
+        </TableLayout>
+
+    </RelativeLayout>
+    -->

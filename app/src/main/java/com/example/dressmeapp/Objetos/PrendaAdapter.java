@@ -1,15 +1,17 @@
 package com.example.dressmeapp.Objetos;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
 
 import java.util.List;
@@ -21,6 +23,7 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
 {
     private List<Prenda> data;
     private RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
+    static Prenda  prenda;
 
     public PrendaAdapter(@NonNull List<Prenda> data, @NonNull RecyclerViewOnItemClickListener recyclerViewOnItemClickListener)
     {
@@ -37,12 +40,14 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
 
     @Override
     public void onBindViewHolder(@NonNull PrendaViewHolder holder, int position) {
-        Prenda prenda = data.get(position);
+         prenda = data.get(position);
 
         holder.getNombre().setText(prenda.nombre);
         holder.getColor().setText(prenda.color);
         holder.getTipo().setText(prenda.tipo);
         holder.getTalla().setText(prenda.talla);
+        GestorBD.cargarFoto(holder.itemView.getContext(), String.valueOf(prenda.id), holder.getImagen2());
+
     }
 
     @Override
@@ -57,6 +62,9 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         TextView color;
         TextView talla;
 
+        ImageView imagen;
+
+
         TableLayout t;
 
         public PrendaViewHolder(@NonNull View v) {
@@ -66,6 +74,13 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
             tipo = v.findViewById(R.id.prenda_tipo);
             color = v.findViewById(R.id.prenda_color);
             talla = v.findViewById(R.id.prenda_talla);
+
+            imagen = v.findViewById(R.id.imageView2);
+
+            //GestorBD.cargarFoto(v.getContext(), "9", imagen);
+
+           // imagen.setImageResource(R.drawable.logologo);
+
             t = v.findViewById(R.id.boton_prenda);
 
             t.setOnClickListener(new View.OnClickListener() {
@@ -92,5 +107,11 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         {
             return talla;
         }
+        Bitmap getImagen() { return GestorBD.obtenerFoto(itemView.getContext(), String.valueOf(prenda.id)); }
+
+        ImageView getImagen2() { return imagen; }
+
+
+
     }
 }

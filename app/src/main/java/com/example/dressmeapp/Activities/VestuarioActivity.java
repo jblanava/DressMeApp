@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,6 +36,8 @@ public class VestuarioActivity extends AppCompatActivity {
     Button bAnydir, bBuscar, bOrdenar, bAgrupar;
     LinearLayout listaPrendas;
     Spinner sOrdenar, sAgrupar;
+
+    ImageView imagen;
 
 
     String busqueda = "";
