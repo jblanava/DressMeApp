@@ -561,6 +561,9 @@ public class GestorBD {
 
         Conjunto res = new Conjunto(nombreCjto);
 
+        // Añadir ID al conjunto (necesario para que los índices funcionen bien)
+        res.add(obtenIDMaximoConjunto(context));
+
         int idColor = colores.get(rng.nextInt(colores.size()));
 
         List<Integer> coloresCombo = ColorCombo(context, idColor);

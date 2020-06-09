@@ -93,7 +93,8 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         conjunto = GestorBD.resAlgoritmo(this, tiempo, actividad, nombre);
 
 
-        for (int j = 0; j < conjunto.getSize(); j++) {
+        // Empezar en 1 porque el 0 es el ID del conjunto
+        for (int j = 1; j < conjunto.getSize(); j++) {
             //Voy mostrando todas las prendas por pantalla
             int idPrenda = conjunto.obtenId(j);
 
