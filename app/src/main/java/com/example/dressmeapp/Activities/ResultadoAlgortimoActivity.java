@@ -7,11 +7,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Conjunto;
@@ -48,6 +50,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
             }
         });
         reintentar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 retryConjunto();
@@ -70,11 +73,10 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         this.finish();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void retryConjunto() {
-    Intent salto = new Intent(this, AlgoritmoRecomendador.class);
-    startActivity(salto);
-    this.finish();
-
+        listaPrendas.removeAllViews();
+        hagoCosas();
     }
 
     private void guardaConjunto() {
@@ -94,14 +96,16 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         // TODO esta es la mayor chapuza de la historia
 
         int contador = 0;
+        conjunto = null;
 
         while(conjunto == null)
         {
             conjunto = GestorBD.resAlgoritmo2(this, tiempo, actividad);
             contador++;
 
-            if(contador == 500)
+            if(contador == 25)
             {
+                Toast.makeText(ResultadoAlgortimoActivity.this, "No hemos podido crear un conjunto que satisfaga las restricciones. Porfabor introduzca más prendas", Toast.LENGTH_LONG).show();
                 return;
             }
         }
