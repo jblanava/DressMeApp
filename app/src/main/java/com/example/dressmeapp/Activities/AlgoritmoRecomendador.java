@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+
+import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
 
 public class AlgoritmoRecomendador extends AppCompatActivity {
@@ -56,6 +58,7 @@ public class AlgoritmoRecomendador extends AppCompatActivity {
 
     void ir_a_resultado_activity()
     {
+
         int[] temperaturas = {1, 2, 4};
         int[] formalidades = {1, 2, 4, 8, 16};
 

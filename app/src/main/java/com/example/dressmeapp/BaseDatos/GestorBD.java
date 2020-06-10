@@ -36,8 +36,9 @@ public class GestorBD {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp25.db"; // Antonio ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp26.db"; // Antonio V. ha cambiado a la BD__17
                                                         // Maria ha cambiado a BD 22
+                                                        // Antonio ha cambiado a BD 26
 
 
     public static void seleccionarBD(String nombreBD) {
@@ -542,6 +543,49 @@ public class GestorBD {
 
 
     ///// Algoritmo
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static Conjunto resAlgoritmo2(Context context, int tiempo, int actividad)
+    {
+        List<Integer> todos_los_colores = GestorBD.get_ids_tabla(context, "color");
+        int[] tiposAbrigo = {1, 7};
+        int[] tiposSudadera = {10, 13};
+        int[] tiposCamiseta = {3, 4, 5, 12};
+        int[] tiposPantalon = {9, 11};
+        int[] tiposZapatos = {6, 14, 16};
+        int[] tiposComplementos = {8};
+
+        int idCamiseta = NombreTemporal(context, tiempo, actividad, tiposCamiseta, todos_los_colores);
+
+        int color_principal = get_id_tabla(context, "color", Obtener_Prenda(context, idCamiseta).color);
+
+        List<Integer> coloresCombo = ColorCombo(context, color_principal);
+
+        int idAbrigo        = NombreTemporal(context, tiempo, actividad, tiposAbrigo, coloresCombo);
+        int idSudadera      = NombreTemporal(context, tiempo, actividad, tiposSudadera, coloresCombo);
+        int idPantalon      = NombreTemporal(context, tiempo, actividad, tiposPantalon, coloresCombo);
+        int idZapatos       = NombreTemporal(context, tiempo, actividad, tiposZapatos, coloresCombo);
+        int idComplementos  = NombreTemporal(context, tiempo, actividad, tiposComplementos, coloresCombo);
+
+        if(idPantalon == -1)  idPantalon = NombreTemporal(context, tiempo, actividad, tiposPantalon, todos_los_colores);
+        if(idZapatos == -1)  idZapatos   = NombreTemporal(context, tiempo, actividad, tiposZapatos, todos_los_colores);
+
+        if(idPantalon == -1 || idZapatos == -1)
+        {
+            return null; // TODO esto es una chapuza que luego abra que solucionar
+        }
+
+        Conjunto res = new Conjunto();
+
+        res.add(idAbrigo);
+        res.add(idSudadera);
+        res.add(idCamiseta);
+        res.add(idPantalon);
+        res.add(idZapatos);
+        res.add(idComplementos);
+
+        return res;
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)

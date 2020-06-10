@@ -20,7 +20,7 @@ import com.example.dressmeapp.R;
 
 
 public class ResultadoAlgortimoActivity extends AppCompatActivity {
-    private Conjunto conjunto;
+    private Conjunto conjunto = null;
     private LinearLayout listaPrendas;
     private Button bFavoritos;
 
@@ -89,9 +89,22 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         Intent mIntent = getIntent();
         int tiempo = mIntent.getIntExtra("temperatura", 0);
         int actividad = mIntent.getIntExtra("formalidad", 0);
-        String nombre = mIntent.getStringExtra("nombre");
+        String nombreEvento = mIntent.getStringExtra("nombre"); // TODO: usar o eliminar.
 
-        conjunto = GestorBD.resAlgoritmo(this, tiempo, actividad);
+        // TODO esta es la mayor chapuza de la historia
+
+        int contador = 0;
+
+        while(conjunto == null)
+        {
+            conjunto = GestorBD.resAlgoritmo2(this, tiempo, actividad);
+            contador++;
+
+            if(contador == 500)
+            {
+                return;
+            }
+        }
 
 
         // Empezar en 1 porque el 0 es el ID del conjunto
