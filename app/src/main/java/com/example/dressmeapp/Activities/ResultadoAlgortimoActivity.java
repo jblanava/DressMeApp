@@ -100,7 +100,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
         while(conjunto == null)
         {
-            conjunto = GestorBD.resAlgoritmo2(this, tiempo, actividad);
+            conjunto = GestorBD.get_conjunto_algoritmo(this, tiempo, actividad);
             contador++;
 
             if(contador == 25)

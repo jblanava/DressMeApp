@@ -545,7 +545,7 @@ public class GestorBD {
     ///// Algoritmo
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static Conjunto resAlgoritmo2(Context context, int tiempo, int actividad)
+    public static Conjunto get_conjunto_algoritmo(Context context, int tiempo, int actividad)
     {
         List<Integer> todos_los_colores = GestorBD.get_ids_tabla(context, "color");
         int[] tiposAbrigo = {1, 7};
@@ -555,20 +555,20 @@ public class GestorBD {
         int[] tiposZapatos = {6, 14, 16};
         int[] tiposComplementos = {8};
 
-        int idCamiseta = NombreTemporal(context, tiempo, actividad, tiposCamiseta, todos_los_colores);
+        int idCamiseta = get_prenda_condiciones(context, tiempo, actividad, tiposCamiseta, todos_los_colores);
 
         int color_principal = get_id_tabla(context, "color", Obtener_Prenda(context, idCamiseta).color);
 
         List<Integer> coloresCombo = ColorCombo(context, color_principal);
 
-        int idAbrigo        = NombreTemporal(context, tiempo, actividad, tiposAbrigo, coloresCombo);
-        int idSudadera      = NombreTemporal(context, tiempo, actividad, tiposSudadera, coloresCombo);
-        int idPantalon      = NombreTemporal(context, tiempo, actividad, tiposPantalon, coloresCombo);
-        int idZapatos       = NombreTemporal(context, tiempo, actividad, tiposZapatos, coloresCombo);
-        int idComplementos  = NombreTemporal(context, tiempo, actividad, tiposComplementos, coloresCombo);
+        int idAbrigo        = get_prenda_condiciones(context, tiempo, actividad, tiposAbrigo, coloresCombo);
+        int idSudadera      = get_prenda_condiciones(context, tiempo, actividad, tiposSudadera, coloresCombo);
+        int idPantalon      = get_prenda_condiciones(context, tiempo, actividad, tiposPantalon, coloresCombo);
+        int idZapatos       = get_prenda_condiciones(context, tiempo, actividad, tiposZapatos, coloresCombo);
+        int idComplementos  = get_prenda_condiciones(context, tiempo, actividad, tiposComplementos, coloresCombo);
 
-        if(idPantalon == -1)  idPantalon = NombreTemporal(context, tiempo, actividad, tiposPantalon, todos_los_colores);
-        if(idZapatos == -1)  idZapatos   = NombreTemporal(context, tiempo, actividad, tiposZapatos, todos_los_colores);
+        if(idPantalon == -1)  idPantalon = get_prenda_condiciones(context, tiempo, actividad, tiposPantalon, todos_los_colores);
+        if(idZapatos == -1)  idZapatos   = get_prenda_condiciones(context, tiempo, actividad, tiposZapatos, todos_los_colores);
 
         if(idPantalon == -1 || idZapatos == -1)
         {
@@ -589,74 +589,7 @@ public class GestorBD {
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static Conjunto resAlgoritmo(Context context, int tiempo, int actividad) {
-
-        List<Integer> colores = get_ids_tabla(context, "color");
-
-        Random rng = new Random();
-
-
-        int[] tiposAbrigo = {1, 7};
-        int[] tiposSudadera = {10, 13};
-        int[] tiposCamiseta = {3, 4, 5, 12};
-        int[] tiposPantalon = {9, 11};
-        int[] tiposZapatos = {6, 14, 16};
-        int[] tiposComplementos = {8};
-
-
-        Conjunto res = new Conjunto();
-
-        // Añadir ID al conjunto (necesario para que los índices funcionen bien)
-        res.add(obtenIDMaximoConjunto(context));
-
-        int idColor = colores.get(rng.nextInt(colores.size()));
-
-        List<Integer> coloresCombo = ColorCombo(context, idColor);
-
-        int idAbrigo = NombreTemporal(context, tiempo, actividad, tiposAbrigo, coloresCombo);
-        if(idAbrigo == -1)
-        {
-            idAbrigo = NombreTemporal(context, tiempo, actividad, tiposAbrigo, colores);
-        }
-        int idSudadera = NombreTemporal(context, tiempo, actividad, tiposSudadera, coloresCombo);
-        if(idSudadera == -1)
-        {
-            idSudadera = NombreTemporal(context, tiempo, actividad, tiposSudadera, colores);
-        }
-        int idCamiseta = NombreTemporal(context, tiempo, actividad, tiposCamiseta, coloresCombo);
-        if(idCamiseta == -1)
-        {
-            idCamiseta = NombreTemporal(context, tiempo, actividad, tiposCamiseta, colores);
-        }
-        int idPantalon = NombreTemporal(context, tiempo, actividad, tiposPantalon, coloresCombo);
-        if(idPantalon == -1)
-        {
-            idPantalon = NombreTemporal(context, tiempo, actividad, tiposPantalon, colores);
-        }
-        int idZapatos = NombreTemporal(context, tiempo, actividad, tiposZapatos, coloresCombo);
-        if(idZapatos == -1)
-        {
-            idZapatos = NombreTemporal(context, tiempo, actividad, tiposZapatos, colores);
-        }
-        int idCompementos = NombreTemporal(context, tiempo, actividad, tiposComplementos, coloresCombo);
-        if(idCompementos == -1)
-        {
-            idCompementos = NombreTemporal(context, tiempo, actividad, tiposComplementos, colores);
-        }
-
-
-        res.add(idAbrigo);
-        res.add(idSudadera);
-        res.add(idCamiseta);
-        res.add(idPantalon);
-        res.add(idZapatos);
-        res.add(idCompementos);
-
-        return res;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private static int NombreTemporal(Context context, int tiempo, int actividad, int[] tipos, List<Integer> colores) // TODO: Buscarle un nombre a esto
+    private static int get_prenda_condiciones(Context context, int tiempo, int actividad, int[] tipos, List<Integer> colores)
     {
         StringJoiner sj = new StringJoiner(" OR ", "( ", " )");
 
