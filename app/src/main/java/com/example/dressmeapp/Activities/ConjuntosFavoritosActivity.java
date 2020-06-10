@@ -45,9 +45,8 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
         List<Conjunto> listaConjuntos= GestorBD.ConjuntosFavoritosEnBD(this);
         Collections.reverse(listaConjuntos); // esto voltea la lista
 
-        int contador=0;
-        for(Conjunto c : listaConjuntos){
-            contador++;
+        for(Conjunto c : listaConjuntos)
+        {
             //Crear un text view, mostrarlo por pantalla
             metodoMisPanas(c.getNombreCjto());
             //Recorro el conjunto y muestro las prendas
@@ -76,7 +75,6 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
     void metodoChavales(final Prenda prenda)
     {
         if(prenda == null) return;      // TODO: porque cojones necesito esto aqui? PS: no quitar o peta el historial
-
 
         //@SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
 

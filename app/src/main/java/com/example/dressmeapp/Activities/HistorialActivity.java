@@ -50,9 +50,7 @@ public class HistorialActivity extends AppCompatActivity {
         List<Conjunto> listaConjuntos= GestorBD.ConjuntosEnBD(this);
         Collections.reverse(listaConjuntos); // esto voltea la lista
 
-        int contador=0;
         for(Conjunto c : listaConjuntos){
-            contador++;
 
             //Crear un text view, mostrarlo por pantalla
             metodoMisPanas(c.getNombreCjto());
