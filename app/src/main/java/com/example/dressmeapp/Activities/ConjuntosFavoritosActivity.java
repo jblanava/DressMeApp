@@ -80,8 +80,7 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
 
         //@SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
 
-        @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.prenda_view_2, null);
-
+        @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
         TextView nombre = v.findViewById(R.id.prenda_nombre);
         TextView tipo = v.findViewById(R.id.prenda_tipo);
         TextView color = v.findViewById(R.id.prenda_color);
