@@ -23,13 +23,21 @@ public class GestorBD2 {
     }
     public static void crearComboColor(Context contexto, int color1, int color2){
         int id=obtenIDMaximoComboColor(contexto);
-        String sentenciaSQL;
-        sentenciaSQL = "INSERT INTO COMBO_COLOR (ID, COLOR1, COLOR2) VALUES (" +id+", " + color1+","+ color2+")";
 
         BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
+
+        // TODO comprobar si esta combinacion ya existe. Ahora mismo puedes tener la misma combinacion varias veces
+
+        // Si ColorA combina con ColorB entonces ColorB debe combinar con ColorA
+
+        String sentenciaSQL;
+        sentenciaSQL = "INSERT INTO COMBO_COLOR (ID, COLOR1, COLOR2) VALUES (" +id+", " + color1+","+ color2+")";
         baseDatos.execSQL(sentenciaSQL);
+        sentenciaSQL = "INSERT INTO COMBO_COLOR (ID, COLOR1, COLOR2) VALUES (" +id+", " + color2+","+ color1+")";
+        baseDatos.execSQL(sentenciaSQL);
+
         baseDatos.close();
         base.close();
 

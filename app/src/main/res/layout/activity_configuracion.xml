@@ -10,7 +10,7 @@
     <Button
         android:id="@+id/botonCambioTallas"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:background="@drawable/mybutton"
         android:text="@string/a_ada_nuevas_tallas"
@@ -24,7 +24,7 @@
     <Button
         android:id="@+id/botonTipoColor"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:background="@drawable/mybutton"
         android:text="@string/a_ada_nuevos_colores"
@@ -36,9 +36,23 @@
         app:layout_constraintVertical_bias="0.474" />
 
     <Button
+        android:id="@+id/boton_nuevas_combinaciones"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mybutton"
+        android:text="AÑADA NUEVAS COMBINACIONES"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.639" />
+
+    <Button
         android:id="@+id/botonCambioPerfil"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:background="@drawable/mybutton"
         android:text="@string/cambie_aqu_su_perfil"
@@ -47,6 +61,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661" />
+        app:layout_constraintVertical_bias="0.809" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

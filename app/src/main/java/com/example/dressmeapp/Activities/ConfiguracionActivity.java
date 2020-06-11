@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.dressmeapp.R;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.dressmeapp.R;
 
 public class ConfiguracionActivity extends AppCompatActivity {
 
@@ -24,6 +24,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
         Button botonCambioPerfil = findViewById(R.id.botonCambioPerfil);
         Button botonCambioTallas = findViewById(R.id.botonCambioTallas);
         Button botonTipoColor = findViewById(R.id.botonTipoColor);
+        Button botonCombinaciones = findViewById(R.id.boton_nuevas_combinaciones);
 
         botonCambioPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +44,12 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 cambioTallas();
             }
         });
+        botonCombinaciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cambiaCombinaciones();
+            }
+        });
     }
 
 
@@ -53,6 +60,11 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
     private void cambiaColor() {
         Intent cambio = new Intent(this,CambioColorActivity.class);
+        startActivity(cambio);
+    }
+
+    private void cambiaCombinaciones() {
+        Intent cambio = new Intent(this,AniadirCombinacion.class);
         startActivity(cambio);
     }
 
