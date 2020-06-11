@@ -21,6 +21,15 @@ public class GestorBD2 {
         base.close();
         return id;
     }
+
+    /**
+     * Crea una nuevo par de colores que el algoritmo vestidor considera que
+     * combinan bien.
+     * @param contexto El contexto a usar.
+     * @param color1 El primer color.
+     * @param color2 El segundo color.
+     * @return True si ha habido éxito (no se repite en la BD)
+     */
     public static boolean crearComboColor(Context contexto, int color1, int color2){
 
         boolean repetido = false;
