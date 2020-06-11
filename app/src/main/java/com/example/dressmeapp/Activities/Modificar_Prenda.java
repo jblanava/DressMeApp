@@ -1,12 +1,7 @@
 package com.example.dressmeapp.Activities;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Prenda;
@@ -118,9 +117,6 @@ public class Modificar_Prenda extends AppCompatActivity {
 
 
     public void ir_a_fotos(){
-/*
-        Intent ventanaVestuario = new Intent(this, VestuarioActivity.class);
-        String id_modificar = ventanaVestuario.getStringExtra("intVariableName"); */
 
         Intent mIntent = getIntent();
         int id = mIntent.getIntExtra("intVariableName", 0);
@@ -157,7 +153,7 @@ public class Modificar_Prenda extends AppCompatActivity {
     }
 
 
-    void eliminar() // TODO: Preguntar al usuario si está seguro
+    void eliminar()
     {
         GestorBD.CambiarVisibilidadPrenda(this, prenda.id);
         finish();
