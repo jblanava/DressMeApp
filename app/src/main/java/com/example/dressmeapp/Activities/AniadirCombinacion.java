@@ -58,8 +58,12 @@ public class AniadirCombinacion extends AppCompatActivity {
         int c1 = Scolor1.getSelectedItemPosition() + 1;
         int c2 = Scolor2.getSelectedItemPosition() + 1;
 
-        GestorBD2.crearComboColor(this, c1, c2);
+        if (GestorBD2.crearComboColor(this, c1, c2)) {
+            Toast.makeText(AniadirCombinacion.this, "Se ha guardado la combinacion indicada", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(AniadirCombinacion.this, "Combinación de colores ya registrada", Toast.LENGTH_SHORT).show();
+        }
 
-        Toast.makeText(AniadirCombinacion.this, "Se ha guardado la combinacion indicada", Toast.LENGTH_SHORT).show();
+
     }
 }

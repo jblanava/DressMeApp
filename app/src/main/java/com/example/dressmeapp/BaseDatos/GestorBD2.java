@@ -21,25 +21,46 @@ public class GestorBD2 {
         base.close();
         return id;
     }
-    public static void crearComboColor(Context contexto, int color1, int color2){
-        int id=obtenIDMaximoComboColor(contexto);
+    public static boolean crearComboColor(Context contexto, int color1, int color2){
+
+        boolean repetido = false;
 
         BaseDatos base = new BaseDatos(contexto, nombreBD);
-        SQLiteDatabase baseDatos;
-        baseDatos = base.getWritableDatabase();
+        SQLiteDatabase baseDatosLeer = base.getReadableDatabase();
 
-        // TODO comprobar si esta combinacion ya existe. Ahora mismo puedes tener la misma combinacion varias veces
+        // Comprobar si se repite
+        Cursor curRepetido = baseDatosLeer.rawQuery(
+                "SELECT COUNT(*) FROM COMBO_COLOR WHERE COLOR1=" + color1 + " AND COLOR2=" + color2, null);
+        if (curRepetido.moveToFirst()) {
+            if (curRepetido.getInt(0) > 0) {
+                repetido = true;
+            }
+        }
+        curRepetido.close();
+        baseDatosLeer.close();
 
-        // Si ColorA combina con ColorB entonces ColorB debe combinar con ColorA
+        // Si no se repite, añadir el color
+        if (!repetido) {
 
-        String sentenciaSQL;
-        sentenciaSQL = "INSERT INTO COMBO_COLOR (ID, COLOR1, COLOR2) VALUES (" +id+", " + color1+","+ color2+")";
-        baseDatos.execSQL(sentenciaSQL);
-        sentenciaSQL = "INSERT INTO COMBO_COLOR (ID, COLOR1, COLOR2) VALUES (" +id+", " + color2+","+ color1+")";
-        baseDatos.execSQL(sentenciaSQL);
+            SQLiteDatabase baseDatosEscribir = base.getReadableDatabase();
 
-        baseDatos.close();
+            // Si ColorA combina con ColorB entonces ColorB debe combinar con ColorA
+
+            int id = obtenIDMaximoComboColor(contexto);
+            String sentenciaSQL = "INSERT INTO COMBO_COLOR (ID, COLOR1, COLOR2) VALUES (" +id+", " + color1+","+ color2+")";
+            baseDatosEscribir.execSQL(sentenciaSQL);
+
+            id = obtenIDMaximoComboColor(contexto);
+            sentenciaSQL = "INSERT INTO COMBO_COLOR (ID, COLOR1, COLOR2) VALUES (" +id+", " + color2+","+ color1+")";
+            baseDatosEscribir.execSQL(sentenciaSQL);
+
+            baseDatosEscribir.close();
+
+        }
+
         base.close();
+
+        return !repetido;
 
     }
 

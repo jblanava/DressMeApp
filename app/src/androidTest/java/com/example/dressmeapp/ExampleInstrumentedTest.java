@@ -33,7 +33,7 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
 
     private static Context appContext;
-    private static String nombreBaseDatos = "dressmeapp25.db";
+    private static String nombreBaseDatos = "dressmeapp26.db";
 
     @Before
     public void prepararTest() {
@@ -430,6 +430,55 @@ public class ExampleInstrumentedTest {
 
     }
 
+    @Test
+    public void insertarComboColorFuncionaBien() {
+
+        String sentencia = "SELECT COUNT(*) FROM COMBO_COLOR";
+        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        SQLiteDatabase sqldb = bd.getReadableDatabase();
+
+        int idCol1 = GestorBD2.obtenIDMaximoColor(appContext);
+        GestorBD2.crearColor(appContext, "ColorPrueba1", "#123456");
+        int idCol2 = GestorBD2.obtenIDMaximoColor(appContext);
+        GestorBD2.crearColor(appContext, "ColorPrueba2", "#789012");
+
+        Cursor cur = sqldb.rawQuery(sentencia, null);
+        int combosAntes = 0;
+        if (cur.moveToFirst()) {
+            combosAntes = cur.getInt(0);
+        }
+        cur.close();
+
+        GestorBD2.crearComboColor(appContext, idCol1, idCol2);
+
+        cur = sqldb.rawQuery(sentencia, null);
+        int combosDespues = 0;
+        if (cur.moveToFirst()) {
+            combosDespues = cur.getInt(0);
+        }
+        cur.close();
+
+        sqldb.close();
+        bd.close();
+
+        assertEquals(combosDespues, combosAntes + 2);
+
+    }
+
+    @Test
+    public void insertarComboColorRepetidoFuncionaBien() {
+
+        int idCol1 = GestorBD2.obtenIDMaximoColor(appContext);
+        GestorBD2.crearColor(appContext, "ColorPrueba1", "#123456");
+        int idCol2 = GestorBD2.obtenIDMaximoColor(appContext);
+        GestorBD2.crearColor(appContext, "ColorPrueba2", "#789012");
+
+        GestorBD2.crearComboColor(appContext, idCol1, idCol2);
+
+        assertFalse(GestorBD2.crearComboColor(appContext, idCol1, idCol2));
+
+    }
+
     /********************************************************************************
      HISTORIAL & CONJUNTOS
      ********************************************************************************/
@@ -564,5 +613,4 @@ public class ExampleInstrumentedTest {
         assertEquals(1, ok);
 
     }
-
 }
