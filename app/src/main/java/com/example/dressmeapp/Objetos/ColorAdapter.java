@@ -27,7 +27,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
     @NonNull
     @Override
     public ColorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.spinner_color_prenda, parent, false);
+        View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_color_view, parent, false);
         return new ColorViewHolder(row);
     }
 
@@ -46,7 +46,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
         return data.size();
     }
 
-    public class ColorViewHolder extends RecyclerView.ViewHolder {
+    class ColorViewHolder extends RecyclerView.ViewHolder {
         TextView txtColor;
         ImageView cuadrado;
 

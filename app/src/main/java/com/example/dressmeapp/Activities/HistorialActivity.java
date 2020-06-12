@@ -32,7 +32,6 @@ public class HistorialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial);
         getSupportActionBar().hide();
-        Log.i("CONJUNTOS", Debug.getTabla(this, "dressmeapp25.db", "CONJUNTO", null));
         enlazaControles();
         hagoCosas();
 

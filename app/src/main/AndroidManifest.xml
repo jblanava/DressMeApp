@@ -14,7 +14,7 @@
         android:roundIcon="@drawable/logomaniqui"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.AniadirCombinacion"></activity>
+        <activity android:name=".Activities.AniadirCombinacion" />
         <activity android:name=".Activities.ConjuntosFavoritosActivity" />
         <activity android:name=".Activities.AniadirTallaActivity" />
         <activity android:name=".AgruparView" />
@@ -33,7 +33,6 @@
         <activity android:name=".Activities.AlgoritmoRecomendador" />
         <activity android:name=".Activities.MostrarDatosActivity" />
         <activity android:name=".Activities.Modificar_Prenda" />
-        <activity android:name=".Activities.AgruparPrendasActivity" />
         <activity android:name=".Activities.AniadirPrendaActivity" />
         <activity android:name=".Activities.ConfiguracionActivity" />
         <activity android:name=".Activities.ConfiguracionContraseniaActivity" />

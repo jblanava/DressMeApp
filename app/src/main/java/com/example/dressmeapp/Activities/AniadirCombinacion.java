@@ -1,5 +1,6 @@
 package com.example.dressmeapp.Activities;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -10,15 +11,21 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBD2;
+import com.example.dressmeapp.Objetos.ComboColorAdapter;
+import com.example.dressmeapp.Objetos.ComboColorPrenda;
+import com.example.dressmeapp.Objetos.RecyclerViewOnItemClickListener;
 import com.example.dressmeapp.R;
 
 import java.util.List;
 
 public class AniadirCombinacion extends AppCompatActivity {
 
+    RecyclerView comboColorView;
     Spinner Scolor1;
     Spinner Scolor2;
 
@@ -26,12 +33,14 @@ public class AniadirCombinacion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aniadir_combinacion);
-
+        getSupportActionBar().hide();
         enlazar_controles();
     }
 
 
     void enlazar_controles() {// Enlaza los controles y rellena los Spinner con la lista de opciones
+
+        comboColorView = findViewById(R.id.comboColorView);
 
         Scolor1 = findViewById(R.id.spinner_color1);
         Scolor2 = findViewById(R.id.spinner_color2);
@@ -60,10 +69,34 @@ public class AniadirCombinacion extends AppCompatActivity {
 
         if (GestorBD2.crearComboColor(this, c1, c2)) {
             Toast.makeText(AniadirCombinacion.this, "Se ha guardado la combinacion indicada", Toast.LENGTH_SHORT).show();
+            mostrarCombos();
         } else {
             Toast.makeText(AniadirCombinacion.this, "Combinación de colores ya registrada", Toast.LENGTH_SHORT).show();
         }
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mostrarCombos();
+    }
+
+    private void mostrarCombos() {
+
+        comboColorView.removeAllViews();
+
+        final Context context = this;
+        final List<ComboColorPrenda> combos = GestorBD2.getCombosColores(context);
+
+        comboColorView.setAdapter(new ComboColorAdapter(combos, new RecyclerViewOnItemClickListener() {
+            @Override
+            public void onClick(View v, int position) { }
+        }));
+
+        comboColorView.setLayoutManager(new LinearLayoutManager(this));
+
+    }
+
 }
