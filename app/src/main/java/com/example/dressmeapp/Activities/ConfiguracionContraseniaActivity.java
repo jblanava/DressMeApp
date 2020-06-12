@@ -61,12 +61,10 @@ public class ConfiguracionContraseniaActivity extends AppCompatActivity {
             // La nueva contraseña no debe ser vacía
             ok = false;
             errores += "Introduzca una nueva contraseña";
-        } else if (antiguaPass.equals(GestorBD.getPass(this, GestorBD.getIdPerfil()))) {
+        } else if (!antiguaPass.equals(GestorBD.getPass(this, GestorBD.getIdPerfil()))) {
             // Hay que introducir la contraseña antigua para cambiarla
-
-            // TODO esto estaba comentado, no sé si funciona.
             ok = false;
-            errores += "Introduzca una nueva contraseña";
+            errores += "Escriba la contraseña antigua para cambiarla";
         }
 
         if (ok) {

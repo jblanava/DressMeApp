@@ -37,9 +37,10 @@ public class GestorBD {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp26.db"; // Antonio V. ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp28.db"; // Antonio V. ha cambiado a la BD__17
                                                         // Maria ha cambiado a BD 22
 
+    public static int fotoActual = 1;
 
     public static void seleccionarBD(String nombreBD) {
         GestorBD.nombreBD = nombreBD;
@@ -262,11 +263,12 @@ public class GestorBD {
      * @param id_perfil El ID del perfil que tendrá la prenda.
      */
     @SuppressLint("DefaultLocale")
-    public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
+    public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil, int foto) {
 
         int id = obtener_id_maximo(contexto, "prenda");
         String sentenciaSQL;
-        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%d', %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil);
+        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', %d, %d, %d, %d, %d, %d)",
+                id, nombre, color, tipo, talla, visible, id_perfil, foto);
 
         BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
@@ -276,6 +278,9 @@ public class GestorBD {
         base.close();
 
         return id;
+    }
+    public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
+        return crearPrenda(contexto, nombre, color, tipo, talla, visible, id_perfil, 1);
     }
 
     public static List<Prenda> PrendasVisibles(Context context, String busqueda, String ordenacion)
@@ -409,6 +414,25 @@ public class GestorBD {
         base.close();
         cursor.close();
         return p;
+    }
+
+    public static int get_foto_de_prenda(Context contexto, int idPrenda) {
+        String sentenciaSQL =  "SELECT FOTO FROM PRENDA WHERE ID=" + idPrenda;
+        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        int res = 1;
+        if (cursor.moveToFirst()) {
+            res = cursor.getInt(cursor.getColumnIndex("FOTO"));
+        }
+
+        cursor.close();
+        baseDatos.close();
+        base.close();
+
+        return res;
     }
 
 
@@ -944,20 +968,27 @@ public class GestorBD {
                         /** Fotos **/
      /*********************************************************************************************************/
 
-     public static void guardarFoto(Context context, byte [] img, String id_activo){
 
-         BaseDatos bdh = new BaseDatos(context, nombreBD);
-         SQLiteDatabase bd;
-         bd = bdh.getWritableDatabase();
 
-         ContentValues cv = new ContentValues();
-         cv.put("FOTO", img);
-         cv.put("ID", Integer.parseInt(id_activo));
-         bd.insert("FOTOS",null, cv);
+    public static int guardarFoto(Context context, byte[] img){
 
-         bd.close();
-         bdh.close();
-     }
+        int id = obtener_id_maximo(context, "FOTOS");
+
+        BaseDatos bdh = new BaseDatos(context, nombreBD);
+        SQLiteDatabase bd;
+        bd = bdh.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("FOTO", img);
+        cv.put("ID", id);
+        bd.insert("FOTOS",null, cv);
+
+        bd.close();
+        bdh.close();
+
+        return id;
+
+    }
 
     public static void eliminar_foto_antigua(Context context, String id_activo){
         String vsql = "DELETE FROM FOTOS WHERE ID = " + id_activo;
@@ -972,7 +1003,7 @@ public class GestorBD {
 
 
     public static void cargarFoto(Context context, int id_modificar, ImageView imagen){
-         String vsql = "SELECT * FROM FOTOS WHERE ID = " + id_modificar;
+        String vsql = "SELECT FOTO FROM FOTOS WHERE ID = " + id_modificar;
 
         BaseDatos bdh =  new BaseDatos(context, nombreBD);
 
@@ -981,7 +1012,7 @@ public class GestorBD {
 
         if(rs.moveToNext())
         {
-            byte[] image = rs.getBlob(1);
+            byte[] image = rs.getBlob(rs.getColumnIndex("FOTO"));
             Bitmap bmp= BitmapFactory.decodeByteArray(image, 0 , image.length);
             try{
 

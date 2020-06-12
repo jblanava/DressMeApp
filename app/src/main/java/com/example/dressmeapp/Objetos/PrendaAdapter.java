@@ -1,5 +1,6 @@
 package com.example.dressmeapp.Objetos;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
     private List<Prenda> data;
     private RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
     static Prenda  prenda;
+    private Context context;
 
     public PrendaAdapter(@NonNull List<Prenda> data, @NonNull RecyclerViewOnItemClickListener recyclerViewOnItemClickListener)
     {
@@ -34,7 +36,8 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
 
     @Override
     public PrendaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_prenda_view, parent, false);
+        context = parent.getContext();
+        View row = LayoutInflater.from(context).inflate(R.layout.activity_prenda_view, parent, false);
         return new PrendaViewHolder(row);
     }
 
@@ -46,7 +49,7 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         holder.getColor().setText(prenda.color);
         holder.getTipo().setText(prenda.tipo);
         holder.getTalla().setText(prenda.talla);
-        GestorBD.cargarFoto(holder.itemView.getContext(), String.valueOf(prenda.id), holder.getImagen2());
+        GestorBD.cargarFoto(holder.itemView.getContext(), GestorBD.get_foto_de_prenda(context, prenda.id), holder.getImagen2());
 
     }
 

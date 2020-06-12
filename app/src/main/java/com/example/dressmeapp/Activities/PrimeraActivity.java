@@ -4,10 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 public class PrimeraActivity extends AppCompatActivity {
@@ -22,6 +28,8 @@ public class PrimeraActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         timer = new Timer();
         ct = this;
+
+        comprobarFotoPorDefecto();
     }
 
     @Override
@@ -35,5 +43,22 @@ public class PrimeraActivity extends AppCompatActivity {
                 finish();
             }
         }, 1500);
+    }
+
+    private void comprobarFotoPorDefecto() {
+
+        int idmax = GestorBD.obtener_id_maximo(ct, "FOTOS");
+        if (idmax == 1) {
+
+            Resources res = getResources();
+            Drawable drawable = res.getDrawable(R.drawable.logologo);
+            Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] bitMapData = stream.toByteArray();
+
+            GestorBD.guardarFoto(ct, bitMapData);
+        }
+
     }
 }

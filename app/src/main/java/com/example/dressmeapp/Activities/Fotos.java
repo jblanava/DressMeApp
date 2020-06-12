@@ -74,7 +74,7 @@ public class Fotos extends AppCompatActivity {
             bitmap .compress(Bitmap.CompressFormat.PNG, 100, bos);
             byte[] img = bos.toByteArray();
 
-            GestorBD.guardarFoto(this,img, id_activo);
+            GestorBD.fotoActual = GestorBD.guardarFoto(this, img);
 
             this.finish();
         }else{
