@@ -971,7 +971,7 @@ public class GestorBD {
     }
 
 
-    public static void cargarFoto(Context context, String id_modificar, ImageView imagen){
+    public static void cargarFoto(Context context, int id_modificar, ImageView imagen){
          String vsql = "SELECT * FROM FOTOS WHERE ID = " + id_modificar;
 
         BaseDatos bdh =  new BaseDatos(context, nombreBD);
