@@ -59,7 +59,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void obtenerIDMaximoPerfilFuncionaBien() {
 
-        int maxCalculado = GestorBD.obtenIDMaximoPerfil(appContext);
+        int maxCalculado = GestorBD.obtener_id_maximo(appContext, "PERFIL");
         GestorBD.CrearPerfil(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
         int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
 
@@ -181,7 +181,7 @@ public class ExampleInstrumentedTest {
     public void obtenerIDMaximoPrendaFuncionaBien() {
 
         // Extraer ID máximo, que debería tener la prenda
-        int maxId = GestorBD.obtenIDMaximoPrenda(appContext);
+        int maxId = GestorBD.obtener_id_maximo(appContext, "PRENDA");
 
         // Añadir la prenda
 
@@ -201,7 +201,7 @@ public class ExampleInstrumentedTest {
         );
 
 
-        assertEquals(maxId + 1, GestorBD.obtenIDMaximoPrenda(appContext));
+        assertEquals(maxId + 1, GestorBD.obtener_id_maximo(appContext, "PRENDA"));
 
     }
 
@@ -218,7 +218,7 @@ public class ExampleInstrumentedTest {
         int idTipo = 1; // abrigo
         int idTalla = 1; // M
 
-        int idPrenda = GestorBD.obtenIDMaximoPrenda(appContext);
+        int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
         GestorBD.crearPrenda(appContext,
                 "PrendaFoo",
                 idColor,
@@ -264,7 +264,7 @@ public class ExampleInstrumentedTest {
         int idTipo = 1; // abrigo
         int idTalla = 1; // M
 
-        int idPrenda = GestorBD.obtenIDMaximoPrenda(appContext);
+        int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
         GestorBD.crearPrenda(appContext,
                 "PrendaFoo",
                 idColor,
@@ -310,7 +310,7 @@ public class ExampleInstrumentedTest {
         int idTipo = 1; // abrigo
         int idTalla = 1; // M
 
-        int idPrenda = GestorBD.obtenIDMaximoPrenda(appContext);
+        int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
         GestorBD.crearPrenda(appContext,
                 "PrendaFoo",
                 idColor,
@@ -352,7 +352,7 @@ public class ExampleInstrumentedTest {
         int idTipo = 1; // abrigo
         int idTalla = 1; // M
 
-        int idPrenda = GestorBD.obtenIDMaximoPrenda(appContext);
+        int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
         GestorBD.crearPrenda(appContext,
                 "PrendaFoo",
                 idColor,
@@ -380,7 +380,7 @@ public class ExampleInstrumentedTest {
         int idTipo = 1; // abrigo
         int idTalla = 1; // M
 
-        int idPrenda = GestorBD.obtenIDMaximoPrenda(appContext);
+        int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
         GestorBD.crearPrenda(appContext,
                 "PrendaFoo",
                 idColor,
@@ -390,7 +390,7 @@ public class ExampleInstrumentedTest {
                 idPerfil
         );
 
-        int idPrendaNuevo = GestorBD.obtenIDMaximoPrenda(appContext);
+        int idPrendaNuevo = GestorBD.obtener_id_maximo(appContext, "PRENDA");
 
         Prenda prendaAntigua = GestorBD.Obtener_Prenda(appContext, idPrenda);
         Prenda prendaNueva = new Prenda(prendaAntigua.id, "PrendaBar",
@@ -422,9 +422,9 @@ public class ExampleInstrumentedTest {
     @Test
     public void obtenerIDMaximoColorFuncionaBien() {
 
-        int maxIdAntes = GestorBD2.obtenIDMaximoColor(appContext);
+        int maxIdAntes = GestorBD.obtener_id_maximo(appContext, "COLOR");
         GestorBD2.crearColor(appContext, "ColorPrueba", "#123456");
-        int maxIdDespues = GestorBD2.obtenIDMaximoColor(appContext);
+        int maxIdDespues = GestorBD.obtener_id_maximo(appContext, "COLOR");
 
         assertEquals(maxIdDespues, maxIdAntes + 1);
 
@@ -437,9 +437,9 @@ public class ExampleInstrumentedTest {
         BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
         SQLiteDatabase sqldb = bd.getReadableDatabase();
 
-        int idCol1 = GestorBD2.obtenIDMaximoColor(appContext);
+        int idCol1 = GestorBD.obtener_id_maximo(appContext, "COLOR");
         GestorBD2.crearColor(appContext, "ColorPrueba1", "#123456");
-        int idCol2 = GestorBD2.obtenIDMaximoColor(appContext);
+        int idCol2 = GestorBD.obtener_id_maximo(appContext, "COLOR");
         GestorBD2.crearColor(appContext, "ColorPrueba2", "#789012");
 
         Cursor cur = sqldb.rawQuery(sentencia, null);
@@ -468,9 +468,9 @@ public class ExampleInstrumentedTest {
     @Test
     public void insertarComboColorRepetidoFuncionaBien() {
 
-        int idCol1 = GestorBD2.obtenIDMaximoColor(appContext);
+        int idCol1 = GestorBD.obtener_id_maximo(appContext, "COLOR");
         GestorBD2.crearColor(appContext, "ColorPrueba1", "#123456");
-        int idCol2 = GestorBD2.obtenIDMaximoColor(appContext);
+        int idCol2 = GestorBD.obtener_id_maximo(appContext, "COLOR");
         GestorBD2.crearColor(appContext, "ColorPrueba2", "#789012");
 
         GestorBD2.crearComboColor(appContext, idCol1, idCol2);
@@ -488,7 +488,7 @@ public class ExampleInstrumentedTest {
 
         // Crear conjunto
 
-        int idPerfil = GestorBD.obtenIDMaximoPerfil(appContext);
+        int idPerfil = GestorBD.obtener_id_maximo(appContext, "PERFIL");
         GestorBD.CrearPerfil(appContext, "foo", "bar");
         GestorBD.setIdPerfil(idPerfil);
 
@@ -499,7 +499,7 @@ public class ExampleInstrumentedTest {
         int[] idsPrenda = new int[6];
         int[] tiposPrenda = {1, 13, 4, 11, 16, 8};
         for (int i = 0; i < 6; i++) {
-            idsPrenda[i] = GestorBD.obtenIDMaximoPrenda(appContext);
+            idsPrenda[i] = GestorBD.obtener_id_maximo(appContext, "PRENDA");
             GestorBD.crearPrenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
             cjto.add(idsPrenda[i]);
         }
@@ -542,7 +542,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void obtenIDMaximoConjuntoFuncionaBien() {
 
-        int idPerfil = GestorBD.obtenIDMaximoPerfil(appContext);
+        int idPerfil = GestorBD.obtener_id_maximo(appContext, "PERFIL");
         GestorBD.CrearPerfil(appContext, "foo", "bar");
 
         Conjunto cjto = new Conjunto("test");
@@ -552,7 +552,7 @@ public class ExampleInstrumentedTest {
         int[] idsPrenda = new int[6];
         int[] tiposPrenda = {1, 13, 4, 11, 16, 8};
         for (int i = 0; i < 6; i++) {
-            idsPrenda[i] = GestorBD.obtenIDMaximoPrenda(appContext);
+            idsPrenda[i] = GestorBD.obtener_id_maximo(appContext, "PRENDA");
             GestorBD.crearPrenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
             cjto.add(idsPrenda[i]);
         }
@@ -569,7 +569,7 @@ public class ExampleInstrumentedTest {
 
         int cjtosExistentesAntes = GestorBD.ConjuntosEnBD(appContext).size();
 
-        int idPerfil = GestorBD.obtenIDMaximoPerfil(appContext);
+        int idPerfil = GestorBD.obtener_id_maximo(appContext, "PERFIL");
         GestorBD.CrearPerfil(appContext, "foo", "bar");
         GestorBD.setIdPerfil(idPerfil);
 
@@ -580,7 +580,7 @@ public class ExampleInstrumentedTest {
         int[] idsPrenda = new int[6];
         int[] tiposPrenda = {1, 13, 4, 11, 16, 8};
         for (int i = 0; i < 6; i++) {
-            idsPrenda[i] = GestorBD.obtenIDMaximoPrenda(appContext);
+            idsPrenda[i] = GestorBD.obtener_id_maximo(appContext, "PRENDA");
             GestorBD.crearPrenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
             cjto.add(idsPrenda[i]);
         }
