@@ -11,6 +11,7 @@ import android.os.Build;
 import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
+
 import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
@@ -45,6 +46,28 @@ public class GestorBD {
     }
 
 
+    public static int obtener_id_maximo(Context context, String tabla)
+    {
+        int resultado = 0;
+        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM " + tabla.trim().toUpperCase();
+
+        Cursor cursor;
+        BaseDatos base = new BaseDatos(context, nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+        if (cursor.moveToFirst()) {
+            do {
+                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
+            } while (cursor.moveToNext());
+        }
+        resultado++;
+        baseDatos.close();
+        base.close();
+        cursor.close();
+        return resultado;
+    }
+
     ///////////////////////77
 /// PERFIL
 
@@ -54,64 +77,6 @@ public class GestorBD {
 
     public static void setIdPerfil(int nuevoId) {
         idPerfil = nuevoId;
-    }
-
-
-    /**
-     * Devuelve el ID correspondiente al siguiente perfil que se cree.
-     * (Este método debería ser privado, ya que solo se invoca al crear un perfil.)
-     *
-     * @param context El contexto a usar.
-     * @return El ID correspondiente al siguiente perfil que se cree (máximo + 1)
-     */
-    public static int obtenIDMaximoPerfil(Context context) {
-        int resultado = 0;
-        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PERFIL";
-
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(context, nombreBD);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if (cursor.moveToFirst()) {
-            do {
-                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
-            } while (cursor.moveToNext());
-        }
-        resultado++;
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return resultado;
-    }
-
-
-    /**
-     * Devuelve el ID correspondiente a la siguiente prenda que se cree.
-     * (Este método quizás debería ser privado, ya que solo se invoca al crear un perfil.)
-     *
-     * @param context El contexto a usar.
-     * @return El ID correspondiente a la siguiente prenda que se cree.
-     */
-    public static int obtenIDMaximoPrenda(Context context) {
-        int resultado = 0;
-        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM PRENDA";
-
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(context, nombreBD);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if (cursor.moveToFirst()) {
-            do {
-                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
-            } while (cursor.moveToNext());
-        }
-        resultado++;
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return resultado;
     }
 
 
@@ -206,7 +171,7 @@ public class GestorBD {
      * @param contrasenia La contraseña para el perfil.
      */
     public static int CrearPerfil(Context contexto, String usuario, String contrasenia) {
-        int id = obtenIDMaximoPerfil(contexto);
+        int id = obtener_id_maximo(contexto, "perfil");
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE,  CONTRASENIA) VALUES (";
         sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "')";
@@ -299,7 +264,7 @@ public class GestorBD {
     @SuppressLint("DefaultLocale")
     public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
 
-        int id = obtenIDMaximoPrenda(contexto);
+        int id = obtener_id_maximo(contexto, "prenda");
         String sentenciaSQL;
         sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%d', %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil);
 
