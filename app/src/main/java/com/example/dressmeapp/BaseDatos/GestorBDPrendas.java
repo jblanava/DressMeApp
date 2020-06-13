@@ -49,12 +49,13 @@ public class GestorBDPrendas {
      *                  (siempre lo será en el historial)
      * @param id_perfil El ID del perfil que tendrá la prenda.
      */
-    @SuppressLint("DefaultLocale")
-    public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
 
+
+         @SuppressLint("DefaultLocale")
+         public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil,int foto) {
         int id = GestorBD.obtener_id_maximo(contexto, "prenda");
         String sentenciaSQL;
-        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%d', %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil);
+        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%d', %d, %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil,foto);
 
         BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
@@ -64,6 +65,9 @@ public class GestorBDPrendas {
         base.close();
 
         return id;
+    }
+    public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
+        return crearPrenda(contexto, nombre, color, tipo, talla, visible, id_perfil, 1);
     }
 
     public static List<Prenda> PrendasVisibles(Context context, String busqueda, String ordenacion)
