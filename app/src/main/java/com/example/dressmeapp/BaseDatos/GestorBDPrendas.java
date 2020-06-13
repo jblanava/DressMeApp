@@ -18,7 +18,7 @@ import androidx.annotation.RequiresApi;
 
 public class GestorBDPrendas {
     /* Incluye operaciones sobre la BD relacionadas con las prendas y sus atributos*/
-
+    //TODO: MODIFICAR EL METODO CREAR PRENDA
     /**
      * El ID del perfil que tiene la sesión abierta actualmente.
      */
