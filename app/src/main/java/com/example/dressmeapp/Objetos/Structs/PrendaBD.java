@@ -9,6 +9,7 @@ public class PrendaBD
     public int talla;
     public int visible;
     public int perfil;
+    public int foto;
 
     public PrendaBD(){}
 
@@ -23,10 +24,11 @@ public class PrendaBD
         talla= Integer.parseInt(campos[4]);
         visible= Integer.parseInt(campos[5]);
         perfil = Integer.parseInt(campos[6]);
+        foto = Integer.parseInt(campos[7]);
     }
 
     public String toString()
     {
-        return id + ";" + nombre + ";" + color + ";"+tipo+";"+talla+";"+visible+";"+perfil+ "\n";
+        return id + ";" + nombre + ";" + color + ";"+tipo+";"+talla+";"+visible+";"+perfil+";"+foto+ "\n";
     }
 }

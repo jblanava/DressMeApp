@@ -2,7 +2,6 @@ package com.example.dressmeapp.Objetos;
 
 import android.content.Context;
 import android.os.Environment;
-import android.util.Log;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBD2;
@@ -14,12 +13,12 @@ import com.example.dressmeapp.Objetos.Structs.PrendaBD;
 import com.example.dressmeapp.Objetos.Structs.TallaBD;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +37,7 @@ public class Importador
             Map<Integer, Integer> Mapaperfiles = new HashMap<>();
             Map<Integer, Integer> Mapacolores = new HashMap<>();
             Map<Integer, Integer> Mapatallas = new HashMap<>();
+            Map<Integer, Integer> Mapafotos = new HashMap<>();
             Map<Integer, Integer> Mapaprendas = new HashMap<>();
 
             List<String> prefiles = importar(br);
@@ -46,6 +46,9 @@ public class Importador
             List<String> tallas = importar(br);
             List<String> prendas = importar(br);
             List<String> conjuntos = importar(br);
+
+
+            importar_fotos(context, Mapafotos);
 
             for(String s : prefiles)
             {
@@ -97,7 +100,8 @@ public class Importador
                 PrendaBD p = new PrendaBD(s);
 
 
-                int nuevoId = GestorBD.crearPrenda(context, p.nombre, Mapacolores.get(p.color), p.tipo, Mapatallas.get(p.talla), p.visible, Mapaperfiles.get(p.perfil));
+                int nuevoId = GestorBD.crearPrenda(context, p.nombre, Mapacolores.get(p.color), p.tipo,
+                        Mapatallas.get(p.talla), p.visible, Mapaperfiles.get(p.perfil), Mapafotos.get(p.foto));
 
                 Mapaprendas.put(p.id, nuevoId);
             }
@@ -123,6 +127,24 @@ public class Importador
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void importar_fotos(Context context, Map<Integer, Integer> Mapafotos) throws IOException {
+        File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/fotos");
+        dir.mkdirs();
+
+        for(File file : dir.listFiles())
+        {
+            byte[] fileData = new byte[(int) file.length()];
+            DataInputStream dis = new DataInputStream(new FileInputStream(file));
+            dis.readFully(fileData);
+            dis.close();
+
+            int id = Integer.parseInt(file.getName().split("[_.]")[1]);
+
+            Mapafotos.put(id, GestorBD.guardarFoto(context, fileData));
+        }
+
     }
 
     public List<String> importar(BufferedReader br) throws IOException {
