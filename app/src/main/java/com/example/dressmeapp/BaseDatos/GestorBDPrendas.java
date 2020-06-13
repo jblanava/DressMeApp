@@ -24,13 +24,6 @@ public class GestorBDPrendas {
      */
     public static int idPerfil;
 
-    public static int getIdPerfil() {
-        return idPerfil;
-    }
-
-    public static void setIdPerfil(int nuevoId) {
-        idPerfil = nuevoId;
-    }
     /**
      * Crea una nueva prenda.
      *
@@ -251,7 +244,7 @@ public class GestorBDPrendas {
         int tipo = GestorBD.get_id_tabla(context, "tipo", p.tipo);
         int talla = GestorBD.get_id_tabla(context, "talla", p.talla);
 
-        crear_prenda(context, p.nombre, color, tipo, talla, 1, getIdPerfil());
+        crear_prenda(context, p.nombre, color, tipo, talla, 1, GestorBD.idPerfil);
     }
 
     public static int crear_color(Context contexto, String nombre, String hex) {

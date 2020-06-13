@@ -63,14 +63,6 @@ public class GestorBD {
     ///////////////////////77
 /// PERFIL
 
-    public static int getIdPerfil() {
-        return idPerfil;
-    }
-
-    public static void setIdPerfil(int nuevoId) {
-        idPerfil = nuevoId;
-    }
-
 
        /**
         * Comprueba si un string corresponde a un nombre de perfil existente.

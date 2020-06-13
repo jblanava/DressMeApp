@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (ok) {
-            GestorBD.setIdPerfil(GestorBDPerfil.IdPerfilAsociado(getApplicationContext(), usuario, pass));
+            GestorBD.idPerfil = GestorBDPerfil.IdPerfilAsociado(getApplicationContext(), usuario, pass);
             ir_a_menu_principal();
         } else {
             textError.setText(error);

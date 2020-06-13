@@ -194,7 +194,7 @@ public class Modificar_Prenda extends AppCompatActivity {
         sColor.setSelection(GestorBD.get_id_tabla(this, "color", prenda.color) - 1);
         sTipo.setSelection(GestorBD.get_id_tabla(this, "tipo", prenda.tipo) - 1);
         sTalla.setSelection(GestorBD.get_id_tabla(this, "talla", prenda.talla) - 1);
-        sPerfiles.setSelection(GestorBD.getIdPerfil() - 1);
+        sPerfiles.setSelection(GestorBD.idPerfil - 1);
         cargar_foto(GestorBDFotos.fotoActual);
     }
 

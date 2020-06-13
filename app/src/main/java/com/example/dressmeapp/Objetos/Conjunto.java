@@ -14,7 +14,7 @@ public class Conjunto {
 
 
     public Conjunto(String nombreCjto){
-        idPerfil = BaseDatos.idPerfil;
+        idPerfil = GestorBD.idPerfil;
         idPrendas = new ArrayList<>();
         this.nombreCjto = nombreCjto;
     }

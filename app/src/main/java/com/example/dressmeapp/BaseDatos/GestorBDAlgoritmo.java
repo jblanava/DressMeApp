@@ -23,14 +23,6 @@ public class GestorBDAlgoritmo {
      */
     public static int idPerfil;
 
-    public static int getIdPerfil() {
-        return idPerfil;
-    }
-
-    public static void setIdPerfil(int nuevoId) {
-        idPerfil = nuevoId;
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static Conjunto get_conjunto_algoritmo(Context context, int tiempo, int actividad)
     {
