@@ -1,7 +1,5 @@
 package com.example.dressmeapp.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -9,6 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
@@ -29,7 +29,7 @@ public class PrimeraActivity extends AppCompatActivity {
         timer = new Timer();
         ct = this;
 
-        comprobarFotoPorDefecto();
+        comprobar_foto_por_defecto();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class PrimeraActivity extends AppCompatActivity {
         }, 1500);
     }
 
-    private void comprobarFotoPorDefecto() {
+    private void comprobar_foto_por_defecto() {
 
         int idmax = GestorBD.obtener_id_maximo(ct, "FOTOS");
         if (idmax == 1) {
@@ -55,9 +55,9 @@ public class PrimeraActivity extends AppCompatActivity {
             Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            byte[] bitMapData = stream.toByteArray();
+            byte[] bitmap_data = stream.toByteArray();
 
-            GestorBD.guardarFoto(ct, bitMapData);
+            GestorBD.guardarFoto(ct, bitmap_data);
         }
 
     }
