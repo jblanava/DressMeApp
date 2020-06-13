@@ -35,7 +35,7 @@ public class Modificar_Prenda extends AppCompatActivity {
     Button bEliminar;
     Button bFotos;
 
-    ImageView imagen;
+    ImageView iImagen;
 
     String defaultText = "ENVIAR A PERFIL";
 
@@ -66,30 +66,30 @@ public class Modificar_Prenda extends AppCompatActivity {
         bGuardar = findViewById(R.id.boton_guardar);
         bEliminar = findViewById(R.id.boton_eliminar);
         bFotos = findViewById(R.id.boton_foto);
-        imagen = findViewById(R.id.prenda_foto);
+        iImagen = findViewById(R.id.prenda_foto);
 
 
         List<String> colores = GestorBD.get_nombres_tabla(this, "color");
-        ArrayAdapter<String> adapterColores = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colores);
-        adapterColores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sColor.setAdapter(adapterColores);
+        ArrayAdapter<String> adapter_colores = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colores);
+        adapter_colores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sColor.setAdapter(adapter_colores);
 
         List<String> tipos = GestorBD.get_nombres_tabla(this, "tipo");
-        ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos);
-        adapterTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sTipo.setAdapter(adapterTipos);
+        ArrayAdapter<String> adapter_tipos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos);
+        adapter_tipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sTipo.setAdapter(adapter_tipos);
 
         List<String> tallas = GestorBD.get_nombres_tabla(this, "talla");
-        ArrayAdapter<String> adapterTallas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tallas);
-        adapterTallas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sTalla.setAdapter(adapterTallas);
+        ArrayAdapter<String> adapter_tallas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tallas);
+        adapter_tallas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sTalla.setAdapter(adapter_tallas);
 
         List<String> perfiles = GestorBD.get_nombres_tabla(this, "perfil");
 
-        ArrayAdapter<String> adapterPerfiles = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, perfiles);
-        adapterPerfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter_perfiles = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, perfiles);
+        adapter_perfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sPerfiles.setPrompt(defaultText);
-        sPerfiles.setAdapter(adapterPerfiles);
+        sPerfiles.setAdapter(adapter_perfiles);
 
         bEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,12 +118,12 @@ public class Modificar_Prenda extends AppCompatActivity {
 
     public void ir_a_fotos(){
 
-        Intent mIntent = getIntent();
-        int id = mIntent.getIntExtra("intVariableName", 0);
+        Intent mi_intent = getIntent();
+        int id = mi_intent.getIntExtra("intVariableName", 0);
 
-        Intent nuevaVentana = new Intent(this,Fotos.class);
-        nuevaVentana.putExtra("id_modificar", String.valueOf(id));
-        startActivity(nuevaVentana);
+        Intent nueva_ventana = new Intent(this,Fotos.class);
+        nueva_ventana.putExtra("id_modificar", String.valueOf(id));
+        startActivity(nueva_ventana);
     }
 
     private void mostrar_alerta_eliminar_prenda() {
@@ -199,7 +199,7 @@ public class Modificar_Prenda extends AppCompatActivity {
     }
 
     protected void cargar_foto(int idfoto){
-        GestorBD.cargarFoto(this, idfoto, imagen);
+        GestorBD.cargarFoto(this, idfoto, iImagen);
     }
 
 

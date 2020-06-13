@@ -1,7 +1,5 @@
 package com.example.dressmeapp.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
@@ -10,18 +8,19 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.dressmeapp.BaseDatos.GestorBD2;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.R;
 
 public class NuevoColorActivity extends AppCompatActivity {
 
-    private TextView txtError;
-    private ImageView imgColor;
-    private TextView txtNombreColor;
+    private TextView tError;
+    private ImageView iColor;
+    private TextView tNombreColor;
 
-    private ColorPrenda miColor;
+    private ColorPrenda color_prenda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,31 +33,31 @@ public class NuevoColorActivity extends AppCompatActivity {
 
     private void enlazarControles() {
 
-        txtError = findViewById(R.id.txtError);
+        tError = findViewById(R.id.txtError);
 
-        miColor = new ColorPrenda(0, "", "#000000");
+        color_prenda = new ColorPrenda(0, "", "#000000");
         // ID = 0 (por definir cuando se añada el color a la BD)
         // Nombre por defecto = cadena vacía
         // Color por defecto = #000000
 
-        imgColor = findViewById(R.id.imgColor);
-        txtNombreColor = findViewById(R.id.txtNombreColor);
-        txtNombreColor.setText(miColor.getNombre());
+        iColor = findViewById(R.id.imgColor);
+        tNombreColor = findViewById(R.id.txtNombreColor);
+        tNombreColor.setText(color_prenda.getNombre());
 
         SeekBar barRojo = findViewById(R.id.barRojo);
-        barRojo.setProgress(miColor.getRojo());
+        barRojo.setProgress(color_prenda.getRojo());
 
         SeekBar barVerde = findViewById(R.id.barVerde);
-        barVerde.setProgress(miColor.getVerde());
+        barVerde.setProgress(color_prenda.getVerde());
 
         SeekBar barAzul = findViewById(R.id.barAzul);
-        barAzul.setProgress(miColor.getAzul());
+        barAzul.setProgress(color_prenda.getAzul());
 
         barRojo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                miColor.setRojo(progress);
-                imgColor.setBackgroundColor(miColor.getAndroidColor());
+                color_prenda.setRojo(progress);
+                iColor.setBackgroundColor(color_prenda.getAndroidColor());
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }
@@ -66,8 +65,8 @@ public class NuevoColorActivity extends AppCompatActivity {
         barVerde.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                miColor.setVerde(progress);
-                imgColor.setBackgroundColor(miColor.getAndroidColor());
+                color_prenda.setVerde(progress);
+                iColor.setBackgroundColor(color_prenda.getAndroidColor());
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }
@@ -75,8 +74,8 @@ public class NuevoColorActivity extends AppCompatActivity {
         barAzul.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                miColor.setAzul(progress);
-                imgColor.setBackgroundColor(miColor.getAndroidColor());
+                color_prenda.setAzul(progress);
+                iColor.setBackgroundColor(color_prenda.getAndroidColor());
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }
@@ -86,7 +85,7 @@ public class NuevoColorActivity extends AppCompatActivity {
         btnAniadirColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                confirmarNuevoColor(txtNombreColor.getText().toString(), miColor.getHex());
+                confirmarNuevoColor(tNombreColor.getText().toString(), color_prenda.getHex());
             }
         });
 
@@ -98,7 +97,7 @@ public class NuevoColorActivity extends AppCompatActivity {
             GestorBDPrendas.crearColor(this, nombre, hex);
             finish();
         } else {
-            txtError.setText("Ponga un nombre al color");
+            tError.setText("Ponga un nombre al color");
         }
     }
 
