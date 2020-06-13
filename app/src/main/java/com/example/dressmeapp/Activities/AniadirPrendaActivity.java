@@ -99,7 +99,7 @@ public class AniadirPrendaActivity extends AppCompatActivity {
         int tipo = Stipo.getSelectedItemPosition() + 1;
         int talla = Stalla.getSelectedItemPosition() + 1;
 
-        GestorBDPrendas.crearPrenda(this, nombre, color, tipo, talla, 1, GestorBD.getIdPerfil());
+        GestorBDPrendas.crear_prenda(this, nombre, color, tipo, talla, 1, GestorBD.getIdPerfil());
 
         finish();
     }

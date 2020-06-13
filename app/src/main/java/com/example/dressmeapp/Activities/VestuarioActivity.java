@@ -152,7 +152,7 @@ public class VestuarioActivity extends AppCompatActivity {
     void mostrar_prendas() {
         lista_prendas.removeAllViews();
 
-        final List<Prenda> prendas = GestorBDPrendas.PrendasVisibles(this, this.busqueda, this.ordenacion);
+        final List<Prenda> prendas = GestorBDPrendas.get_prendas_visibles(this, this.busqueda, this.ordenacion);
 
         final Context a = this;
 

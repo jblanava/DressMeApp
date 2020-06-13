@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
-import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 
@@ -24,7 +23,7 @@ public class GestorBDAlgoritmo {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp26.db";
+    private static String nombreBD = "dressmeapp30.db";
 
     public static void seleccionarBD(String nombreBD) {
         GestorBDAlgoritmo.nombreBD = nombreBD;
@@ -51,7 +50,7 @@ public class GestorBDAlgoritmo {
 
         int idCamiseta = get_prenda_condiciones(context, tiempo, actividad, tiposCamiseta, todos_los_colores);
 
-        int color_principal = GestorBD.get_id_tabla(context, "color", GestorBDPrendas.Obtener_Prenda(context, idCamiseta).color);
+        int color_principal = GestorBD.get_id_tabla(context, "color", GestorBDPrendas.get_prenda(context, idCamiseta).color);
 
         List<Integer> coloresCombo = GestorBDPrendas.ColorCombo(context, color_principal);
 
@@ -120,8 +119,8 @@ public class GestorBDAlgoritmo {
                 int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
 
 
-                int pActividad = tipoActividad(context, tipo);
-                int pTiempo = tipoTiempo(context, tipo);
+                int pActividad = tipo_actividad(context, tipo);
+                int pTiempo = tipo_tiempo(context, tipo);
 
                 if((pActividad & actividad) != 0 && (pTiempo & tiempo) != 0)
                 {
@@ -150,7 +149,7 @@ public class GestorBDAlgoritmo {
 
 
 
-    private static int tipoActividad(Context context, int idTipo) {
+    private static int tipo_actividad(Context context, int idTipo) {
         String sentenciaSQL = "SELECT ACTIVIDAD FROM TIPO WHERE ID = " + idTipo;
         Cursor cursor;
         int res = -1;
@@ -168,7 +167,7 @@ public class GestorBDAlgoritmo {
         return res;
     }
 
-    private static int tipoTiempo(Context context, int idTipo) {
+    private static int tipo_tiempo(Context context, int idTipo) {
         String sentenciaSQL = "SELECT TIEMPO FROM TIPO WHERE ID = " + idTipo;
         Cursor cursor;
         int res = -1;
@@ -187,7 +186,7 @@ public class GestorBDAlgoritmo {
     }
 
 
-    public static List<Conjunto> ConjuntosEnBD(Context context) {
+    public static List<Conjunto> get_conjuntos(Context context) {
 
         List<Conjunto> res = new ArrayList<>();
 
@@ -233,7 +232,7 @@ public class GestorBDAlgoritmo {
 
     }
 
-    public static List<Conjunto> ConjuntosFavoritosEnBD(Context context) {
+    public static List<Conjunto> get_conjuntos_favoritos(Context context) {
 
         List<Conjunto> res = new ArrayList<>();
 
@@ -279,31 +278,9 @@ public class GestorBDAlgoritmo {
 
     }
 
-    public static int obtenIDMaximoConjunto(Context context) {
-        int resultado = 0;
-        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM CONJUNTO";
+    public static void add_conjunto(Context contexto, Conjunto conj, int flag) {
 
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(context, nombreBD);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if (cursor.moveToFirst()) {
-            do {
-                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
-            } while (cursor.moveToNext());
-        }
-        resultado++;
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return resultado;
-    }
-
-
-    public static void addConjunto(Context contexto, Conjunto conj, int flag) {
-
-        int id = obtenIDMaximoConjunto(contexto); // ID
+        int id = GestorBD.obtener_id_maximo(contexto, "CONJUNTO"); // ID
 
         List<Integer> idPrendas = conj.getPrendas();
         ListIterator<Integer> it = idPrendas.listIterator();
@@ -321,7 +298,7 @@ public class GestorBDAlgoritmo {
 
         while(it.hasNext()) {
 
-            Prenda aux = GestorBDPrendas.Obtener_Prenda(contexto, it.next());
+            Prenda aux = GestorBDPrendas.get_prenda(contexto, it.next());
 
             if(aux != null){
 

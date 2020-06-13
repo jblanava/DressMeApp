@@ -37,7 +37,7 @@ public class AniadirTallaActivity extends AppCompatActivity {
 
     private void guardar_talla() {
         String talla = tallaNueva.getText().toString();
-        GestorBDPrendas.CrearTalla(this, talla);
+        GestorBDPrendas.crear_talla(this, talla);
         finish();
     }
 }

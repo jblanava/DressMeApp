@@ -18,6 +18,9 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
 
+    public static String nombreBD = "dressmeapp29.db";
+    public static int idPerfil;
+
     public BaseDatos(Context contexto, String nombrebd) {
         super(contexto, nombrebd, null, VERSION);
     }

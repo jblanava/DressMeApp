@@ -24,7 +24,7 @@ public class GestorBDPrendas {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp26.db";
+    private static String nombreBD = "dressmeapp30.db";
 
     public static void seleccionarBD(String nombreBD) {
         GestorBDPrendas.nombreBD = nombreBD;
@@ -50,11 +50,12 @@ public class GestorBDPrendas {
      * @param id_perfil El ID del perfil que tendrá la prenda.
      */
     @SuppressLint("DefaultLocale")
-    public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
+    public static int crear_prenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil, int foto) {
 
         int id = GestorBD.obtener_id_maximo(contexto, "prenda");
         String sentenciaSQL;
-        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', '%d', %d, %d, %d, %d)", id, nombre, color, tipo, talla, visible, id_perfil);
+        sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', %d, %d, %d, %d, %d, %d)",
+                id, nombre, color, tipo, talla, visible, id_perfil, foto);
 
         BaseDatos base = new BaseDatos(contexto, nombreBD);
         SQLiteDatabase baseDatos;
@@ -65,8 +66,11 @@ public class GestorBDPrendas {
 
         return id;
     }
+    public static int crear_prenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
+        return crear_prenda(contexto, nombre, color, tipo, talla, visible, id_perfil, 1);
+    }
 
-    public static List<Prenda> PrendasVisibles(Context context, String busqueda, String ordenacion)
+    public static List<Prenda> get_prendas_visibles(Context context, String busqueda, String ordenacion)
     {
         String sentenciaSQL;
 
@@ -124,7 +128,7 @@ public class GestorBDPrendas {
      * @param contexto El contexto a usar.
      * @param idPrenda El ID de la prenda a borrar.
      */
-    public static void CambiarVisibilidadPrenda(Context contexto, int idPrenda) { // este metodo es para cambiar la visibilidad, pero la prenda se mantiene en la base de datos
+    public static void ocultar_prenda(Context contexto, int idPrenda) { // este metodo es para cambiar la visibilidad, pero la prenda se mantiene en la base de datos
 
         String SentenciaSQL;
         SentenciaSQL = "UPDATE PRENDA SET ";
@@ -168,7 +172,7 @@ public class GestorBDPrendas {
         base.close();
     }
 
-    public static List<ColorPrenda> ObtenerColores(Context context) {
+    public static List<ColorPrenda> get_colores(Context context) {
 
         List<ColorPrenda> res = new ArrayList<>();
 
@@ -198,8 +202,8 @@ public class GestorBDPrendas {
 
     }
 
-    public static int CrearTalla(Context contexto, String talla) {
-        int id = obtenIDMaximoTalla(contexto);
+    public static int crear_talla(Context contexto, String talla) {
+        int id = GestorBD.obtener_id_maximo(contexto, "TALLA");
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO TALLA (ID, NOMBRE) VALUES (";
         sentenciaSQL += id + ",'" + talla.trim() + "')";
@@ -214,27 +218,7 @@ public class GestorBDPrendas {
         return id;
     }
 
-    private static int obtenIDMaximoTalla(Context context) {
-        int resultado = 0;
-        String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM TALLA";
-
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(context, nombreBD);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-        if (cursor.moveToFirst()) {
-            do {
-                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
-            } while (cursor.moveToNext());
-        }
-        resultado++;
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return resultado;
-    }
-    public static Prenda Obtener_Prenda(Context context, int id) {
+    public static Prenda get_prenda(Context context, int id) {
 
 
         String sentenciaSQL =  "SELECT PRENDA.NOMBRE \"NOMBRE\", COLOR.NOMBRE \"COLOR\", TIPO.NOMBRE \"TIPO\", TALLA.NOMBRE \"TALLA\" ";
@@ -267,16 +251,16 @@ public class GestorBDPrendas {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static void Modificar_Prenda(Context context, Prenda p) {
-        CambiarVisibilidadPrenda(context, p.id);
+        ocultar_prenda(context, p.id);
 
         int color = GestorBD.get_id_tabla(context, "color", p.color);
         int tipo = GestorBD.get_id_tabla(context, "tipo", p.tipo);
         int talla = GestorBD.get_id_tabla(context, "talla", p.talla);
 
-        crearPrenda(context, p.nombre, color, tipo, talla, 1, getIdPerfil());
+        crear_prenda(context, p.nombre, color, tipo, talla, 1, getIdPerfil());
     }
 
-    public static int crearColor(Context contexto, String nombre, String hex) {
+    public static int crear_color(Context contexto, String nombre, String hex) {
         int id = GestorBD.obtener_id_maximo(contexto, "color");
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO COLOR (ID, NOMBRE, HEX) VALUES (" + id + ", '" + nombre + "', '" + hex + "')";
@@ -298,7 +282,7 @@ public class GestorBDPrendas {
      * @param color2 El segundo color.
      * @return True si ha habido éxito (no se repite en la BD)
      */
-    public static boolean crearComboColor(Context contexto, int color1, int color2){
+    public static boolean crear_combo_color(Context contexto, int color1, int color2){
 
         boolean repetido = false;
 
@@ -341,7 +325,7 @@ public class GestorBDPrendas {
 
     }
 
-    public static List<ComboColorPrenda> getCombosColores(Context contexto) {
+    public static List<ComboColorPrenda> get_combos_colores(Context contexto) {
 
         List<ComboColorPrenda> lista = new ArrayList<>();
 

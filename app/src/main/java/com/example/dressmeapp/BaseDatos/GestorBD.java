@@ -38,7 +38,7 @@ public class GestorBD {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp29.db"; // Antonio V. ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp30.db"; // Antonio V. ha cambiado a la BD__17
                                                         // Maria ha cambiado a BD 22
 
 

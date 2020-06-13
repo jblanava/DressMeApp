@@ -68,7 +68,7 @@ public class AniadirCombinacion extends AppCompatActivity {
         int c1 = Scolor1.getSelectedItemPosition() + 1;
         int c2 = Scolor2.getSelectedItemPosition() + 1;
 
-        if (GestorBDPrendas.crearComboColor(this, c1, c2)) {
+        if (GestorBDPrendas.crear_combo_color(this, c1, c2)) {
             Toast.makeText(AniadirCombinacion.this, "Se ha guardado la combinacion indicada", Toast.LENGTH_SHORT).show();
             mostrarCombos();
         } else {
@@ -89,7 +89,7 @@ public class AniadirCombinacion extends AppCompatActivity {
         comboColorView.removeAllViews();
 
         final Context context = this;
-        final List<ComboColorPrenda> combos = GestorBDPrendas.getCombosColores(context);
+        final List<ComboColorPrenda> combos = GestorBDPrendas.get_combos_colores(context);
 
         comboColorView.setAdapter(new ComboColorAdapter(combos, new RecyclerViewOnItemClickListener() {
             @Override

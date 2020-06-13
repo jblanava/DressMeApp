@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.dressmeapp.BaseDatos.GestorBD2;
 import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.R;
@@ -95,7 +94,7 @@ public class NuevoColorActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void confirmarNuevoColor(String nombre, String hex) {
         if (nombre.length() != 0) {
-            GestorBDPrendas.crearColor(this, nombre, hex);
+            GestorBDPrendas.crear_color(this, nombre, hex);
             finish();
         } else {
             txtError.setText("Ponga un nombre al color");

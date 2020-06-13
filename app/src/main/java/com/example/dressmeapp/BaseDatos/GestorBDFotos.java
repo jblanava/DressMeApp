@@ -20,7 +20,7 @@ public class GestorBDFotos {
 
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp26.db";
+    private static String nombreBD = "dressmeapp30.db";
 
     public static void seleccionarBD(String nombreBD) { GestorBDFotos.nombreBD = nombreBD; }
 

@@ -155,7 +155,7 @@ public class Modificar_Prenda extends AppCompatActivity {
 
     void eliminar()
     {
-        GestorBDPrendas.CambiarVisibilidadPrenda(this, prenda.id);
+        GestorBDPrendas.ocultar_prenda(this, prenda.id);
         finish();
     }
 
@@ -168,9 +168,9 @@ public class Modificar_Prenda extends AppCompatActivity {
         int talla = sTalla.getSelectedItemPosition() + 1;
         int perfil = sPerfiles.getSelectedItemPosition() + 1;
 
-        GestorBDPrendas.CambiarVisibilidadPrenda(this, prenda.id);
+        GestorBDPrendas.ocultar_prenda(this, prenda.id);
         //Esto peta porque lo ha modificado el otro grupo, lo dejo así de momento :D
-        GestorBDPrendas.crearPrenda(this, nombre, color, tipo, talla, 1, perfil, GestorBDFotos.fotoActual);
+        GestorBDPrendas.crear_prenda(this, nombre, color, tipo, talla, 1, perfil, GestorBDFotos.fotoActual);
 
         //GestorBD.Modificar_Prenda(this, prenda);
 
@@ -186,7 +186,7 @@ public class Modificar_Prenda extends AppCompatActivity {
 
         GestorBDFotos.fotoActual = GestorBD.get_foto_de_prenda(this, id);
 
-        prenda = GestorBDPrendas.Obtener_Prenda(this, id);
+        prenda = GestorBDPrendas.get_prenda(this, id);
 
         prenda.id = id;
 

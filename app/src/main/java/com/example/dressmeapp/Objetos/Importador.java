@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.BaseDatos.GestorBD2;
 import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
 import com.example.dressmeapp.BaseDatos.GestorBDPerfil;
 import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
@@ -71,7 +70,7 @@ public class Importador
                     continue; // Los primeros 12 son los que vienen por defecto y me los salto
                 }
 
-                int nuevoId = GestorBDPrendas.crearColor(context, c.nombre, c.hex);
+                int nuevoId = GestorBDPrendas.crear_color(context, c.nombre, c.hex);
 
                 mapa_colores.put(c.id, nuevoId);
             }
@@ -79,7 +78,7 @@ public class Importador
             for(String s : combos)
             {
                 ComboColorBD c = new ComboColorBD(s);
-                GestorBDPrendas.crearComboColor(context, c.color1, c.color2);
+                GestorBDPrendas.crear_combo_color(context, c.color1, c.color2);
             }
 
             for(String s : tallas)
@@ -92,7 +91,7 @@ public class Importador
                     continue; // Las primeras 6 son las que vienen por defecto y me las salto
                 }
 
-                int nuevoId = GestorBDPrendas.CrearTalla(context, t.nombre);
+                int nuevoId = GestorBDPrendas.crear_talla(context, t.nombre);
 
                 mapa_tallas.put(t.id, nuevoId);
             }
@@ -103,7 +102,7 @@ public class Importador
                 PrendaBD p = new PrendaBD(s);
 
 
-                int nuevoId = GestorBDPrendas.crearPrenda(context, p.nombre, mapa_colores.get(p.color), p.tipo,
+                int nuevoId = GestorBDPrendas.crear_prenda(context, p.nombre, mapa_colores.get(p.color), p.tipo,
                         mapa_tallas.get(p.talla), p.visible, mapa_perfiles.get(p.perfil), mapa_fotos.get(p.foto));
 
                 mapa_prendas.put(p.id, nuevoId);
@@ -119,7 +118,7 @@ public class Importador
                     c.add(mapa_prendas.get(i));
                 }
 
-                GestorBDAlgoritmo.addConjunto(context, c, p.favorito);
+                GestorBDAlgoritmo.add_conjunto(context, c, p.favorito);
             }
 
 

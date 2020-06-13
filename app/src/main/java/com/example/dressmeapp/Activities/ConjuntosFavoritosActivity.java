@@ -44,7 +44,7 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
     }
 
     private void mostrar_conjuntos() {
-        List<Conjunto> listaConjuntos= GestorBDAlgoritmo.ConjuntosFavoritosEnBD(this);
+        List<Conjunto> listaConjuntos= GestorBDAlgoritmo.get_conjuntos_favoritos(this);
         Collections.reverse(listaConjuntos); // esto voltea la lista
 
         for(Conjunto c : listaConjuntos)
@@ -57,7 +57,7 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
             for(int j = 1; j < c.getSize(); j++){ // empezamos en 1, porque la pos 0 es para el propio ID del conjunto //
                 //Voy mostrando todas las prendas por pantalla
                 int idPrenda= c.obtenId(j);
-                Prenda prenda = GestorBDPrendas.Obtener_Prenda(this,idPrenda);
+                Prenda prenda = GestorBDPrendas.get_prenda(this,idPrenda);
                 mostrar_prenda(prenda);
             }
         }

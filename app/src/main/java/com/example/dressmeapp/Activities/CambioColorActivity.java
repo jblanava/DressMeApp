@@ -54,7 +54,7 @@ public class CambioColorActivity extends AppCompatActivity {
     private void mostrar_colores() {
 
         final Context context = this;
-        final List<ColorPrenda> colores = GestorBDPrendas.ObtenerColores(context);
+        final List<ColorPrenda> colores = GestorBDPrendas.get_colores(context);
 
         listaColores.setAdapter(new ColorAdapter(colores, new RecyclerViewOnItemClickListener() {
             @Override

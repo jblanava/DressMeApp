@@ -67,7 +67,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void aniade_favoritos() {
-        GestorBDAlgoritmo.addConjunto(this, this.conjunto, 1);
+        GestorBDAlgoritmo.add_conjunto(this, this.conjunto, 1);
         bFavoritos.setText("Conjunto añadido");
         Intent salto = new Intent(this, MenuPrincipalActivity.class);
         startActivity(salto);
@@ -81,7 +81,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
     }
 
     private void guardar() {
-        GestorBDAlgoritmo.addConjunto(this,this.conjunto, 0);
+        GestorBDAlgoritmo.add_conjunto(this,this.conjunto, 0);
         Intent salto = new Intent(this, MenuPrincipalActivity.class);
         startActivity(salto);
         this.finish();
@@ -118,7 +118,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
             if(id_prenda != -1)
             {
-                Prenda prenda = GestorBDPrendas.Obtener_Prenda(this, id_prenda);
+                Prenda prenda = GestorBDPrendas.get_prenda(this, id_prenda);
                 mostrar_prenda(prenda);
             }
         }

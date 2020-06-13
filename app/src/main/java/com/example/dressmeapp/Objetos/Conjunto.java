@@ -1,5 +1,6 @@
 package com.example.dressmeapp.Objetos;
 
+import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class Conjunto {
 
 
     public Conjunto(String nombreCjto){
-        idPerfil = GestorBD.getIdPerfil();
+        idPerfil = BaseDatos.idPerfil;
         idPrendas = new ArrayList<>();
         this.nombreCjto = nombreCjto;
     }
