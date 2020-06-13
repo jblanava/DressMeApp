@@ -10,7 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.dressmeapp.BaseDatos.GestorBD;
+
+import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.Objetos.ColorAdapter;
 import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.Objetos.RecyclerViewOnItemClickListener;
@@ -53,7 +54,7 @@ public class CambioColorActivity extends AppCompatActivity {
     private void mostrarColores() {
 
         final Context context = this;
-        final List<ColorPrenda> colores = GestorBD.ObtenerColores(context);
+        final List<ColorPrenda> colores = GestorBDPrendas.ObtenerColores(context);
 
         listaColores.setAdapter(new ColorAdapter(colores, new RecyclerViewOnItemClickListener() {
             @Override
