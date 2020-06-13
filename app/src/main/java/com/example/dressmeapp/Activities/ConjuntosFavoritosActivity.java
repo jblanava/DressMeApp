@@ -32,25 +32,25 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conjuntos_favoritos);
         getSupportActionBar().hide();
-        enlazaControles();
-        hagoCosas();
+        enlaza_controles();
+        mostrar_conjuntos();
     }
 
 
 
-    private void enlazaControles() {
+    private void enlaza_controles() {
         listaPrendas = findViewById(R.id.lista_prendas);
 
     }
 
-    private void hagoCosas() {
+    private void mostrar_conjuntos() {
         List<Conjunto> listaConjuntos= GestorBDAlgoritmo.ConjuntosFavoritosEnBD(this);
         Collections.reverse(listaConjuntos); // esto voltea la lista
 
         for(Conjunto c : listaConjuntos)
         {
             //Crear un text view, mostrarlo por pantalla
-            metodoMisPanas(c.getNombreCjto());
+            mostrar_conjunto(c.getNombreCjto());
             //Recorro el conjunto y muestro las prendas
 
 
@@ -58,7 +58,7 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
                 //Voy mostrando todas las prendas por pantalla
                 int idPrenda= c.obtenId(j);
                 Prenda prenda = GestorBDPrendas.Obtener_Prenda(this,idPrenda);
-                metodoChavales(prenda);
+                mostrar_prenda(prenda);
             }
         }
 
@@ -66,7 +66,7 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
     }
 
     @SuppressLint("DefaultLocale")
-    private void metodoMisPanas(String nombreConj) {
+    private void mostrar_conjunto(String nombreConj) {
         @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_conjunto_view, null);
 
         TextView conjunto = v.findViewById(R.id.conjuntoView);
@@ -74,7 +74,7 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
         listaPrendas.addView(v);
     }
 
-    void metodoChavales(final Prenda prenda)
+    void mostrar_prenda(final Prenda prenda)
     {
         if(prenda == null) return;      // TODO: porque cojones necesito esto aqui? PS: no quitar o peta el historial
 
