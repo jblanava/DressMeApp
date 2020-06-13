@@ -25,15 +25,15 @@ import java.util.List;
 
 public class Modificar_Prenda extends AppCompatActivity {
 
-    EditText Enombre;
-    Spinner Scolor;
-    Spinner Stipo;
-    Spinner Stalla;
-    Spinner Sperfiles;
+    EditText eNombre;
+    Spinner sColor;
+    Spinner sTipo;
+    Spinner sTalla;
+    Spinner sPerfiles;
 
-    Button Bguardar;
-    Button Beliminar;
-    Button BFotos;
+    Button bGuardar;
+    Button bEliminar;
+    Button bFotos;
 
     ImageView imagen;
 
@@ -53,52 +53,52 @@ public class Modificar_Prenda extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        cargar_foto(GestorBD.fotoActual);
+        cargar_foto(GestorBDFotos.fotoActual);
     }
 
     void enlazar_controles() {// Enlaza los controles y rellena los Spinner con la lista de opciones
 
-        Enombre = findViewById(R.id.rellena_nombre);
-        Scolor = findViewById(R.id.spinner_color);
-        Stipo = findViewById(R.id.spinner_tipo);
-        Stalla = findViewById(R.id.spinner_talla);
-        Sperfiles = findViewById(R.id.spinner_perfiles);
-        Bguardar = findViewById(R.id.boton_guardar);
-        Beliminar = findViewById(R.id.boton_eliminar);
-        BFotos = findViewById(R.id.boton_foto);
+        eNombre = findViewById(R.id.rellena_nombre);
+        sColor = findViewById(R.id.spinner_color);
+        sTipo = findViewById(R.id.spinner_tipo);
+        sTalla = findViewById(R.id.spinner_talla);
+        sPerfiles = findViewById(R.id.spinner_perfiles);
+        bGuardar = findViewById(R.id.boton_guardar);
+        bEliminar = findViewById(R.id.boton_eliminar);
+        bFotos = findViewById(R.id.boton_foto);
         imagen = findViewById(R.id.prenda_foto);
 
 
         List<String> colores = GestorBD.get_nombres_tabla(this, "color");
         ArrayAdapter<String> adapterColores = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colores);
         adapterColores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Scolor.setAdapter(adapterColores);
+        sColor.setAdapter(adapterColores);
 
         List<String> tipos = GestorBD.get_nombres_tabla(this, "tipo");
         ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tipos);
         adapterTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Stipo.setAdapter(adapterTipos);
+        sTipo.setAdapter(adapterTipos);
 
         List<String> tallas = GestorBD.get_nombres_tabla(this, "talla");
         ArrayAdapter<String> adapterTallas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tallas);
         adapterTallas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Stalla.setAdapter(adapterTallas);
+        sTalla.setAdapter(adapterTallas);
 
         List<String> perfiles = GestorBD.get_nombres_tabla(this, "perfil");
 
         ArrayAdapter<String> adapterPerfiles = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, perfiles);
         adapterPerfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Sperfiles.setPrompt(defaultText);
-        Sperfiles.setAdapter(adapterPerfiles);
+        sPerfiles.setPrompt(defaultText);
+        sPerfiles.setAdapter(adapterPerfiles);
 
-        Beliminar.setOnClickListener(new View.OnClickListener() {
+        bEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mostrarAlertaEliminarPrenda();
+                mostrar_alerta_eliminar_prenda();
             }
         });
 
-        Bguardar.setOnClickListener(new View.OnClickListener() {
+        bGuardar.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
@@ -106,7 +106,7 @@ public class Modificar_Prenda extends AppCompatActivity {
             }
         });
 
-        BFotos.setOnClickListener(new View.OnClickListener() {
+        bFotos.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
@@ -126,7 +126,7 @@ public class Modificar_Prenda extends AppCompatActivity {
         startActivity(nuevaVentana);
     }
 
-    private void mostrarAlertaEliminarPrenda() {
+    private void mostrar_alerta_eliminar_prenda() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setMessage("¿Desea borrar la prenda?");
         alertDialog.setTitle("ATENCIÓN");
@@ -162,11 +162,11 @@ public class Modificar_Prenda extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     void guardar() {
 
-        String nombre = Enombre.getText().toString();
-        int color = Scolor.getSelectedItemPosition() + 1;
-        int tipo = Stipo.getSelectedItemPosition() + 1;
-        int talla = Stalla.getSelectedItemPosition() + 1;
-        int perfil = Sperfiles.getSelectedItemPosition() + 1;
+        String nombre = eNombre.getText().toString();
+        int color = sColor.getSelectedItemPosition() + 1;
+        int tipo = sTipo.getSelectedItemPosition() + 1;
+        int talla = sTalla.getSelectedItemPosition() + 1;
+        int perfil = sPerfiles.getSelectedItemPosition() + 1;
 
         GestorBDPrendas.CambiarVisibilidadPrenda(this, prenda.id);
         //Esto peta porque lo ha modificado el otro grupo, lo dejo así de momento :D
@@ -184,18 +184,18 @@ public class Modificar_Prenda extends AppCompatActivity {
         Intent mIntent = getIntent();
         int id = mIntent.getIntExtra("intVariableName", 0);
 
-        GestorBD.fotoActual = GestorBD.get_foto_de_prenda(this, id);
+        GestorBDFotos.fotoActual = GestorBD.get_foto_de_prenda(this, id);
 
-        prenda = GestorBD.Obtener_Prenda(this, id);
+        prenda = GestorBDPrendas.Obtener_Prenda(this, id);
 
         prenda.id = id;
 
-        Enombre.setText(prenda.nombre);
-        Scolor.setSelection(GestorBD.get_id_tabla(this, "color", prenda.color) - 1);
-        Stipo.setSelection(GestorBD.get_id_tabla(this, "tipo", prenda.tipo) - 1);
-        Stalla.setSelection(GestorBD.get_id_tabla(this, "talla", prenda.talla) - 1);
-        Sperfiles.setSelection(GestorBD.getIdPerfil() - 1);
-        cargar_foto(GestorBD.fotoActual);
+        eNombre.setText(prenda.nombre);
+        sColor.setSelection(GestorBD.get_id_tabla(this, "color", prenda.color) - 1);
+        sTipo.setSelection(GestorBD.get_id_tabla(this, "tipo", prenda.tipo) - 1);
+        sTalla.setSelection(GestorBD.get_id_tabla(this, "talla", prenda.talla) - 1);
+        sPerfiles.setSelection(GestorBD.getIdPerfil() - 1);
+        cargar_foto(GestorBDFotos.fotoActual);
     }
 
     protected void cargar_foto(int idfoto){
