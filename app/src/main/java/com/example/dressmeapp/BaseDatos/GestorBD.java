@@ -263,8 +263,8 @@ public class GestorBD {
      *                  (siempre lo será en el historial)
      * @param id_perfil El ID del perfil que tendrá la prenda.
      */
-    @SuppressLint("DefaultLocale")
-    public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil, int foto) {
+   // @SuppressLint("DefaultLocale")
+   // public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil, int foto) {
  /*   @SuppressLint("DefaultLocale")
     public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
 
