@@ -25,11 +25,11 @@ public class ConfiguracionContraseniaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion_contrasenia);
         getSupportActionBar().hide();
-        enlazaControles();
+        enlaza_controles();
     }
 
 
-    private void enlazaControles(){
+    private void enlaza_controles(){
 
         contraseniaAntigua = findViewById(R.id.contraseniaAntigua);
         nuevaContrasenia = findViewById(R.id.nuevaContrasenia);
@@ -40,12 +40,12 @@ public class ConfiguracionContraseniaActivity extends AppCompatActivity {
         Button botonActualizar = findViewById(R.id.botonActualizar);
         botonActualizar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                UpdatePass();
+                update_pass();
             }
         });
 
     }
-    private void UpdatePass(){
+    private void update_pass(){
 
         String antiguaPass = contraseniaAntigua.getText().toString();
         String nuevaPass = nuevaContrasenia.getText().toString();
