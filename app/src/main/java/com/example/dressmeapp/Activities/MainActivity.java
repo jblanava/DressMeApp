@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        enlazarControles();
+        enlazar_controles();
     }
 
-    private void enlazarControles() {
+    private void enlazar_controles() {
 
         textError = findViewById(R.id.textError);
         textError.setText("");
@@ -48,18 +48,18 @@ public class MainActivity extends AppCompatActivity {
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                irARegistro();
+                ir_a_registro();
             }
         });
     }
 
-    private void irAMenuPrincipal() {
+    private void ir_a_menu_principal() {
 
         Intent nuevaActividad = new Intent(this, MenuPrincipalActivity.class);
         startActivity(nuevaActividad);
         finish();
     }
-    private void irARegistro(){
+    private void ir_a_registro(){
         Intent nuevaActividad = new Intent(this, RegistroActivity.class);
         startActivity(nuevaActividad);
     }
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (ok) {
             GestorBD.setIdPerfil(GestorBDPerfil.IdPerfilAsociado(getApplicationContext(), usuario, pass));
-            irAMenuPrincipal();
+            ir_a_menu_principal();
         } else {
             textError.setText(error);
         }
