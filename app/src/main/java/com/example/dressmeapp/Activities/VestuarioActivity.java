@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.Objetos.PrendaAdapter;
 import com.example.dressmeapp.Objetos.RecyclerViewOnItemClickListener;
@@ -168,7 +169,7 @@ public class VestuarioActivity extends AppCompatActivity {
     void mostrar_prendas() {
         listaPrendas.removeAllViews();
 
-        final List<Prenda> prendas = GestorBD.PrendasVisibles(this, this.busqueda, this.ordenacion);
+        final List<Prenda> prendas = GestorBDPrendas.PrendasVisibles(this, this.busqueda, this.ordenacion);
 
         final Context a = this;
 
