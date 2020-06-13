@@ -4,16 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.Objetos.ColorAdapter;
 import com.example.dressmeapp.Objetos.RecyclerViewOnItemClickListener;
 import com.example.dressmeapp.Objetos.TallaAdapter;
 import com.example.dressmeapp.R;
@@ -29,7 +25,7 @@ public class CambioTallasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cambio_tallas);
         getSupportActionBar().hide();
-        enlazarControles();
+        enlazar_controles();
     }
 
 
@@ -39,22 +35,22 @@ public class CambioTallasActivity extends AppCompatActivity {
 
         listaTallas.removeAllViews();
 
-        cargarTallas();
+        cargar_tallas();
     }
 
-    private void enlazarControles() {
+    private void enlazar_controles() {
         listaTallas = findViewById(R.id.lista_tallas);
 
         bAddTalla=findViewById(R.id.bAddTalla);
         bAddTalla.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                aniadirTalla();
+                aniadir_talla();
             }
         });
     }
 
-    void cargarTallas() {
+    void cargar_tallas() {
         final List<String> tallas = GestorBD.get_nombres_tabla(this, "talla");
 
         listaTallas.setAdapter(new TallaAdapter(tallas, new RecyclerViewOnItemClickListener() {
@@ -67,7 +63,7 @@ public class CambioTallasActivity extends AppCompatActivity {
         listaTallas.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void aniadirTalla(){
+    private void aniadir_talla(){
         Intent nuevaTalla = new Intent(this,AniadirTallaActivity.class);
         startActivity(nuevaTalla);
     }
