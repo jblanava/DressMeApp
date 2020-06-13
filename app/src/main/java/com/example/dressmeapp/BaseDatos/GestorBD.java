@@ -80,14 +80,14 @@ public class GestorBD {
     }
 
 
-    /**
-     * Comprueba si un string corresponde a un nombre de perfil existente.
-     *
-     * @param context El contexto en el que comprobar.
-     * @param nombre  El nombre a buscar
-     * @return true sii el nombre corresponde a algún perfil
-     */
-    public static boolean UsuarioEstaEnBD(Context context, String nombre) {
+       /**
+        * Comprueba si un string corresponde a un nombre de perfil existente.
+        *
+        * @param context El contexto en el que comprobar.
+        * @param //nombre  El nombre a buscar
+        * @return true sii el nombre corresponde a algún perfil
+        */
+  /*  public static boolean UsuarioEstaEnBD(Context context, String nombre) {
         // clase Registro
         String sentenciaSQL;
         sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE='" + nombre + "'";
@@ -108,7 +108,7 @@ public class GestorBD {
         return resultado;
 
     }
-
+*/
     /**
      * Devuelve el ID de un perfil dado su nombre y contraseña.
      *
@@ -117,7 +117,7 @@ public class GestorBD {
      * @param password La contraseña cuyo ID buscar
      * @return El ID del perfil definido, o 0 si no existe un perfil con los datos dados
      */
-    public static int IdPerfilAsociado(Context context, String usuario, String password) {
+  /*  public static int IdPerfilAsociado(Context context, String usuario, String password) {
 
         int id = 0;
         String sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE ='" + usuario + "' AND CONTRASENIA ='" + password + "'";
@@ -138,7 +138,7 @@ public class GestorBD {
         cursor.close();
         return id;
     }
-
+*/
     /**
      * Comprueba si el par (nombre de perfil, contraseña) dado corresponde a un usuario.
      *
@@ -147,7 +147,7 @@ public class GestorBD {
      * @param password La contraseña del perfil a comprobar.
      * @return true sii el par (nombre de perfil, contraseña) corresponden a un usuario.
      */
-    public static boolean PassCorrecta(Context contexto, String usuario, String password) {
+  /*  public static boolean PassCorrecta(Context contexto, String usuario, String password) {
 
         boolean encontrado;
 
@@ -162,15 +162,15 @@ public class GestorBD {
 
         return encontrado;
     }
-
+*/
     /**
      * Crea un nuevo perfil.
      *
-     * @param contexto    El contexto en el que crear el perfil
-     * @param usuario     El nombre del perfil
-     * @param contrasenia La contraseña para el perfil.
+     * @param //contexto    El contexto en el que crear el perfil
+     * @param //usuario     El nombre del perfil
+     * @param //contrasenia La contraseña para el perfil.
      */
-    public static int CrearPerfil(Context contexto, String usuario, String contrasenia) {
+/*    public static int CrearPerfil(Context contexto, String usuario, String contrasenia) {
         int id = obtener_id_maximo(contexto, "perfil");
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE,  CONTRASENIA) VALUES (";
@@ -261,7 +261,7 @@ public class GestorBD {
      *                  (siempre lo será en el historial)
      * @param id_perfil El ID del perfil que tendrá la prenda.
      */
-    @SuppressLint("DefaultLocale")
+ /*   @SuppressLint("DefaultLocale")
     public static int crearPrenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil) {
 
         int id = obtener_id_maximo(contexto, "prenda");
@@ -336,7 +336,7 @@ public class GestorBD {
      * @param contexto El contexto a usar.
      * @param idPrenda El ID de la prenda a borrar.
      */
-    public static void CambiarVisibilidadPrenda(Context contexto, int idPrenda) { // este metodo es para cambiar la visibilidad, pero la prenda se mantiene en la base de datos
+ /*   public static void CambiarVisibilidadPrenda(Context contexto, int idPrenda) { // este metodo es para cambiar la visibilidad, pero la prenda se mantiene en la base de datos
 
         String SentenciaSQL;
         SentenciaSQL = "UPDATE PRENDA SET ";
@@ -350,14 +350,16 @@ public class GestorBD {
         baseDatos.close();
         base.close();
     }
+*/
 
+ /*
     /**
      * Borra definitivamente la prenda indicada
      *
      * @param contexto El contexto a usar.
      * @param id       El ID de la prenda que quieres borrar
      */
-    public static void borrarPrenda(Context contexto, int id) {
+ /*   public static void borrarPrenda(Context contexto, int id) {
         String SentenciaSQL;
         SentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + id;
 
@@ -409,7 +411,7 @@ public class GestorBD {
         base.close();
         cursor.close();
         return p;
-    }
+    } */
 
 
     public static List<String> get_nombres_tabla(Context context, String tabla)
@@ -460,7 +462,7 @@ public class GestorBD {
         return id;
     }
 
-    private static List<Integer> get_ids_tabla(Context context, String tabla)
+    public static List<Integer> get_ids_tabla(Context context, String tabla)
     {
         String sentenciaSQL = "SELECT ID FROM " + tabla.toUpperCase();
 
@@ -487,8 +489,8 @@ public class GestorBD {
         return res;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void Modificar_Prenda(Context context, Prenda p) {
+    //@RequiresApi(api = Build.VERSION_CODES.N)
+  /*  public static void Modificar_Prenda(Context context, Prenda p) {
         CambiarVisibilidadPrenda(context, p.id);
 
         int color = GestorBD.get_id_tabla(context, "color", p.color);
@@ -938,13 +940,13 @@ public class GestorBD {
         return resultado;
     }
 
-
+    */
 
     /*********************************************************************************************************/
                         /** Fotos **/
      /*********************************************************************************************************/
 
-     public static void guardarFoto(Context context, byte [] img, String id_activo){
+ /*    public static void guardarFoto(Context context, byte [] img, String id_activo){
 
          BaseDatos bdh = new BaseDatos(context, nombreBD);
          SQLiteDatabase bd;
@@ -1214,7 +1216,7 @@ public class GestorBD {
 
         return conjuntos;
     }
-
+*/
 
 
 

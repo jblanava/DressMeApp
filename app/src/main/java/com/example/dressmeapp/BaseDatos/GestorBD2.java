@@ -14,7 +14,7 @@ public class GestorBD2 {
     private static String nombreBD = "dressmeapp26.db"; // Antonio V. ha cambiado a la BD__17
                                                         // Antonio ha cambiado a BD 26
 
-    public static int crearColor(Context contexto, String nombre, String hex) {
+    /*public static int crearColor(Context contexto, String nombre, String hex) {
         int id = GestorBD.obtener_id_maximo(contexto, "color");
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO COLOR (ID, NOMBRE, HEX) VALUES (" + id + ", '" + nombre + "', '" + hex + "')";
@@ -26,17 +26,17 @@ public class GestorBD2 {
         baseDatos.close();
         base.close();
         return id;
-    }
+    }*/
 
     /**
      * Crea una nuevo par de colores que el algoritmo vestidor considera que
      * combinan bien.
-     * @param contexto El contexto a usar.
-     * @param color1 El primer color.
-     * @param color2 El segundo color.
+     * @param //contexto El contexto a usar.
+     * @param //color1 El primer color.
+     * @param //color2 El segundo color.
      * @return True si ha habido éxito (no se repite en la BD)
      */
-    public static boolean crearComboColor(Context contexto, int color1, int color2){
+    /*public static boolean crearComboColor(Context contexto, int color1, int color2){
 
         boolean repetido = false;
 
@@ -77,8 +77,8 @@ public class GestorBD2 {
 
         return !repetido;
 
-    }
-
+    } */
+/*
     public static List<ComboColorPrenda> getCombosColores(Context contexto) {
 
         List<ComboColorPrenda> lista = new ArrayList<>();
@@ -123,5 +123,5 @@ public class GestorBD2 {
         return lista;
 
     }
-
+    */
 }
