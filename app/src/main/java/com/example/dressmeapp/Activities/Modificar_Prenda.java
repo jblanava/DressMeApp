@@ -16,6 +16,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDFotos;
+import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
 
@@ -153,7 +155,7 @@ public class Modificar_Prenda extends AppCompatActivity {
 
     void eliminar()
     {
-        GestorBD.CambiarVisibilidadPrenda(this, prenda.id);
+        GestorBDPrendas.CambiarVisibilidadPrenda(this, prenda.id);
         finish();
     }
 
@@ -166,9 +168,9 @@ public class Modificar_Prenda extends AppCompatActivity {
         int talla = Stalla.getSelectedItemPosition() + 1;
         int perfil = Sperfiles.getSelectedItemPosition() + 1;
 
-        GestorBD.CambiarVisibilidadPrenda(this, prenda.id);
-
-        GestorBD.crearPrenda(this, nombre, color, tipo, talla, 1, perfil, GestorBD.fotoActual);
+        GestorBDPrendas.CambiarVisibilidadPrenda(this, prenda.id);
+        //Esto peta porque lo ha modificado el otro grupo, lo dejo así de momento :D
+        GestorBDPrendas.crearPrenda(this, nombre, color, tipo, talla, 1, perfil, GestorBDFotos.fotoActual);
 
         //GestorBD.Modificar_Prenda(this, prenda);
 

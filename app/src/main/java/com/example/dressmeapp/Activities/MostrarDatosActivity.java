@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDPerfil;
 import com.example.dressmeapp.R;
 
 public class MostrarDatosActivity extends AppCompatActivity {
@@ -47,7 +48,7 @@ public class MostrarDatosActivity extends AppCompatActivity {
     private void muestraDatos() {
 
         int id= GestorBD.getIdPerfil();
-        String user = GestorBD.getUser(contexto, id);
+        String user = GestorBDPerfil.getUser(contexto, id);
         String pass = "********";
         muestraUser.setText(user);
         muestraPassword.setText(pass);
@@ -56,8 +57,8 @@ public class MostrarDatosActivity extends AppCompatActivity {
     private void mostrarDatos_mas_pass() {
 
         int id= GestorBD.getIdPerfil();
-       String user = GestorBD.getUser(contexto, id);
-       String pass_mostrada = GestorBD.getPass(this, id);
+       String user = GestorBDPerfil.getUser(contexto, id);
+       String pass_mostrada = GestorBDPerfil.getPass(this, id);
 
        muestraUser.setText(user);
        muestraPassword.setText(pass_mostrada);

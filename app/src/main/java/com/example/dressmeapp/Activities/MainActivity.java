@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDPerfil;
 import com.example.dressmeapp.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -68,16 +69,16 @@ public class MainActivity extends AppCompatActivity {
         String error = "";
         boolean ok = true;
 
-        if (!GestorBD.UsuarioEstaEnBD(getApplicationContext(), usuario)) {
+        if (!GestorBDPerfil.UsuarioEstaEnBD(getApplicationContext(), usuario)) {
             ok = false;
             error = getString(R.string.login_incorrecto_usuario);
-        } else if (!GestorBD.PassCorrecta(getApplicationContext(), usuario, pass)) {
+        } else if (!GestorBDPerfil.PassCorrecta(getApplicationContext(), usuario, pass)) {
             ok = false;
             error = getString(R.string.login_incorrecto_pass);
         }
 
         if (ok) {
-            GestorBD.setIdPerfil(GestorBD.IdPerfilAsociado(getApplicationContext(), usuario, pass));
+            GestorBD.setIdPerfil(GestorBDPerfil.IdPerfilAsociado(getApplicationContext(), usuario, pass));
             irAMenuPrincipal();
         } else {
             textError.setText(error);

@@ -16,6 +16,8 @@ public class GestorBDFotos {
     /**
      * El ID del perfil que tiene la sesión abierta actualmente.
      */
+    public static int fotoActual = 1;
+
     public static int idPerfil;
 
     private static String nombreBD = "dressmeapp26.db";
