@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.BaseDatos.GestorBD2;
+
+import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.Objetos.ComboColorAdapter;
 import com.example.dressmeapp.Objetos.ComboColorPrenda;
 import com.example.dressmeapp.Objetos.RecyclerViewOnItemClickListener;
@@ -67,7 +68,7 @@ public class AniadirCombinacion extends AppCompatActivity {
         int c1 = Scolor1.getSelectedItemPosition() + 1;
         int c2 = Scolor2.getSelectedItemPosition() + 1;
 
-        if (GestorBD2.crearComboColor(this, c1, c2)) {
+        if (GestorBDPrendas.crearComboColor(this, c1, c2)) {
             Toast.makeText(AniadirCombinacion.this, "Se ha guardado la combinacion indicada", Toast.LENGTH_SHORT).show();
             mostrarCombos();
         } else {
@@ -88,7 +89,7 @@ public class AniadirCombinacion extends AppCompatActivity {
         comboColorView.removeAllViews();
 
         final Context context = this;
-        final List<ComboColorPrenda> combos = GestorBD2.getCombosColores(context);
+        final List<ComboColorPrenda> combos = GestorBDPrendas.getCombosColores(context);
 
         comboColorView.setAdapter(new ComboColorAdapter(combos, new RecyclerViewOnItemClickListener() {
             @Override

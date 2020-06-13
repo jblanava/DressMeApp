@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDPerfil;
 import com.example.dressmeapp.Objetos.Exportador;
 import com.example.dressmeapp.R;
 
@@ -96,7 +97,7 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     private void borrado_de_perfil() {
 
         int id= GestorBD.getIdPerfil();
-        GestorBD.BorrarPerfil(contexto, id);
+        GestorBDPerfil.BorrarPerfil(contexto, id);
 
         this.finish();
 

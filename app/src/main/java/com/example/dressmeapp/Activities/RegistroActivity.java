@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBD2;
+import com.example.dressmeapp.BaseDatos.GestorBDPerfil;
 import com.example.dressmeapp.Objetos.Importador;
 import com.example.dressmeapp.R;
 
@@ -71,7 +73,7 @@ public class RegistroActivity extends AppCompatActivity {
         if (nombre.isEmpty()) {
             ok = false;
             errores += getString(R.string.registro_error_sinnombre) + "\n";
-        } else if (GestorBD.UsuarioEstaEnBD(getApplicationContext(), nombre)) {
+        } else if (GestorBDPerfil.UsuarioEstaEnBD(getApplicationContext(), nombre)) {
             ok = false;
             errores += getString(R.string.registro_error_nombreusado) + "\n";
         }
@@ -87,8 +89,8 @@ public class RegistroActivity extends AppCompatActivity {
 
         // Mostrar errores o crear cuenta
         if (ok) {
-            GestorBD.CrearPerfil(getApplicationContext(), nombre, contrasenia);
-            GestorBD.setIdPerfil(GestorBD.IdPerfilAsociado(getApplicationContext(), nombre, contrasenia));
+            GestorBDPerfil.CrearPerfil(getApplicationContext(), nombre, contrasenia);
+            GestorBD.setIdPerfil(GestorBDPerfil.IdPerfilAsociado(getApplicationContext(), nombre, contrasenia));
             irAMenuPrincipal();
         } else {
             textError.setText(errores);

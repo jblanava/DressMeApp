@@ -34,11 +34,11 @@ public class Importador
 
             BufferedReader br = new BufferedReader(new FileReader(file));
 
-            Map<Integer, Integer> Mapaperfiles = new HashMap<>();
-            Map<Integer, Integer> Mapacolores = new HashMap<>();
-            Map<Integer, Integer> Mapatallas = new HashMap<>();
-            Map<Integer, Integer> Mapafotos = new HashMap<>();
-            Map<Integer, Integer> Mapaprendas = new HashMap<>();
+            Map<Integer, Integer> mapa_perfiles = new HashMap<>();
+            Map<Integer, Integer> mapa_colores = new HashMap<>();
+            Map<Integer, Integer> mapa_tallas = new HashMap<>();
+            Map<Integer, Integer> mapa_fotos = new HashMap<>();
+            Map<Integer, Integer> mapa_prendas = new HashMap<>();
 
             List<String> prefiles = importar(br);
             List<String> colores = importar(br);
@@ -48,14 +48,14 @@ public class Importador
             List<String> conjuntos = importar(br);
 
 
-            importar_fotos(context, Mapafotos);
+            importar_fotos(context, mapa_fotos);
 
             for(String s : prefiles)
             {
                 PerfilBD p = new PerfilBD(s);
                 int nuevoId = GestorBD.CrearPerfil(context, p.usuario, p.clave);
 
-                Mapaperfiles.put(p.id, nuevoId);
+                mapa_perfiles.put(p.id, nuevoId);
             }
 
             for(String s : colores)
@@ -64,13 +64,13 @@ public class Importador
 
                 if(c.id <= 12)
                 {
-                    Mapacolores.put(c.id, c.id);
+                    mapa_colores.put(c.id, c.id);
                     continue; // Los primeros 12 son los que vienen por defecto y me los salto
                 }
 
                 int nuevoId = GestorBD2.crearColor(context, c.nombre, c.hex);
 
-                Mapacolores.put(c.id, nuevoId);
+                mapa_colores.put(c.id, nuevoId);
             }
 
             for(String s : combos)
@@ -85,13 +85,13 @@ public class Importador
 
                 if(t.id <= 6)
                 {
-                    Mapatallas.put(t.id, t.id);
+                    mapa_tallas.put(t.id, t.id);
                     continue; // Las primeras 6 son las que vienen por defecto y me las salto
                 }
 
                 int nuevoId = GestorBD.CrearTalla(context, t.nombre);
 
-                Mapatallas.put(t.id, nuevoId);
+                mapa_tallas.put(t.id, nuevoId);
             }
 
 
@@ -100,10 +100,10 @@ public class Importador
                 PrendaBD p = new PrendaBD(s);
 
 
-                int nuevoId = GestorBD.crearPrenda(context, p.nombre, Mapacolores.get(p.color), p.tipo,
-                        Mapatallas.get(p.talla), p.visible, Mapaperfiles.get(p.perfil), Mapafotos.get(p.foto));
+                int nuevoId = GestorBD.crearPrenda(context, p.nombre, mapa_colores.get(p.color), p.tipo,
+                        mapa_tallas.get(p.talla), p.visible, mapa_perfiles.get(p.perfil), mapa_fotos.get(p.foto));
 
-                Mapaprendas.put(p.id, nuevoId);
+                mapa_prendas.put(p.id, nuevoId);
             }
 
             for(String s : conjuntos)
@@ -113,7 +113,7 @@ public class Importador
 
                 for(int i : p.prendas)
                 {
-                    c.add(Mapaprendas.get(i));
+                    c.add(mapa_prendas.get(i));
                 }
 
                 GestorBD.addConjunto(context, c, p.favorito);

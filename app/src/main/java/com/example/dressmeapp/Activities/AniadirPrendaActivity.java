@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.*;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.R;
 
 import java.util.List;
@@ -98,7 +99,7 @@ public class AniadirPrendaActivity extends AppCompatActivity {
         int tipo = Stipo.getSelectedItemPosition() + 1;
         int talla = Stalla.getSelectedItemPosition() + 1;
 
-        GestorBD.crearPrenda(this, nombre, color, tipo, talla, 1, GestorBD.getIdPerfil());
+        GestorBDPrendas.crearPrenda(this, nombre, color, tipo, talla, 1, GestorBD.getIdPerfil());
 
         finish();
     }
