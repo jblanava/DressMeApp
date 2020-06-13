@@ -53,7 +53,7 @@ public class Modificar_Prenda extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        cargar_foto(GestorBD.fotoActual);
+        cargar_foto(GestorBDFotos.fotoActual);
     }
 
     void enlazar_controles() {// Enlaza los controles y rellena los Spinner con la lista de opciones
@@ -184,9 +184,9 @@ public class Modificar_Prenda extends AppCompatActivity {
         Intent mIntent = getIntent();
         int id = mIntent.getIntExtra("intVariableName", 0);
 
-        GestorBD.fotoActual = GestorBD.get_foto_de_prenda(this, id);
+        GestorBDFotos.fotoActual = GestorBD.get_foto_de_prenda(this, id);
 
-        prenda = GestorBD.Obtener_Prenda(this, id);
+        prenda = GestorBDPrendas.Obtener_Prenda(this, id);
 
         prenda.id = id;
 
@@ -195,7 +195,7 @@ public class Modificar_Prenda extends AppCompatActivity {
         Stipo.setSelection(GestorBD.get_id_tabla(this, "tipo", prenda.tipo) - 1);
         Stalla.setSelection(GestorBD.get_id_tabla(this, "talla", prenda.talla) - 1);
         Sperfiles.setSelection(GestorBD.getIdPerfil() - 1);
-        cargar_foto(GestorBD.fotoActual);
+        cargar_foto(GestorBDFotos.fotoActual);
     }
 
     protected void cargar_foto(int idfoto){
