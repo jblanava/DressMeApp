@@ -13,12 +13,11 @@ import com.example.dressmeapp.R;
 
 import java.util.Random;
 
-
 public class BaseDatos extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
 
-    public static String nombreBD = "dressmeapp29.db";
+    public static String nombreBD = "dressmeapp30.db";
     public static int idPerfil;
 
     public BaseDatos(Context contexto, String nombrebd) {

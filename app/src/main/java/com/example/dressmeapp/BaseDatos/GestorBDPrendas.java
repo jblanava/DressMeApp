@@ -24,12 +24,6 @@ public class GestorBDPrendas {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp30.db";
-
-    public static void seleccionarBD(String nombreBD) {
-        GestorBDPrendas.nombreBD = nombreBD;
-    }
-
     public static int getIdPerfil() {
         return idPerfil;
     }
@@ -57,7 +51,7 @@ public class GestorBDPrendas {
         sentenciaSQL = String.format("INSERT INTO PRENDA VALUES (%d, '%s', %d, %d, %d, %d, %d, %d)",
                 id, nombre, color, tipo, talla, visible, id_perfil, foto);
 
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
@@ -97,7 +91,7 @@ public class GestorBDPrendas {
         Cursor cursor;
         List<Prenda> res = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -135,7 +129,7 @@ public class GestorBDPrendas {
         SentenciaSQL += "VISIBLE = '0' ";
         SentenciaSQL += "WHERE ID = " + idPrenda;
 
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(SentenciaSQL);
@@ -153,7 +147,7 @@ public class GestorBDPrendas {
         String SentenciaSQL;
         SentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + id;
 
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(SentenciaSQL);
@@ -164,7 +158,7 @@ public class GestorBDPrendas {
     public static void BorrarConjunto(Context context, int idConjunto) {
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM CONJUNTO WHERE ID = " + idConjunto;
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
@@ -179,7 +173,7 @@ public class GestorBDPrendas {
         String sentenciaSQL = "SELECT * FROM COLOR";
         Cursor cursor;
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -208,7 +202,7 @@ public class GestorBDPrendas {
         sentenciaSQL = "INSERT INTO TALLA (ID, NOMBRE) VALUES (";
         sentenciaSQL += id + ",'" + talla.trim() + "')";
 
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
@@ -226,7 +220,7 @@ public class GestorBDPrendas {
         sentenciaSQL += "WHERE PRENDA.ID = " + id + " ";
         sentenciaSQL += "AND COLOR.ID = PRENDA.COLOR AND TIPO.ID = PRENDA.TIPO AND TALLA.ID = PRENDA.TALLA ";
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -265,7 +259,7 @@ public class GestorBDPrendas {
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO COLOR (ID, NOMBRE, HEX) VALUES (" + id + ", '" + nombre + "', '" + hex + "')";
 
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
@@ -286,7 +280,7 @@ public class GestorBDPrendas {
 
         boolean repetido = false;
 
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatosLeer = base.getReadableDatabase();
 
         // Comprobar si se repite
@@ -335,7 +329,7 @@ public class GestorBDPrendas {
         sentenciaSQL += "WHERE C1.ID = CC.COLOR1 AND C2.ID = CC.COLOR2 AND C1.ID <= C2.ID ";
         sentenciaSQL += "ORDER BY C1.NOMBRE, C2.NOMBRE";
 
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -377,7 +371,7 @@ public class GestorBDPrendas {
         Cursor cursor;
         List<Integer> colores = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);

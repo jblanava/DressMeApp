@@ -20,10 +20,6 @@ public class GestorBDFotos {
 
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp30.db";
-
-    public static void seleccionarBD(String nombreBD) { GestorBDFotos.nombreBD = nombreBD; }
-
     public static int getIdPerfil() {
         return idPerfil;
     }
@@ -34,7 +30,7 @@ public class GestorBDFotos {
 
     public static void guardarFoto(Context context, byte [] img, String id_activo){
 
-        BaseDatos bdh = new BaseDatos(context, nombreBD);
+        BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase bd;
         bd = bdh.getWritableDatabase();
 
@@ -50,7 +46,7 @@ public class GestorBDFotos {
     public static void eliminar_foto_antigua(Context context, String id_activo){
         String vsql = "DELETE FROM FOTOS WHERE ID = " + id_activo;
 
-        BaseDatos bdh = new BaseDatos(context, nombreBD);
+        BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase bd;
         bd = bdh.getWritableDatabase();
         bd.execSQL(vsql);
@@ -62,7 +58,7 @@ public class GestorBDFotos {
     public static void cargarFoto(Context context, int id_modificar, ImageView imagen){
         String vsql = "SELECT * FROM FOTOS WHERE ID = " + id_modificar;
 
-        BaseDatos bdh =  new BaseDatos(context, nombreBD);
+        BaseDatos bdh =  new BaseDatos(context, BaseDatos.nombreBD);
 
         SQLiteDatabase bd = bdh.getReadableDatabase();
         Cursor rs = bd.rawQuery(vsql,null);
@@ -93,7 +89,7 @@ public class GestorBDFotos {
     public static Bitmap obtenerFoto(Context context, String id_modificar){
         String vsql = "SELECT * FROM FOTOS WHERE ID = " + id_modificar;
 
-        BaseDatos bdh =  new BaseDatos(context, nombreBD);
+        BaseDatos bdh =  new BaseDatos(context, BaseDatos.nombreBD);
 
         SQLiteDatabase bd = bdh.getReadableDatabase();
         Cursor rs = bd.rawQuery(vsql,null);

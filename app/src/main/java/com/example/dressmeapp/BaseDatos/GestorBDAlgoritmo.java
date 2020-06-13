@@ -23,12 +23,6 @@ public class GestorBDAlgoritmo {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp30.db";
-
-    public static void seleccionarBD(String nombreBD) {
-        GestorBDAlgoritmo.nombreBD = nombreBD;
-    }
-
     public static int getIdPerfil() {
         return idPerfil;
     }
@@ -104,7 +98,7 @@ public class GestorBDAlgoritmo {
 
 
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         Cursor cursor;
@@ -154,7 +148,7 @@ public class GestorBDAlgoritmo {
         Cursor cursor;
         int res = -1;
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -172,7 +166,7 @@ public class GestorBDAlgoritmo {
         Cursor cursor;
         int res = -1;
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -194,7 +188,7 @@ public class GestorBDAlgoritmo {
         String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + idPerfil;
         Cursor cursor;
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -240,7 +234,7 @@ public class GestorBDAlgoritmo {
         String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + idPerfil + " AND FAVORITO=1";
         Cursor cursor;
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -338,7 +332,7 @@ public class GestorBDAlgoritmo {
             sentenciaSQL = "INSERT INTO CONJUNTO (ID, ABRIGO, SUDADERA, CAMISETA, PANTALON, ZAPATO, COMPLEMENTO, ID_PERFIL, FAVORITO, NOMBRE_EVENTO) VALUES ('";
             sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "', '" + idPerfil + "', '" + flag + "', '"+ conj.getNombreCjto() +"' )";
 
-            BaseDatos base = new BaseDatos(contexto, nombreBD);
+            BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
             SQLiteDatabase baseDatos;
             baseDatos = base.getWritableDatabase();
             baseDatos.execSQL(sentenciaSQL);

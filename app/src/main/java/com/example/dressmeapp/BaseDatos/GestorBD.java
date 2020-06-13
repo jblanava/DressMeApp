@@ -38,22 +38,13 @@ public class GestorBD {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp30.db"; // Antonio V. ha cambiado a la BD__17
-                                                        // Maria ha cambiado a BD 22
-
-
-    public static void seleccionarBD(String nombreBD) {
-        GestorBD.nombreBD = nombreBD;
-    }
-
-
     public static int obtener_id_maximo(Context context, String tabla)
     {
         int resultado = 0;
         String sentenciaSQL = "SELECT MAX(ID) AS MAXID FROM " + tabla.trim().toUpperCase();
 
         Cursor cursor;
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -422,7 +413,7 @@ public class GestorBD {
 
     public static int get_foto_de_prenda(Context contexto, int idPrenda) {
         String sentenciaSQL =  "SELECT FOTO FROM PRENDA WHERE ID=" + idPrenda;
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -447,7 +438,7 @@ public class GestorBD {
         Cursor cursor;
         List<String> res = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -472,7 +463,7 @@ public class GestorBD {
         String sentenciaSQL = String.format("SELECT ID FROM %s WHERE UPPER(NOMBRE) LIKE '%s'", tabla.toUpperCase(), nombre.toUpperCase());
         Cursor cursor;
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
 
@@ -495,7 +486,7 @@ public class GestorBD {
         Cursor cursor;
         List<Integer> res = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -978,7 +969,7 @@ public class GestorBD {
 
         int id = obtener_id_maximo(context, "FOTOS");
 
-        BaseDatos bdh = new BaseDatos(context, nombreBD);
+        BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase bd;
         bd = bdh.getWritableDatabase();
 
@@ -997,7 +988,7 @@ public class GestorBD {
     public static void eliminar_foto_antigua(Context context, String id_activo){
         String vsql = "DELETE FROM FOTOS WHERE ID = " + id_activo;
 
-        BaseDatos bdh = new BaseDatos(context, nombreBD);
+        BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase bd;
         bd = bdh.getWritableDatabase();
         bd.execSQL(vsql);
@@ -1009,7 +1000,7 @@ public class GestorBD {
     public static void cargarFoto(Context context, int id_modificar, ImageView imagen){
         String vsql = "SELECT FOTO FROM FOTOS WHERE ID = " + id_modificar;
 
-        BaseDatos bdh =  new BaseDatos(context, nombreBD);
+        BaseDatos bdh =  new BaseDatos(context, BaseDatos.nombreBD);
 
         SQLiteDatabase bd = bdh.getReadableDatabase();
         Cursor rs = bd.rawQuery(vsql,null);
@@ -1040,7 +1031,7 @@ public class GestorBD {
     public static Bitmap obtenerFoto(Context context, String id_modificar){
         String vsql = "SELECT * FROM FOTOS WHERE ID = " + id_modificar;
 
-        BaseDatos bdh =  new BaseDatos(context, nombreBD);
+        BaseDatos bdh =  new BaseDatos(context, BaseDatos.nombreBD);
 
         SQLiteDatabase bd = bdh.getReadableDatabase();
         Cursor rs = bd.rawQuery(vsql,null);
@@ -1069,7 +1060,7 @@ public class GestorBD {
         Cursor cursor;
         List<ColorBD> colores = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -1098,7 +1089,7 @@ public class GestorBD {
         Cursor cursor;
         List<ComboColorBD> combos = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -1128,7 +1119,7 @@ public class GestorBD {
         Cursor cursor;
         List<PerfilBD> perfiles = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -1158,7 +1149,7 @@ public class GestorBD {
         Cursor cursor;
         List<PrendaBD> prendas = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -1192,7 +1183,7 @@ public class GestorBD {
         Cursor cursor;
         List<TallaBD> tallas = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -1222,7 +1213,7 @@ public class GestorBD {
         Cursor cursor;
         List<ConjuntoBD> conjuntos = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -1257,7 +1248,7 @@ public class GestorBD {
         Cursor cursor;
         List<FotoBD> fotos = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);

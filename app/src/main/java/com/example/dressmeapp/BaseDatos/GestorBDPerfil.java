@@ -12,12 +12,6 @@ public class GestorBDPerfil {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp30.db";
-
-    public static void seleccionarBD(String nombreBD) {
-        GestorBDPerfil.nombreBD = nombreBD;
-    }
-
     public static int getIdPerfil() {
         return idPerfil;
     }
@@ -37,7 +31,7 @@ public class GestorBDPerfil {
         // clase Registro
         String sentenciaSQL;
         sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE='" + nombre + "'";
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -69,7 +63,7 @@ public class GestorBDPerfil {
         String sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE ='" + usuario + "' AND CONTRASENIA ='" + password + "'";
 
         Cursor cursor;
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -99,7 +93,7 @@ public class GestorBDPerfil {
 
         String sentenciaSQL = "SELECT * FROM PERFIL WHERE NOMBRE='"
                 + usuario + "' AND CONTRASENIA='" + password + "'";
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         Cursor cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -122,7 +116,7 @@ public class GestorBDPerfil {
         sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE,  CONTRASENIA) VALUES (";
         sentenciaSQL += id + ",'" + usuario.trim() + "', '" + contrasenia.trim() + "')";
 
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
@@ -138,7 +132,7 @@ public class GestorBDPerfil {
         String borrarPrendas = "DELETE FROM PRENDA WHERE ID_PERFIL = " + id;
         String borrarConjuntos = "DELETE FROM CONJUNTO WHERE ID_PERFIL = " + id;
 
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
 
@@ -154,7 +148,7 @@ public class GestorBDPerfil {
 
         String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
                 + password + "' WHERE ID=" + idPerfil;
-        BaseDatos base = new BaseDatos(contexto, nombreBD);
+        BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
@@ -166,7 +160,7 @@ public class GestorBDPerfil {
     public static String getUser(Context context, int idPerfil) {
         String SentenciaSQL = "SELECT NOMBRE FROM PERFIL WHERE ID=" + idPerfil;
         String res = "";
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getWritableDatabase();
         Cursor cursor = baseDatos.rawQuery(SentenciaSQL, null);
         if (cursor.moveToFirst()) res = LibreriaBD.Campo(cursor, "NOMBRE");
@@ -179,7 +173,7 @@ public class GestorBDPerfil {
     public static String getPass(Context context, int idPerfil) {
         String SentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE ID=" + idPerfil;
         String res = "";
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getWritableDatabase();
         Cursor cursor = baseDatos.rawQuery(SentenciaSQL, null);
         if (cursor.moveToFirst()) res = LibreriaBD.Campo(cursor, "CONTRASENIA");
