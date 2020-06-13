@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.dressmeapp.BaseDatos.GestorBD;
+
+import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.R;
 
 public class AniadirTallaActivity extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class AniadirTallaActivity extends AppCompatActivity {
 
     private void guardarTalla() {
         String talla = tallaNueva.getText().toString();
-        GestorBD.CrearTalla(this, talla);
+        GestorBDPrendas.CrearTalla(this, talla);
         finish();
     }
 }

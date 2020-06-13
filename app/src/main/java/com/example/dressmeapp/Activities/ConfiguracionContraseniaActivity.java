@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDPerfil;
 import com.example.dressmeapp.R;
 
 public class ConfiguracionContraseniaActivity extends AppCompatActivity {
@@ -61,14 +62,14 @@ public class ConfiguracionContraseniaActivity extends AppCompatActivity {
             // La nueva contraseña no debe ser vacía
             ok = false;
             errores += "Introduzca una nueva contraseña";
-        } else if (!antiguaPass.equals(GestorBD.getPass(this, GestorBD.getIdPerfil()))) {
+        } else if (!antiguaPass.equals(GestorBDPerfil.getPass(this, GestorBD.getIdPerfil()))) {
             // Hay que introducir la contraseña antigua para cambiarla
             ok = false;
             errores += "Escriba la contraseña antigua para cambiarla";
         }
 
         if (ok) {
-            GestorBD.ActualizarPerfil(getApplicationContext(), GestorBD.getIdPerfil(), nuevaContrasenia.getText().toString());
+            GestorBDPerfil.ActualizarPerfil(getApplicationContext(), GestorBD.getIdPerfil(), nuevaContrasenia.getText().toString());
 
             Intent salto = new Intent(this, MenuPrincipalActivity.class);
             startActivity(salto);
