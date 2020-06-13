@@ -19,10 +19,10 @@ public class AniadirTallaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aniadir_talla);
         getSupportActionBar().hide();
-        enlazarControles();
+        enlazar_controles();
     }
 
-    private void enlazarControles() {
+    private void enlazar_controles() {
 
         tallaNueva = findViewById(R.id.recogeTalla);
 
@@ -30,12 +30,12 @@ public class AniadirTallaActivity extends AppCompatActivity {
         bGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                guardarTalla();
+                guardar_talla();
             }
         });
     }
 
-    private void guardarTalla() {
+    private void guardar_talla() {
         String talla = tallaNueva.getText().toString();
         GestorBDPrendas.CrearTalla(this, talla);
         finish();

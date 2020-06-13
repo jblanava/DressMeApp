@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
+import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.Debug.Debug;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
@@ -46,7 +48,7 @@ public class HistorialActivity extends AppCompatActivity {
     }
 
     private void hagoCosas() {
-        List<Conjunto> listaConjuntos= GestorBD.ConjuntosEnBD(this);
+        List<Conjunto> listaConjuntos= GestorBDAlgoritmo.ConjuntosEnBD(this);
         Collections.reverse(listaConjuntos); // esto voltea la lista
 
         for(Conjunto c : listaConjuntos){
@@ -59,7 +61,7 @@ public class HistorialActivity extends AppCompatActivity {
             for(int j = 1; j < c.getSize(); j++){ // empezamos en 1, porque la pos 0 es para el propio ID del conjunto //
                 //Voy mostrando todas las prendas por pantalla
                 int idPrenda= c.obtenId(j);
-                Prenda prenda = GestorBD.Obtener_Prenda(this,idPrenda);
+                Prenda prenda = GestorBDPrendas.Obtener_Prenda(this,idPrenda);
                 metodoChavales(prenda);
             }
         }

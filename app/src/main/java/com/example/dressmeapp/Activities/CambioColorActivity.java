@@ -27,19 +27,19 @@ public class CambioColorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cambio_color);
-        enlazarControles();
+        enlazar_controles();
         getSupportActionBar().hide();
     }
 
-    private void enlazarControles() {
+    private void enlazar_controles() {
         listaColores = findViewById(R.id.listaColores);
-        mostrarColores();
+        mostrar_colores();
 
         Button btnNuevoColor = findViewById(R.id.btnNuevoColor);
         btnNuevoColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                irANuevoColor();
+                ir_a__nuevo_color();
             }
         });
     }
@@ -48,10 +48,10 @@ public class CambioColorActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         listaColores.removeAllViews();
-        mostrarColores();
+        mostrar_colores();
     }
 
-    private void mostrarColores() {
+    private void mostrar_colores() {
 
         final Context context = this;
         final List<ColorPrenda> colores = GestorBDPrendas.ObtenerColores(context);
@@ -67,7 +67,7 @@ public class CambioColorActivity extends AppCompatActivity {
 
     }
 
-    private void irANuevoColor() {
+    private void ir_a__nuevo_color() {
         Intent intent = new Intent(this, NuevoColorActivity.class);
         startActivity(intent);
     }
