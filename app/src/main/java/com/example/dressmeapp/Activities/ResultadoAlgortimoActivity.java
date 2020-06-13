@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
+import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
@@ -66,7 +68,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void aniadeAFavoritos() {
-        GestorBD.addConjunto(this, this.conjunto, 1);
+        GestorBDAlgoritmo.addConjunto(this, this.conjunto, 1);
         bFavoritos.setText("Conjunto añadido");
         Intent salto = new Intent(this, MenuPrincipalActivity.class);
         startActivity(salto);
@@ -80,7 +82,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
     }
 
     private void guardaConjunto() {
-        GestorBD.addConjunto(this,this.conjunto, 0);
+        GestorBDAlgoritmo.addConjunto(this,this.conjunto, 0);
         Intent salto = new Intent(this, MenuPrincipalActivity.class);
         startActivity(salto);
         this.finish();
@@ -100,7 +102,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
         while(conjunto == null)
         {
-            conjunto = GestorBD.get_conjunto_algoritmo(this, tiempo, actividad);
+            conjunto = GestorBDAlgoritmo.get_conjunto_algoritmo(this, tiempo, actividad);
             contador++;
 
             if(contador == 25)
@@ -118,7 +120,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
             if(idPrenda != -1)
             {
-                Prenda prenda = GestorBD.Obtener_Prenda(this, idPrenda);
+                Prenda prenda = GestorBDPrendas.Obtener_Prenda(this, idPrenda);
                 metodoChavales(prenda);
             }
         }
