@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
 import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
-import com.example.dressmeapp.Debug.Debug;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.R;
@@ -34,27 +32,27 @@ public class HistorialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial);
         getSupportActionBar().hide();
-        enlazaControles();
-        hagoCosas();
+        enlaza_controles();
+        mostrar_conjuntos();
 
 
     }
 
 
 
-    private void enlazaControles() {
+    private void enlaza_controles() {
         listaPrendas = findViewById(R.id.lista_prendas);
 
     }
 
-    private void hagoCosas() {
+    private void mostrar_conjuntos() {
         List<Conjunto> listaConjuntos= GestorBDAlgoritmo.ConjuntosEnBD(this);
         Collections.reverse(listaConjuntos); // esto voltea la lista
 
         for(Conjunto c : listaConjuntos){
 
             //Crear un text view, mostrarlo por pantalla
-            metodoMisPanas(c.getNombreCjto());
+            mostrar_conjunto(c.getNombreCjto());
             //Recorro el conjunto y muestro las prendas
 
 
@@ -62,7 +60,7 @@ public class HistorialActivity extends AppCompatActivity {
                 //Voy mostrando todas las prendas por pantalla
                 int idPrenda= c.obtenId(j);
                 Prenda prenda = GestorBDPrendas.Obtener_Prenda(this,idPrenda);
-                metodoChavales(prenda);
+                mostrar_prenda(prenda);
             }
         }
 
@@ -70,7 +68,7 @@ public class HistorialActivity extends AppCompatActivity {
     }
 
     @SuppressLint("DefaultLocale")
-    private void metodoMisPanas(String nombreConj) {
+    private void mostrar_conjunto(String nombreConj) {
         @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_conjunto_view, null);
 
         TextView conjunto = v.findViewById(R.id.conjuntoView);
@@ -78,7 +76,7 @@ public class HistorialActivity extends AppCompatActivity {
         listaPrendas.addView(v);
     }
 
-    void metodoChavales(final Prenda prenda)
+    void mostrar_prenda(final Prenda prenda)
     {
         if(prenda == null) return;      // TODO: porque cojones necesito esto aqui? PS: no quitar o peta el historial
 

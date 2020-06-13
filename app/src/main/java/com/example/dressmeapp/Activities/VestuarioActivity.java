@@ -1,25 +1,23 @@
 package com.example.dressmeapp.Activities;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.media.Image;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.content.Intent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
@@ -33,12 +31,11 @@ import java.util.List;
 
 public class VestuarioActivity extends AppCompatActivity {
 
-    EditText Ebusqueda;
+    EditText eBusqueda;
     Button bAnydir, bBuscar, bOrdenar, bAgrupar;
-    LinearLayout listaPrendas;
+    LinearLayout lista_prendas;
     Spinner sOrdenar, sAgrupar;
 
-    ImageView imagen;
 
 
     String busqueda = "";
@@ -46,8 +43,8 @@ public class VestuarioActivity extends AppCompatActivity {
     String agrupacion = "";
 
 
-    private final static String[] ordernarPor = {"Ordenar por:", "Nombre", "Color", "Tipo", "Talla"};
-    private final static String[] agruparPor = {"Agrupar por:", "Color", "Tipo", "Talla"};
+    private final static String[] ordernar_por = {"Ordenar por:", "Nombre", "Color", "Tipo", "Talla"};
+    private final static String[] agrupar_por = {"Agrupar por:", "Color", "Tipo", "Talla"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +59,7 @@ public class VestuarioActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        listaPrendas.removeAllViews();
+        lista_prendas.removeAllViews();
 
         mostrar_prendas();
     }
@@ -74,19 +71,19 @@ public class VestuarioActivity extends AppCompatActivity {
         bBuscar = findViewById(R.id.boton_buscar);
         bOrdenar = findViewById(R.id.boton_ordenar);
         bAgrupar = findViewById(R.id.boton_agrupar);
-        Ebusqueda = findViewById(R.id.editText_busqueda);
+        eBusqueda = findViewById(R.id.editText_busqueda);
 
 
-        listaPrendas = findViewById(R.id.lista_prendas);
+        lista_prendas = findViewById(R.id.lista_prendas);
 
 
-        ArrayAdapter<String> adapterOrden = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ordernarPor);
-        adapterOrden.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sOrdenar.setAdapter(adapterOrden);
+        ArrayAdapter<String> adapter_orden = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ordernar_por);
+        adapter_orden.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sOrdenar.setAdapter(adapter_orden);
 
-        ArrayAdapter<String> adapterAgrupar = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, agruparPor);
-        adapterAgrupar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sAgrupar.setAdapter(adapterAgrupar);
+        ArrayAdapter<String> adapter_agrupar = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, agrupar_por);
+        adapter_agrupar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sAgrupar.setAdapter(adapter_agrupar);
 
 
         bAnydir.setOnClickListener(new View.OnClickListener() {
@@ -124,14 +121,7 @@ public class VestuarioActivity extends AppCompatActivity {
     void ordenar() {
         int criterio = sOrdenar.getSelectedItemPosition();
 
-        if(criterio == 0)
-        {
-            ordenacion = "";
-        }
-        else
-        {
-            ordenacion = ordernarPor[criterio];
-        }
+        ordenacion = criterio == 0 ? "" : ordernar_por[criterio];
 
         mostrar_prendas();
     }
@@ -140,14 +130,7 @@ public class VestuarioActivity extends AppCompatActivity {
     void agrupar() {
         int criterio = sAgrupar.getSelectedItemPosition();
 
-        if(criterio == 0)
-        {
-            agrupacion = "";
-        }
-        else
-        {
-            agrupacion = agruparPor[criterio];
-        }
+        agrupacion = criterio == 0 ? "" : agrupar_por[criterio];
 
         mostrar_prendas();
     }
@@ -159,15 +142,15 @@ public class VestuarioActivity extends AppCompatActivity {
     }
 
     void buscar() {
-        quitarTeclado(Ebusqueda);
-        busqueda = Ebusqueda.getText().toString();
+        quitar_teclado(eBusqueda);
+        busqueda = eBusqueda.getText().toString();
         mostrar_prendas();
     }
 
 
     @SuppressLint("SetTextI18n")
     void mostrar_prendas() {
-        listaPrendas.removeAllViews();
+        lista_prendas.removeAllViews();
 
         final List<Prenda> prendas = GestorBDPrendas.PrendasVisibles(this, this.busqueda, this.ordenacion);
 
@@ -179,7 +162,7 @@ public class VestuarioActivity extends AppCompatActivity {
 
             for(String tag : tags)
             {
-                final List<Prenda> prendasConTag = new ArrayList<>();
+                final List<Prenda> prendas_con_tag = new ArrayList<>();
 
                 for (Prenda prenda : prendas)
                 {
@@ -187,26 +170,26 @@ public class VestuarioActivity extends AppCompatActivity {
                     {
                         if(prenda.color.equalsIgnoreCase(tag))
                         {
-                            prendasConTag.add(prenda);
+                            prendas_con_tag.add(prenda);
                         }
                     }
                     else if(agrupacion.equalsIgnoreCase("tipo"))
                     {
                         if(prenda.tipo.equalsIgnoreCase(tag))
                         {
-                            prendasConTag.add(prenda);
+                            prendas_con_tag.add(prenda);
                         }
                     }
                     else if(agrupacion.equalsIgnoreCase("talla"))
                     {
                         if(prenda.talla.equalsIgnoreCase(tag))
                         {
-                            prendasConTag.add(prenda);
+                            prendas_con_tag.add(prenda);
                         }
                     }
                 }
 
-                if(prendasConTag.size() == 0) continue;
+                if(prendas_con_tag.size() == 0) continue;
 
                 @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.activity_agrupar_view, null);
 
@@ -215,12 +198,12 @@ public class VestuarioActivity extends AppCompatActivity {
 
                 texto.setText(tag);
 
-                rv.setAdapter(new PrendaAdapter(prendasConTag, new RecyclerViewOnItemClickListener() {
+                rv.setAdapter(new PrendaAdapter(prendas_con_tag, new RecyclerViewOnItemClickListener() {
                     @Override
                     public void onClick(View v, int position) {
 
                         Intent modificar = new Intent(a, Modificar_Prenda.class);
-                        modificar.putExtra("intVariableName", prendasConTag.get(position).id);
+                        modificar.putExtra("intVariableName", prendas_con_tag.get(position).id);
                         startActivity(modificar);
                     }
                 }));
@@ -228,7 +211,7 @@ public class VestuarioActivity extends AppCompatActivity {
 
                 rv.setLayoutManager(new LinearLayoutManager(this));
 
-                listaPrendas.addView(view);
+                lista_prendas.addView(view);
             }
         }
         else
@@ -253,12 +236,12 @@ public class VestuarioActivity extends AppCompatActivity {
 
             rv.setLayoutManager(new LinearLayoutManager(this));
 
-            listaPrendas.addView(view);
+            lista_prendas.addView(view);
         }
 
     }
 
-    private void quitarTeclado(View v) {
+    private void quitar_teclado(View v) {
         InputMethodManager teclado = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         teclado.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
