@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDFotos;
 import com.example.dressmeapp.R;
 
 import java.io.ByteArrayOutputStream;
@@ -74,7 +75,7 @@ public class Fotos extends AppCompatActivity {
             bitmap .compress(Bitmap.CompressFormat.PNG, 100, bos);
             byte[] img = bos.toByteArray();
 
-            GestorBD.fotoActual = GestorBD.guardarFoto(this, img);
+            GestorBDFotos.fotoActual = GestorBD.guardarFoto(this, img);
 
             this.finish();
         }else{
