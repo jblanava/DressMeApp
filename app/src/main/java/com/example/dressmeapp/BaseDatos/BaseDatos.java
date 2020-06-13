@@ -1,9 +1,15 @@
 package com.example.dressmeapp.BaseDatos;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
+
+import com.example.dressmeapp.R;
 
 import java.util.Random;
 
@@ -30,6 +36,7 @@ public class BaseDatos extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6, 1, 0, \"Conjunto1\") ");
         db.execSQL("INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1, 1, 0, \"Conjunto2\") ");
+
     }
 
     private void crearPrendas(SQLiteDatabase db) {
@@ -44,7 +51,7 @@ public class BaseDatos extends SQLiteOpenHelper {
             int tipo = rng.nextInt(24) + 1;
             int talla = rng.nextInt(5) + 1;
 
-            @SuppressLint("DefaultLocale") String sentencia = String.format("INSERT INTO PRENDA VALUES (%d  , '%s', %d, %d, %d, 1, 1)", i, "Prueba" + i ,color, tipo, talla);
+            @SuppressLint("DefaultLocale") String sentencia = String.format("INSERT INTO PRENDA VALUES (%d, '%s', %d, %d, %d, 1, 1, 1)", i, "Prueba" + i ,color, tipo, talla);
             db.execSQL(sentencia);
         }
 
@@ -61,7 +68,7 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL(vsql);
 
         vsql = "CREATE TABLE \"PRENDA\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"NOMBRE\" VARCHAR(50) NOT NULL, \"COLOR\" INTEGER NOT NULL" +
-                ", \"TIPO\" INTEGER NOT NULL, \"TALLA\" INTEGER NOT NULL,\"VISIBLE\" INTEGER NOT NULL, \"ID_PERFIL\" INTEGER NOT NULL )";
+                ", \"TIPO\" INTEGER NOT NULL, \"TALLA\" INTEGER NOT NULL,\"VISIBLE\" INTEGER NOT NULL, \"ID_PERFIL\" INTEGER NOT NULL, \"FOTO\" INTEGER NOT NULL DEFAULT 1 )";
 
         db.execSQL(vsql);
 
@@ -80,7 +87,6 @@ public class BaseDatos extends SQLiteOpenHelper {
         vsql = "CREATE TABLE \"FOTOS\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL , \"FOTO\" BLOB) ";
 
         db.execSQL(vsql);
-
 
     }
 

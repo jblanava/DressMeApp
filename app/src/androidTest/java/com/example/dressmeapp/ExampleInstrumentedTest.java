@@ -33,7 +33,7 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
 
     private static Context appContext;
-    private static String nombreBaseDatos = "dressmeapp26.db";
+    private static String nombreBaseDatos = "dressmeapp27.db";
 
     @Before
     public void prepararTest() {

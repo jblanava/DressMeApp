@@ -142,7 +142,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         color.setText(prenda.color);
         tipo.setText(prenda.tipo);
         talla.setText(prenda.talla);
-        GestorBD.cargarFoto(this, String.valueOf(prenda.id),imagen);
+        GestorBD.cargarFoto(this, prenda.id,imagen);
 
         listaPrendas.addView(v);
     }

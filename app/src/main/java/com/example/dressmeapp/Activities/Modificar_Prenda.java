@@ -45,14 +45,13 @@ public class Modificar_Prenda extends AppCompatActivity {
         setContentView(R.layout.activity_modificar__prenda);
         getSupportActionBar().hide();
         enlazar_controles();
-
         enlazar_prenda();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        this.cargar_foto();
+        cargar_foto(GestorBD.fotoActual);
     }
 
     void enlazar_controles() {// Enlaza los controles y rellena los Spinner con la lista de opciones
@@ -89,7 +88,6 @@ public class Modificar_Prenda extends AppCompatActivity {
         adapterPerfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Sperfiles.setPrompt(defaultText);
         Sperfiles.setAdapter(adapterPerfiles);
-
 
         Beliminar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +168,7 @@ public class Modificar_Prenda extends AppCompatActivity {
 
         GestorBD.CambiarVisibilidadPrenda(this, prenda.id);
 
-        GestorBD.crearPrenda(this, nombre, color, tipo, talla, 1, perfil);
+        GestorBD.crearPrenda(this, nombre, color, tipo, talla, 1, perfil, GestorBD.fotoActual);
 
         //GestorBD.Modificar_Prenda(this, prenda);
 
@@ -180,8 +178,11 @@ public class Modificar_Prenda extends AppCompatActivity {
 
     void enlazar_prenda() // Pone los valores de la interfaz para que coincidan por defecto con la prenda a modificar
     {
+
         Intent mIntent = getIntent();
         int id = mIntent.getIntExtra("intVariableName", 0);
+
+        GestorBD.fotoActual = GestorBD.get_foto_de_prenda(this, id);
 
         prenda = GestorBD.Obtener_Prenda(this, id);
 
@@ -192,15 +193,11 @@ public class Modificar_Prenda extends AppCompatActivity {
         Stipo.setSelection(GestorBD.get_id_tabla(this, "tipo", prenda.tipo) - 1);
         Stalla.setSelection(GestorBD.get_id_tabla(this, "talla", prenda.talla) - 1);
         Sperfiles.setSelection(GestorBD.getIdPerfil() - 1);
+        cargar_foto(GestorBD.fotoActual);
     }
 
-    protected void cargar_foto(){
-        Intent mIntent = getIntent();
-        int id = mIntent.getIntExtra("intVariableName", 0);
-        String id_modificar = String.valueOf(id);
-
-        GestorBD.cargarFoto(this, id_modificar, imagen);
-
+    protected void cargar_foto(int idfoto){
+        GestorBD.cargarFoto(this, idfoto, imagen);
     }
 
 
