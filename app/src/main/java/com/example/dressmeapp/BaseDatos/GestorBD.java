@@ -38,7 +38,7 @@ public class GestorBD {
      */
     public static int idPerfil;
 
-    private static String nombreBD = "dressmeapp28.db"; // Antonio V. ha cambiado a la BD__17
+    private static String nombreBD = "dressmeapp29.db"; // Antonio V. ha cambiado a la BD__17
                                                         // Maria ha cambiado a BD 22
 
     public static int fotoActual = 1;
@@ -1171,6 +1171,7 @@ public class GestorBD {
                 c.talla = LibreriaBD.CampoInt(cursor,"TALLA");
                 c.tipo = LibreriaBD.CampoInt(cursor,"TIPO");
                 c.visible = LibreriaBD.CampoInt(cursor,"VISIBLE");
+                c.foto = LibreriaBD.CampoInt(cursor,"FOTO");
 
                 prendas.add(c);
             } while (cursor.moveToNext());
