@@ -50,7 +50,7 @@ public class GestorBDAlgoritmo {
             return null; // TODO esto es una chapuza que luego abra que solucionar
         }
 
-        Conjunto res = new Conjunto();
+        Conjunto res = new Conjunto(nombreEvento);
 
         res.add(idAbrigo);
         res.add(idSudadera);
