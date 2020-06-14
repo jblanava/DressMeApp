@@ -166,13 +166,13 @@ public class Modificar_Prenda extends AppCompatActivity {
         int color = sColor.getSelectedItemPosition() + 1;
         int tipo = sTipo.getSelectedItemPosition() + 1;
         int talla = sTalla.getSelectedItemPosition() + 1;
-        int perfil = sPerfiles.getSelectedItemPosition() + 1;
+
+
+        int perfil =  GestorBD.get_id_tabla(this, "perfil", sPerfiles.getSelectedItem().toString());
 
         GestorBDPrendas.ocultar_prenda(this, prenda.id);
-        //Esto peta porque lo ha modificado el otro grupo, lo dejo así de momento :D
         GestorBDPrendas.crear_prenda(this, nombre, color, tipo, talla, 1, perfil, GestorBDFotos.fotoActual);
 
-        //GestorBD.Modificar_Prenda(this, prenda);
 
         finish();
     }
@@ -198,8 +198,8 @@ public class Modificar_Prenda extends AppCompatActivity {
         cargar_foto(GestorBDFotos.fotoActual);
     }
 
-    protected void cargar_foto(int idfoto){
-        GestorBD.cargarFoto(this, idfoto, iImagen);
+    protected void cargar_foto(int id_foto){
+        GestorBD.cargarFoto(this, id_foto, iImagen);
     }
 
 

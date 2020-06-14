@@ -107,6 +107,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
             if(contador == 25)
             {
                 Toast.makeText(ResultadoAlgortimoActivity.this, "No hemos podido crear un conjunto que satisfaga las restricciones. Porfabor introduzca más prendas", Toast.LENGTH_LONG).show();
+                finish();
                 return;
             }
         }
