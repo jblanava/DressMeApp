@@ -10,6 +10,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
+import com.example.dressmeapp.BaseDatos.GestorBDPerfil;
 import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.BaseDatos.LibreriaBD;
 import com.example.dressmeapp.Debug.Debug;
@@ -33,14 +35,13 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
 
     private static Context appContext;
-    private static String nombreBaseDatos = "dressmeapp27.db";
+
+    // ¡¡Hacer tests borra la base de datos!!
 
     @Before
     public void prepararTest() {
         appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        appContext.deleteDatabase(nombreBaseDatos);
-
-        GestorBD.seleccionarBD(nombreBaseDatos);
+        appContext.deleteDatabase(BaseDatos.nombreBD);
     }
 
     /********************************************************************************
@@ -50,9 +51,9 @@ public class ExampleInstrumentedTest {
     @Test
     public void insertarPerfilFuncionaBien() {
 
-        GestorBD.CrearPerfil(appContext, "UsuarioPrueba", "ContraseñaPrueba");
-        assertTrue(GestorBD.UsuarioEstaEnBD(appContext, "UsuarioPrueba"));
-        assertTrue(GestorBD.PassCorrecta(appContext, "UsuarioPrueba", "ContraseñaPrueba"));
+        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba", "ContraseñaPrueba");
+        assertTrue(GestorBDPerfil.usuario_existe(appContext, "UsuarioPrueba"));
+        assertTrue(GestorBDPerfil.pass_correcta(appContext, "UsuarioPrueba", "ContraseñaPrueba"));
 
     }
 
@@ -60,8 +61,8 @@ public class ExampleInstrumentedTest {
     public void obtenerIDMaximoPerfilFuncionaBien() {
 
         int maxCalculado = GestorBD.obtener_id_maximo(appContext, "PERFIL");
-        GestorBD.CrearPerfil(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
-        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
+        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
+        int maxNuevoPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "UsuarioPrueba2");
 
         assertEquals(maxCalculado, maxNuevoPerfil);
 
@@ -74,18 +75,18 @@ public class ExampleInstrumentedTest {
         int perfilesDespues = 0;
 
         String sentencia = "SELECT COUNT(*) FROM PERFIL";
-        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        BaseDatos bd = new BaseDatos(appContext, BaseDatos.nombreBD);
         SQLiteDatabase sqLiteDatabase = bd.getReadableDatabase();
 
-        GestorBD.CrearPerfil(appContext, "UsuarioPrueba3", "ContraseñaPrueba3");
-        int maxNuevoPerfil = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba3", "ContraseñaPrueba3");
+        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba3", "ContraseñaPrueba3");
+        int maxNuevoPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "UsuarioPrueba3");
 
         Cursor cur = sqLiteDatabase.rawQuery(sentencia, null);
         if (cur.moveToFirst()) {
             perfilesAntes = cur.getInt(0);
         }
 
-        GestorBD.BorrarPerfil(appContext, maxNuevoPerfil);
+        GestorBDPerfil.borrar_perfil(appContext, maxNuevoPerfil);
 
         cur = sqLiteDatabase.rawQuery(sentencia, null);
         if (cur.moveToFirst()) {
@@ -99,32 +100,32 @@ public class ExampleInstrumentedTest {
     @Test
     public void actualizarPerfilFuncionaBien() {
 
-        GestorBD.CrearPerfil(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
-        int id = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
+        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
+        int id = GestorBD.get_id_tabla(appContext, "PERFIL", "UsuarioPrueba4");
 
-        GestorBD.ActualizarPerfil(appContext, id, "NuevaContraseña");
+        GestorBDPerfil.actualizar_perfil(appContext, id, "NuevaContraseña");
 
-        assertTrue(GestorBD.PassCorrecta(appContext, "UsuarioPrueba4", "NuevaContraseña"));
+        assertTrue(GestorBDPerfil.pass_correcta(appContext, "UsuarioPrueba4", "NuevaContraseña"));
 
     }
 
     @Test
     public void getUserFuncionaBien() {
 
-        GestorBD.CrearPerfil(appContext, "UsuarioPrueba5", "ContraseñaPrueba5");
-        int id = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba5", "ContraseñaPrueba5");
+        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba5", "ContraseñaPrueba5");
+        int id = GestorBD.get_id_tabla(appContext, "PERFIL", "UsuarioPrueba5");
 
-        assertEquals("UsuarioPrueba5", GestorBD.getUser(appContext, id));
+        assertEquals("UsuarioPrueba5", GestorBDPerfil.get_usuario(appContext, id));
 
     }
 
     @Test
     public void getPassFuncionaBien() {
 
-        GestorBD.CrearPerfil(appContext, "UsuarioPrueba6", "ContraseñaPrueba6");
-        int id = GestorBD.IdPerfilAsociado(appContext, "UsuarioPrueba6", "ContraseñaPrueba6");
+        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba6", "ContraseñaPrueba6");
+        int id = GestorBD.get_id_tabla(appContext, "PERFIL", "UsuarioPrueba6");
 
-        assertEquals("ContraseñaPrueba6", GestorBD.getPass(appContext, id));
+        assertEquals("ContraseñaPrueba6", GestorBDPerfil.get_contrasenia(appContext, id));
 
     }
 
@@ -136,7 +137,7 @@ public class ExampleInstrumentedTest {
     public void insertarPrendaFuncionaBien() {
 
         String sentencia = "SELECT COUNT(*) FROM PRENDA";
-        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        BaseDatos bd = new BaseDatos(appContext, BaseDatos.nombreBD);
         SQLiteDatabase sqldb = bd.getReadableDatabase();
 
         Cursor cur = sqldb.rawQuery(sentencia, null);
@@ -147,14 +148,14 @@ public class ExampleInstrumentedTest {
         cur.close();
 
 
-        GestorBD.CrearPerfil(appContext, "foo", "bar");
-        int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
+        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        int idPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "foo");
         int idColor = 1; // azul
         int idTipo = 1; // abrigo
-        int idTalla = 1; // XS
+        int idTalla = 1; // M
 
 
-        GestorBD.crearPrenda(appContext,
+        GestorBDPrendas.crear_prenda(appContext,
                 "PrendaFoo",
                 idColor,
                 idTipo,
@@ -185,15 +186,15 @@ public class ExampleInstrumentedTest {
 
         // Añadir la prenda
 
-        GestorBD.CrearPerfil(appContext, "foo", "bar");
-        int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
+        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        int idPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "foo");
         int idColor = 1; // azul
         int idTipo = 1; // abrigo
-        int idTalla = 1; // XS
+        int idTalla = 1; // M
 
-        GestorBD.crearPrenda(appContext,
+        GestorBDPrendas.crear_prenda(appContext,
                 "PrendaFoo",
-                1,
+                idColor,
                 idTipo,
                 idTalla,
                 1,
@@ -209,17 +210,17 @@ public class ExampleInstrumentedTest {
     public void borrarPrendaVisibleFuncionaBien() {
 
         String sentencia = "SELECT COUNT(*) FROM PRENDA WHERE VISIBLE=1";
-        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        BaseDatos bd = new BaseDatos(appContext, BaseDatos.nombreBD);
         SQLiteDatabase sqldb = bd.getReadableDatabase();
 
-        GestorBD.CrearPerfil(appContext, "foo", "bar");
-        int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
+        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        int idPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "foo");
         int idColor = 1; // azul
         int idTipo = 1; // abrigo
         int idTalla = 1; // M
 
         int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
-        GestorBD.crearPrenda(appContext,
+        GestorBDPrendas.crear_prenda(appContext,
                 "PrendaFoo",
                 idColor,
                 idTipo,
@@ -235,7 +236,7 @@ public class ExampleInstrumentedTest {
         }
         cur.close();
 
-        GestorBD.CambiarVisibilidadPrenda(appContext, idPrenda);
+        GestorBDPrendas.ocultar_prenda(appContext, idPrenda);
 
         cur = sqldb.rawQuery(sentencia, null);
         int countDespues = 0;
@@ -255,17 +256,17 @@ public class ExampleInstrumentedTest {
     public void borrarPrendaDefinitivaFuncionaBien() {
 
         String sentencia = "SELECT COUNT(*) FROM PRENDA";
-        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        BaseDatos bd = new BaseDatos(appContext, BaseDatos.nombreBD);
         SQLiteDatabase sqldb = bd.getReadableDatabase();
 
-        GestorBD.CrearPerfil(appContext, "foo", "bar");
-        int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
+        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        int idPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "foo");
         int idColor = 1; // azul
         int idTipo = 1; // abrigo
         int idTalla = 1; // M
 
         int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
-        GestorBD.crearPrenda(appContext,
+        GestorBDPrendas.crear_prenda(appContext,
                 "PrendaFoo",
                 idColor,
                 idTipo,
@@ -281,7 +282,7 @@ public class ExampleInstrumentedTest {
         }
         cur.close();
 
-        GestorBD.borrarPrenda(appContext, idPrenda);
+        GestorBDPrendas.borrar_prenda(appContext, idPrenda);
 
         cur = sqldb.rawQuery(sentencia, null);
         int countDespues = 0;
@@ -301,17 +302,17 @@ public class ExampleInstrumentedTest {
     public void borrarPrendaVisibleNoBorraDefinitivamente() {
 
         String sentencia = "SELECT COUNT(*) FROM PRENDA";
-        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        BaseDatos bd = new BaseDatos(appContext, BaseDatos.nombreBD);
         SQLiteDatabase sqldb = bd.getReadableDatabase();
 
-        GestorBD.CrearPerfil(appContext, "foo", "bar");
-        int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
+        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        int idPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "foo");
         int idColor = 1; // azul
         int idTipo = 1; // abrigo
         int idTalla = 1; // M
 
         int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
-        GestorBD.crearPrenda(appContext,
+        GestorBDPrendas.crear_prenda(appContext,
                 "PrendaFoo",
                 idColor,
                 idTipo,
@@ -327,7 +328,7 @@ public class ExampleInstrumentedTest {
         }
         cur.close();
 
-        GestorBD.CambiarVisibilidadPrenda(appContext, idPrenda);
+        GestorBDPrendas.ocultar_prenda(appContext, idPrenda);
 
         cur = sqldb.rawQuery(sentencia, null);
         int countDespues = 0;
@@ -346,14 +347,14 @@ public class ExampleInstrumentedTest {
     @Test
     public void obtenerPrendaFuncionaBien() {
 
-        GestorBD.CrearPerfil(appContext, "foo", "bar");
-        int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
+        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        int idPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "foo");
         int idColor = 1; // azul
         int idTipo = 1; // abrigo
         int idTalla = 1; // M
 
         int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
-        GestorBD.crearPrenda(appContext,
+        GestorBDPrendas.crear_prenda(appContext,
                 "PrendaFoo",
                 idColor,
                 idTipo,
@@ -362,7 +363,7 @@ public class ExampleInstrumentedTest {
                 idPerfil
         );
 
-        Prenda prenda = GestorBD.Obtener_Prenda(appContext, idPrenda);
+        Prenda prenda = GestorBDPrendas.get_prenda(appContext, idPrenda);
 
         assertEquals(prenda.nombre, "PrendaFoo");
         assertEquals(prenda.color, "AZUL");
@@ -374,14 +375,14 @@ public class ExampleInstrumentedTest {
     @Test
     public void modificarPrendaFuncionaBien() {
 
-        GestorBD.CrearPerfil(appContext, "foo", "bar");
-        int idPerfil = GestorBD.IdPerfilAsociado(appContext, "foo", "bar");
+        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        int idPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "foo");
         int idColor = 1; // azul
         int idTipo = 1; // abrigo
         int idTalla = 1; // M
 
         int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
-        GestorBD.crearPrenda(appContext,
+        GestorBDPrendas.crear_prenda(appContext,
                 "PrendaFoo",
                 idColor,
                 idTipo,
@@ -392,13 +393,13 @@ public class ExampleInstrumentedTest {
 
         int idPrendaNuevo = GestorBD.obtener_id_maximo(appContext, "PRENDA");
 
-        Prenda prendaAntigua = GestorBD.Obtener_Prenda(appContext, idPrenda);
+        Prenda prendaAntigua = GestorBDPrendas.get_prenda(appContext, idPrenda);
         Prenda prendaNueva = new Prenda(prendaAntigua.id, "PrendaBar",
                 prendaAntigua.color, prendaAntigua.tipo, prendaAntigua.talla);
 
         GestorBD.Modificar_Prenda(appContext, prendaNueva);
 
-        Prenda prendaNuevaReobtenida = GestorBD.Obtener_Prenda(appContext, idPrendaNuevo);
+        Prenda prendaNuevaReobtenida = GestorBDPrendas.get_prenda(appContext, idPrendaNuevo);
 
         assertEquals(prendaNueva.nombre, prendaNuevaReobtenida.nombre);
 
@@ -411,9 +412,9 @@ public class ExampleInstrumentedTest {
     @Test
     public void insertarColorFuncionaBien() {
 
-        int numColoresAntes = GestorBD.ObtenerColores(appContext).size();
-        GestorBDPrendas.crearColor(appContext, "ColorPrueba", "#123456");
-        int numColoresDespues = GestorBD.ObtenerColores(appContext).size();
+        int numColoresAntes = GestorBD.get_ids_tabla(appContext, "COLOR").size();
+        GestorBDPrendas.crear_color(appContext, "ColorPrueba", "#123456");
+        int numColoresDespues = GestorBD.get_ids_tabla(appContext, "COLOR").size();
 
         assertEquals(numColoresDespues, numColoresAntes + 1);
 
@@ -434,7 +435,7 @@ public class ExampleInstrumentedTest {
     public void insertarComboColorFuncionaBien() {
 
         String sentencia = "SELECT COUNT(*) FROM COMBO_COLOR";
-        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        BaseDatos bd = new BaseDatos(appContext, BaseDatos.nombreBD);
         SQLiteDatabase sqldb = bd.getReadableDatabase();
 
         int idCol1 = GestorBD.obtener_id_maximo(appContext, "COLOR");
@@ -469,13 +470,13 @@ public class ExampleInstrumentedTest {
     public void insertarComboColorRepetidoFuncionaBien() {
 
         int idCol1 = GestorBD.obtener_id_maximo(appContext, "COLOR");
-        GestorBDPrendas.crearColor(appContext, "ColorPrueba1", "#123456");
+        GestorBDPrendas.crear_color(appContext, "ColorPrueba1", "#123456");
         int idCol2 = GestorBD.obtener_id_maximo(appContext, "COLOR");
-        GestorBDPrendas.crearColor(appContext, "ColorPrueba2", "#789012");
+        GestorBDPrendas.crear_color(appContext, "ColorPrueba2", "#789012");
 
-        GestorBDPrendas.crearComboColor(appContext, idCol1, idCol2);
+        GestorBDPrendas.crear_combo_color(appContext, idCol1, idCol2);
 
-        assertFalse(GestorBDPrendas.crearComboColor(appContext, idCol1, idCol2));
+        assertFalse(GestorBDPrendas.crear_combo_color(appContext, idCol1, idCol2));
 
     }
 
@@ -483,17 +484,18 @@ public class ExampleInstrumentedTest {
      HISTORIAL & CONJUNTOS
      ********************************************************************************/
 
+    /*
     @Test
     public void borrarConjuntoFuncionaBien() {
 
         // Crear conjunto
 
         int idPerfil = GestorBD.obtener_id_maximo(appContext, "PERFIL");
-        GestorBD.CrearPerfil(appContext, "foo", "bar");
-        GestorBD.setIdPerfil(idPerfil);
+        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        GestorBD.idPerfil = idPerfil;
 
         Conjunto cjto = new Conjunto("test");
-        int idCjto = GestorBD.obtenIDMaximoConjunto(appContext);
+        int idCjto = GestorBD.obtener_id_maximo(appContext, "CONJUNTO");
         cjto.add(idCjto);
 
         int[] idsPrenda = new int[6];
@@ -504,13 +506,13 @@ public class ExampleInstrumentedTest {
             cjto.add(idsPrenda[i]);
         }
 
-        GestorBD.addConjunto(appContext, cjto, 0);
+        GestorBDAlgoritmo.add_conjunto(appContext, cjto, 0);
 
         int numConjuntosAntes = GestorBD.ConjuntosEnBD(appContext).size();
 
         // Borrarlo
 
-        GestorBD.BorrarConjunto(appContext, idCjto);
+        GestorBDAlgoritmo.borrar_conjunto(appContext, idCjto);
 
         int numConjuntosDespues = GestorBD.ConjuntosEnBD(appContext).size();
         assertEquals(numConjuntosDespues, numConjuntosAntes - 1);
@@ -523,7 +525,7 @@ public class ExampleInstrumentedTest {
                 + " AND ZAPATO=" + idsPrenda[4]
                 + " AND COMPLEMENTO=" + idsPrenda[5]
                 + " AND ID_PERFIL=" + idPerfil;
-        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        BaseDatos bd = new BaseDatos(appContext, BaseDatos.nombreBD);
         SQLiteDatabase sqldb = bd.getReadableDatabase();
 
         int ok = -1;
@@ -538,15 +540,15 @@ public class ExampleInstrumentedTest {
         assertEquals(0, ok);
 
     }
-
+*/
     @Test
     public void obtenIDMaximoConjuntoFuncionaBien() {
 
         int idPerfil = GestorBD.obtener_id_maximo(appContext, "PERFIL");
-        GestorBD.CrearPerfil(appContext, "foo", "bar");
+        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
 
         Conjunto cjto = new Conjunto("test");
-        int idCjto = GestorBD.obtenIDMaximoConjunto(appContext);
+        int idCjto = GestorBD.obtener_id_maximo(appContext, "CONJUNTO");
         cjto.add(idCjto);
 
         int[] idsPrenda = new int[6];
@@ -557,7 +559,7 @@ public class ExampleInstrumentedTest {
             cjto.add(idsPrenda[i]);
         }
 
-        GestorBD.addConjunto(appContext, cjto, 0);
+        GestorBDAlgoritmo.add_conjunto(appContext, cjto, 0);
         int idCjtoDespues = GestorBD.obtenIDMaximoConjunto(appContext);
 
         assertEquals(idCjtoDespues, idCjto + 1);
@@ -570,7 +572,7 @@ public class ExampleInstrumentedTest {
         int cjtosExistentesAntes = GestorBD.ConjuntosEnBD(appContext).size();
 
         int idPerfil = GestorBD.obtener_id_maximo(appContext, "PERFIL");
-        GestorBD.CrearPerfil(appContext, "foo", "bar");
+        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
         GestorBD.setIdPerfil(idPerfil);
 
         Conjunto cjto = new Conjunto("test!");
@@ -585,7 +587,7 @@ public class ExampleInstrumentedTest {
             cjto.add(idsPrenda[i]);
         }
 
-        GestorBD.addConjunto(appContext, cjto, 0);
+        GestorBDAlgoritmo.add_conjunto(appContext, cjto, 0);
 
         String sql = "SELECT COUNT(*) AS CUENTA FROM CONJUNTO WHERE ABRIGO=" + idsPrenda[0]
                 + " AND SUDADERA=" + idsPrenda[1]
@@ -594,7 +596,7 @@ public class ExampleInstrumentedTest {
                 + " AND ZAPATO=" + idsPrenda[4]
                 + " AND COMPLEMENTO=" + idsPrenda[5]
                 + " AND ID_PERFIL=" + idPerfil;
-        BaseDatos bd = new BaseDatos(appContext, nombreBaseDatos);
+        BaseDatos bd = new BaseDatos(appContext, BaseDatos.nombreBD);
         SQLiteDatabase sqldb = bd.getReadableDatabase();
 
         int ok = -1;
