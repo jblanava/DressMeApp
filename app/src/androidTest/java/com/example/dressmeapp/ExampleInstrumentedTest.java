@@ -372,39 +372,6 @@ public class ExampleInstrumentedTest {
 
     }
 
-    @Test
-    public void modificarPrendaFuncionaBien() {
-
-        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
-        int idPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "foo");
-        int idColor = 1; // azul
-        int idTipo = 1; // abrigo
-        int idTalla = 1; // M
-
-        int idPrenda = GestorBD.obtener_id_maximo(appContext, "PRENDA");
-        GestorBDPrendas.crear_prenda(appContext,
-                "PrendaFoo",
-                idColor,
-                idTipo,
-                idTalla,
-                1,
-                idPerfil
-        );
-
-        int idPrendaNuevo = GestorBD.obtener_id_maximo(appContext, "PRENDA");
-
-        Prenda prendaAntigua = GestorBDPrendas.get_prenda(appContext, idPrenda);
-        Prenda prendaNueva = new Prenda(prendaAntigua.id, "PrendaBar",
-                prendaAntigua.color, prendaAntigua.tipo, prendaAntigua.talla);
-
-        GestorBD.Modificar_Prenda(appContext, prendaNueva);
-
-        Prenda prendaNuevaReobtenida = GestorBDPrendas.get_prenda(appContext, idPrendaNuevo);
-
-        assertEquals(prendaNueva.nombre, prendaNuevaReobtenida.nombre);
-
-    }
-
     /********************************************************************************
      COLORES
      ********************************************************************************/
@@ -484,7 +451,7 @@ public class ExampleInstrumentedTest {
      HISTORIAL & CONJUNTOS
      ********************************************************************************/
 
-    /*
+
     @Test
     public void borrarConjuntoFuncionaBien() {
 
@@ -502,19 +469,19 @@ public class ExampleInstrumentedTest {
         int[] tiposPrenda = {1, 13, 4, 11, 16, 8};
         for (int i = 0; i < 6; i++) {
             idsPrenda[i] = GestorBD.obtener_id_maximo(appContext, "PRENDA");
-            GestorBD.crearPrenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
+            GestorBDPrendas.crear_prenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
             cjto.add(idsPrenda[i]);
         }
 
         GestorBDAlgoritmo.add_conjunto(appContext, cjto, 0);
 
-        int numConjuntosAntes = GestorBD.ConjuntosEnBD(appContext).size();
+        int numConjuntosAntes = GestorBD.get_ids_tabla(appContext, "CONJUNTO").size();
 
         // Borrarlo
 
-        GestorBDAlgoritmo.borrar_conjunto(appContext, idCjto);
+        GestorBDPrendas.borrar_conjunto(appContext, idCjto);
 
-        int numConjuntosDespues = GestorBD.ConjuntosEnBD(appContext).size();
+        int numConjuntosDespues = GestorBD.get_ids_tabla(appContext, "CONJUNTO").size();
         assertEquals(numConjuntosDespues, numConjuntosAntes - 1);
 
         // Comprobar que no está el conjunto
@@ -540,7 +507,7 @@ public class ExampleInstrumentedTest {
         assertEquals(0, ok);
 
     }
-*/
+
     @Test
     public void obtenIDMaximoConjuntoFuncionaBien() {
 
@@ -555,12 +522,12 @@ public class ExampleInstrumentedTest {
         int[] tiposPrenda = {1, 13, 4, 11, 16, 8};
         for (int i = 0; i < 6; i++) {
             idsPrenda[i] = GestorBD.obtener_id_maximo(appContext, "PRENDA");
-            GestorBD.crearPrenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
+            GestorBDPrendas.crear_prenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
             cjto.add(idsPrenda[i]);
         }
 
         GestorBDAlgoritmo.add_conjunto(appContext, cjto, 0);
-        int idCjtoDespues = GestorBD.obtenIDMaximoConjunto(appContext);
+        int idCjtoDespues = GestorBD.obtener_id_maximo(appContext, "CONJUNTO");
 
         assertEquals(idCjtoDespues, idCjto + 1);
 
@@ -569,21 +536,21 @@ public class ExampleInstrumentedTest {
     @Test
     public void insertarConjuntoFuncionaBien() {
 
-        int cjtosExistentesAntes = GestorBD.ConjuntosEnBD(appContext).size();
+        int cjtosExistentesAntes = GestorBD.get_ids_tabla(appContext, "CONJUNTO").size();
 
         int idPerfil = GestorBD.obtener_id_maximo(appContext, "PERFIL");
         GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
-        GestorBD.setIdPerfil(idPerfil);
+        GestorBD.idPerfil = idPerfil;
 
         Conjunto cjto = new Conjunto("test!");
-        int idCjto = GestorBD.obtenIDMaximoConjunto(appContext);
+        int idCjto = GestorBD.obtener_id_maximo(appContext, "CONJUNTO");
         cjto.add(idCjto);
 
         int[] idsPrenda = new int[6];
         int[] tiposPrenda = {1, 13, 4, 11, 16, 8};
         for (int i = 0; i < 6; i++) {
             idsPrenda[i] = GestorBD.obtener_id_maximo(appContext, "PRENDA");
-            GestorBD.crearPrenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
+            GestorBDPrendas.crear_prenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
             cjto.add(idsPrenda[i]);
         }
 
@@ -609,7 +576,7 @@ public class ExampleInstrumentedTest {
         sqldb.close();
 
 
-        int cjtosExistentesDespues = GestorBD.ConjuntosEnBD(appContext).size();
+        int cjtosExistentesDespues = GestorBD.get_ids_tabla(appContext, "CONJUNTO").size();
 
         assertEquals(cjtosExistentesDespues, cjtosExistentesAntes + 1);
         assertEquals(1, ok);
