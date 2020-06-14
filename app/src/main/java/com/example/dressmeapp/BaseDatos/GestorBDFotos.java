@@ -13,20 +13,7 @@ import com.example.dressmeapp.R;
 public class GestorBDFotos {
     /* Operaciones relacionadas con la base de datos y el manejo de la tabla FOTOS */
 
-    /**
-     * El ID del perfil que tiene la sesión abierta actualmente.
-     */
     public static int fotoActual = 1;
-
-    public static int idPerfil;
-
-    public static int getIdPerfil() {
-        return idPerfil;
-    }
-
-    public static void setIdPerfil(int nuevoId) {
-        idPerfil = nuevoId;
-    }
 
     public static void guardarFoto(Context context, byte [] img, String id_activo){
 

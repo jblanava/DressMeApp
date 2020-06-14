@@ -17,14 +17,9 @@ import java.util.StringJoiner;
 import androidx.annotation.RequiresApi;
 
 public class GestorBDAlgoritmo {
-    /* Clase relacionada con las operaciones sobre la BD y el algoritmo */
-    /**
-     * El ID del perfil que tiene la sesión abierta actualmente.
-     */
-    public static int idPerfil;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static Conjunto get_conjunto_algoritmo(Context context, int tiempo, int actividad)
+    public static Conjunto get_conjunto_algoritmo(Context context, int tiempo, int actividad, String nombreEvento)
     {
         List<Integer> todos_los_colores = GestorBD.get_ids_tabla(context, "color");
         int[] tiposAbrigo = {1, 7};
@@ -54,8 +49,12 @@ public class GestorBDAlgoritmo {
             return null; // TODO esto es una chapuza que luego abra que solucionar
         }
 
-        Conjunto res = new Conjunto();
+        Conjunto res = new Conjunto(nombreEvento);
 
+        // Índice 0 de Conjunto = ID del conjunto
+        res.add(GestorBD.obtener_id_maximo(context, "CONJUNTO"));
+
+        // Índices 1-6 de Conjunto = IDs de cada prenda
         res.add(idAbrigo);
         res.add(idSudadera);
         res.add(idCamiseta);
@@ -86,7 +85,7 @@ public class GestorBDAlgoritmo {
 
         String codicionColores = sj.toString();
 
-        String sentenciaSQL = "SELECT ID, TIPO FROM PRENDA  WHERE " + codicionTipos + " AND " + codicionColores + " AND VISIBLE = 1 AND ID_PERFIL = " + idPerfil;
+        String sentenciaSQL = "SELECT ID, TIPO FROM PRENDA  WHERE " + codicionTipos + " AND " + codicionColores + " AND VISIBLE = 1 AND ID_PERFIL = " + GestorBD.idPerfil;
 
 
 
@@ -177,7 +176,7 @@ public class GestorBDAlgoritmo {
         List<Conjunto> res = new ArrayList<>();
 
 
-        String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + idPerfil;
+        String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + GestorBD.idPerfil;
         Cursor cursor;
 
         BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
@@ -223,7 +222,7 @@ public class GestorBDAlgoritmo {
         List<Conjunto> res = new ArrayList<>();
 
 
-        String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + idPerfil + " AND FAVORITO=1";
+        String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + GestorBD.idPerfil + " AND FAVORITO=1";
         Cursor cursor;
 
         BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
@@ -279,9 +278,6 @@ public class GestorBDAlgoritmo {
         int complemento = -1;
         int pantalon = -1;
 
-
-
-
         while(it.hasNext()) {
 
             Prenda aux = GestorBDPrendas.get_prenda(contexto, it.next());
@@ -322,7 +318,7 @@ public class GestorBDAlgoritmo {
         {
             String sentenciaSQL;
             sentenciaSQL = "INSERT INTO CONJUNTO (ID, ABRIGO, SUDADERA, CAMISETA, PANTALON, ZAPATO, COMPLEMENTO, ID_PERFIL, FAVORITO, NOMBRE_EVENTO) VALUES ('";
-            sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "', '" + idPerfil + "', '" + flag + "', '"+ conj.getNombreCjto() +"' )";
+            sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "', '" + GestorBD.idPerfil + "', '" + flag + "', '"+ conj.getNombreCjto() +"' )";
 
             BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
             SQLiteDatabase baseDatos;

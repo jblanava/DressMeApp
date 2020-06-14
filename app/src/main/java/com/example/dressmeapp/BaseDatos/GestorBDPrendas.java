@@ -19,10 +19,6 @@ import androidx.annotation.RequiresApi;
 public class GestorBDPrendas {
     /* Incluye operaciones sobre la BD relacionadas con las prendas y sus atributos*/
     //TODO: MODIFICAR EL METODO CREAR PRENDA
-    /**
-     * El ID del perfil que tiene la sesión abierta actualmente.
-     */
-    public static int idPerfil;
 
     /**
      * Crea una nueva prenda.
@@ -64,7 +60,7 @@ public class GestorBDPrendas {
         String tabla = ordenacion.toUpperCase().trim();
         sentenciaSQL =  "SELECT PRENDA.ID , PRENDA.NOMBRE \"NOMBRE\", COLOR.NOMBRE \"COLOR\", TIPO.NOMBRE \"TIPO\", TALLA.NOMBRE \"TALLA\" ";
         sentenciaSQL += "FROM PRENDA, COLOR, TIPO, TALLA ";
-        sentenciaSQL += "WHERE PRENDA.VISIBLE = 1 AND PRENDA.ID_PERFIL = " + idPerfil + " ";
+        sentenciaSQL += "WHERE PRENDA.VISIBLE = 1 AND PRENDA.ID_PERFIL = " + GestorBD.idPerfil + " ";
         sentenciaSQL += "AND COLOR.ID = PRENDA.COLOR AND TIPO.ID = PRENDA.TIPO AND TALLA.ID = PRENDA.TALLA ";
         sentenciaSQL += "AND (UPPER(PRENDA.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";
         sentenciaSQL += "OR UPPER(COLOR.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";

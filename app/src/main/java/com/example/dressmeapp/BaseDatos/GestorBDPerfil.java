@@ -8,19 +8,6 @@ public class GestorBDPerfil {
     /* Operaciones relacionadas con el perfil y la tabla PERFIL */
 
     /**
-     * El ID del perfil que tiene la sesión abierta actualmente.
-     */
-    public static int idPerfil;
-
-    public static int getIdPerfil() {
-        return idPerfil;
-    }
-
-    public static void setIdPerfil(int nuevoId) {
-        idPerfil = nuevoId;
-    }
-
-    /**
      * Comprueba si un string corresponde a un nombre de perfil existente.
      *
      * @param context El contexto en el que comprobar.
