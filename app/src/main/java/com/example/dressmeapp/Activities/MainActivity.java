@@ -69,16 +69,16 @@ public class MainActivity extends AppCompatActivity {
         String error = "";
         boolean ok = true;
 
-        if (!GestorBDPerfil.UsuarioEstaEnBD(getApplicationContext(), usuario)) {
+        if (!GestorBDPerfil.usuario_existe(getApplicationContext(), usuario)) {
             ok = false;
             error = getString(R.string.login_incorrecto_usuario);
-        } else if (!GestorBDPerfil.PassCorrecta(getApplicationContext(), usuario, pass)) {
+        } else if (!GestorBDPerfil.pass_correcta(getApplicationContext(), usuario, pass)) {
             ok = false;
             error = getString(R.string.login_incorrecto_pass);
         }
 
         if (ok) {
-            GestorBD.idPerfil = GestorBDPerfil.IdPerfilAsociado(getApplicationContext(), usuario, pass);
+            GestorBD.idPerfil = GestorBD.get_id_tabla(getApplicationContext(), "PERFIL", usuario);
             ir_a_menu_principal();
         } else {
             textError.setText(error);

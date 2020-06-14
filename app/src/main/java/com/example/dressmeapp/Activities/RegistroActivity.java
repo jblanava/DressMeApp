@@ -72,7 +72,7 @@ public class RegistroActivity extends AppCompatActivity {
         if (nombre.isEmpty()) {
             ok = false;
             errores += getString(R.string.registro_error_sinnombre) + "\n";
-        } else if (GestorBDPerfil.UsuarioEstaEnBD(getApplicationContext(), nombre)) {
+        } else if (GestorBDPerfil.usuario_existe(getApplicationContext(), nombre)) {
             ok = false;
             errores += getString(R.string.registro_error_nombreusado) + "\n";
         }
@@ -88,8 +88,8 @@ public class RegistroActivity extends AppCompatActivity {
 
         // Mostrar errores o crear cuenta
         if (ok) {
-            GestorBDPerfil.CrearPerfil(getApplicationContext(), nombre, contrasenia);
-            GestorBD.idPerfil = GestorBDPerfil.IdPerfilAsociado(getApplicationContext(), nombre, contrasenia);
+            GestorBDPerfil.crear_perfil(getApplicationContext(), nombre, contrasenia);
+            GestorBD.idPerfil = GestorBD.get_id_tabla(getApplicationContext(), "PERFIL", nombre);
             ir_a_menu_principal();
         } else {
             tError.setText(errores);

@@ -1,11 +1,5 @@
 package com.example.dressmeapp.Objetos.Structs;
 
-import com.example.dressmeapp.BaseDatos.BaseDatos;
-import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.BaseDatos.GestorBD2;
-
-import java.util.List;
-
 public class ColorBD
 {
     public int id;

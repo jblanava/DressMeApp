@@ -34,7 +34,7 @@ public class GestorBDAlgoritmo {
 
         int color_principal = GestorBD.get_id_tabla(context, "color", GestorBDPrendas.get_prenda(context, idCamiseta).color);
 
-        List<Integer> coloresCombo = GestorBDPrendas.ColorCombo(context, color_principal);
+        List<Integer> coloresCombo = GestorBDPrendas.color_con_cuales_combina(context, color_principal);
 
         int idAbrigo        = get_prenda_condiciones(context, tiempo, actividad, tiposAbrigo, coloresCombo);
         int idSudadera      = get_prenda_condiciones(context, tiempo, actividad, tiposSudadera, coloresCombo);

@@ -15,7 +15,7 @@ public class GestorBDPerfil {
      * @param nombre  El nombre a buscar
      * @return true sii el nombre corresponde a algún perfil
      */
-    public static boolean UsuarioEstaEnBD(Context context, String nombre) {
+    public static boolean usuario_existe(Context context, String nombre) {
         // clase Registro
         String sentenciaSQL;
         sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE='" + nombre + "'";
@@ -38,36 +38,6 @@ public class GestorBDPerfil {
     }
 
     /**
-     * Devuelve el ID de un perfil dado su nombre y contraseña.
-     *
-     * @param context  El contexto en el cual comprobar.
-     * @param usuario  El usuario cuyo ID buscar
-     * @param password La contraseña cuyo ID buscar
-     * @return El ID del perfil definido, o 0 si no existe un perfil con los datos dados
-     */
-    public static int IdPerfilAsociado(Context context, String usuario, String password) {
-
-        int id = 0;
-        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE ='" + usuario + "' AND CONTRASENIA ='" + password + "'";
-
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-
-        if (cursor.moveToFirst()) {
-            id = LibreriaBD.CampoInt(cursor, "ID");
-        }
-
-
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return id;
-    }
-
-    /**
      * Comprueba si el par (nombre de perfil, contraseña) dado corresponde a un usuario.
      *
      * @param contexto El contexto en el cual comprobar.
@@ -75,7 +45,7 @@ public class GestorBDPerfil {
      * @param password La contraseña del perfil a comprobar.
      * @return true sii el par (nombre de perfil, contraseña) corresponden a un usuario.
      */
-    public static boolean PassCorrecta(Context contexto, String usuario, String password) {
+    public static boolean pass_correcta(Context contexto, String usuario, String password) {
 
         boolean encontrado;
 
@@ -98,7 +68,7 @@ public class GestorBDPerfil {
      * @param usuario     El nombre del perfil
      * @param contrasenia La contraseña para el perfil.
      */
-    public static int CrearPerfil(Context contexto, String usuario, String contrasenia) {
+    public static int crear_perfil(Context contexto, String usuario, String contrasenia) {
         int id = GestorBD.obtener_id_maximo(contexto, "perfil");
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO PERFIL (ID, NOMBRE,  CONTRASENIA) VALUES (";
@@ -114,7 +84,7 @@ public class GestorBDPerfil {
         return id;
     }
 
-    public static void BorrarPerfil(Context contexto, int id) {
+    public static void borrar_perfil(Context contexto, int id) {
 
         String borrarPerfiles = "DELETE FROM PERFIL WHERE ID = " + id;
         String borrarPrendas = "DELETE FROM PRENDA WHERE ID_PERFIL = " + id;
@@ -132,7 +102,7 @@ public class GestorBDPerfil {
         base.close();
     }
 
-    public static void ActualizarPerfil(Context contexto, int idPerfil, String password) {
+    public static void actualizar_perfil(Context contexto, int idPerfil, String password) {
 
         String sentenciaSQL = "UPDATE PERFIL SET CONTRASENIA='"
                 + password + "' WHERE ID=" + idPerfil;
@@ -145,7 +115,7 @@ public class GestorBDPerfil {
 
     }
 
-    public static String getUser(Context context, int idPerfil) {
+    public static String get_usuario(Context context, int idPerfil) {
         String SentenciaSQL = "SELECT NOMBRE FROM PERFIL WHERE ID=" + idPerfil;
         String res = "";
         BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
@@ -158,7 +128,7 @@ public class GestorBDPerfil {
         return res;
     }
 
-    public static String getPass(Context context, int idPerfil) {
+    public static String get_contrasenia(Context context, int idPerfil) {
         String SentenciaSQL = "SELECT CONTRASENIA FROM PERFIL WHERE ID=" + idPerfil;
         String res = "";
         BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);

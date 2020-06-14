@@ -7,10 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.Debug.Debug;
 import com.example.dressmeapp.R;
 
 import java.io.ByteArrayOutputStream;

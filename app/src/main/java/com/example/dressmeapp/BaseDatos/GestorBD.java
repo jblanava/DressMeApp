@@ -1,20 +1,13 @@
 package com.example.dressmeapp.BaseDatos;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.widget.ImageView;
 
-import androidx.annotation.RequiresApi;
-
-import com.example.dressmeapp.Objetos.ColorPrenda;
-import com.example.dressmeapp.Objetos.Conjunto;
-import com.example.dressmeapp.Objetos.Prenda;
 import com.example.dressmeapp.Objetos.Structs.ColorBD;
 import com.example.dressmeapp.Objetos.Structs.ComboColorBD;
 import com.example.dressmeapp.Objetos.Structs.ConjuntoBD;
@@ -26,10 +19,6 @@ import com.example.dressmeapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Random;
-import java.util.StringJoiner;
-
 
 public class GestorBD {
 
