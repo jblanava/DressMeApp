@@ -52,6 +52,10 @@ public class GestorBDAlgoritmo {
 
         Conjunto res = new Conjunto(nombreEvento);
 
+        // ID 0 = ID conjunto
+        res.add(GestorBD.obtener_id_maximo(context, "CONJUNTO"));
+
+        // IDs 1-6 = IDs prendas del conjunto
         res.add(idAbrigo);
         res.add(idSudadera);
         res.add(idCamiseta);
