@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class GestorBDPerfil {
     /* Operaciones relacionadas con el perfil y la tabla PERFIL */
 
+
     /**
      * Comprueba si un string corresponde a un nombre de perfil existente.
      *

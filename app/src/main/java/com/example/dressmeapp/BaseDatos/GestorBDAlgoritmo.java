@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
+import androidx.annotation.RequiresApi;
+
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 
@@ -14,9 +16,8 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.StringJoiner;
 
-import androidx.annotation.RequiresApi;
-
 public class GestorBDAlgoritmo {
+    /* Clase relacionada con las operaciones sobre la BD y el algoritmo */
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static Conjunto get_conjunto_algoritmo(Context context, int tiempo, int actividad, String nombreEvento)
@@ -49,12 +50,8 @@ public class GestorBDAlgoritmo {
             return null; // TODO esto es una chapuza que luego abra que solucionar
         }
 
-        Conjunto res = new Conjunto(nombreEvento);
+        Conjunto res = new Conjunto();
 
-        // Índice 0 de Conjunto = ID del conjunto
-        res.add(GestorBD.obtener_id_maximo(context, "CONJUNTO"));
-
-        // Índices 1-6 de Conjunto = IDs de cada prenda
         res.add(idAbrigo);
         res.add(idSudadera);
         res.add(idCamiseta);
