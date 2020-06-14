@@ -38,36 +38,6 @@ public class GestorBDPerfil {
     }
 
     /**
-     * Devuelve el ID de un perfil dado su nombre y contraseña.
-     *
-     * @param context  El contexto en el cual comprobar.
-     * @param usuario  El usuario cuyo ID buscar
-     * @param password La contraseña cuyo ID buscar
-     * @return El ID del perfil definido, o 0 si no existe un perfil con los datos dados
-     */
-    public static int IdPerfilAsociado(Context context, String usuario, String password) {
-
-        int id = 0;
-        String sentenciaSQL = "SELECT ID FROM PERFIL WHERE NOMBRE ='" + usuario + "' AND CONTRASENIA ='" + password + "'";
-
-        Cursor cursor;
-        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-
-        if (cursor.moveToFirst()) {
-            id = LibreriaBD.CampoInt(cursor, "ID");
-        }
-
-
-        baseDatos.close();
-        base.close();
-        cursor.close();
-        return id;
-    }
-
-    /**
      * Comprueba si el par (nombre de perfil, contraseña) dado corresponde a un usuario.
      *
      * @param contexto El contexto en el cual comprobar.

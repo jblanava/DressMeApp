@@ -17,7 +17,7 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
 
-    public static String nombreBD = "dressmeapp30.db";
+    public static String nombreBD = "dressmeapp32.db";
 
     public BaseDatos(Context contexto, String nombrebd) {
         super(contexto, nombrebd, null, VERSION);
@@ -167,20 +167,6 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL( "INSERT INTO COLOR VALUES (11  , 'VERDE', '#22ED0B') ") ;
         db.execSQL( "INSERT INTO COLOR VALUES (12 , 'VIOLETA', '#8827C4') ") ;
 
-        /*
-        db.execSQL("INSERT INTO COLOR VALUES (1  , 'AZUL') ");
-        db.execSQL("INSERT INTO COLOR VALUES (2  , 'AMARILLO') ");
-        db.execSQL("INSERT INTO COLOR VALUES (3  , 'BLANCO') ");
-        db.execSQL("INSERT INTO COLOR VALUES (4  , 'GRIS') ");
-        db.execSQL("INSERT INTO COLOR VALUES (5  , 'MARRON') ");
-        db.execSQL("INSERT INTO COLOR VALUES (6  , 'MORADO') ");
-        db.execSQL("INSERT INTO COLOR VALUES (7  , 'NARANJA') ");
-        db.execSQL("INSERT INTO COLOR VALUES (8  , 'NEGRO') ");
-        db.execSQL("INSERT INTO COLOR VALUES (9  , 'ROJO') ");
-        db.execSQL("INSERT INTO COLOR VALUES (10  , 'ROSA') ");
-        db.execSQL("INSERT INTO COLOR VALUES (11  , 'VERDE') ");
-        db.execSQL("INSERT INTO COLOR VALUES (12 , 'VIOLETA') ");
-        */
     }
     private void crearCombo(SQLiteDatabase db){
 
