@@ -10,7 +10,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
-import com.example.dressmeapp.BaseDatos.GestorBD2;
+import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.BaseDatos.LibreriaBD;
 import com.example.dressmeapp.Debug.Debug;
 import com.example.dressmeapp.Objetos.Conjunto;
@@ -412,7 +412,7 @@ public class ExampleInstrumentedTest {
     public void insertarColorFuncionaBien() {
 
         int numColoresAntes = GestorBD.ObtenerColores(appContext).size();
-        GestorBD2.crearColor(appContext, "ColorPrueba", "#123456");
+        GestorBDPrendas.crearColor(appContext, "ColorPrueba", "#123456");
         int numColoresDespues = GestorBD.ObtenerColores(appContext).size();
 
         assertEquals(numColoresDespues, numColoresAntes + 1);
@@ -423,7 +423,7 @@ public class ExampleInstrumentedTest {
     public void obtenerIDMaximoColorFuncionaBien() {
 
         int maxIdAntes = GestorBD.obtener_id_maximo(appContext, "COLOR");
-        GestorBD2.crearColor(appContext, "ColorPrueba", "#123456");
+        GestorBDPrendas.crear_color(appContext, "ColorPrueba", "#123456");
         int maxIdDespues = GestorBD.obtener_id_maximo(appContext, "COLOR");
 
         assertEquals(maxIdDespues, maxIdAntes + 1);
@@ -438,9 +438,9 @@ public class ExampleInstrumentedTest {
         SQLiteDatabase sqldb = bd.getReadableDatabase();
 
         int idCol1 = GestorBD.obtener_id_maximo(appContext, "COLOR");
-        GestorBD2.crearColor(appContext, "ColorPrueba1", "#123456");
+        GestorBDPrendas.crear_color(appContext, "ColorPrueba1", "#123456");
         int idCol2 = GestorBD.obtener_id_maximo(appContext, "COLOR");
-        GestorBD2.crearColor(appContext, "ColorPrueba2", "#789012");
+        GestorBDPrendas.crear_color(appContext, "ColorPrueba2", "#789012");
 
         Cursor cur = sqldb.rawQuery(sentencia, null);
         int combosAntes = 0;
@@ -449,7 +449,7 @@ public class ExampleInstrumentedTest {
         }
         cur.close();
 
-        GestorBD2.crearComboColor(appContext, idCol1, idCol2);
+        GestorBDPrendas.crear_combo_color(appContext, idCol1, idCol2);
 
         cur = sqldb.rawQuery(sentencia, null);
         int combosDespues = 0;
@@ -469,13 +469,13 @@ public class ExampleInstrumentedTest {
     public void insertarComboColorRepetidoFuncionaBien() {
 
         int idCol1 = GestorBD.obtener_id_maximo(appContext, "COLOR");
-        GestorBD2.crearColor(appContext, "ColorPrueba1", "#123456");
+        GestorBDPrendas.crearColor(appContext, "ColorPrueba1", "#123456");
         int idCol2 = GestorBD.obtener_id_maximo(appContext, "COLOR");
-        GestorBD2.crearColor(appContext, "ColorPrueba2", "#789012");
+        GestorBDPrendas.crearColor(appContext, "ColorPrueba2", "#789012");
 
-        GestorBD2.crearComboColor(appContext, idCol1, idCol2);
+        GestorBDPrendas.crearComboColor(appContext, idCol1, idCol2);
 
-        assertFalse(GestorBD2.crearComboColor(appContext, idCol1, idCol2));
+        assertFalse(GestorBDPrendas.crearComboColor(appContext, idCol1, idCol2));
 
     }
 
