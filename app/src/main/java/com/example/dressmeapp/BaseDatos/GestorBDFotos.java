@@ -15,7 +15,7 @@ public class GestorBDFotos {
 
     public static int fotoActual = 1;
 
-    public static void guardarFoto(Context context, byte [] img, String id_activo){
+    public static void guardar_foto(Context context, byte [] img, String id_activo){
 
         BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase bd;
@@ -42,7 +42,7 @@ public class GestorBDFotos {
     }
 
 
-    public static void cargarFoto(Context context, int id_modificar, ImageView imagen){
+    public static void cargar_foto(Context context, int id_modificar, ImageView imagen){
         String vsql = "SELECT * FROM FOTOS WHERE ID = " + id_modificar;
 
         BaseDatos bdh =  new BaseDatos(context, BaseDatos.nombreBD);
@@ -73,7 +73,7 @@ public class GestorBDFotos {
         bd.close();
     }
 
-    public static Bitmap obtenerFoto(Context context, String id_modificar){
+    public static Bitmap get_foto(Context context, String id_modificar){
         String vsql = "SELECT * FROM FOTOS WHERE ID = " + id_modificar;
 
         BaseDatos bdh =  new BaseDatos(context, BaseDatos.nombreBD);

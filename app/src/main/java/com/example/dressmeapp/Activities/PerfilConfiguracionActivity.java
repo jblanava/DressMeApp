@@ -97,7 +97,7 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
     private void borrado_de_perfil() {
 
         int id= GestorBD.idPerfil;
-        GestorBDPerfil.BorrarPerfil(contexto, id);
+        GestorBDPerfil.borrar_perfil(contexto, id);
 
         this.finish();
 

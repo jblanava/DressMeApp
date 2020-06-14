@@ -16,22 +16,6 @@ import java.util.List;
 
 public class ExportarBD {
     /* Operaciones para exportar la base de datos a un fichero que el usuario pueda tener */
-    /**
-     * El ID del perfil que tiene la sesión abierta actualmente.
-     */
-    public static int idPerfil;
-
-    private static String nombreBD = "dressmeapp26.db";
-
-    public static void seleccionarBD(String nombreBD) { ExportarBD.nombreBD = nombreBD; }
-
-    public static int getIdPerfil() {
-        return idPerfil;
-    }
-
-    public static void setIdPerfil(int nuevoId) {
-        idPerfil = nuevoId;
-    }
 
     static public List<ColorBD> expColores(Context context)
     {
@@ -40,7 +24,7 @@ public class ExportarBD {
         Cursor cursor;
         List<ColorBD> colores = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -69,7 +53,7 @@ public class ExportarBD {
         Cursor cursor;
         List<ComboColorBD> combos = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -94,12 +78,12 @@ public class ExportarBD {
 
     static public List<PerfilBD> expPerfil(Context context)
     {
-        String sentenciaSQL = "SELECT * FROM PERFIL WHERE ID = " + idPerfil;
+        String sentenciaSQL = "SELECT * FROM PERFIL WHERE ID = " + GestorBD.idPerfil;
 
         Cursor cursor;
         List<PerfilBD> perfiles = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -124,12 +108,12 @@ public class ExportarBD {
 
     static public List<PrendaBD> expPrendas(Context context)
     {
-        String sentenciaSQL = "SELECT * FROM PRENDA WHERE ID_PERFIL = " + idPerfil;
+        String sentenciaSQL = "SELECT * FROM PRENDA WHERE ID_PERFIL = " + GestorBD.idPerfil;
 
         Cursor cursor;
         List<PrendaBD> prendas = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -162,7 +146,7 @@ public class ExportarBD {
         Cursor cursor;
         List<TallaBD> tallas = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
@@ -187,12 +171,12 @@ public class ExportarBD {
 
     static public List<ConjuntoBD> expConjuntos(Context context)
     {
-        String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + idPerfil;
+        String sentenciaSQL = "SELECT * FROM CONJUNTO WHERE ID_PERFIL = " + GestorBD.idPerfil;
 
         Cursor cursor;
         List<ConjuntoBD> conjuntos = new ArrayList<>();
 
-        BaseDatos base = new BaseDatos(context, nombreBD);
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getReadableDatabase();
 
         cursor = baseDatos.rawQuery(sentenciaSQL, null);

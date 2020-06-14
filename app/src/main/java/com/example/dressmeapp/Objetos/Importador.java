@@ -55,7 +55,7 @@ public class Importador
             for(String s : prefiles)
             {
                 PerfilBD p = new PerfilBD(s);
-                int nuevoId = GestorBDPerfil.CrearPerfil(context, p.usuario, p.clave);
+                int nuevoId = GestorBDPerfil.crear_perfil(context, p.usuario, p.clave);
 
                 mapa_perfiles.put(p.id, nuevoId);
             }

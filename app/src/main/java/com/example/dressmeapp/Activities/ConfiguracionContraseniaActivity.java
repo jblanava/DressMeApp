@@ -62,14 +62,14 @@ public class ConfiguracionContraseniaActivity extends AppCompatActivity {
             // La nueva contraseña no debe ser vacía
             ok = false;
             errores += "Introduzca una nueva contraseña";
-        } else if (!antiguaPass.equals(GestorBDPerfil.getPass(this, GestorBD.idPerfil))) {
+        } else if (!antiguaPass.equals(GestorBDPerfil.get_contrasenia(this, GestorBD.idPerfil))) {
             // Hay que introducir la contraseña antigua para cambiarla
             ok = false;
             errores += "Escriba la contraseña antigua para cambiarla";
         }
 
         if (ok) {
-            GestorBDPerfil.ActualizarPerfil(getApplicationContext(), GestorBD.idPerfil, nuevaContrasenia.getText().toString());
+            GestorBDPerfil.actualizar_perfil(getApplicationContext(), GestorBD.idPerfil, nuevaContrasenia.getText().toString());
 
             Intent salto = new Intent(this, MenuPrincipalActivity.class);
             startActivity(salto);

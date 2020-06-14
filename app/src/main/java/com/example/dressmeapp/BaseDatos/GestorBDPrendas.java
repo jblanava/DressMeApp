@@ -128,7 +128,7 @@ public class GestorBDPrendas {
      * @param contexto El contexto a usar.
      * @param id       El ID de la prenda que quieres borrar
      */
-    public static void borrarPrenda(Context contexto, int id) {
+    public static void borrar_prenda(Context contexto, int id) {
         String SentenciaSQL;
         SentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + id;
 
@@ -140,7 +140,7 @@ public class GestorBDPrendas {
         base.close();
     }
 
-    public static void BorrarConjunto(Context context, int idConjunto) {
+    public static void borrar_conjunto(Context context, int idConjunto) {
         String sentenciaSQL;
         sentenciaSQL = "DELETE FROM CONJUNTO WHERE ID = " + idConjunto;
         BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
@@ -338,7 +338,7 @@ public class GestorBDPrendas {
 
     }
 
-    public static List<Integer> ColorCombo(Context context, int idColor)
+    public static List<Integer> color_con_cuales_combina(Context context, int idColor)
     {
         String sentenciaSQL = "SELECT COLOR2 FROM COMBO_COLOR WHERE COLOR1 =  " +  idColor;
 
