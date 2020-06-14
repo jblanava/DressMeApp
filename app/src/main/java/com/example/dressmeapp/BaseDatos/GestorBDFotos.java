@@ -18,16 +18,6 @@ public class GestorBDFotos {
      */
     public static int fotoActual = 1;
 
-    public static int idPerfil;
-
-    public static int getIdPerfil() {
-        return idPerfil;
-    }
-
-    public static void setIdPerfil(int nuevoId) {
-        idPerfil = nuevoId;
-    }
-
     public static void guardarFoto(Context context, byte [] img, String id_activo){
 
         BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);

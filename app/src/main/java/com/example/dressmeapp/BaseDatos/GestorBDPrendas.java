@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 
 import com.example.dressmeapp.Objetos.ColorPrenda;
 import com.example.dressmeapp.Objetos.ComboColorPrenda;
@@ -14,15 +13,8 @@ import com.example.dressmeapp.Objetos.Prenda;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.RequiresApi;
-
 public class GestorBDPrendas {
     /* Incluye operaciones sobre la BD relacionadas con las prendas y sus atributos*/
-    //TODO: MODIFICAR EL METODO CREAR PRENDA
-    /**
-     * El ID del perfil que tiene la sesión abierta actualmente.
-     */
-    public static int idPerfil;
 
     /**
      * Crea una nueva prenda.
@@ -64,7 +56,7 @@ public class GestorBDPrendas {
         String tabla = ordenacion.toUpperCase().trim();
         sentenciaSQL =  "SELECT PRENDA.ID , PRENDA.NOMBRE \"NOMBRE\", COLOR.NOMBRE \"COLOR\", TIPO.NOMBRE \"TIPO\", TALLA.NOMBRE \"TALLA\" ";
         sentenciaSQL += "FROM PRENDA, COLOR, TIPO, TALLA ";
-        sentenciaSQL += "WHERE PRENDA.VISIBLE = 1 AND PRENDA.ID_PERFIL = " + idPerfil + " ";
+        sentenciaSQL += "WHERE PRENDA.VISIBLE = 1 AND PRENDA.ID_PERFIL = " + GestorBD.idPerfil + " ";
         sentenciaSQL += "AND COLOR.ID = PRENDA.COLOR AND TIPO.ID = PRENDA.TIPO AND TALLA.ID = PRENDA.TALLA ";
         sentenciaSQL += "AND (UPPER(PRENDA.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";
         sentenciaSQL += "OR UPPER(COLOR.NOMBRE) LIKE '%" + busqueda.toUpperCase() + "%' ";
@@ -234,17 +226,6 @@ public class GestorBDPrendas {
         base.close();
         cursor.close();
         return p;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void Modificar_Prenda(Context context, Prenda p) {
-        ocultar_prenda(context, p.id);
-
-        int color = GestorBD.get_id_tabla(context, "color", p.color);
-        int tipo = GestorBD.get_id_tabla(context, "tipo", p.tipo);
-        int talla = GestorBD.get_id_tabla(context, "talla", p.talla);
-
-        crear_prenda(context, p.nombre, color, tipo, talla, 1, GestorBD.idPerfil);
     }
 
     public static int crear_color(Context contexto, String nombre, String hex) {
