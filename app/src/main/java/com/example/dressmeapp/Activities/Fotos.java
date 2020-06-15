@@ -68,14 +68,13 @@ public class Fotos extends AppCompatActivity {
 
     private void guardar_foto() {
         if(ha_hecho_foto){
-            GestorBD.eliminar_foto_antigua(this,id_activo);
             Bitmap bitmap = ((BitmapDrawable)imagen.getDrawable()).getBitmap();
 
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             bitmap .compress(Bitmap.CompressFormat.PNG, 100, bos);
             byte[] img = bos.toByteArray();
 
-            GestorBDFotos.fotoActual = GestorBD.guardarFoto(this, img);
+            GestorBDFotos.fotoActual = GestorBDFotos.guardar_foto(this, img);
 
             this.finish();
         }else{

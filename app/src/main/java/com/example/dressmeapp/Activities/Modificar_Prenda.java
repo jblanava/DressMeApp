@@ -199,7 +199,7 @@ public class Modificar_Prenda extends AppCompatActivity {
     }
 
     protected void cargar_foto(int id_foto){
-        GestorBD.cargarFoto(this, id_foto, iImagen);
+        GestorBDFotos.cargar_foto(this, id_foto, iImagen);
     }
 
 

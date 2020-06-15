@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 
+import com.example.dressmeapp.BaseDatos.ExportarBD;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.Objetos.Structs.FotoBD;
 
@@ -25,12 +26,12 @@ public class Exportador
 
             exportar_fotos(context);
 
-            exportar(fw, GestorBD.expPerfil(context));
-            exportar(fw, GestorBD.expColores(context));
-            exportar(fw, GestorBD.expComboColor(context));
-            exportar(fw, GestorBD.expTallas(context));
-            exportar(fw, GestorBD.expPrendas(context));
-            exportar(fw, GestorBD.expConjuntos(context));
+            exportar(fw, ExportarBD.expPerfil(context));
+            exportar(fw, ExportarBD.expColores(context));
+            exportar(fw, ExportarBD.expComboColor(context));
+            exportar(fw, ExportarBD.expTallas(context));
+            exportar(fw, ExportarBD.expPrendas(context));
+            exportar(fw, ExportarBD.expConjuntos(context));
 
             fw.close();
         }
@@ -45,7 +46,7 @@ public class Exportador
         File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/fotos");
         dir.mkdirs();
 
-        for (FotoBD f : GestorBD.expFotos(context))
+        for (FotoBD f : ExportarBD.expFotos(context))
         {
             Bitmap bitmap = BitmapFactory.decodeByteArray(f.datos, 0 , f.datos.length);
 

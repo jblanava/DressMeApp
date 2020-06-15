@@ -12,6 +12,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDFotos;
 import com.example.dressmeapp.Debug.Debug;
 import com.example.dressmeapp.R;
 
@@ -50,6 +51,7 @@ public class PrimeraActivity extends AppCompatActivity {
     private void comprobar_foto_por_defecto() {
 
         int idmax = GestorBD.obtener_id_maximo(ct, "FOTOS");
+        Log.i("idmax", idmax + "");
         if (idmax == 1) {
 
             Resources res = getResources();
@@ -59,8 +61,9 @@ public class PrimeraActivity extends AppCompatActivity {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             byte[] bitmap_data = stream.toByteArray();
 
-            GestorBD.guardarFoto(ct, bitmap_data);
+            GestorBDFotos.guardar_foto(ct, bitmap_data);
         }
+        Log.i("idmax", GestorBD.obtener_id_maximo(ct, "FOTOS") + "");
 
     }
 }

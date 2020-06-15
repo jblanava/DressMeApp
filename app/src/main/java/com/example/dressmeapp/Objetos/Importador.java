@@ -5,6 +5,7 @@ import android.os.Environment;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
+import com.example.dressmeapp.BaseDatos.GestorBDFotos;
 import com.example.dressmeapp.BaseDatos.GestorBDPerfil;
 import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.Objetos.Structs.ColorBD;
@@ -144,7 +145,7 @@ public class Importador
 
             int id = Integer.parseInt(file.getName().split("[_.]")[1]);
 
-            Mapafotos.put(id, GestorBD.guardarFoto(context, fileData));
+            Mapafotos.put(id, GestorBDFotos.guardar_foto(context, fileData));
         }
 
     }

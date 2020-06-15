@@ -944,28 +944,7 @@ public class GestorBD {
                         /** Fotos **/
      /*********************************************************************************************************/
 
-
-
-    public static int guardarFoto(Context context, byte[] img){
-
-        int id = obtener_id_maximo(context, "FOTOS");
-
-        BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);
-        SQLiteDatabase bd;
-        bd = bdh.getWritableDatabase();
-
-        ContentValues cv = new ContentValues();
-        cv.put("FOTO", img);
-        cv.put("ID", id);
-        bd.insert("FOTOS",null, cv);
-
-        bd.close();
-        bdh.close();
-
-        return id;
-
-    }
-
+/*
     public static void eliminar_foto_antigua(Context context, String id_activo){
         String vsql = "DELETE FROM FOTOS WHERE ID = " + id_activo;
 
@@ -1223,35 +1202,9 @@ public class GestorBD {
         return conjuntos;
     }
 
-    static public List<FotoBD> expFotos(Context context) {
-        String sentenciaSQL = "SELECT * FROM FOTOS";
-
-        Cursor cursor;
-        List<FotoBD> fotos = new ArrayList<>();
-
-        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
-        SQLiteDatabase baseDatos = base.getReadableDatabase();
-
-        cursor = baseDatos.rawQuery(sentenciaSQL, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                FotoBD f = new FotoBD();
-
-                f.id = LibreriaBD.CampoInt(cursor, "ID");
-                f.datos = cursor.getBlob(cursor.getColumnIndex("FOTO"));
-
-                fotos.add(f);
-            } while (cursor.moveToNext());
-        }
-        baseDatos.close();
-        base.close();
-        cursor.close();
-
-        return fotos;
-    }
 
 
+*/
 
 
 

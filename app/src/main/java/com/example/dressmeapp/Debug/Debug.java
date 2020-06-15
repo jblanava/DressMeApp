@@ -11,9 +11,12 @@ import java.sql.ResultSet;
 
 public class Debug {
 
-    public static String get_tabla(Context contexto, String tabla, String where) {
+    public static String get_tabla(Context contexto, String tabla, String columnas, String where) {
 
-        String sentenciaSQL = "SELECT * FROM " + tabla;
+        if (columnas == null) {
+            columnas = "*";
+        }
+        String sentenciaSQL = "SELECT " + columnas + " FROM " + tabla;
         if (where != null && where.length() > 0) {
             sentenciaSQL += " WHERE " + where;
         }

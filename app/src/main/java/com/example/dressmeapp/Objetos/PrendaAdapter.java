@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
+import com.example.dressmeapp.BaseDatos.GestorBDFotos;
 import com.example.dressmeapp.R;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         holder.getColor().setText(prenda.color);
         holder.getTipo().setText(prenda.tipo);
         holder.getTalla().setText(prenda.talla);
-        GestorBD.cargarFoto(holder.itemView.getContext(), GestorBD.get_foto_de_prenda(context, prenda.id), holder.getImagen2());
+        GestorBDFotos.cargar_foto(holder.itemView.getContext(), GestorBD.get_foto_de_prenda(context, prenda.id), holder.getImagen2());
 
     }
 
@@ -110,7 +111,7 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         {
             return talla;
         }
-        Bitmap getImagen() { return GestorBD.obtenerFoto(itemView.getContext(), String.valueOf(prenda.id)); }
+        Bitmap getImagen() { return GestorBDFotos.get_foto(itemView.getContext(), String.valueOf(prenda.id)); }
 
         ImageView getImagen2() { return imagen; }
 

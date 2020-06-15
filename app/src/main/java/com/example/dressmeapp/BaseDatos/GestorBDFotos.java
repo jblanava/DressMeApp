@@ -15,6 +15,27 @@ public class GestorBDFotos {
 
     public static int fotoActual = 1;
 
+    public static int guardar_foto(Context context, byte[] img){
+
+        int id = GestorBD.obtener_id_maximo(context, "FOTOS");
+
+        BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);
+        SQLiteDatabase bd;
+        bd = bdh.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("FOTO", img);
+        cv.put("ID", id);
+        bd.insert("FOTOS",null, cv);
+
+        bd.close();
+        bdh.close();
+
+        return id;
+
+    }
+
+    /*
     public static void guardar_foto(Context context, byte [] img, String id_activo){
 
         BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);
@@ -29,6 +50,8 @@ public class GestorBDFotos {
         bd.close();
         bdh.close();
     }
+
+     */
 
     public static void eliminar_foto_antigua(Context context, String id_activo){
         String vsql = "DELETE FROM FOTOS WHERE ID = " + id_activo;

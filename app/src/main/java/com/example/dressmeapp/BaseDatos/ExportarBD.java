@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.dressmeapp.Objetos.Structs.ColorBD;
 import com.example.dressmeapp.Objetos.Structs.ComboColorBD;
 import com.example.dressmeapp.Objetos.Structs.ConjuntoBD;
+import com.example.dressmeapp.Objetos.Structs.FotoBD;
 import com.example.dressmeapp.Objetos.Structs.PerfilBD;
 import com.example.dressmeapp.Objetos.Structs.PrendaBD;
 import com.example.dressmeapp.Objetos.Structs.TallaBD;
@@ -203,5 +204,33 @@ public class ExportarBD {
         cursor.close();
 
         return conjuntos;
+    }
+
+    static public List<FotoBD> expFotos(Context context) {
+        String sentenciaSQL = "SELECT * FROM FOTOS";
+
+        Cursor cursor;
+        List<FotoBD> fotos = new ArrayList<>();
+
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+
+        cursor = baseDatos.rawQuery(sentenciaSQL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                FotoBD f = new FotoBD();
+
+                f.id = LibreriaBD.CampoInt(cursor, "ID");
+                f.datos = cursor.getBlob(cursor.getColumnIndex("FOTO"));
+
+                fotos.add(f);
+            } while (cursor.moveToNext());
+        }
+        baseDatos.close();
+        base.close();
+        cursor.close();
+
+        return fotos;
     }
 }

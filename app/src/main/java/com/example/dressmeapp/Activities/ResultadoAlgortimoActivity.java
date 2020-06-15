@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
+import com.example.dressmeapp.BaseDatos.GestorBDFotos;
 import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
 import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
@@ -144,7 +145,7 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         color.setText(prenda.color);
         tipo.setText(prenda.tipo);
         talla.setText(prenda.talla);
-        GestorBD.cargarFoto(this, prenda.id,imagen);
+        GestorBDFotos.cargar_foto(this, prenda.id,imagen);
 
         lista_prendas.addView(v);
     }
