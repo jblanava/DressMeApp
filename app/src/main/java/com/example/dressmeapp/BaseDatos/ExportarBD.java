@@ -130,6 +130,7 @@ public class ExportarBD {
                 c.talla = LibreriaBD.CampoInt(cursor,"TALLA");
                 c.tipo = LibreriaBD.CampoInt(cursor,"TIPO");
                 c.visible = LibreriaBD.CampoInt(cursor,"VISIBLE");
+                c.foto = LibreriaBD.CampoInt(cursor,"FOTO");
 
                 prendas.add(c);
             } while (cursor.moveToNext());
