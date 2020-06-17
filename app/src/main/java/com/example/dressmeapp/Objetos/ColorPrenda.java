@@ -64,4 +64,16 @@ public class ColorPrenda {
         androidColor = Color.parseColor(hex);
     }
 
+    public boolean equals(Object otro) {
+        boolean res = false;
+        if (otro instanceof ColorPrenda) {
+            ColorPrenda otroColor = (ColorPrenda)otro;
+            res = id == otroColor.id;
+        }
+        return res;
+    }
+    public int hashCode() {
+        return id;
+    }
+
 }

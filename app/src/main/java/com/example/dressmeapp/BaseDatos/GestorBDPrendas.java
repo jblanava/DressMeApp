@@ -16,18 +16,6 @@ import java.util.List;
 public class GestorBDPrendas {
     /* Incluye operaciones sobre la BD relacionadas con las prendas y sus atributos*/
 
-    /**
-     * Crea una nueva prenda.
-     *
-     * @param contexto  El contexto a usar.
-     * @param nombre    El nombre de la prenda.
-     * @param color     El color de la prenda.
-     * @param tipo      Qué tipo de prenda es.
-     * @param talla     La talla de la prenda.
-     * @param visible   Si la prenda será visible o no en la lista de prendas
-     *                  (siempre lo será en el historial)
-     * @param id_perfil El ID del perfil que tendrá la prenda.
-     */
     @SuppressLint("DefaultLocale")
     public static int crear_prenda(Context contexto, String nombre, int color, int tipo, int talla, int visible, int id_perfil, int foto) {
 
@@ -84,11 +72,11 @@ public class GestorBDPrendas {
         if (cursor.moveToFirst()) {
             do {
 
-                int id = LibreriaBD.CampoInt(cursor, "ID");
-                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-                String color = LibreriaBD.Campo(cursor, "COLOR");
-                String tipo = LibreriaBD.Campo(cursor, "TIPO");
-                String talla = LibreriaBD.Campo(cursor, "TALLA");
+                int id = LibreriaBD.campo_int(cursor, "ID");
+                String nombre = LibreriaBD.campo_string(cursor, "NOMBRE");
+                String color = LibreriaBD.campo_string(cursor, "COLOR");
+                String tipo = LibreriaBD.campo_string(cursor, "TIPO");
+                String talla = LibreriaBD.campo_string(cursor, "TALLA");
 
                 res.add(new Prenda(id, nombre, color, tipo, talla));
 
@@ -100,13 +88,6 @@ public class GestorBDPrendas {
         return res;
     }
 
-    /**
-     * Pone el flag "visible" a 0 en una prenda, ocultándola en la lista de prendas y en
-     * el algoritmo vestidor pero no en el historial.
-     *
-     * @param contexto El contexto a usar.
-     * @param idPrenda El ID de la prenda a borrar.
-     */
     public static void ocultar_prenda(Context contexto, int idPrenda) { // este metodo es para cambiar la visibilidad, pero la prenda se mantiene en la base de datos
 
         String SentenciaSQL;
@@ -122,12 +103,6 @@ public class GestorBDPrendas {
         base.close();
     }
 
-    /**
-     * Borra definitivamente la prenda indicada
-     *
-     * @param contexto El contexto a usar.
-     * @param id       El ID de la prenda que quieres borrar
-     */
     public static void borrar_prenda(Context contexto, int id) {
         String SentenciaSQL;
         SentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + id;
@@ -166,9 +141,9 @@ public class GestorBDPrendas {
         if (cursor.moveToFirst()) {
             do {
 
-                int id = LibreriaBD.CampoInt(cursor, "ID");
-                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-                String hex = LibreriaBD.Campo(cursor, "HEX");
+                int id = LibreriaBD.campo_int(cursor, "ID");
+                String nombre = LibreriaBD.campo_string(cursor, "NOMBRE");
+                String hex = LibreriaBD.campo_string(cursor, "HEX");
 
                 res.add(new ColorPrenda(id, nombre, hex));
 
@@ -213,10 +188,10 @@ public class GestorBDPrendas {
 
         if (cursor.moveToFirst()) {
 
-            String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-            String  color = LibreriaBD.Campo(cursor, "COLOR");
-            String tipo = LibreriaBD.Campo(cursor, "TIPO");
-            String talla = LibreriaBD.Campo(cursor, "TALLA");
+            String nombre = LibreriaBD.campo_string(cursor, "NOMBRE");
+            String  color = LibreriaBD.campo_string(cursor, "COLOR");
+            String tipo = LibreriaBD.campo_string(cursor, "TIPO");
+            String talla = LibreriaBD.campo_string(cursor, "TALLA");
 
 
             p = new Prenda(id, nombre, color, tipo, talla);
@@ -242,14 +217,6 @@ public class GestorBDPrendas {
         return id;
     }
 
-    /**
-     * Crea una nuevo par de colores que el algoritmo vestidor considera que
-     * combinan bien.
-     * @param contexto El contexto a usar.
-     * @param color1 El primer color.
-     * @param color2 El segundo color.
-     * @return True si ha habido éxito (no se repite en la BD)
-     */
     public static boolean crear_combo_color(Context contexto, int color1, int color2){
 
         boolean repetido = false;
@@ -353,7 +320,7 @@ public class GestorBDPrendas {
         if (cursor.moveToFirst()) {
             do {
 
-                int combo = LibreriaBD.CampoInt(cursor, "COLOR2");
+                int combo = LibreriaBD.campo_int(cursor, "COLOR2");
 
                 colores .add(combo);
 

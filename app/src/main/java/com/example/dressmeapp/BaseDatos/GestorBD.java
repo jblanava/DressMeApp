@@ -1,21 +1,8 @@
 package com.example.dressmeapp.BaseDatos;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.widget.ImageView;
-
-import com.example.dressmeapp.Objetos.Structs.ColorBD;
-import com.example.dressmeapp.Objetos.Structs.ComboColorBD;
-import com.example.dressmeapp.Objetos.Structs.ConjuntoBD;
-import com.example.dressmeapp.Objetos.Structs.FotoBD;
-import com.example.dressmeapp.Objetos.Structs.PerfilBD;
-import com.example.dressmeapp.Objetos.Structs.PrendaBD;
-import com.example.dressmeapp.Objetos.Structs.TallaBD;
-import com.example.dressmeapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +26,7 @@ public class GestorBD {
         cursor = baseDatos.rawQuery(sentenciaSQL, null);
         if (cursor.moveToFirst()) {
             do {
-                resultado = LibreriaBD.CampoInt(cursor, "MAXID");
+                resultado = LibreriaBD.campo_int(cursor, "MAXID");
             } while (cursor.moveToNext());
         }
         resultado++;
@@ -427,7 +414,7 @@ public class GestorBD {
         if (cursor.moveToFirst()) {
             do {
 
-                String nombre = LibreriaBD.Campo(cursor, "NOMBRE");
+                String nombre = LibreriaBD.campo_string(cursor, "NOMBRE");
 
                 res.add(nombre);
 
@@ -451,7 +438,7 @@ public class GestorBD {
         int id = -1;
 
         if (cursor.moveToFirst()) {
-            id = LibreriaBD.CampoInt(cursor, "ID");
+            id = LibreriaBD.campo_int(cursor, "ID");
         }
 
         baseDatos.close();
@@ -475,7 +462,7 @@ public class GestorBD {
         if (cursor.moveToFirst()) {
             do {
 
-                int id = LibreriaBD.CampoInt(cursor, "ID");
+                int id = LibreriaBD.campo_int(cursor, "ID");
 
                 res.add(id);
 

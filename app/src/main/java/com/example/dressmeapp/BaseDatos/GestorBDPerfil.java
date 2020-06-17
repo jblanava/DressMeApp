@@ -121,7 +121,7 @@ public class GestorBDPerfil {
         BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getWritableDatabase();
         Cursor cursor = baseDatos.rawQuery(SentenciaSQL, null);
-        if (cursor.moveToFirst()) res = LibreriaBD.Campo(cursor, "NOMBRE");
+        if (cursor.moveToFirst()) res = LibreriaBD.campo_string(cursor, "NOMBRE");
         base.close();
         baseDatos.close();
         cursor.close();
@@ -134,7 +134,7 @@ public class GestorBDPerfil {
         BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getWritableDatabase();
         Cursor cursor = baseDatos.rawQuery(SentenciaSQL, null);
-        if (cursor.moveToFirst()) res = LibreriaBD.Campo(cursor, "CONTRASENIA");
+        if (cursor.moveToFirst()) res = LibreriaBD.campo_string(cursor, "CONTRASENIA");
         base.close();
         baseDatos.close();
         cursor.close();

@@ -37,16 +37,14 @@ public class TestsAlgoritmo {
     @Test
     public void borrarConjuntoFuncionaBien() {
 
-        // Crear conjunto
-
-        int idPerfil = GestorBD.obtener_id_maximo(appContext, "PERFIL");
-        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        // Crear perfil y loguearnos en él
+        int idPerfil = GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
         GestorBD.idPerfil = idPerfil;
 
+        // Crear y añadir el conjunto
         Conjunto cjto = new Conjunto("test");
         int idCjto = GestorBD.obtener_id_maximo(appContext, "CONJUNTO");
         cjto.add(idCjto);
-
         int[] idsPrenda = new int[6];
         int[] tiposPrenda = {1, 13, 4, 11, 16, 8};
         for (int i = 0; i < 6; i++) {
@@ -54,15 +52,15 @@ public class TestsAlgoritmo {
             GestorBDPrendas.crear_prenda(appContext, "test" + (i + 1), 1, tiposPrenda[i], 1, 1, idPerfil);
             cjto.add(idsPrenda[i]);
         }
-
         GestorBDAlgoritmo.add_conjunto(appContext, cjto, 0);
 
+        // Extraer número de conjuntos antes
         int numConjuntosAntes = GestorBD.get_ids_tabla(appContext, "CONJUNTO").size();
 
         // Borrarlo
-
         GestorBDPrendas.borrar_conjunto(appContext, idCjto);
 
+        // Extraer número de conjuntos después y asegurarnos de que es uno menos
         int numConjuntosDespues = GestorBD.get_ids_tabla(appContext, "CONJUNTO").size();
         assertEquals(numConjuntosDespues, numConjuntosAntes - 1);
 
@@ -93,8 +91,7 @@ public class TestsAlgoritmo {
     @Test
     public void obtenIDMaximoConjuntoFuncionaBien() {
 
-        int idPerfil = GestorBD.obtener_id_maximo(appContext, "PERFIL");
-        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        int idPerfil = GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
 
         Conjunto cjto = new Conjunto("test");
         int idCjto = GestorBD.obtener_id_maximo(appContext, "CONJUNTO");
@@ -108,10 +105,9 @@ public class TestsAlgoritmo {
             cjto.add(idsPrenda[i]);
         }
 
-        GestorBDAlgoritmo.add_conjunto(appContext, cjto, 0);
-        int idCjtoDespues = GestorBD.obtener_id_maximo(appContext, "CONJUNTO");
+        int idCjtoDespues = GestorBDAlgoritmo.add_conjunto(appContext, cjto, 0);
 
-        assertEquals(idCjtoDespues, idCjto + 1);
+        assertEquals(idCjtoDespues, idCjto);
 
     }
 
@@ -120,8 +116,7 @@ public class TestsAlgoritmo {
 
         int cjtosExistentesAntes = GestorBD.get_ids_tabla(appContext, "CONJUNTO").size();
 
-        int idPerfil = GestorBD.obtener_id_maximo(appContext, "PERFIL");
-        GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
+        int idPerfil = GestorBDPerfil.crear_perfil(appContext, "foo", "bar");
         GestorBD.idPerfil = idPerfil;
 
         Conjunto cjto = new Conjunto("test!");
@@ -164,5 +159,7 @@ public class TestsAlgoritmo {
         assertEquals(1, ok);
 
     }
+
+
 
 }

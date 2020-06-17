@@ -101,8 +101,8 @@ public class GestorBDAlgoritmo {
         if (cursor.moveToFirst()) {
             do {
 
-                int id = LibreriaBD.CampoInt(cursor, "ID");
-                int tipo = LibreriaBD.CampoInt(cursor, "TIPO");
+                int id = LibreriaBD.campo_int(cursor, "ID");
+                int tipo = LibreriaBD.campo_int(cursor, "TIPO");
 
 
                 int pActividad = tipo_actividad(context, tipo);
@@ -147,7 +147,7 @@ public class GestorBDAlgoritmo {
 
         if (cursor.moveToFirst()) {
             do {
-                res = LibreriaBD.CampoInt(cursor, "ACTIVIDAD");
+                res = LibreriaBD.campo_int(cursor, "ACTIVIDAD");
             } while (cursor.moveToNext());
         }
         return res;
@@ -165,7 +165,7 @@ public class GestorBDAlgoritmo {
 
         if (cursor.moveToFirst()) {
             do {
-                res = LibreriaBD.CampoInt(cursor, "TIEMPO");
+                res = LibreriaBD.campo_int(cursor, "TIEMPO");
             } while (cursor.moveToNext());
         }
         return res;
@@ -188,15 +188,15 @@ public class GestorBDAlgoritmo {
         if (cursor.moveToFirst()) {
             do {
 
-                Conjunto c = new Conjunto(LibreriaBD.Campo(cursor, "NOMBRE_EVENTO"));
+                Conjunto c = new Conjunto(LibreriaBD.campo_string(cursor, "NOMBRE_EVENTO"));
 
-                int id = LibreriaBD.CampoInt(cursor, "ID");
-                int Abrigo = LibreriaBD.CampoInt(cursor, "ABRIGO");
-                int Sudadera = LibreriaBD.CampoInt(cursor, "SUDADERA");
-                int Camiseta = LibreriaBD.CampoInt(cursor, "CAMISETA");
-                int Pantalon = LibreriaBD.CampoInt(cursor, "PANTALON");
-                int Zapato = LibreriaBD.CampoInt(cursor, "ZAPATO");
-                int Complemento = LibreriaBD.CampoInt(cursor, "COMPLEMENTO");
+                int id = LibreriaBD.campo_int(cursor, "ID");
+                int Abrigo = LibreriaBD.campo_int(cursor, "ABRIGO");
+                int Sudadera = LibreriaBD.campo_int(cursor, "SUDADERA");
+                int Camiseta = LibreriaBD.campo_int(cursor, "CAMISETA");
+                int Pantalon = LibreriaBD.campo_int(cursor, "PANTALON");
+                int Zapato = LibreriaBD.campo_int(cursor, "ZAPATO");
+                int Complemento = LibreriaBD.campo_int(cursor, "COMPLEMENTO");
 
                 c.add(id);
                 c.add(Abrigo);
@@ -234,15 +234,15 @@ public class GestorBDAlgoritmo {
         if (cursor.moveToFirst()) {
             do {
 
-                Conjunto c = new Conjunto(LibreriaBD.Campo(cursor, "NOMBRE_EVENTO"));
+                Conjunto c = new Conjunto(LibreriaBD.campo_string(cursor, "NOMBRE_EVENTO"));
 
-                int id = LibreriaBD.CampoInt(cursor, "ID");
-                int Abrigo = LibreriaBD.CampoInt(cursor, "ABRIGO");
-                int Sudadera = LibreriaBD.CampoInt(cursor, "SUDADERA");
-                int Camiseta = LibreriaBD.CampoInt(cursor, "CAMISETA");
-                int Pantalon = LibreriaBD.CampoInt(cursor, "PANTALON");
-                int Zapato = LibreriaBD.CampoInt(cursor, "ZAPATO");
-                int Complemento = LibreriaBD.CampoInt(cursor, "COMPLEMENTO");
+                int id = LibreriaBD.campo_int(cursor, "ID");
+                int Abrigo = LibreriaBD.campo_int(cursor, "ABRIGO");
+                int Sudadera = LibreriaBD.campo_int(cursor, "SUDADERA");
+                int Camiseta = LibreriaBD.campo_int(cursor, "CAMISETA");
+                int Pantalon = LibreriaBD.campo_int(cursor, "PANTALON");
+                int Zapato = LibreriaBD.campo_int(cursor, "ZAPATO");
+                int Complemento = LibreriaBD.campo_int(cursor, "COMPLEMENTO");
 
                 c.add(id);
                 c.add(Abrigo);
@@ -264,7 +264,7 @@ public class GestorBDAlgoritmo {
 
     }
 
-    public static void add_conjunto(Context contexto, Conjunto conj, int flag) {
+    public static int add_conjunto(Context contexto, Conjunto conj, int flag) {
 
         int id = GestorBD.obtener_id_maximo(contexto, "CONJUNTO"); // ID
 
@@ -328,6 +328,7 @@ public class GestorBDAlgoritmo {
             baseDatos.close();
             base.close();
         }
+        return id;
 
     }
 

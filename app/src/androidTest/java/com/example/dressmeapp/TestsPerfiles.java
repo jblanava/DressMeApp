@@ -13,8 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -38,7 +37,6 @@ public class TestsPerfiles {
     public void insertarPerfilFuncionaBien() {
 
         GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba", "ContraseñaPrueba");
-        assertTrue(GestorBDPerfil.usuario_existe(appContext, "UsuarioPrueba"));
         assertTrue(GestorBDPerfil.pass_correcta(appContext, "UsuarioPrueba", "ContraseñaPrueba"));
 
     }
@@ -47,8 +45,7 @@ public class TestsPerfiles {
     public void obtenerIDMaximoPerfilFuncionaBien() {
 
         int maxCalculado = GestorBD.obtener_id_maximo(appContext, "PERFIL");
-        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
-        int maxNuevoPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "UsuarioPrueba2");
+        int maxNuevoPerfil = GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba2", "ContraseñaPrueba2");
 
         assertEquals(maxCalculado, maxNuevoPerfil);
 
@@ -57,37 +54,18 @@ public class TestsPerfiles {
     @Test
     public void borrarPerfilFuncionaBien() {
 
-        int perfilesAntes = 0;
-        int perfilesDespues = 0;
+        int idNuevo = GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba3", "ContraseñaPrueba3");
+        GestorBDPerfil.borrar_perfil(appContext, idNuevo);
 
-        String sentencia = "SELECT COUNT(*) FROM PERFIL";
-        BaseDatos bd = new BaseDatos(appContext, BaseDatos.nombreBD);
-        SQLiteDatabase sqLiteDatabase = bd.getReadableDatabase();
-
-        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba3", "ContraseñaPrueba3");
-        int maxNuevoPerfil = GestorBD.get_id_tabla(appContext, "PERFIL", "UsuarioPrueba3");
-
-        Cursor cur = sqLiteDatabase.rawQuery(sentencia, null);
-        if (cur.moveToFirst()) {
-            perfilesAntes = cur.getInt(0);
-        }
-
-        GestorBDPerfil.borrar_perfil(appContext, maxNuevoPerfil);
-
-        cur = sqLiteDatabase.rawQuery(sentencia, null);
-        if (cur.moveToFirst()) {
-            perfilesDespues = cur.getInt(0);
-        }
-
-        assertEquals(perfilesDespues, perfilesAntes - 1);
+        assertFalse(GestorBDPerfil.usuario_existe(appContext, "UsuarioPrueba3"));
 
     }
 
     @Test
     public void actualizarPerfilFuncionaBien() {
 
-        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
-        int id = GestorBD.get_id_tabla(appContext, "PERFIL", "UsuarioPrueba4");
+
+        int id = GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba4", "ContraseñaPrueba4");
 
         GestorBDPerfil.actualizar_perfil(appContext, id, "NuevaContraseña");
 
@@ -97,22 +75,14 @@ public class TestsPerfiles {
 
     @Test
     public void getUserFuncionaBien() {
-
-        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba5", "ContraseñaPrueba5");
-        int id = GestorBD.get_id_tabla(appContext, "PERFIL", "UsuarioPrueba5");
-
+        int id = GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba5", "ContraseñaPrueba5");
         assertEquals("UsuarioPrueba5", GestorBDPerfil.get_usuario(appContext, id));
-
     }
 
     @Test
     public void getPassFuncionaBien() {
-
-        GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba6", "ContraseñaPrueba6");
-        int id = GestorBD.get_id_tabla(appContext, "PERFIL", "UsuarioPrueba6");
-
+        int id = GestorBDPerfil.crear_perfil(appContext, "UsuarioPrueba6", "ContraseñaPrueba6");
         assertEquals("ContraseñaPrueba6", GestorBDPerfil.get_contrasenia(appContext, id));
-
     }
 
 }

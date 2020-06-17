@@ -34,9 +34,9 @@ public class ExportarBD {
             do {
                 ColorBD c = new ColorBD();
 
-                c.id = LibreriaBD.CampoInt(cursor, "ID");
-                c.nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-                c.hex = LibreriaBD.Campo(cursor, "HEX");
+                c.id = LibreriaBD.campo_int(cursor, "ID");
+                c.nombre = LibreriaBD.campo_string(cursor, "NOMBRE");
+                c.hex = LibreriaBD.campo_string(cursor, "HEX");
 
                 colores.add(c);
             } while (cursor.moveToNext());
@@ -63,9 +63,9 @@ public class ExportarBD {
             do {
                 ComboColorBD cc = new ComboColorBD();
 
-                cc.id = LibreriaBD.CampoInt(cursor, "ID");
-                cc.color1 = LibreriaBD.CampoInt(cursor, "COLOR1");
-                cc.color2 = LibreriaBD.CampoInt(cursor, "COLOR2");
+                cc.id = LibreriaBD.campo_int(cursor, "ID");
+                cc.color1 = LibreriaBD.campo_int(cursor, "COLOR1");
+                cc.color2 = LibreriaBD.campo_int(cursor, "COLOR2");
 
                 combos.add(cc);
             } while (cursor.moveToNext());
@@ -93,9 +93,9 @@ public class ExportarBD {
             do {
                 PerfilBD c = new PerfilBD();
 
-                c.id = LibreriaBD.CampoInt(cursor, "ID");
-                c.clave = LibreriaBD.Campo(cursor, "CONTRASENIA");
-                c.usuario = LibreriaBD.Campo(cursor, "NOMBRE");
+                c.id = LibreriaBD.campo_int(cursor, "ID");
+                c.clave = LibreriaBD.campo_string(cursor, "CONTRASENIA");
+                c.usuario = LibreriaBD.campo_string(cursor, "NOMBRE");
 
                 perfiles.add(c);
             } while (cursor.moveToNext());
@@ -123,14 +123,14 @@ public class ExportarBD {
             do {
                 PrendaBD c = new PrendaBD();
 
-                c.id = LibreriaBD.CampoInt(cursor, "ID");
-                c.color = LibreriaBD.CampoInt(cursor, "COLOR");
-                c.nombre = LibreriaBD.Campo(cursor, "NOMBRE");
-                c.perfil = LibreriaBD.CampoInt(cursor,"ID_PERFIL");
-                c.talla = LibreriaBD.CampoInt(cursor,"TALLA");
-                c.tipo = LibreriaBD.CampoInt(cursor,"TIPO");
-                c.visible = LibreriaBD.CampoInt(cursor,"VISIBLE");
-                c.foto = LibreriaBD.CampoInt(cursor,"FOTO");
+                c.id = LibreriaBD.campo_int(cursor, "ID");
+                c.color = LibreriaBD.campo_int(cursor, "COLOR");
+                c.nombre = LibreriaBD.campo_string(cursor, "NOMBRE");
+                c.perfil = LibreriaBD.campo_int(cursor,"ID_PERFIL");
+                c.talla = LibreriaBD.campo_int(cursor,"TALLA");
+                c.tipo = LibreriaBD.campo_int(cursor,"TIPO");
+                c.visible = LibreriaBD.campo_int(cursor,"VISIBLE");
+                c.foto = LibreriaBD.campo_int(cursor,"FOTO");
 
                 prendas.add(c);
             } while (cursor.moveToNext());
@@ -157,9 +157,9 @@ public class ExportarBD {
             do {
                 TallaBD c = new TallaBD();
 
-                c.id = LibreriaBD.CampoInt(cursor, "ID");
+                c.id = LibreriaBD.campo_int(cursor, "ID");
 
-                c.nombre = LibreriaBD.Campo(cursor, "NOMBRE");
+                c.nombre = LibreriaBD.campo_string(cursor, "NOMBRE");
 
                 tallas.add(c);
             } while (cursor.moveToNext());
@@ -187,14 +187,14 @@ public class ExportarBD {
             do {
                 ConjuntoBD c = new ConjuntoBD();
 
-                c.id = LibreriaBD.CampoInt(cursor, "ID");
-                c.prendas[0] = LibreriaBD.CampoInt(cursor, "ABRIGO");
-                c.prendas[1] = LibreriaBD.CampoInt(cursor, "SUDADERA");
-                c.prendas[2] = LibreriaBD.CampoInt(cursor, "CAMISETA");
-                c.prendas[3] = LibreriaBD.CampoInt(cursor, "PANTALON");
-                c.prendas[4] = LibreriaBD.CampoInt(cursor, "ZAPATO");
-                c.prendas[5] = LibreriaBD.CampoInt(cursor, "COMPLEMENTO");
-                c.perfil = LibreriaBD.CampoInt(cursor,"ID_PERFIL");
+                c.id = LibreriaBD.campo_int(cursor, "ID");
+                c.prendas[0] = LibreriaBD.campo_int(cursor, "ABRIGO");
+                c.prendas[1] = LibreriaBD.campo_int(cursor, "SUDADERA");
+                c.prendas[2] = LibreriaBD.campo_int(cursor, "CAMISETA");
+                c.prendas[3] = LibreriaBD.campo_int(cursor, "PANTALON");
+                c.prendas[4] = LibreriaBD.campo_int(cursor, "ZAPATO");
+                c.prendas[5] = LibreriaBD.campo_int(cursor, "COMPLEMENTO");
+                c.perfil = LibreriaBD.campo_int(cursor,"ID_PERFIL");
 
 
                 conjuntos.add(c);
@@ -222,7 +222,7 @@ public class ExportarBD {
             do {
                 FotoBD f = new FotoBD();
 
-                f.id = LibreriaBD.CampoInt(cursor, "ID");
+                f.id = LibreriaBD.campo_int(cursor, "ID");
                 f.datos = cursor.getBlob(cursor.getColumnIndex("FOTO"));
 
                 fotos.add(f);
