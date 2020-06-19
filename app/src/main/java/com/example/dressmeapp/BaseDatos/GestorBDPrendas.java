@@ -205,6 +205,7 @@ public class GestorBDPrendas {
 
     public static int crear_color(Context contexto, String nombre, String hex) {
         int id = GestorBD.obtener_id_maximo(contexto, "color");
+        int id_combo_reflexivo = GestorBD.obtener_id_maximo(contexto, "combo_color");
         String sentenciaSQL;
         sentenciaSQL = "INSERT INTO COLOR (ID, NOMBRE, HEX) VALUES (" + id + ", '" + nombre + "', '" + hex + "')";
 
@@ -212,6 +213,11 @@ public class GestorBDPrendas {
         SQLiteDatabase baseDatos;
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(sentenciaSQL);
+
+        // Esto es para asegurarnos de que la relación COMBO_COLOR sea reflexiva
+        baseDatos.execSQL("INSERT INTO COMBO_COLOR (ID, COLOR1, COLOR2)" +
+                "VALUES (" + id_combo_reflexivo + ", " + id + ", " + id + ")");
+
         baseDatos.close();
         base.close();
         return id;
