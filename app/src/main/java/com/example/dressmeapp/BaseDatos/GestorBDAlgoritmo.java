@@ -49,7 +49,7 @@ public class GestorBDAlgoritmo {
 
         if(idPantalon == -1 || idZapatos == -1)
         {
-            return null; // TODO esto es una chapuza que luego abra que solucionar
+            return null;
         }
 
         Conjunto res = new Conjunto(nombreEvento);

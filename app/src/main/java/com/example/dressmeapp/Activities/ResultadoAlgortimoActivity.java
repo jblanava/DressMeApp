@@ -94,8 +94,6 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
         int actividad = mIntent.getIntExtra("formalidad", 0);
         String nombreEvento = mIntent.getStringExtra("nombre");
 
-        // TODO esta es la mayor chapuza de la historia
-
         conjunto = GestorBDAlgoritmo.get_conjunto_algoritmo(this, tiempo, actividad, nombreEvento);
 
         if(conjunto == null)
