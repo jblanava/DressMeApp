@@ -11,7 +11,7 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
 
-    public static String nombreBD = "dressmeapp35.db";
+    public static String nombreBD = "dressmeapp36.db";
 
     public BaseDatos(Context contexto, String nombrebd) {
         super(contexto, nombrebd, null, VERSION);
@@ -152,48 +152,41 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     private void crearColor(SQLiteDatabase db) {
 
-        db.execSQL( "INSERT INTO COLOR VALUES (1  , 'AZUL', '#0000FF') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (2  , 'AMARILLO', '#FFFF00') ") ;
+        db.execSQL( "INSERT INTO COLOR VALUES (1  , 'AZUL', '#38D5F5') ") ;
+        db.execSQL( "INSERT INTO COLOR VALUES (2  , 'AMARILLO', '#F0F266') ") ;
         db.execSQL( "INSERT INTO COLOR VALUES (3  , 'BLANCO', '#FFFFFF') ") ;
         db.execSQL( "INSERT INTO COLOR VALUES (4  , 'GRIS', '#808080') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (5  , 'MARRON', '#804000') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (6  , 'MORADO', '#7D2787') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (7  , 'NARANJA', '#FC8F00') ") ;
+        db.execSQL( "INSERT INTO COLOR VALUES (5  , 'MARRON', '#A05000') ") ;
+        db.execSQL( "INSERT INTO COLOR VALUES (6  , 'MORADO', '#A116AB') ") ;
+        db.execSQL( "INSERT INTO COLOR VALUES (7  , 'NARANJA', '#F7BB4A') ") ;
         db.execSQL( "INSERT INTO COLOR VALUES (8  , 'NEGRO', '#000000') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (9  , 'ROJO', '#FF0000') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (10  , 'ROSA', '#F989C1') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (11  , 'VERDE', '#22ED0B') ") ;
-        db.execSQL( "INSERT INTO COLOR VALUES (12 , 'VIOLETA', '#8827C4') ") ;
+        db.execSQL( "INSERT INTO COLOR VALUES (9  , 'ROJO', '#FF3333') ") ;
+        db.execSQL( "INSERT INTO COLOR VALUES (10  , 'ROSA', '#E277E6') ") ;
+        db.execSQL( "INSERT INTO COLOR VALUES (11  , 'VERDE', '#92FF70') ") ;
+        db.execSQL( "INSERT INTO COLOR VALUES (12 , 'VIOLETA', '#DAB1FA') ") ;
 
     }
-    private void crearCombo(SQLiteDatabase db){
-
+    private void crearCombo(SQLiteDatabase db)
+    {
         db.execSQL("INSERT INTO COMBO_COLOR VALUES (1,2,3)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (2,4,5)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (3,3,5)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (4,10,3)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (5,3,2)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (6,5,4)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (7,5,3)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (8,3,10)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (9,1,10)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (10,3,1)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (11,10,1)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (12,1,3)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (13,5,2)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (14,2,5)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (15,1,1)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (16,2,2)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (17,3,3)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (18,4,4)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (19,5,5)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (20,6,6)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (21,7,7)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (22,8,8)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (23,9,9)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (24,10,10)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (25,11,11)");
-        db.execSQL("INSERT INTO COMBO_COLOR VALUES (26,12,12)");
-
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (2,10,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (3,3,2)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (4,3,10)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (5,1,10)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (6,3,1)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (7,10,1)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (8,1,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (9,1,1)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (10,2,2)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (11,3,3)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (12,4,4)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (13,5,5)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (14,6,6)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (15,7,7)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (16,8,8)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (17,9,9)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (18,10,10)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (19,11,11)");
+        db.execSQL("INSERT INTO COMBO_COLOR VALUES (20,12,12)");
     }
 }
