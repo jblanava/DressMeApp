@@ -105,14 +105,32 @@ public class GestorBDPrendas {
 
     public static void borrar_prenda(Context contexto, int id) {
         String SentenciaSQL;
-        SentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + id;
+
+        SentenciaSQL = "SELECT FOTO FROM PRENDA WHERE ID = " + id;
 
         BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
-        SQLiteDatabase baseDatos;
+        SQLiteDatabase baseDatos = base.getReadableDatabase();
+        Cursor cursor = baseDatos.rawQuery(SentenciaSQL, null);
+
+        int id_foto = -1;
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                id_foto = LibreriaBD.campo_int(cursor, "FOTO");
+
+            } while (cursor.moveToNext());
+        }
+
+        if(id_foto > 1) GestorBDFotos.eliminar_foto(contexto, id_foto);
+
+        SentenciaSQL = "DELETE FROM PRENDA WHERE ID = " + id;
+
         baseDatos = base.getWritableDatabase();
         baseDatos.execSQL(SentenciaSQL);
         baseDatos.close();
         base.close();
+        cursor.close();
     }
 
     public static void borrar_conjunto(Context context, int idConjunto) {

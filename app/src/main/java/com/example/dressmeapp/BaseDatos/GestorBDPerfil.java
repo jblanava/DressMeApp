@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.List;
+
 public class GestorBDPerfil {
     /* Operaciones relacionadas con el perfil y la tabla PERFIL */
 
@@ -87,7 +89,19 @@ public class GestorBDPerfil {
     public static void borrar_perfil(Context contexto, int id) {
 
         String borrarPerfiles = "DELETE FROM PERFIL WHERE ID = " + id;
-        String borrarPrendas = "DELETE FROM PRENDA WHERE ID_PERFIL = " + id;
+/*
+        Log.i("info" , Debug.get_tabla(contexto, "fotos", "ID", null));
+        Log.i("info" , Debug.get_tabla(contexto, "prenda", "ID", "ID_PERFIL = " + id));
+*/
+        List<Integer> prendas = GestorBD.get_ids_tabla(contexto, "prenda");
+        for (int id_prenda: prendas)
+        {
+            GestorBDPrendas.borrar_prenda(contexto, id_prenda);
+        }
+/*
+        Log.i("info" , Debug.get_tabla(contexto, "fotos", "ID", null));
+        Log.i("info" , Debug.get_tabla(contexto, "prenda", "ID", "ID_PERFIL = " + id));
+*/
         String borrarConjuntos = "DELETE FROM CONJUNTO WHERE ID_PERFIL = " + id;
 
         BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
@@ -95,7 +109,6 @@ public class GestorBDPerfil {
         baseDatos = base.getWritableDatabase();
 
         baseDatos.execSQL(borrarPerfiles);
-        baseDatos.execSQL(borrarPrendas);
         baseDatos.execSQL(borrarConjuntos);
 
         baseDatos.close();

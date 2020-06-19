@@ -35,26 +35,8 @@ public class GestorBDFotos {
 
     }
 
-    /*
-    public static void guardar_foto(Context context, byte [] img, String id_activo){
-
-        BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);
-        SQLiteDatabase bd;
-        bd = bdh.getWritableDatabase();
-
-        ContentValues cv = new ContentValues();
-        cv.put("FOTO", img);
-        cv.put("ID", Integer.parseInt(id_activo));
-        bd.insert("FOTOS",null, cv);
-
-        bd.close();
-        bdh.close();
-    }
-
-     */
-
-    public static void eliminar_foto_antigua(Context context, String id_activo){
-        String vsql = "DELETE FROM FOTOS WHERE ID = " + id_activo;
+    public static void eliminar_foto(Context context, int id){
+        String vsql = "DELETE FROM FOTOS WHERE ID = " + id;
 
         BaseDatos bdh = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase bd;
