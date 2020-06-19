@@ -10,7 +10,7 @@ import android.widget.*;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.R;
 
-public class AlgoritmoRecomendador extends AppCompatActivity {
+public class AlgoritmoRecomendadorActivity extends AppCompatActivity {
 
     String[] formalidades = {"Formal", "Semi-formal", "Casual", "Deportivo", "Baño"};
     String[] temperaturas = {"Frio", "Normal", "Calor"};

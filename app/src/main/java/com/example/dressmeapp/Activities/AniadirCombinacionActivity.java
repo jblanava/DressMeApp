@@ -24,7 +24,7 @@ import com.example.dressmeapp.R;
 
 import java.util.List;
 
-public class AniadirCombinacion extends AppCompatActivity {
+public class AniadirCombinacionActivity extends AppCompatActivity {
 
     RecyclerView comboColorView;
     Spinner Scolor1;
@@ -69,10 +69,10 @@ public class AniadirCombinacion extends AppCompatActivity {
         int c2 = Scolor2.getSelectedItemPosition() + 1;
 
         if (GestorBDPrendas.crear_combo_color(this, c1, c2)) {
-            Toast.makeText(AniadirCombinacion.this, "Se ha guardado la combinacion indicada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AniadirCombinacionActivity.this, "Se ha guardado la combinacion indicada", Toast.LENGTH_SHORT).show();
             mostrarCombos();
         } else {
-            Toast.makeText(AniadirCombinacion.this, "Combinación de colores ya registrada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AniadirCombinacionActivity.this, "Combinación de colores ya registrada", Toast.LENGTH_SHORT).show();
         }
 
 

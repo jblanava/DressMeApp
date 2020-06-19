@@ -48,7 +48,7 @@ public class RecomendadorActivity extends AppCompatActivity {
     }
 
     private void saltoAlgoritmo(){
-        Intent salto = new Intent(this,AlgoritmoRecomendador.class);
+        Intent salto = new Intent(this, AlgoritmoRecomendadorActivity.class);
         startActivity(salto);
     }
     private  void saltoHistorial(){

@@ -23,7 +23,7 @@ import com.example.dressmeapp.R;
 
 import java.util.List;
 
-public class Modificar_Prenda extends AppCompatActivity {
+public class ModificarPrendaActivity extends AppCompatActivity {
 
     EditText eNombre;
     Spinner sColor;
@@ -121,7 +121,7 @@ public class Modificar_Prenda extends AppCompatActivity {
         Intent mi_intent = getIntent();
         int id = mi_intent.getIntExtra("intVariableName", 0);
 
-        Intent nueva_ventana = new Intent(this,Fotos.class);
+        Intent nueva_ventana = new Intent(this, FotosActivity.class);
         nueva_ventana.putExtra("id_modificar", String.valueOf(id));
         startActivity(nueva_ventana);
     }
