@@ -17,13 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBDFotos;
 import com.example.dressmeapp.R;
 
 import java.io.ByteArrayOutputStream;
 
-public class Fotos extends AppCompatActivity {
+public class FotosActivity extends AppCompatActivity {
 
 
     String id_activo;
@@ -78,7 +77,7 @@ public class Fotos extends AppCompatActivity {
 
             this.finish();
         }else{
-            Toast.makeText(Fotos.this, "No hay foto para subir", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FotosActivity.this, "No hay foto para subir", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -111,7 +110,7 @@ public class Fotos extends AppCompatActivity {
             CODIGO_PERMISOS_ALMACENAMIENTO = 2;
 
     private void verificarYPedirPermisosDeCamara() {
-        int estadoDePermiso = ContextCompat.checkSelfPermission(Fotos.this, Manifest.permission.CAMERA);
+        int estadoDePermiso = ContextCompat.checkSelfPermission(FotosActivity.this, Manifest.permission.CAMERA);
         if (estadoDePermiso == PackageManager.PERMISSION_GRANTED) {
             // En caso de que haya dado permisos ponemos la bandera en true
             // y llamar al método
@@ -119,7 +118,7 @@ public class Fotos extends AppCompatActivity {
             toma_foto_2();
         } else {
             // Si no, entonces pedimos permisos. Ahora mira onRequestPermissionsResult
-            ActivityCompat.requestPermissions(Fotos.this,
+            ActivityCompat.requestPermissions(FotosActivity.this,
                     new String[]{Manifest.permission.CAMERA},
                     CODIGO_PERMISOS_CAMARA);
         }
@@ -162,7 +161,7 @@ public class Fotos extends AppCompatActivity {
     private void permisoDeAlmacenamientoDenegado() {
         // Esto se llama cuando el usuario hace click en "Denegar" o
         // cuando lo denegó anteriormente
-        Toast.makeText(Fotos.this, "El permiso para el almacenamiento está denegado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(FotosActivity.this, "El permiso para el almacenamiento está denegado", Toast.LENGTH_SHORT).show();
     }
 
     private void permisoDeCamaraConcedido() {
@@ -177,7 +176,7 @@ public class Fotos extends AppCompatActivity {
     private void permisoDeCamaraDenegado() {
         // Esto se llama cuando el usuario hace click en "Denegar" o
         // cuando lo denegó anteriormente
-        Toast.makeText(Fotos.this, "El permiso para la cámara está denegado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(FotosActivity.this, "El permiso para la cámara está denegado", Toast.LENGTH_SHORT).show();
     }
 
 

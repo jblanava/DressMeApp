@@ -64,7 +64,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
 
     private void cambia_combinaciones() {
-        Intent cambio = new Intent(this,AniadirCombinacion.class);
+        Intent cambio = new Intent(this, AniadirCombinacionActivity.class);
         startActivity(cambio);
     }
 

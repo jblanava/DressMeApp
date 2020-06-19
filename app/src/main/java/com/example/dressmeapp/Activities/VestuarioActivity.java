@@ -202,7 +202,7 @@ public class VestuarioActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v, int position) {
 
-                        Intent modificar = new Intent(a, Modificar_Prenda.class);
+                        Intent modificar = new Intent(a, ModificarPrendaActivity.class);
                         modificar.putExtra("intVariableName", prendas_con_tag.get(position).id);
                         startActivity(modificar);
                     }
@@ -227,7 +227,7 @@ public class VestuarioActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v, int position) {
 
-                    Intent modificar = new Intent(a, Modificar_Prenda.class);
+                    Intent modificar = new Intent(a, ModificarPrendaActivity.class);
                     modificar.putExtra("intVariableName", prendas.get(position).id);
                     startActivity(modificar);
                 }
