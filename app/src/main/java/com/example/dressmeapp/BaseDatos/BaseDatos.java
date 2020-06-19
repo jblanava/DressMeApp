@@ -25,31 +25,6 @@ public class BaseDatos extends SQLiteOpenHelper {
         crearTalla(db);
         crearTipos(db);
         crearCombo(db);
-        db.execSQL("INSERT INTO PERFIL VALUES (1  , '1', '2') "); // PERFIL DE PRUEBA
-
-        crearPrendas(db);
-
-        db.execSQL("INSERT INTO CONJUNTO VALUES (1  , 1,2,3,4,5,6, 1, 0, \"Conjunto1\") ");
-        db.execSQL("INSERT INTO CONJUNTO VALUES (2  , 6,5,4,3,2,1, 1, 0, \"Conjunto2\") ");
-
-    }
-
-    private void crearPrendas(SQLiteDatabase db) {
-
-        Random rng = new Random();
-
-        for(int i = 1; i <= 120; i++)
-        {
-
-
-            int color = rng.nextInt(11) + 1;
-            int tipo = rng.nextInt(24) + 1;
-            int talla = rng.nextInt(5) + 1;
-
-            @SuppressLint("DefaultLocale") String sentencia = String.format("INSERT INTO PRENDA VALUES (%d, '%s', %d, %d, %d, 1, 1, 1)", i, "Prueba" + i ,color, tipo, talla);
-            db.execSQL(sentencia);
-        }
-
     }
 
     @Override
