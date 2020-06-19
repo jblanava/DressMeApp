@@ -78,6 +78,7 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which)
             {
                 borrado_de_perfil();
+                mover_a_inicio();
                 //código Java si se ha pulsado sí
             }
         });
@@ -110,7 +111,11 @@ public class PerfilConfiguracionActivity extends AppCompatActivity {
         Intent salto = new Intent(this,MostrarDatosActivity.class);
         startActivity(salto);
     }
-
+    protected void mover_a_inicio() {
+        //No sabemos que hase, preguntar a María :D
+        Intent salto = new Intent(this,MainActivity.class);
+        startActivity(salto);
+    }
     protected void exportar_datos() {
         pedir_permisos();
     }
