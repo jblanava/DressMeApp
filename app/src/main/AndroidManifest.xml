@@ -17,7 +17,6 @@
         <activity android:name=".Activities.AniadirCombinacionActivity" />
         <activity android:name=".Activities.ConjuntosFavoritosActivity" />
         <activity android:name=".Activities.AniadirTallaActivity" />
-        <activity android:name=".AgruparView" />
         <activity android:name=".Activities.PrimeraActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
