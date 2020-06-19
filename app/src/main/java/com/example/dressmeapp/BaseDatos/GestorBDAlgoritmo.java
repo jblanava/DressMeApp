@@ -23,14 +23,16 @@ public class GestorBDAlgoritmo {
     public static Conjunto get_conjunto_algoritmo(Context context, int tiempo, int actividad, String nombreEvento)
     {
         List<Integer> todos_los_colores = GestorBD.get_ids_tabla(context, "color");
-        int[] tiposAbrigo = {1, 7};
-        int[] tiposSudadera = {10, 13};
-        int[] tiposCamiseta = {3, 4, 5, 12};
-        int[] tiposPantalon = {9, 11};
-        int[] tiposZapatos = {6, 14, 16};
-        int[] tiposComplementos = {8};
+        int[] tiposAbrigo = {1, 7, 29, 30};
+        int[] tiposSudadera = {10, 13, 15};
+        int[] tiposCamiseta = {3, 4, 5, 12, 20, 21, 23};
+        int[] tiposPantalon = {2, 9, 11, 18, 19};
+        int[] tiposZapatos = {6, 14, 16, 17, 22};
+        int[] tiposComplementos = {8, 24, 25, 26, 27, 28};
 
         int idCamiseta = get_prenda_condiciones(context, tiempo, actividad, tiposCamiseta, todos_los_colores);
+
+        if(idCamiseta == -1) return null;
 
         int color_principal = GestorBD.get_id_tabla(context, "color", GestorBDPrendas.get_prenda(context, idCamiseta).color);
 

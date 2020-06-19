@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
 import com.example.dressmeapp.BaseDatos.GestorBDFotos;
 import com.example.dressmeapp.BaseDatos.GestorBDPrendas;
@@ -97,22 +96,14 @@ public class ResultadoAlgortimoActivity extends AppCompatActivity {
 
         // TODO esta es la mayor chapuza de la historia
 
-        int contador = 0;
-        conjunto = null;
+        conjunto = GestorBDAlgoritmo.get_conjunto_algoritmo(this, tiempo, actividad, nombreEvento);
 
-        while(conjunto == null)
+        if(conjunto == null)
         {
-            conjunto = GestorBDAlgoritmo.get_conjunto_algoritmo(this, tiempo, actividad, nombreEvento);
-            contador++;
-
-            if(contador == 25)
-            {
-                Toast.makeText(ResultadoAlgortimoActivity.this, "No hemos podido crear un conjunto que satisfaga las restricciones. Porfabor introduzca más prendas", Toast.LENGTH_LONG).show();
-                finish();
-                return;
-            }
+            Toast.makeText(ResultadoAlgortimoActivity.this, "No hemos podido crear un conjunto que satisfaga las restricciones. Por favor introduzca más prendas", Toast.LENGTH_LONG).show();
+            finish();
+            return;
         }
-
 
         // Empezar en 1 porque el 0 es el ID del conjunto
         for (int j = 1; j < conjunto.getSize(); j++) {
