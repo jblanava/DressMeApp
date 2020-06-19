@@ -28,7 +28,7 @@
         <activity android:name=".Activities.ResultadoAlgortimoActivity" />
         <activity android:name=".Activities.CambioTallasActivity" />
         <activity android:name=".Activities.CambioColorActivity" /> <!-- <activity android:name=".Activities.CambioPrendasActivity" /> -->
-        <activity android:name=".Activities.ConjuntoActivity" />
+
         <activity android:name=".Activities.HistorialActivity" /> <!-- <activity android:name=".Activities.CabeceraAgrupacion" /> <activity android:name=".Activities.HistorialActivity" /> -->
         <activity android:name=".Activities.AlgoritmoRecomendador" />
         <activity android:name=".Activities.MostrarDatosActivity" />
@@ -44,7 +44,6 @@
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.NuevoColorActivity" />
         <activity android:name=".Activities.Fotos" />
-        <activity android:name=".Activities.PrendaActivity" />
     </application>
 
 </manifest>
