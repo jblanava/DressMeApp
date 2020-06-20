@@ -1,6 +1,5 @@
 # DressMeApp
-Proyecto Introducción a la Ingeniería del Software
-- RF1.1. Crear un nuevo perfil, al que se le podrá asignar un nombre que será único en la máquina donde se ejecute la aplicación.
-- RF1.2. Entrar a un perfil y acceder a su AV.
-- RF1.3. Modificar los datos de un perfil.
-- RF1.4. Borrar un perfil existente.
+
+DressMeApp es una aplicación de Android que permite al usuario crear y visualizar un *armario virtual* con la ropa que tenga y, con las prendas que se registren, sugerir conjuntos de prendas para vestir en diferentes ocasiones.
+
+El proyecto ha sido desarrollado utilizando Android Studio, Java y Gradle. La aplicación utiliza una base de datos SQLite almacenada localmente para registrar las prendas del usuario, sus propiedades y un historial de las sugerencias de conjuntos que han sido aceptadas por el usuario. También se pueden crear diferentes _perfiles_ para su uso por diferentes personas en el ámbito doméstico.
