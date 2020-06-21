@@ -22,7 +22,10 @@
             android:layout_height="wrap_content"
             android:background="@color/colorFondo"
             android:padding="10dp"
-            android:text="Añada las combinaciones de colores que considere agradables." />
+            android:gravity="center"
+            android:text="Añada las combinaciones de colores que considere agradables."
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/comboColorView"
@@ -34,7 +37,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:orientation="horizontal">
 
             <Spinner
@@ -66,6 +69,7 @@
             android:id="@+id/boton_guardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:background="@drawable/mybutton"
             android:text="@string/guardar" />
