@@ -37,11 +37,11 @@ android:padding="8dp">
                 android:id="@+id/prenda_nombre"
                 android:layout_width="321dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="13dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="@string/nombre"
-                android:textSize="24sp" />
+                android:textSize="28sp" />
 
         </TableRow>
 
@@ -58,7 +58,7 @@ android:padding="8dp">
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/tipo"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
 
         </TableRow>
@@ -75,7 +75,7 @@ android:padding="8dp">
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/color"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/prenda_talla"
@@ -84,7 +84,7 @@ android:padding="8dp">
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/talla"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
 
         </TableRow>
