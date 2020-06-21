@@ -77,7 +77,7 @@ public class ConjuntosFavoritosActivity extends AppCompatActivity {
 
     void mostrar_prenda(final Prenda prenda)
     {
-        if(prenda == null) return;      // TODO: porque cojones necesito esto aqui? PS: no quitar o peta el historial
+        if(prenda == null) return;
 
         //@SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.activity_prenda_view, null);
 
