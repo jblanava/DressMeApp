@@ -8,7 +8,7 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
 
-    public static String nombreBD = "dressmeapp.db";
+    public static String nombreBD = "dressmeapp_123352345.db";
 
     public BaseDatos(Context contexto, String nombrebd) {
         super(contexto, nombrebd, null, VERSION);

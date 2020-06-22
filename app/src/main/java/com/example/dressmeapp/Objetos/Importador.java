@@ -3,6 +3,7 @@ package com.example.dressmeapp.Objetos;
 import android.content.Context;
 import android.os.Environment;
 
+import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
 import com.example.dressmeapp.BaseDatos.GestorBDFotos;
 import com.example.dressmeapp.BaseDatos.GestorBDPerfil;
@@ -64,15 +65,18 @@ public class Importador
             {
                 ColorBD c = new ColorBD(s);
 
-                if(c.id <= 12)
+                int nueva_posicion = GestorBD.get_id_tabla(context, "color", c.nombre);
+
+                if (nueva_posicion == -1)
                 {
-                    mapa_colores.put(c.id, c.id);
-                    continue; // Los primeros 12 son los que vienen por defecto y me los salto
+                    nueva_posicion = GestorBDPrendas.crear_color(context, c.nombre, c.hex);
+                }
+                else if(!c.hex.equals(GestorBDPrendas.get_hex(context, nueva_posicion))) // si existe pero no tienen el mismo hex tambien lo creamos
+                {
+                    nueva_posicion = GestorBDPrendas.crear_color(context, c.nombre + "_" + c.hex, c.hex);
                 }
 
-                int nuevoId = GestorBDPrendas.crear_color(context, c.nombre, c.hex);
-
-                mapa_colores.put(c.id, nuevoId);
+                mapa_tallas.put(c.id, nueva_posicion);
             }
 
             for(String s : combos)
@@ -85,15 +89,14 @@ public class Importador
             {
                 TallaBD t = new TallaBD(s);
 
-                if(t.id <= 6)
+                int nueva_posicion = GestorBD.get_id_tabla(context, "talla", t.nombre);
+
+                if (nueva_posicion == -1)   // si no existe lo creamos
                 {
-                    mapa_tallas.put(t.id, t.id);
-                    continue; // Las primeras 6 son las que vienen por defecto y me las salto
+                    nueva_posicion = GestorBDPrendas.crear_talla(context, t.nombre);
                 }
 
-                int nuevoId = GestorBDPrendas.crear_talla(context, t.nombre);
-
-                mapa_tallas.put(t.id, nuevoId);
+                mapa_tallas.put(t.id, nueva_posicion);
             }
 
 
