@@ -332,7 +332,7 @@ public class GestorBDAlgoritmo {
         {
             String sentenciaSQL;
             sentenciaSQL = "INSERT INTO CONJUNTO (ID, ABRIGO, SUDADERA, CAMISETA, PANTALON, ZAPATO, COMPLEMENTO, ID_PERFIL, FAVORITO, NOMBRE_EVENTO) VALUES ('";
-            sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "', '" + GestorBD.idPerfil + "', '" + flag + "', '"+ conj.getNombreCjto() +"' )";
+            sentenciaSQL += id + "','" + abrigo + "', '" + sudadera + "', '" + camiseta + "','" + pantalon + "', '" + zapato + "', '" + complemento + "', '" + GestorBD.idPerfil + "', '" + flag + "', '"+ conj.getNombre_conjunto() +"' )";
 
             BaseDatos base = new BaseDatos(contexto, BaseDatos.nombreBD);
             SQLiteDatabase baseDatos;

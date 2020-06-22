@@ -1,6 +1,5 @@
 package com.example.dressmeapp.Objetos;
 
-import com.example.dressmeapp.BaseDatos.BaseDatos;
 import com.example.dressmeapp.BaseDatos.GestorBD;
 
 import java.util.ArrayList;
@@ -9,14 +8,14 @@ import java.util.List;
 public class Conjunto {
 
     private List<Integer> idPrendas;
-    private String nombreCjto;
+    private String nombre_conjunto;
     int idPerfil;
 
 
-    public Conjunto(String nombreCjto){
+    public Conjunto(String nombre_conjunto){
         idPerfil = GestorBD.idPerfil;
         idPrendas = new ArrayList<>();
-        this.nombreCjto = nombreCjto;
+        this.nombre_conjunto = nombre_conjunto;
     }
     public Conjunto() {
         this("");
@@ -43,12 +42,7 @@ public class Conjunto {
         }
     }
     public boolean estaId(int id){
-        if(idPrendas.contains(id)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return idPrendas.contains(id);
     }
     public int getSize(){
         return idPrendas.size();
@@ -62,6 +56,6 @@ public class Conjunto {
     public List<Integer> getPrendas(){
         return this.idPrendas;
     }
-    public String getNombreCjto() { return nombreCjto; }
+    public String getNombre_conjunto() { return nombre_conjunto; }
 
 }

@@ -1,14 +1,13 @@
 package com.example.dressmeapp.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
@@ -53,7 +52,7 @@ public class HistorialActivity extends AppCompatActivity {
         for(Conjunto c : listaConjuntos){
 
             //Crear un text view, mostrarlo por pantalla
-            mostrar_conjunto(c.getNombreCjto());
+            mostrar_conjunto(c.getNombre_conjunto());
             //Recorro el conjunto y muestro las prendas
 
 
@@ -95,7 +94,8 @@ public class HistorialActivity extends AppCompatActivity {
         color.setText(prenda.color);
         tipo.setText(prenda.tipo);
         talla.setText(prenda.talla);
-        GestorBDFotos.cargar_foto(this, prenda.id,imagen);
+
+        GestorBDFotos.cargar_foto(this, GestorBD.get_foto_de_prenda(this, prenda.id), imagen);
 
         listaPrendas.addView(v);
     }

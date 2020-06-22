@@ -195,7 +195,8 @@ public class ExportarBD {
                 c.prendas[4] = LibreriaBD.campo_int(cursor, "ZAPATO");
                 c.prendas[5] = LibreriaBD.campo_int(cursor, "COMPLEMENTO");
                 c.perfil = LibreriaBD.campo_int(cursor,"ID_PERFIL");
-
+                c.favorito = LibreriaBD.campo_int(cursor, "FAVORITO");
+                c.nombre = LibreriaBD.campo_string(cursor, "NOMBRE_EVENTO");
 
                 conjuntos.add(c);
             } while (cursor.moveToNext());
