@@ -102,7 +102,19 @@ public class GestorBDPrendas {
         baseDatos.close();
         base.close();
     }
+    public static String get_hex(Context context, int idColor) {
+        String SentenciaSQL = "SELECT HEX FROM COLOR WHERE ID=" + idColor;
+        String res = "";
+        BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
+        SQLiteDatabase baseDatos = base.getWritableDatabase();
+        Cursor cursor = baseDatos.rawQuery(SentenciaSQL, null);
+        if (cursor.moveToFirst()) res = LibreriaBD.campo_string(cursor, "COLOR");
+        base.close();
+        baseDatos.close();
+        cursor.close();
+        return res;
 
+    }
     public static void borrar_prenda(Context contexto, int id) {
         String SentenciaSQL;
 
