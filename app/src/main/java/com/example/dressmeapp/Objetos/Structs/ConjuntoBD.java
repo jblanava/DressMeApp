@@ -1,15 +1,12 @@
 package com.example.dressmeapp.Objetos.Structs;
 
-import com.example.dressmeapp.Objetos.Conjunto;
-
-import java.util.Arrays;
-
 public class ConjuntoBD
 {
     public int id;
     public int[] prendas = new int[6];
     public int perfil;
     public int favorito;
+    public String nombre;
 
     public ConjuntoBD(){}
 
@@ -20,9 +17,14 @@ public class ConjuntoBD
         id = Integer.parseInt(campos[0]);
         //Esto creo que es así, puede que no
         for(int i = 1;i<7;i++)
-        prendas[i - 1] = Integer.parseInt(campos[i]);
+            prendas[i - 1] = Integer.parseInt(campos[i]);
         perfil = Integer.parseInt(campos[7]);
         favorito = Integer.parseInt(campos[8]);
+
+        if(campos.length > 9)
+            nombre = campos[9];
+        else
+            nombre = "Conjunto: " + id;
     }
 
     public String toString()
@@ -34,6 +36,6 @@ public class ConjuntoBD
             pren += p + ";";
         }
 
-        return id + ";" + pren + perfil + ";" + favorito + "\n";
+        return id + ";" + pren + perfil + ";" + favorito + ";" + nombre + "\n";
     }
 }

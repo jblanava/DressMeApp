@@ -1,7 +1,6 @@
 package com.example.dressmeapp.Objetos;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,7 +110,6 @@ public class PrendaAdapter extends RecyclerView.Adapter<PrendaAdapter.PrendaView
         {
             return talla;
         }
-        Bitmap getImagen() { return GestorBDFotos.get_foto(itemView.getContext(), String.valueOf(prenda.id)); }
 
         ImageView getImagen2() { return imagen; }
 

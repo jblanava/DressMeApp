@@ -3,7 +3,6 @@ package com.example.dressmeapp.Objetos;
 import android.content.Context;
 import android.os.Environment;
 
-import com.example.dressmeapp.BaseDatos.GestorBD;
 import com.example.dressmeapp.BaseDatos.GestorBDAlgoritmo;
 import com.example.dressmeapp.BaseDatos.GestorBDFotos;
 import com.example.dressmeapp.BaseDatos.GestorBDPerfil;
@@ -112,11 +111,12 @@ public class Importador
             for(String s : conjuntos)
             {
                 ConjuntoBD p = new ConjuntoBD(s);
-                Conjunto c = new Conjunto();
+                Conjunto c = new Conjunto(p.nombre);
 
                 for(int i : p.prendas)
                 {
-                    c.add(mapa_prendas.get(i));
+                    if(i == -1) c.add(-1);
+                    else c.add(mapa_prendas.get(i));
                 }
 
                 GestorBDAlgoritmo.add_conjunto(context, c, p.favorito);

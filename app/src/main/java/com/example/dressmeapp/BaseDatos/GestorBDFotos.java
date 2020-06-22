@@ -78,7 +78,7 @@ public class GestorBDFotos {
         bd.close();
     }
 
-    public static Bitmap get_foto(Context context, String id_modificar){
+    public static Bitmap get_foto(Context context, int id_modificar){
         String vsql = "SELECT * FROM FOTOS WHERE ID = " + id_modificar;
 
         BaseDatos bdh =  new BaseDatos(context, BaseDatos.nombreBD);
