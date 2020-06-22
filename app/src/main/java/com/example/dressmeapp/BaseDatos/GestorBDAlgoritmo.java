@@ -11,6 +11,7 @@ import com.example.dressmeapp.Objetos.Conjunto;
 import com.example.dressmeapp.Objetos.Prenda;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
@@ -274,6 +275,13 @@ public class GestorBDAlgoritmo {
         ListIterator<Integer> it = idPrendas.listIterator();
 
 
+        int[] tiposAbrigo = {1, 7, 29, 30};
+        int[] tiposSudadera = {10, 13, 15};
+        int[] tiposCamiseta = {3, 4, 5, 12, 20, 21, 23};
+        int[] tiposPantalon = {2, 9, 11, 18, 19};
+        int[] tiposZapatos = {6, 14, 16, 17, 22};
+        int[] tiposComplementos = {8, 24, 25, 26, 27, 28};
+
         int abrigo = -1;
         int sudadera = -1;
         int camiseta = -1;
@@ -281,39 +289,42 @@ public class GestorBDAlgoritmo {
         int complemento = -1;
         int pantalon = -1;
 
+        it.next();
+
         while(it.hasNext()) {
 
-            Prenda aux = GestorBDPrendas.get_prenda(contexto, it.next());
+            int id_prenda = it.next();
+            Prenda aux = GestorBDPrendas.get_prenda(contexto, id_prenda);
 
-            if(aux != null){
+            if (aux == null) continue;
 
-                //Abrigo:
-                if(aux.tipo.equalsIgnoreCase("abrigo") || aux.tipo.equalsIgnoreCase("chaqueta")) {
-                    abrigo = aux.id;
-                }
-                // Sudadera
-                else if(aux.tipo.equalsIgnoreCase("jersey") || aux.tipo.equalsIgnoreCase("sudadera")|| aux.tipo.equalsIgnoreCase("polar") ) {
-                    sudadera = aux.id;
-                }
-                //Camiseta
-                else if(aux.tipo.equalsIgnoreCase("blusa") || aux.tipo.equalsIgnoreCase("camisa") || aux.tipo.equalsIgnoreCase("camiseta m.corta") || aux.tipo.equalsIgnoreCase("polo") || aux.tipo.equalsIgnoreCase("traje") || aux.tipo.equalsIgnoreCase("chandal") || aux.tipo.equalsIgnoreCase("vestido") || aux.tipo.equalsIgnoreCase("camiseta m.larga") || aux.tipo.equalsIgnoreCase("top")  ) {
-                    camiseta = aux.id;
-                }
-                //Pantalon
-                else if(aux.tipo.equalsIgnoreCase("bañador/bikini") || aux.tipo.equalsIgnoreCase("falda") || aux.tipo.equalsIgnoreCase("pantalon") || aux.tipo.equalsIgnoreCase("shorts") || aux.tipo.equalsIgnoreCase("bermudas") ) {
-                    pantalon = aux.id;
-                }
-                //Zapatos
-                else if(aux.tipo.equalsIgnoreCase("chanclas") || aux.tipo.equalsIgnoreCase("tennis") || aux.tipo.equalsIgnoreCase("zapatos/tacones") || aux.tipo.equalsIgnoreCase("sandalias") || aux.tipo.equalsIgnoreCase("zapatillas") ) {
-                    zapato = aux.id;
-                }
-                //Complemento
-                else if(aux.tipo.equalsIgnoreCase("complemento")) {
-                    complemento = aux.id;
-                }
+            int tipo = GestorBD.get_id_tabla(contexto, "tipo", aux.tipo);
 
-            } // Fin de if
 
+            if(Arrays.binarySearch(tiposAbrigo, tipo) >= 0)
+            {
+                abrigo = id_prenda;
+            }
+            else if(Arrays.binarySearch(tiposSudadera, tipo) >= 0)
+            {
+                sudadera = id_prenda;
+            }
+            else if(Arrays.binarySearch(tiposCamiseta, tipo) >= 0)
+            {
+                camiseta = id_prenda;
+            }
+            else if(Arrays.binarySearch(tiposPantalon, tipo) >= 0)
+            {
+                pantalon = id_prenda;
+            }
+            else if(Arrays.binarySearch(tiposZapatos, tipo) >= 0)
+            {
+                zapato = id_prenda;
+            }
+            else if(Arrays.binarySearch(tiposComplementos, tipo) >= 0)
+            {
+                complemento = id_prenda;
+            }
 
         } // Fin de while
 
