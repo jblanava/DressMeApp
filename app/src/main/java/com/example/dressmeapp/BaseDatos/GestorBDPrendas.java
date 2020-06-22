@@ -108,7 +108,7 @@ public class GestorBDPrendas {
         BaseDatos base = new BaseDatos(context, BaseDatos.nombreBD);
         SQLiteDatabase baseDatos = base.getWritableDatabase();
         Cursor cursor = baseDatos.rawQuery(SentenciaSQL, null);
-        if (cursor.moveToFirst()) res = LibreriaBD.campo_string(cursor, "COLOR");
+        if (cursor.moveToFirst()) res = LibreriaBD.campo_string(cursor, "HEX");
         base.close();
         baseDatos.close();
         cursor.close();
